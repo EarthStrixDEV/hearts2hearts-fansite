@@ -1,0 +1,744 @@
+{
+  "_comment": "Extracted from public web sources on 2026-11-21 (see docs/data-sources.md). Only facts the sources state; no photos; paraphrased. Single-source items are marked in `description`.",
+  "members": [
+    {
+      "slug": "jiwoo",
+      "stage_name": "Jiwoo",
+      "name_ko": "지우",
+      "real_name": "Choi Ji-woo (최지우)",
+      "birth_date": "2006-09-07",
+      "position": [
+        "Leader",
+        "Dancer",
+        "Rapper",
+        "Vocalist",
+        "Visual"
+      ],
+      "color_hex": "#FFB3CF",
+      "bio": "Leader of Hearts2Hearts. Trained at SM for about six years and studied ballet before debut.",
+      "facts": [
+        [
+          "Nationality",
+          "South Korean"
+        ],
+        [
+          "Birthplace",
+          "Godeok-dong, Gangdong-gu, Seoul"
+        ],
+        [
+          "Height",
+          "168–169 cm"
+        ],
+        [
+          "MBTI",
+          "ISFJ"
+        ],
+        [
+          "Blood type",
+          "A"
+        ],
+        [
+          "Training period",
+          "About 6 years"
+        ],
+        [
+          "Pre-debut",
+          "Scouted by SM in sixth grade at a convenience store."
+        ],
+        [
+          "Fun fact",
+          "Studied ballet for 6–7 years."
+        ],
+        [
+          "Card rarity",
+          "holo"
+        ]
+      ]
+    },
+    {
+      "slug": "carmen",
+      "stage_name": "Carmen",
+      "name_ko": "카르멘",
+      "real_name": "Nyoman Ayu Carmenita",
+      "birth_date": "2006-03-28",
+      "position": [
+        "Main Vocalist"
+      ],
+      "color_hex": "#FFCBA4",
+      "bio": "Indonesian member from Bali who auditioned for SM over Zoom.",
+      "facts": [
+        [
+          "Nationality",
+          "Indonesian"
+        ],
+        [
+          "Birthplace",
+          "Denpasar, Bali, Indonesia"
+        ],
+        [
+          "Height",
+          "168 cm"
+        ],
+        [
+          "MBTI",
+          "ENFJ"
+        ],
+        [
+          "Blood type",
+          "O"
+        ],
+        [
+          "Training period",
+          "About 2 years"
+        ],
+        [
+          "Pre-debut",
+          "Auditioned for SM over Zoom, singing about 100 songs before she passed."
+        ],
+        [
+          "Fun fact",
+          "Born in Bali, Indonesia."
+        ],
+        [
+          "Card rarity",
+          "rare"
+        ]
+      ]
+    },
+    {
+      "slug": "yuha",
+      "stage_name": "Yuha",
+      "name_ko": "유하",
+      "real_name": "Yu Ha-ram (유하람)",
+      "birth_date": "2007-04-12",
+      "position": [
+        "Vocalist",
+        "Dancer"
+      ],
+      "color_hex": "#A9E3CD",
+      "bio": "Spent eight years as a trainee after SM street-cast her on three separate occasions.",
+      "facts": [
+        [
+          "Nationality",
+          "South Korean"
+        ],
+        [
+          "Birthplace",
+          "Bangokgwanseol-dong, Wonju, Gangwon-do"
+        ],
+        [
+          "Height",
+          "164 cm"
+        ],
+        [
+          "MBTI",
+          "INTJ"
+        ],
+        [
+          "Blood type",
+          "B"
+        ],
+        [
+          "Training period",
+          "About 8 years"
+        ],
+        [
+          "Pre-debut",
+          "Street-cast by SM on three separate occasions."
+        ],
+        [
+          "Fun fact",
+          "Longest trainee period of the eight members (about 8 years)."
+        ],
+        [
+          "Card rarity",
+          "common"
+        ]
+      ]
+    },
+    {
+      "slug": "stella",
+      "stage_name": "Stella",
+      "name_ko": "스텔라",
+      "real_name": "Kim Da-hyun (김다현)",
+      "birth_date": "2007-06-18",
+      "position": [
+        "Vocalist"
+      ],
+      "color_hex": "#A8D8FF",
+      "bio": "Korean-Canadian member who trained in Busan before joining SM.",
+      "facts": [
+        [
+          "Nationality",
+          "South Korean · Canadian"
+        ],
+        [
+          "Birthplace",
+          "Ulsan"
+        ],
+        [
+          "Height",
+          "167 cm"
+        ],
+        [
+          "MBTI",
+          "ENTP"
+        ],
+        [
+          "Blood type",
+          "O"
+        ],
+        [
+          "Training period",
+          "About 1 year 6 months"
+        ],
+        [
+          "Pre-debut",
+          "Attended Doctor Music Academy in Busan; 32 of 60 agencies wanted to cast her in its in-house audition."
+        ],
+        [
+          "Fun fact",
+          "Holds Canadian nationality as well as Korean."
+        ],
+        [
+          "Card rarity",
+          "rare"
+        ]
+      ]
+    },
+    {
+      "slug": "juun",
+      "stage_name": "Juun",
+      "name_ko": "주은",
+      "real_name": "Kim Ju-eun (김주은)",
+      "birth_date": "2008-12-03",
+      "position": [
+        "Main Dancer",
+        "Rapper",
+        "Vocalist"
+      ],
+      "color_hex": "#CDBEFF",
+      "bio": "Main dancer, scouted by SM after her dance videos drew attention online.",
+      "facts": [
+        [
+          "Nationality",
+          "South Korean"
+        ],
+        [
+          "Birthplace",
+          "Goyang, Gyeonggi-do (grew up in Icheon)"
+        ],
+        [
+          "Height",
+          "166 cm"
+        ],
+        [
+          "MBTI",
+          "ISTP"
+        ],
+        [
+          "Blood type",
+          "A"
+        ],
+        [
+          "Training period",
+          "About 4–5 years"
+        ],
+        [
+          "Pre-debut",
+          "Scouted by SM through DMs after her dance videos caught their eye."
+        ],
+        [
+          "Card rarity",
+          "common"
+        ]
+      ]
+    },
+    {
+      "slug": "ana",
+      "stage_name": "A-na",
+      "name_ko": "에이나",
+      "real_name": "Roh Yu-na (노유나)",
+      "birth_date": "2008-12-20",
+      "position": [
+        "Rapper",
+        "Vocalist",
+        "Visual"
+      ],
+      "color_hex": "#FFE08A",
+      "bio": "Rapper and visual who joined SM in October 2022.",
+      "facts": [
+        [
+          "Nationality",
+          "South Korean"
+        ],
+        [
+          "Birthplace",
+          "Seoul (grew up in Yongin, Gyeonggi-do)"
+        ],
+        [
+          "Height",
+          "171 cm"
+        ],
+        [
+          "MBTI",
+          "ENFJ"
+        ],
+        [
+          "Blood type",
+          "A"
+        ],
+        [
+          "Training period",
+          "About 3 years"
+        ],
+        [
+          "Pre-debut",
+          "Joined SM on October 16, 2022."
+        ],
+        [
+          "Card rarity",
+          "rare"
+        ]
+      ]
+    },
+    {
+      "slug": "ian",
+      "stage_name": "Ian",
+      "name_ko": "이안",
+      "real_name": "Jeong Lee-an (정이안)",
+      "birth_date": "2009-10-09",
+      "position": [
+        "Dancer",
+        "Vocalist",
+        "Visual",
+        "Center"
+      ],
+      "color_hex": "#F9B8DD",
+      "bio": "Center and visual with a background as a child model.",
+      "facts": [
+        [
+          "Nationality",
+          "South Korean"
+        ],
+        [
+          "Birthplace",
+          "Hyehwa-dong, Jongno-gu, Seoul"
+        ],
+        [
+          "Height",
+          "164.7 cm"
+        ],
+        [
+          "MBTI",
+          "ESFJ"
+        ],
+        [
+          "Blood type",
+          "B"
+        ],
+        [
+          "Training period",
+          "About 3 years"
+        ],
+        [
+          "Pre-debut",
+          "Joined SM on October 15, 2022."
+        ],
+        [
+          "Fun fact",
+          "Worked as a child model before SM."
+        ],
+        [
+          "Fun fact",
+          "Appeared in SM's 30th anniversary \"The Future\" video."
+        ],
+        [
+          "Card rarity",
+          "common"
+        ]
+      ]
+    },
+    {
+      "slug": "yeon",
+      "stage_name": "Ye-on",
+      "name_ko": "예온",
+      "real_name": "Kim Na-yeon (김나연)",
+      "birth_date": "2010-04-19",
+      "position": [
+        "Vocalist",
+        "Maknae"
+      ],
+      "color_hex": "#BCC6FF",
+      "bio": "The youngest member (maknae), born in 2010.",
+      "facts": [
+        [
+          "Nationality",
+          "South Korean"
+        ],
+        [
+          "Birthplace",
+          "Sangbuk-myeon, Yangsan, Gyeongsangnam-do"
+        ],
+        [
+          "Height",
+          "167 cm"
+        ],
+        [
+          "MBTI",
+          "ISFJ"
+        ],
+        [
+          "Blood type",
+          "A"
+        ],
+        [
+          "Training period",
+          "About 2 years"
+        ],
+        [
+          "Pre-debut",
+          "Joined SM in sixth grade after being scouted through a DM."
+        ],
+        [
+          "Fun fact",
+          "Started singing at age 5–6."
+        ],
+        [
+          "Card rarity",
+          "holo"
+        ]
+      ]
+    }
+  ],
+  "albums": [
+    {
+      "slug": "the-chase",
+      "title": "The Chase",
+      "album_type": "single",
+      "release_date": "2025-02-24",
+      "description": "Debut single album (2 tracks).",
+      "tracks": [
+        [
+          "The Chase",
+          null,
+          true
+        ],
+        [
+          "Butterflies",
+          null,
+          false
+        ]
+      ]
+    },
+    {
+      "slug": "style",
+      "title": "STYLE",
+      "album_type": "single",
+      "release_date": "2025-06-18",
+      "description": "Digital single released between eras.",
+      "tracks": [
+        [
+          "STYLE",
+          null,
+          true
+        ]
+      ]
+    },
+    {
+      "slug": "pretty-please",
+      "title": "Pretty Please",
+      "album_type": "single",
+      "release_date": "2025-09-24",
+      "description": "Pre-release single for the FOCUS mini album.",
+      "tracks": [
+        [
+          "Pretty Please",
+          null,
+          true
+        ]
+      ]
+    },
+    {
+      "slug": "focus",
+      "title": "FOCUS",
+      "album_type": "ep",
+      "release_date": "2025-10-20",
+      "description": "1st mini album (6 tracks, includes the earlier singles Pretty Please and STYLE). Some sites count only 5 tracks because STYLE came out earlier.",
+      "tracks": [
+        [
+          "FOCUS",
+          null,
+          true
+        ],
+        [
+          "Apple Pie",
+          null,
+          false
+        ],
+        [
+          "Pretty Please",
+          null,
+          false
+        ],
+        [
+          "Flutter",
+          null,
+          false
+        ],
+        [
+          "Blue Moon",
+          null,
+          false
+        ],
+        [
+          "STYLE",
+          null,
+          false
+        ]
+      ]
+    },
+    {
+      "slug": "focus-remixes",
+      "title": "FOCUS (Remixes)",
+      "album_type": "ep",
+      "release_date": "2025-11-21",
+      "description": "Remix release of the title track FOCUS (4 remixes).",
+      "tracks": [
+        [
+          "FOCUS (Jaebin Remix)",
+          null,
+          false
+        ],
+        [
+          "FOCUS (DJ Seinfeld Remix)",
+          null,
+          false
+        ],
+        [
+          "FOCUS (Young Franco Remix)",
+          null,
+          false
+        ],
+        [
+          "FOCUS (sooyeon Remix)",
+          null,
+          false
+        ]
+      ]
+    },
+    {
+      "slug": "scream-rookies-the-chase-remixes",
+      "title": "ScreaM Rookies : The Chase (Remixes)",
+      "album_type": "ep",
+      "release_date": "2025-12-17",
+      "description": "Remix release. Listed by a single source (kprofiles); verify before publishing.",
+      "tracks": [
+        [
+          "The Chase (0to Remix)",
+          null,
+          false
+        ],
+        [
+          "The Chase (YOHAN Remix)",
+          null,
+          false
+        ],
+        [
+          "The Chase (SONGUN Remix)",
+          null,
+          false
+        ],
+        [
+          "The Chase (Arti & Suchan Kim Remix)",
+          null,
+          false
+        ],
+        [
+          "The Chase (SOR Remix)",
+          null,
+          false
+        ]
+      ]
+    },
+    {
+      "slug": "rude",
+      "title": "RUDE!",
+      "album_type": "single",
+      "release_date": "2026-02-20",
+      "description": "Digital single, the first release of 2026. Later included on Lemon Tang.",
+      "tracks": [
+        [
+          "RUDE!",
+          null,
+          true
+        ]
+      ]
+    },
+    {
+      "slug": "rude-japanese-ver",
+      "title": "RUDE! (Japanese ver.)",
+      "album_type": "single",
+      "release_date": "2026-03-18",
+      "description": "Japanese-language version. Sources label it either a Japanese pre-release single or a digital single.",
+      "tracks": [
+        [
+          "RUDE! (Japanese ver.)",
+          null,
+          true
+        ]
+      ]
+    },
+    {
+      "slug": "iscream-rude-remixes",
+      "title": "iScreaM : RUDE! (Remixes)",
+      "album_type": "ep",
+      "release_date": "2026-03-27",
+      "description": "Remix release. Listed by a single source (kprofiles); verify before publishing.",
+      "tracks": [
+        [
+          "RUDE! (Silly Silky Remix)",
+          null,
+          false
+        ],
+        [
+          "RUDE! (yunji Remix)",
+          null,
+          false
+        ],
+        [
+          "RUDE! (original)",
+          null,
+          false
+        ]
+      ]
+    },
+    {
+      "slug": "lemon-tang",
+      "title": "Lemon Tang",
+      "album_type": "ep",
+      "release_date": "2026-06-22",
+      "description": "2nd mini album (6 tracks, 17:19, released 6 PM KST). One source (GenerAsia) lists only 5 tracks, without RUDE!.",
+      "tracks": [
+        [
+          "Lemon Tang",
+          163,
+          true
+        ],
+        [
+          "15-LOVE",
+          155,
+          false
+        ],
+        [
+          "처음투성이 (Baby steps)",
+          171,
+          false
+        ],
+        [
+          "heart emoji (♡)",
+          179,
+          false
+        ],
+        [
+          "Secret Recipe",
+          171,
+          false
+        ],
+        [
+          "RUDE!",
+          200,
+          false
+        ]
+      ]
+    },
+    {
+      "slug": "iconic-heart",
+      "title": "ICONIC HEART",
+      "album_type": "single",
+      "release_date": "2026-08-12",
+      "description": "1st Japanese single and Japan debut release (3 tracks). Some platforms had the digital tracks from 2026-08-10.",
+      "tracks": [
+        [
+          "ICONIC HEART",
+          null,
+          true
+        ],
+        [
+          "Lemon Tang (Japanese ver.)",
+          null,
+          false
+        ],
+        [
+          "RUDE! (Japanese ver.)",
+          null,
+          false
+        ]
+      ]
+    },
+    {
+      "slug": "moonride",
+      "title": "Moonride",
+      "album_type": "single",
+      "release_date": "2026-09-09",
+      "description": "Collaboration single with Kia (Black Edition tie-in).",
+      "tracks": [
+        [
+          "Moonride",
+          177,
+          true
+        ]
+      ]
+    },
+    {
+      "slug": "iconic-heart-korean-ver",
+      "title": "ICONIC HEART (Korean ver.)",
+      "album_type": "single",
+      "release_date": "2026-10-05",
+      "description": "Korean-language version of the Japanese single.",
+      "tracks": [
+        [
+          "ICONIC HEART (Korean ver.)",
+          null,
+          true
+        ]
+      ]
+    },
+    {
+      "slug": "candy-box-lover",
+      "title": "Candy Box Lover",
+      "album_type": "single",
+      "release_date": "2026-10-11",
+      "description": "Japanese-market release. Listed by a single weak source and its \"Catch! Teenieping OST\" label could not be confirmed; verify before publishing.",
+      "tracks": [
+        [
+          "Candy Box Lover",
+          null,
+          true
+        ]
+      ]
+    },
+    {
+      "slug": "next-chapter",
+      "title": "Next Chapter",
+      "album_type": "single",
+      "release_date": "2026-10-16",
+      "description": "Collaboration with the mobile game Arena of Valor; reported as the group's first English-language single.",
+      "tracks": [
+        [
+          "Next Chapter",
+          null,
+          true
+        ]
+      ]
+    }
+  ],
+  "remove_albums": [
+    "iconic-heart-1st-japanese-single"
+  ],
+  "hold_as_draft": [
+    "scream-rookies-the-chase-remixes",
+    "iscream-rude-remixes",
+    "candy-box-lover"
+  ]
+}
