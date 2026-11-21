@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Hearts2Hearts fan site · Member profile</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&amp;family=IBM+Plex+Sans+KR:wght@400;500;600&amp;family=Caveat:wght@600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#C92A68}a:hover{color:#9E1D50}
+.h2h{--pink-500:#FF8FB8;--pink-700:#C92A68;--cream-50:#FFF8F3;--ink-900:#2B2440;--ink-500:#6E6787;--surface:#FFFFFF;--glass:rgba(255,255,255,.6);--glass-b:rgba(255,255,255,.7);--line:rgba(43,36,64,.08);--holo-deep:linear-gradient(135deg,#D63A77,#8A5CE6,#3D84D4);--shadow:0 8px 24px rgba(255,143,184,.25);--glow:0 0 32px rgba(201,182,255,.5);--spring:cubic-bezier(.34,1.56,.64,1);font-family:'IBM Plex Sans KR',system-ui,sans-serif;color:var(--ink-900);background:var(--cream-50);transition:background 400ms ease}
+.h2h.dark{--cream-50:#1B1630;--ink-900:#F6F0FF;--ink-500:#B9B0D6;--surface:#262040;--glass:rgba(38,32,64,.62);--glass-b:rgba(255,255,255,.14);--line:rgba(255,255,255,.1);--pink-700:#FF9CC3}
+.disp{font-family:'Fredoka',ui-rounded,system-ui,sans-serif}
+.sig{font-family:'Caveat',cursive}
+.glass{background:var(--glass);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--glass-b)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 20px;border-radius:999px;font:600 15px/1 'Fredoka',ui-rounded,sans-serif;border:0;cursor:pointer;text-decoration:none;transition:transform 150ms var(--spring),box-shadow 150ms ease}
+.btn:hover{transform:translateY(-2px)}.btn:active{transform:scale(.96)}
+.btn-a{background:var(--accent-deep);color:#fff;box-shadow:0 8px 24px var(--accent-soft)}.btn-a:hover{color:#fff}
+.btn-s{background:var(--glass);color:var(--accent-deep);border:1.5px solid var(--accent)}.btn-s:hover{color:var(--accent-deep)}
+.ibtn{width:44px;height:44px;flex:none;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;background:var(--glass);border:1px solid var(--glass-b);color:var(--ink-900);cursor:pointer;padding:0;transition:transform 150ms var(--spring)}
+.ibtn:hover{transform:scale(1.1)}.ibtn:active{transform:scale(.96)}
+.btn:focus-visible,.ibtn:focus-visible,.fx:focus-visible,.nl:focus-visible,.gtile:focus-visible,.pcard:focus-visible,.srow:focus-visible{outline:2px solid var(--accent-deep);outline-offset:2px}
+.nl{position:relative;display:inline-flex;align-items:center;min-height:44px;padding:0 11px;color:var(--ink-500);text-decoration:none;font-weight:500;font-size:15px;border-radius:999px;white-space:nowrap}
+.nl:hover{color:var(--ink-900)}.nl.on{color:var(--ink-900)}
+.nav-links{display:flex}.nav-burger{display:none}
+@media (max-width:1000px){.nav-links{display:none}.nav-burger{display:inline-flex}}
+.sheet-link{animation:dropin 420ms var(--spring) both}
+.chip{display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 12px;border-radius:999px;font-size:13px;font-weight:500;white-space:nowrap}
+.flink{color:var(--ink-500);text-decoration:none;font-size:14px;min-height:32px;display:inline-flex;align-items:center}.flink:hover{color:var(--ink-900)}
+.crumb{color:var(--ink-500);text-decoration:none}.crumb:hover{color:var(--ink-900)}
+.portrait{transition:transform 400ms var(--spring)}
+.portrait:hover{transform:perspective(900px) rotateY(-8deg) rotateX(4deg) scale(1.01)}
+.sticker{transition:transform 250ms var(--spring)}
+.sticker:hover{transform:rotate(0deg) scale(1.04)!important}
+.masonry{columns:3 240px;column-gap:16px}
+.gtile{display:block;width:100%;margin:0 0 16px;border:0;padding:0;border-radius:16px;overflow:hidden;cursor:zoom-in;break-inside:avoid;position:relative;transition:transform 250ms var(--spring)}
+.gtile:hover{transform:translateY(-3px)}
+.srow{display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:14px;align-items:center;width:100%;min-height:60px;padding:8px 12px;border:0;border-radius:14px;background:none;color:var(--ink-900);font:inherit;text-align:left;cursor:pointer}
+.srow:hover{background:var(--line)}
+.srow.on{color:var(--accent-deep);font-weight:600}
+.pcard{border:0;padding:0;background:none;cursor:pointer;perspective:1000px;display:block;width:100%;font:inherit;color:inherit}
+.hscroll{display:flex;gap:20px;overflow-x:auto;padding:12px 4px 20px;scroll-snap-type:x mandatory}
+.hscroll>*{scroll-snap-align:start}
+.ov{position:fixed;inset:0;z-index:90;display:flex;align-items:center;justify-content:center;padding:24px;background:rgba(27,22,48,.82);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);animation:fade 250ms ease both}
+.lb-img{animation:pop 350ms var(--spring) both;transition:transform 300ms var(--spring)}
+.docked{animation:up 400ms var(--spring) both}
+@keyframes dropin{from{opacity:0;transform:translateY(-16px)}to{opacity:1;transform:none}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes pop{from{opacity:0;transform:scale(.95)}to{opacity:1}}
+@keyframes up{from{transform:translate(-50%,120%)}to{transform:translate(-50%,0)}}
+.h2h.rm *{animation:none!important;transition:none!important}
+@media (prefers-reduced-motion:reduce){.h2h *{animation:none!important;transition:none!important}.portrait:hover{transform:none}}
+</style>
+</helmet>
+<div class="{{rootClass}}" style="min-height: 100vh; --accent: {{m.color}}; --accent-deep: {{m.deep}}; --accent-soft: {{m.soft}}">
+<header class="glass" style="position: sticky; top: 0; z-index: 50; height: 64px; border-width: 0 0 1px 0; display: flex; align-items: center">
+<div style="width: 100%; max-width: 1240px; margin: 0 auto; padding: 0 24px; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; gap: 12px">
+<a href="Main.dc.html" class="fx" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink-900); min-height: 44px; border-radius: 12px"><svg width="30" height="30" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-10-9.3C.3 8.4 2.2 4 6.2 4c2.3 0 3.9 1.3 5.8 3.4C13.9 5.3 15.5 4 17.8 4c4 0 5.9 4.4 4.2 7.7C19.5 16.4 12 21 12 21z" fill="#FF8FB8"></path></svg><span class="disp" style="font-size: 20px; font-weight: 600">H2H<span style="color: var(--pink-700)">·</span>S2U</span></a>
+<nav class="nav-links" aria-label="Main" style="align-items: center"><sc-for list="{{nav}}" as="n" hint-placeholder-count="8"><a class="{{n.cls}}" href="{{n.href}}" aria-current="{{n.cur}}">{{n.label}}<sc-if value="{{n.on}}" hint-placeholder-val="{{ false }}"><svg width="8" height="8" viewBox="0 0 24 24" aria-hidden="true" style="position: absolute; left: 50%; bottom: 3px; margin-left: -4px"><path d="M12 21s-7.5-4.6-10-9.3C.3 8.4 2.2 4 6.2 4c2.3 0 3.9 1.3 5.8 3.4C13.9 5.3 15.5 4 17.8 4c4 0 5.9 4.4 4.2 7.7C19.5 16.4 12 21 12 21z" fill="#FF8FB8"></path></svg></sc-if></a></sc-for></nav>
+<div style="display: flex; gap: 8px"><button class="ibtn" onClick="{{toggleDark}}" aria-label="Toggle dark mode"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"></path></svg></button><button class="ibtn nav-burger" onClick="{{openMenu}}" aria-label="Open menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"></path></svg></button></div>
+</div>
+</header>
+<sc-if value="{{menu}}" hint-placeholder-val="{{ false }}">
+<div style="position: fixed; inset: 0; z-index: 80; display: flex; flex-direction: column; padding: 16px 24px 32px; gap: 4px; background: var(--cream-50)">
+<div style="display: flex; justify-content: flex-end"><button class="ibtn" onClick="{{closeMenu}}" aria-label="Close menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
+<sc-for list="{{nav}}" as="n" hint-placeholder-count="8"><a class="disp sheet-link fx" href="{{n.href}}" style="font-size: 34px; font-weight: 600; color: var(--ink-900); text-decoration: none; padding: 6px 0; animation-delay: {{n.delay}}">{{n.label}}</a></sc-for>
+</div>
+</sc-if>
+
+<!-- 1 HERO -->
+<section style="position: relative; overflow: hidden; background: linear-gradient(160deg, {{m.tint}}, rgba(255,255,255,0) 70%)">
+<div style="max-width: 1200px; margin: 0 auto; padding: 28px 24px 64px; box-sizing: border-box; display: flex; flex-direction: column; gap: 28px">
+<nav aria-label="Breadcrumb"><ol style="list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; font-size: 14px">
+<li><a class="crumb fx" href="Main.dc.html">Home</a></li><li aria-hidden="true" style="color: var(--ink-500)">/</li>
+<li><a class="crumb fx" href="Members.dc.html">Members</a></li><li aria-hidden="true" style="color: var(--ink-500)">/</li>
+<li aria-current="page" style="font-weight: 600">{{m.name}}</li>
+</ol></nav>
+<div style="display: flex; flex-wrap: wrap; gap: 48px; align-items: center">
+<div class="portrait" style="flex: 1 1 320px; max-width: 440px; aspect-ratio: 3 / 4; border-radius: 28px; position: relative; overflow: hidden; background: {{m.grad}}; box-shadow: 0 0 0 4px #fff, 0 0 0 8px var(--accent), 0 0 56px var(--accent); margin: 8px">
+<span aria-hidden="true" style="position: absolute; inset: 0; background: linear-gradient(115deg, transparent 25%, rgba(255,255,255,.55) 45%, transparent 60%); mix-blend-mode: soft-light"></span>
+<span class="chip" style="position: absolute; top: 16px; left: 16px; background: rgba(255,255,255,.88); color: #2B2440">TODO · official portrait</span>
+</div>
+<div style="flex: 999 1 420px; display: flex; flex-direction: column; gap: 18px; min-width: 0">
+<div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap">
+<span style="display: inline-flex; align-items: center; gap: 8px; font-size: 14px; color: var(--ink-500)"><span style="width: 20px; height: 20px; border-radius: 6px; background: var(--accent); border: 1px solid rgba(43,36,64,.12); display: block"></span>{{m.color}} · fan-picked color</span>
+<span class="chip" style="background: var(--surface); color: var(--ink-500); border: 1px dashed var(--line)">Symbol · TODO</span>
+</div>
+<h1 class="disp" style="margin: 0; font-size: clamp(72px, 10vw, 140px); font-weight: 700; line-height: .9; letter-spacing: -0.04em; color: var(--accent-deep)">{{m.name}}</h1>
+<p style="margin: 0; font-size: 28px; font-weight: 500">{{m.ko}}</p>
+<div style="display: flex; flex-wrap: wrap; gap: 8px"><sc-for list="{{m.posList}}" as="p" hint-placeholder-count="2"><span class="chip" style="background: var(--accent); color: #2B2440">{{p}}</span></sc-for></div>
+<blockquote style="margin: 8px 0 0; padding: 16px 20px; border-radius: 16px; background: var(--surface); font-size: 16px; line-height: 1.6; color: var(--ink-500); position: relative">
+<svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" style="position: absolute; top: -10px; left: 16px"><path d="M12 21s-7.5-4.6-10-9.3C.3 8.4 2.2 4 6.2 4c2.3 0 3.9 1.3 5.8 3.4C13.9 5.3 15.5 4 17.8 4c4 0 5.9 4.4 4.2 7.7C19.5 16.4 12 21 12 21z" style="fill: var(--accent)"></path></svg>
+[INTRO QUOTE · add only a verified, sourced quote, never a written one]
+</blockquote>
+</div>
+</div>
+</div>
+</section>
+
+<main style="max-width: 1200px; margin: 0 auto; padding: 24px 24px 64px; box-sizing: border-box; display: flex; flex-direction: column; gap: 72px">
+
+<!-- 2 PROFILE INFO -->
+<section aria-labelledby="pi" class="glass" style="border-radius: 24px; padding: 32px; box-shadow: 0 8px 24px var(--accent-soft)">
+<h2 id="pi" class="disp" style="margin: 0 0 20px; font-size: 28px; font-weight: 600">Profile</h2>
+<dl style="margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 0 40px">
+<sc-for list="{{info}}" as="r" hint-placeholder-count="7">
+<div style="display: flex; justify-content: space-between; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--line)">
+<dt style="font-size: 14px; color: var(--ink-500)">{{r.k}}</dt>
+<dd style="margin: 0; font-weight: 600; text-align: right; display: inline-flex; align-items: center; gap: 8px; color: {{r.c}}">
+<sc-if value="{{r.star}}" hint-placeholder-val="{{ false }}"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l1.8 8.2L22 12l-8.2 1.8L12 22l-1.8-8.2L2 12l8.2-1.8z" style="fill: var(--accent-deep)"></path></svg></sc-if>{{r.v}}</dd>
+</div>
+</sc-for>
+</dl>
+</section>
+
+<!-- 3 FUN FACTS -->
+<section aria-labelledby="ff">
+<h2 id="ff" class="disp" style="margin: 0 0 8px; font-size: 32px; font-weight: 600">Fun facts</h2>
+<div class="hscroll">
+<sc-for list="{{facts}}" as="f" hint-placeholder-count="3">
+<div class="sticker" style="flex: 0 0 280px; transform: rotate({{f.rot}}deg); background: {{f.bg}}; border-radius: 20px; padding: 22px; box-shadow: 0 10px 0 -4px rgba(43,36,64,.08), 0 14px 24px rgba(43,36,64,.08); border: 3px solid #fff; display: flex; flex-direction: column; gap: 12px; color: #2B2440">
+<span style="width: 40px; height: 40px; border-radius: 12px; background: rgba(255,255,255,.75); display: flex; align-items: center; justify-content: center">
+<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="{{f.icon}}" fill="#2B2440"></path></svg>
+</span>
+<span style="font-size: 16px; line-height: 1.55; font-weight: 500">{{f.t}}</span>
+</div>
+</sc-for>
+</div>
+</section>
+
+<!-- 4 GALLERY -->
+<section aria-labelledby="gl">
+<div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; margin-bottom: 20px; flex-wrap: wrap"><h2 id="gl" class="disp" style="margin: 0; font-size: 32px; font-weight: 600">Gallery</h2><span style="font-size: 13px; color: var(--ink-500)">Click to open · arrow keys to browse · photos TODO from official channels</span></div>
+<div class="masonry">
+<sc-for list="{{gallery}}" as="g" hint-placeholder-count="8">
+<button class="gtile" onClick="{{g.open}}" aria-label="Open photo {{g.n}}" style="height: {{g.h}}px; background: {{g.bg}}"><span class="chip" style="position: absolute; left: 10px; bottom: 10px; background: rgba(255,255,255,.85); color: #2B2440">TODO · photo {{g.n}}</span></button>
+</sc-for>
+</div>
+</section>
+
+<!-- 5 FEATURED SONGS -->
+<section aria-labelledby="fs" style="display: flex; flex-wrap: wrap; gap: 32px">
+<div style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 10px">
+<h2 id="fs" class="disp" style="margin: 0; font-size: 32px; font-weight: 600">Featured songs</h2>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: var(--ink-500)">Tracks where {{m.name}} has a notable part. Part notes come from official line distribution or credits only.</p>
+</div>
+<div class="glass" style="flex: 999 1 520px; border-radius: 24px; padding: 10px">
+<sc-for list="{{songs}}" as="s" hint-placeholder-count="4">
+<button class="{{s.cls}}" onClick="{{s.play}}" aria-label="Play {{s.title}} in the music widget">
+<span style="width: 44px; height: 44px; border-radius: 10px; background: {{s.grad}}; display: block"></span>
+<span style="display: flex; flex-direction: column; gap: 2px; min-width: 0"><span style="font-size: 16px">{{s.title}}</span><span style="font-size: 13px; color: var(--ink-500); font-weight: 400">{{s.album}} · part: TODO</span></span>
+<span style="width: 36px; height: 36px; border-radius: 50%; background: var(--accent); color: #2B2440; display: flex; align-items: center; justify-content: center"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z" fill="currentColor"></path></svg></span>
+</button>
+</sc-for>
+</div>
+</section>
+
+<!-- 6 TIMELINE -->
+<section aria-labelledby="tl">
+<h2 id="tl" class="disp" style="margin: 0 0 24px; font-size: 32px; font-weight: 600">Timeline</h2>
+<ol style="list-style: none; margin: 0; padding: 0 0 0 8px; display: flex; flex-direction: column; max-width: 720px">
+<sc-for list="{{timeline}}" as="t" hint-placeholder-count="7">
+<li style="display: grid; grid-template-columns: 24px minmax(0, 1fr); gap: 20px">
+<span style="display: flex; flex-direction: column; align-items: center"><span style="width: 16px; height: 16px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px var(--cream-50), 0 0 0 6px var(--accent); margin-top: 4px; display: block; flex: none"></span><span style="flex: 1; width: 2px; background: var(--accent); opacity: .5; display: {{t.lineDisplay}}"></span></span>
+<span style="display: flex; flex-direction: column; gap: 4px; padding-bottom: 28px"><span style="font-size: 13px; font-weight: 600; color: var(--accent-deep); letter-spacing: .04em">{{t.when}}</span><span class="disp" style="font-size: 20px; font-weight: 600">{{t.title}}</span><span style="font-size: 15px; color: var(--ink-500); line-height: 1.5">{{t.body}}</span></span>
+</li>
+</sc-for>
+</ol>
+</section>
+
+<!-- 7 PHOTOCARD COLLECTION -->
+<section aria-labelledby="pc">
+<div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; margin-bottom: 20px; flex-wrap: wrap"><h2 id="pc" class="disp" style="margin: 0; font-size: 32px; font-weight: 600">Photocard collection</h2><span style="font-size: 13px; color: var(--ink-500)">One card per era · click to flip</span></div>
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(170px, 100%), 1fr)); gap: 18px">
+<sc-for list="{{eraCards}}" as="c" hint-placeholder-count="6">
+<button class="pcard" onClick="{{c.flip}}" aria-label="{{c.label}}" style="border-radius: 18px">
+<span style="display: block; position: relative; aspect-ratio: 3 / 4; transform-style: preserve-3d; transition: transform 650ms cubic-bezier(.34,1.56,.64,1); transform: {{c.t}}">
+<span style="position: absolute; inset: 0; border-radius: 18px; border: 4px solid #fff; box-sizing: border-box; backface-visibility: hidden; -webkit-backface-visibility: hidden; background: {{c.grad}}; box-shadow: 0 12px 24px rgba(43,36,64,.12); overflow: hidden; display: block">
+<span style="position: absolute; inset: 0; background: linear-gradient(115deg, transparent 25%, rgba(255,255,255,.6) 45%, transparent 60%); mix-blend-mode: soft-light; display: block"></span>
+<span class="disp" style="position: absolute; left: 12px; bottom: 10px; font-size: 16px; font-weight: 600; color: #2B2440">{{c.era}}</span>
+</span>
+<span style="position: absolute; inset: 0; border-radius: 18px; border: 4px solid #fff; box-sizing: border-box; backface-visibility: hidden; -webkit-backface-visibility: hidden; transform: rotateY(180deg); background: var(--accent); padding: 14px; display: flex; flex-direction: column; justify-content: space-between; color: #2B2440">
+<span class="sig" style="font-size: 34px; transform: rotate(-6deg); display: block">{{m.name}}</span>
+<span style="font-size: 12px; line-height: 1.4; display: flex; flex-direction: column; gap: 2px"><strong>{{c.era}}</strong><span>{{c.date}}</span></span>
+</span>
+</span>
+</button>
+</sc-for>
+</div>
+</section>
+
+<!-- 8 BOTTOM NAV -->
+<nav aria-label="Members" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; padding-top: 24px; border-top: 1px solid var(--line)">
+<button class="btn btn-s" onClick="{{prev}}" style="min-height: 64px; padding: 0 20px 0 10px; gap: 12px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg><span style="width: 40px; height: 40px; border-radius: 50%; background: {{prevM.grad}}; display: block; border: 2px solid #fff"></span><span style="display: flex; flex-direction: column; align-items: flex-start; gap: 2px"><span style="font-size: 11px; color: var(--ink-500); font-family: 'IBM Plex Sans KR', sans-serif; font-weight: 500">Previous</span>{{prevM.name}}</span></button>
+<a class="btn" href="Members.dc.html" style="color: var(--ink-500); background: transparent">Back to all members</a>
+<button class="btn btn-s" onClick="{{next}}" style="min-height: 64px; padding: 0 10px 0 20px; gap: 12px"><span style="display: flex; flex-direction: column; align-items: flex-end; gap: 2px"><span style="font-size: 11px; color: var(--ink-500); font-family: 'IBM Plex Sans KR', sans-serif; font-weight: 500">Next</span>{{nextM.name}}</span><span style="width: 40px; height: 40px; border-radius: 50%; background: {{nextM.grad}}; display: block; border: 2px solid #fff"></span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"></path></svg></button>
+</nav>
+</main>
+
+<footer style="border-top: 1px solid var(--line); background: var(--surface)">
+<div style="max-width: 1200px; margin: 0 auto; padding: 48px 24px 32px; box-sizing: border-box; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 32px">
+<div style="display: flex; flex-direction: column; gap: 10px"><span style="display: flex; align-items: center; gap: 10px"><svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-10-9.3C.3 8.4 2.2 4 6.2 4c2.3 0 3.9 1.3 5.8 3.4C13.9 5.3 15.5 4 17.8 4c4 0 5.9 4.4 4.2 7.7C19.5 16.4 12 21 12 21z" fill="#FF8FB8"></path></svg><span class="disp" style="font-size: 20px; font-weight: 600">H2H·S2U</span></span><span style="font-size: 14px; line-height: 1.6; color: var(--ink-500); max-width: 32ch">An unofficial, fan-made home for Hearts2Hearts and S2U.</span></div>
+<nav aria-label="Footer" style="display: flex; flex-direction: column"><span style="font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-500); margin-bottom: 6px">Quick links</span><div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 16px"><sc-for list="{{nav}}" as="n" hint-placeholder-count="8"><a class="flink fx" href="{{n.href}}">{{n.label}}</a></sc-for></div></nav>
+<div style="display: flex; flex-direction: column"><span style="font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-500); margin-bottom: 6px">Official socials</span><a class="flink fx" href="https://www.instagram.com/hearts2hearts">Instagram</a><a class="flink fx" href="https://x.com/Hearts2Hearts">X</a><a class="flink fx" href="https://www.youtube.com/@hearts2hearts.official">YouTube</a><a class="flink fx" href="https://www.tiktok.com/@hearts2hearts">TikTok</a></div>
+</div>
+<div style="border-top: 1px solid var(--line); padding: 18px 24px; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 24px; font-size: 13px; color: var(--ink-500); text-align: center"><span>Unofficial fan site · all images and music rights belong to SM Entertainment</span><span style="display: inline-flex; align-items: center; gap: 6px">Made with <svg width="13" height="13" viewBox="0 0 24 24" role="img" aria-label="love"><path d="M12 21s-7.5-4.6-10-9.3C.3 8.4 2.2 4 6.2 4c2.3 0 3.9 1.3 5.8 3.4C13.9 5.3 15.5 4 17.8 4c4 0 5.9 4.4 4.2 7.7C19.5 16.4 12 21 12 21z" fill="#FF8FB8"></path></svg> by fans</span></div>
+</footer>
+
+<!-- Docked music widget -->
+<sc-if value="{{hasSong}}" hint-placeholder-val="{{ false }}">
+<div class="glass docked" style="position: fixed; left: 50%; bottom: 20px; transform: translateX(-50%); z-index: 60; width: 340px; max-width: calc(100% - 32px); height: 64px; box-sizing: border-box; border-radius: 999px; display: flex; align-items: center; gap: 12px; padding: 0 8px; box-shadow: 0 12px 32px rgba(43,36,64,.2); background: rgba(255,255,255,.88); color: #2B2440">
+<span style="width: 48px; height: 48px; border-radius: 50%; background: {{song.grad}}; display: block; flex: none"></span>
+<span style="flex: 1; min-width: 0; display: flex; flex-direction: column"><span style="font-size: 11px; color: #6E6787">Now playing · via Spotify</span><span style="font-size: 15px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{song.title}}</span></span>
+<button class="ibtn" onClick="{{closeSong}}" aria-label="Close player" style="background: transparent; border: 0; color: #2B2440"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+</div>
+</sc-if>
+
+<!-- Lightbox -->
+<sc-if value="{{hasLb}}" hint-placeholder-val="{{ false }}">
+<div class="ov" onClick="{{closeLb}}">
+<div role="dialog" aria-modal="true" aria-label="Photo {{lb.n}} of {{gCount}}" tabindex="-1" ref="{{focusRef}}" onKeyDown="{{lbKey}}" onClick="{{stop}}" style="position: relative; width: 100%; max-width: 980px; display: flex; flex-direction: column; align-items: center; gap: 16px; outline: none">
+<div class="lb-img" onClick="{{toggleZoom}}" style="width: min(100%, 640px); aspect-ratio: 4 / 5; max-height: 72vh; border-radius: 20px; background: {{lb.bg}}; transform: scale({{zoom}}); cursor: {{zoomCursor}}; display: flex; align-items: flex-end; padding: 16px; box-sizing: border-box"><span class="chip" style="background: rgba(255,255,255,.88); color: #2B2440">TODO · photo {{lb.n}}</span></div>
+<div style="display: flex; align-items: center; gap: 16px; color: #fff">
+<button class="ibtn" onClick="{{lbPrev}}" aria-label="Previous photo" style="background: rgba(255,255,255,.14); border: 0; color: #fff"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg></button>
+<span style="font-size: 14px; font-variant-numeric: tabular-nums">{{lb.n}} / {{gCount}}</span>
+<button class="ibtn" onClick="{{lbNext}}" aria-label="Next photo" style="background: rgba(255,255,255,.14); border: 0; color: #fff"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M9 5l7 7-7 7"></path></svg></button>
+</div>
+<button class="ibtn" onClick="{{closeLb}}" aria-label="Close" style="position: absolute; top: 0; right: 0; background: rgba(255,255,255,.14); border: 0; color: #fff"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+</div>
+</div>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"member":{"editor":"enum","options":["jiwoo","carmen","yuha","stella","juun","ana","ian","yeon"],"default":"stella","section":"Content"},"dark":{"editor":"boolean","default":false,"section":"Theme"},"reduceMotion":{"editor":"boolean","default":false,"section":"Theme"},"$preview":{"width":1440,"height":3700}}'>
+const NAV = [["home", "Home", "Main.dc.html"], ["members", "Members", "Members.dc.html"], ["music", "Music", "Music.dc.html"], ["blog", "Blog", "Blog.dc.html"], ["game", "Game", "Game.dc.html"], ["schedule", "Schedule", "Schedule.dc.html"], ["city", "Mini City", "City.dc.html"], ["about", "About", "About.dc.html"]];
+const PAGE = "members";
+const MEMBERS = [
+  { id: "jiwoo", name: "Jiwoo", ko: "지우", pos: ["Leader", "Dancer", "Rapper"], born: "2006-09-07", nat: "South Korean", color: "#FFB3CF", deep: "#B8285F", pre: "Cast at a convenience store while topping up her bus card with friends.", facts: ["Cast at a convenience store while topping up her bus card with friends.", "Studied ballet for years.", "Auditioned with Red Velvet’s “Peek-A-Boo.”"] },
+  { id: "carmen", name: "Carmen", ko: "카르멘", pos: ["Vocalist"], born: "2006-03-28", nat: "Indonesian", color: "#FFCBA4", deep: "#A24A12", pre: "Earned a trainee spot through SM’s online and Jakarta global auditions.", facts: ["Born in Bali.", "Got into K-pop after watching Girls’ Generation perform.", "Joined through SM’s online and Jakarta global auditions."] },
+  { id: "yuha", name: "Yuha", ko: "유하", pos: ["Vocalist", "Dancer"], born: "2007-04-12", nat: "South Korean", color: "#A9E3CD", deep: "#1D6E52", pre: "SM scouted her three times, including after she became a trainee.", facts: ["Won first place in a national piano competition in 4th grade.", "SM scouted her three times."] },
+  { id: "stella", name: "Stella", ko: "스텔라", pos: ["Vocalist"], born: "2007-06-18", nat: "South Korean · Canadian", color: "#A8D8FF", deep: "#225C9C", pre: "Received casting offers from 32 agencies while training in Busan.", facts: ["Spent part of her childhood in Vancouver, Canada.", "Received casting offers from 32 agencies while training in Busan."] },
+  { id: "juun", name: "Juun", ko: "주은", pos: ["Main Dancer", "Rapper"], born: "2008-12-03", nat: "South Korean", color: "#CDBEFF", deep: "#5B3FBF", pre: "A busking video posted by her mom drew a lot of attention.", facts: ["A busking video of her dancing to Red Velvet’s “Red Flavor” drew attention.", "Auditioned with Red Velvet’s “Psycho.”"] },
+  { id: "ana", name: "A-na", ko: "에이나", pos: ["Vocalist", "Rapper"], born: "2008-12-20", nat: "South Korean", color: "#FFE08A", deep: "#7A5600", pre: "Passed an SM in-house audition about a month after joining a Seoul dance academy.", facts: ["Passed an SM in-house audition about a month after joining a Seoul dance academy.", "Sang the national anthem for her vocal test."] },
+  { id: "ian", name: "Ian", ko: "이안", pos: ["Dancer", "Vocalist"], born: "2009-10-09", nat: "South Korean", color: "#F9B8DD", deep: "#A3256F", pre: "SM scouted her through Instagram.", facts: ["Started out as a kid model and appeared briefly on TV.", "SM scouted her through Instagram."] },
+  { id: "yeon", name: "Ye-on", ko: "예온", pos: ["Vocalist"], born: "2010-04-19", nat: "South Korean", color: "#BCC6FF", deep: "#3B48A8", pre: "Auditioned with Taeyeon’s “UR” and passed the final audition five days later.", facts: ["Trained in classical singing and musical theater from a young age.", "Auditioned with Taeyeon’s “UR” and passed the final audition five days later."] }
+];
+const ERAS = [
+  { era: "The Chase", date: "Feb 24, 2025", grad: "linear-gradient(135deg,#FFD6E7,#FFB6D5 45%,#E9D9FF)", body: "Debut with the single album The Chase." },
+  { era: "Style", date: "Jun 18, 2025", grad: "linear-gradient(135deg,#DDF0FF,#A8D8FF 50%,#FFE3F1)", body: "Digital single." },
+  { era: "Focus", date: "Oct 20, 2025", grad: "linear-gradient(135deg,#E9E1FF,#C9B6FF 50%,#BFE2FF)", body: "First mini album, after the pre-release “Pretty Please.”" },
+  { era: "Rude!", date: "Feb 20, 2026", grad: "linear-gradient(135deg,#FFE0EC,#FF9EC3 50%,#FFD8B8)", body: "Digital single, later on Lemon Tang." },
+  { era: "Lemon Tang", date: "Jun 22, 2026", grad: "linear-gradient(135deg,#FFF6C9,#FFE08A 45%,#CFF3DD)", body: "Second mini album." },
+  { era: "Iconic Heart", date: "Aug 12, 2026", grad: "linear-gradient(135deg,#FFE3F1,#FF8FB8 60%,#C9B6FF)", body: "Japanese single." }
+];
+const SONGS = [["The Chase", "The Chase"], ["Focus", "Focus"], ["Lemon Tang", "Lemon Tang"], ["Iconic Heart", "Iconic Heart"]];
+const MON = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+const ICONS = [
+  "M12 2l1.8 8.2L22 12l-8.2 1.8L12 22l-1.8-8.2L2 12l8.2-1.8z",
+  "M12 21s-7.5-4.6-10-9.3C.3 8.4 2.2 4 6.2 4c2.3 0 3.9 1.3 5.8 3.4C13.9 5.3 15.5 4 17.8 4c4 0 5.9 4.4 4.2 7.7C19.5 16.4 12 21 12 21z",
+  "M9 18V6l11-2v12a3 3 0 1 1-2-2.8V7.4L11 8.6V18a3 3 0 1 1-2-2.8z"
+];
+function zodiac(iso) {
+  const d = new Date(iso + "T00:00:00"), md = (d.getMonth() + 1) * 100 + d.getDate();
+  const Z = [[120, "Capricorn"], [219, "Aquarius"], [321, "Pisces"], [420, "Aries"], [521, "Taurus"], [621, "Gemini"], [723, "Cancer"], [823, "Leo"], [923, "Virgo"], [1023, "Libra"], [1122, "Scorpio"], [1222, "Sagittarius"], [1232, "Capricorn"]];
+  for (let i = 0; i < Z.length; i++) if (md < Z[i][0]) return Z[i][1];
+  return "Capricorn";
+}
+function fmt(iso) { const p = iso.split("-"); return MON[Number(p[1]) - 1] + " " + Number(p[2]) + ", " + p[0]; }
+const GAL = [320, 220, 280, 360, 240, 300, 200, 340];
+
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { idx: null, lb: null, zoom: false, song: null, flipped: {}, menu: false, dark: null }; }
+  cur() {
+    if (this.state.idx !== null) return this.state.idx;
+    const i = MEMBERS.findIndex((m) => m.id === this.props.member);
+    return i < 0 ? 3 : i;
+  }
+  renderVals() {
+    const s = this.state, i = this.cur(), raw = MEMBERS[i];
+    const dark = s.dark === null ? !!this.props.dark : s.dark;
+    const grad = (c) => "linear-gradient(165deg," + c + ", #FFF8F3 130%)";
+    const m = { ...raw, grad: grad(raw.color), tint: raw.color + "1A", soft: raw.color + "66", posList: raw.pos };
+    const prevI = (i + MEMBERS.length - 1) % MEMBERS.length, nextI = (i + 1) % MEMBERS.length;
+    const gallery = GAL.map((h, k) => ({ n: k + 1, h: h, bg: "linear-gradient(" + (140 + k * 25) + "deg," + raw.color + ", #FFF8F3 " + (90 + k * 8) + "%)", open: () => this.setState({ lb: k, zoom: false }) }));
+    const lbI = s.lb === null ? 0 : s.lb;
+    const step = (d) => this.setState({ lb: (lbI + d + GAL.length) % GAL.length, zoom: false });
+    const go = (j) => { this.setState({ idx: j, flipped: {}, lb: null, song: null }); try { window.scrollTo({ top: 0, behavior: "smooth" }); } catch (e) {} };
+    const facts = raw.facts.concat(["Nationality: " + raw.nat + "."]).map((t, k) => ({ t: t, rot: [-2.5, 1.8, -1.2, 2.4][k % 4], bg: k % 2 ? "#FFFFFF" : raw.color, icon: ICONS[k % 3] }));
+    const timeline = [{ when: "Pre-debut", title: "Trainee days", body: raw.pre }].concat(ERAS.map((e) => ({ when: e.date, title: e.era, body: e.body }))).map((t, k, arr) => ({ ...t, lineDisplay: k === arr.length - 1 ? "none" : "block" }));
+    const eraCards = ERAS.map((e) => { const f = !!s.flipped[e.era]; return { ...e, t: f ? "rotateY(180deg)" : "rotateY(0deg)", label: raw.name + " " + e.era + " photocard, click to flip", flip: () => this.setState({ flipped: { ...this.state.flipped, [e.era]: !this.state.flipped[e.era] } }) }; });
+    const songs = SONGS.map((x) => { const era = ERAS.find((e) => e.era === x[1]); return { title: x[0], album: x[1], grad: era.grad, cls: s.song === x[0] ? "srow on" : "srow", play: () => this.setState({ song: x[0] }) }; });
+    return {
+      rootClass: "h2h" + (dark ? " dark" : "") + (this.props.reduceMotion ? " rm" : ""),
+      nav: NAV.map((n, k) => ({ label: n[1], href: n[2], on: n[0] === PAGE, cls: n[0] === PAGE ? "nl on fx" : "nl fx", cur: n[0] === PAGE ? "page" : "false", delay: (k * 50) + "ms" })),
+      menu: s.menu, openMenu: () => this.setState({ menu: true }), closeMenu: () => this.setState({ menu: false }),
+      toggleDark: () => this.setState({ dark: !dark }),
+      m: m,
+      info: [
+        { k: "Stage name", v: raw.name + " (" + raw.ko + ")", c: "inherit", star: false },
+        { k: "Birth name", v: "TODO · verify", c: "var(--ink-500)", star: false },
+        { k: "Birthday", v: fmt(raw.born) + " · " + zodiac(raw.born), c: "inherit", star: true },
+        { k: "Nationality", v: raw.nat, c: "inherit", star: false },
+        { k: "Height", v: "TODO · verify", c: "var(--ink-500)", star: false },
+        { k: "MBTI", v: "TODO · verify", c: "var(--ink-500)", star: false },
+        { k: "Position", v: raw.pos.join(" · "), c: "inherit", star: false },
+        { k: "Member color", v: raw.color + " (fan-picked; official TODO)", c: "inherit", star: false }
+      ],
+      facts: facts, gallery: gallery, gCount: GAL.length,
+      hasLb: s.lb !== null, lb: { n: lbI + 1, bg: gallery[lbI].bg },
+      closeLb: () => this.setState({ lb: null }), stop: (e) => e.stopPropagation(),
+      lbPrev: () => step(-1), lbNext: () => step(1),
+      lbKey: (e) => { if (e.key === "ArrowLeft") step(-1); else if (e.key === "ArrowRight") step(1); else if (e.key === "Escape") this.setState({ lb: null }); },
+      focusRef: (el) => { if (el && document.activeElement !== el && !el.contains(document.activeElement)) el.focus(); },
+      zoom: s.zoom ? "1.5" : "1", zoomCursor: s.zoom ? "zoom-out" : "zoom-in", toggleZoom: () => this.setState({ zoom: !s.zoom }),
+      songs: songs, hasSong: !!s.song, song: s.song ? songs.find((x) => x.title === s.song) : { title: "", grad: "" }, closeSong: () => this.setState({ song: null }),
+      timeline: timeline, eraCards: eraCards,
+      prevM: { name: MEMBERS[prevI].name, grad: grad(MEMBERS[prevI].color) }, nextM: { name: MEMBERS[nextI].name, grad: grad(MEMBERS[nextI].color) },
+      prev: () => go(prevI), next: () => go(nextI)
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Hearts2Hearts fan site · About</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&amp;family=IBM+Plex+Sans+KR:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#C92A68}a:hover{color:#9E1D50}
+.h2h{--pink-500:#FF8FB8;--pink-700:#C92A68;--cream-50:#FFF8F3;--ink-900:#2B2440;--ink-500:#6E6787;--surface:#FFFFFF;--glass:rgba(255,255,255,.6);--glass-b:rgba(255,255,255,.7);--line:rgba(43,36,64,.08);--holo:linear-gradient(135deg,#FFB6D5,#C9B6FF,#A8D8FF,#FFE3F1);--holo-deep:linear-gradient(135deg,#D63A77,#8A5CE6,#3D84D4);--shadow:0 8px 24px rgba(255,143,184,.25);--glow:0 0 32px rgba(201,182,255,.5);--spring:cubic-bezier(.34,1.56,.64,1);font-family:'IBM Plex Sans KR',system-ui,sans-serif;color:var(--ink-900);background:var(--cream-50)}
+.h2h.dark{--cream-50:#1B1630;--ink-900:#F6F0FF;--ink-500:#B9B0D6;--surface:#262040;--glass:rgba(38,32,64,.62);--glass-b:rgba(255,255,255,.14);--line:rgba(255,255,255,.1);--pink-700:#FF9CC3}
+.disp{font-family:'Fredoka',ui-rounded,system-ui,sans-serif}
+.holo-text{background:var(--holo-deep);-webkit-background-clip:text;background-clip:text;color:transparent}
+.glass{background:var(--glass);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--glass-b)}
+.ibtn{width:44px;height:44px;flex:none;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;background:var(--glass);border:1px solid var(--glass-b);color:var(--ink-900);cursor:pointer;padding:0;transition:transform 150ms var(--spring)}
+.ibtn:hover{transform:scale(1.1)}.ibtn:active{transform:scale(.96)}
+.ibtn:focus-visible,.fx:focus-visible,.nl:focus-visible,.lcard:focus-visible{outline:2px solid var(--pink-700);outline-offset:2px}
+.nl{position:relative;display:inline-flex;align-items:center;min-height:44px;padding:0 11px;color:var(--ink-500);text-decoration:none;font-weight:500;font-size:15px;border-radius:999px;white-space:nowrap}
+.nl:hover{color:var(--ink-900)}.nl.on{color:var(--ink-900)}
+.nav-links{display:flex}.nav-burger{display:none}
+@media (max-width:1000px){.nav-links{display:none}.nav-burger{display:inline-flex}}
+.sheet-link{animation:dropin 420ms var(--spring) both}
+.chip{display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 10px;border-radius:999px;font-size:12px;font-weight:500;white-space:nowrap}
+.flink{color:var(--ink-500);text-decoration:none;font-size:14px;min-height:32px;display:inline-flex;align-items:center}.flink:hover{color:var(--ink-900)}
+.floaty{animation:floaty 6s ease-in-out infinite}
+.lcard{display:flex;flex-direction:column;gap:10px;padding:20px;border-radius:20px;text-decoration:none;color:var(--ink-900);background:var(--glass);border:1px solid var(--glass-b);transition:transform 250ms var(--spring),box-shadow 250ms ease}
+.lcard:hover{transform:translateY(-4px);box-shadow:var(--shadow);color:var(--ink-900)}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+@keyframes dropin{from{opacity:0;transform:translateY(-16px)}to{opacity:1;transform:none}}
+.h2h.rm *{animation:none!important;transition:none!important}
+@media (prefers-reduced-motion:reduce){.h2h *{animation:none!important;transition:none!important}}
+</style>
+</helmet>
+<div class="{{rootClass}}" style="min-height: 100vh">
+<header class="glass" style="position: sticky; top: 0; z-index: 50; height: 64px; border-width: 0 0 1px 0; display: flex; align-items: center">
+<div style="width: 100%; max-width: 1240px; margin: 0 auto; padding: 0 24px; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; gap: 12px">
+<a href="Main.dc.html" class="fx" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink-900); min-height: 44px; border-radius: 12px"><svg width="30" height="30" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-10-9.3C.3 8.4 2.2 4 6.2 4c2.3 0 3.9 1.3 5.8 3.4C13.9 5.3 15.5 4 17.8 4c4 0 5.9 4.4 4.2 7.7C19.5 16.4 12 21 12 21z" fill="#FF8FB8"></path></svg><span class="disp" style="font-size: 20px; font-weight: 600">H2H<span style="color: var(--pink-700)">·</span>S2U</span></a>
+<nav class="nav-links" aria-label="Main" style="align-items: center"><sc-for list="{{nav}}" as="n" hint-placeholder-count="8"><a class="{{n.cls}}" href="{{n.href}}" aria-current="{{n.cur}}">{{n.label}}<sc-if value="{{n.on}}" hint-placeholder-val="{{ false }}"><svg width="8" height="8" viewBox="0 0 24 24" aria-hidden="true" style="position: absolute; left: 50%; bottom: 3px; margin-left: -4px"><path d="M12 21s-7.5-4.6-10-9.3C.3 8.4 2.2 4 6.2 4c2.3 0 3.9 1.3 5.8 3.4C13.9 5.3 15.5 4 17.8 4c4 0 5.9 4.4 4.2 7.7C19.5 16.4 12 21 12 21z" fill="#FF8FB8"></path></svg></sc-if></a></sc-for></nav>
+<div style="display: flex; gap: 8px"><button class="ibtn" onClick="{{toggleDark}}" aria-label="Toggle dark mode"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"></path></svg></button><button class="ibtn nav-burger" onClick="{{openMenu}}" aria-label="Open menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"></path></svg></button></div>
+</div>
+</header>
+<sc-if value="{{menu}}" hint-placeholder-val="{{ false }}">
+<div style="position: fixed; inset: 0; z-index: 80; display: flex; flex-direction: column; padding: 16px 24px 32px; gap: 4px; background: var(--cream-50)">
+<div style="display: flex; justify-content: flex-end"><button class="ibtn" onClick="{{closeMenu}}" aria-label="Close menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
+<sc-for list="{{nav}}" as="n" hint-placeholder-count="8"><a class="disp sheet-link fx" href="{{n.href}}" style="font-size: 34px; font-weight: 600; color: var(--ink-900); text-decoration: none; padding: 6px 0; animation-delay: {{n.delay}}">{{n.label}}</a></sc-for>
+</div>
+</sc-if>
+
+<!-- 1 HERO -->
+<section style="position: relative; overflow: hidden; padding: 72px 24px 56px">
+<div aria-hidden="true" style="position: absolute; inset: 0">
+<svg class="floaty" width="34" height="34" viewBox="0 0 24 24" style="position: absolute; left: 8%; top: 30%"><path d="M12 21s-7.5-4.6-10-9.3C.3 8.4 2.2 4 6.2 4c2.3 0 3.9 1.3 5.8 3.4C13.9 5.3 15.5 4 17.8 4c4 0 5.9 4.4 4.2 7.7C19.5 16.4 12 21 12 21z" fill="#FFB6D5"></path></svg>
+<svg class="floaty" width="24" height="24" viewBox="0 0 24 24" style="position: absolute; right: 10%; top: 20%; animation-delay: -2s"><path d="M12 21s-7.5-4.6-10-9.3C.3 8.4 2.2 4 6.2 4c2.3 0 3.9 1.3 5.8 3.4C13.9 5.3 15.5 4 17.8 4c4 0 5.9 4.4 4.2 7.7C19.5 16.4 12 21 12 21z" fill="#C9B6FF"></path></svg>
+<svg class="floaty" width="20" height="20" viewBox="0 0 24 24" style="position: absolute; right: 34%; bottom: 14%; animation-delay: -4s"><path d="M12 21s-7.5-4.6-10-9.3C.3 8.4 2.2 4 6.2 4c2.3 0 3.9 1.3 5.8 3.4C13.9 5.3 15.5 4 17.8 4c4 0 5.9 4.4 4.2 7.7C19.5 16.4 12 21 12 21z" fill="#A8D8FF"></path></svg>
+<div style="position: absolute; width: 640px; height: 640px; left: 50%; top: -360px; margin-left: -320px; border-radius: 50%; background: radial-gradient(circle, rgba(201,182,255,.55), rgba(201,182,255,0) 70%)"></div>
+</div>
+<div style="position: relative; max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 20px">
+<nav aria-label="Breadcrumb" style="font-size: 14px; color: var(--ink-500)"><a href="Main.dc.html" class="fx" style="color: var(--ink-500); text-decoration: none">Home</a> / <span aria-current="page" style="color: var(--ink-900); font-weight: 600">About</span></nav>
+<div style="width: 220px; height: 120px; border-radius: 24px; border: 2px dashed rgba(201,42,104,.35); display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,.5)"><span class="chip" style="background: #fff; color: #2B2440">TODO · official group logo</span></div>
+<h1 class="disp holo-text" style="margin: 0; font-size: clamp(48px, 7vw, 84px); font-weight: 700; letter-spacing: -0.02em; line-height: 1.02">Hearts2Hearts</h1>
+<p style="margin: 0; font-size: 20px; line-height: 1.6; color: var(--ink-500); max-width: 48ch">[NAME STORY · one line on what “Hearts2Hearts” means, quoted from SM’s official introduction]</p>
+</div>
+</section>
+
+<main style="max-width: 1200px; margin: 0 auto; padding: 0 24px 72px; box-sizing: border-box; display: flex; flex-direction: column; gap: 64px">
+
+<!-- 2 GROUP INFO -->
+<section aria-labelledby="gi" class="glass" style="border-radius: 24px; padding: 32px; box-shadow: var(--shadow)">
+<h2 id="gi" class="disp" style="margin: 0 0 24px; font-size: 28px; font-weight: 600">Group info</h2>
+<dl style="margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr)); gap: 16px">
+<sc-for list="{{info}}" as="r" hint-placeholder-count="5">
+<div style="padding: 18px; border-radius: 16px; background: var(--surface); display: flex; flex-direction: column; gap: 6px"><dt style="font-size: 13px; color: var(--ink-500)">{{r.k}}</dt><dd class="disp" style="margin: 0; font-size: 22px; font-weight: 600; color: {{r.c}}">{{r.v}}</dd><sc-if value="{{r.hasSub}}" hint-placeholder-val="{{ false }}"><span style="font-size: 13px; color: var(--ink-500)">{{r.sub}}</span></sc-if></div>
+</sc-for>
+</dl>
+</section>
+
+<!-- 3 STORY TIMELINE -->
+<section aria-labelledby="st">
+<h2 id="st" class="disp" style="margin: 0 0 28px; font-size: 32px; font-weight: 600">Our story so far</h2>
+<ol style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; max-width: 760px">
+<sc-for list="{{story}}" as="t" hint-placeholder-count="9">
+<li style="display: grid; grid-template-columns: 120px 24px minmax(0, 1fr); gap: 16px">
+<span style="font-size: 13px; font-weight: 600; color: var(--pink-700); text-align: right; padding-top: 2px">{{t.when}}</span>
+<span style="display: flex; flex-direction: column; align-items: center"><span style="width: 14px; height: 14px; border-radius: 50%; background: {{t.dot}}; box-shadow: 0 0 0 4px var(--cream-50), 0 0 0 5px {{t.dot}}; margin-top: 3px; display: block; flex: none"></span><span style="flex: 1; width: 2px; background: var(--line); display: {{t.line}}"></span></span>
+<span style="display: flex; flex-direction: column; gap: 4px; padding-bottom: 28px"><span class="disp" style="font-size: 20px; font-weight: 600">{{t.title}}</span><span style="font-size: 15px; line-height: 1.6; color: var(--ink-500)">{{t.body}}</span></span>
+</li>
+</sc-for>
+</ol>
+</section>
+
+<!-- 4 OFFICIAL LINKS -->
+<section aria-labelledby="ol">
+<h2 id="ol" class="disp" style="margin: 0 0 20px; font-size: 32px; font-weight: 600">Official links</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(170px, 100%), 1fr)); gap: 16px">
+<sc-for list="{{links}}" as="l" hint-placeholder-count="6">
+<a class="lcard" href="{{l.href}}">
+<span style="width: 48px; height: 48px; border-radius: 14px; background: {{l.bg}}; display: flex; align-items: center; justify-content: center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2B2440" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{l.icon}}"></path></svg></span>
+<span class="disp" style="font-size: 18px; font-weight: 600">{{l.name}}</span>
+<span style="font-size: 13px; color: var(--ink-500)">{{l.handle}}</span>
+</a>
+</sc-for>
+</div>
+</section>
+
+<!-- 5 ABOUT THIS SITE -->
+<section aria-labelledby="as" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 14px">
+<h2 id="as" class="disp" style="margin: 0; font-size: 32px; font-weight: 600">About this site</h2>
+<p style="margin: 0; font-size: 16px; line-height: 1.8; color: var(--ink-500)">H2H·S2U is an unofficial fan project made by S2U, for S2U. It collects verified information in one soft, friendly place. Nothing here is official, and the AI blog is always labeled as fan content.</p>
+<p style="margin: 0; font-size: 16px; line-height: 1.8; color: var(--ink-500)">Credits: [FAN TEAM NAMES] · Contact: [CONTACT EMAIL]</p>
+</div>
+<div class="glass" style="border-radius: 24px; padding: 24px; display: flex; flex-direction: column; gap: 12px">
+<span style="font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-500)">Built with</span>
+<div style="display: flex; flex-wrap: wrap; gap: 8px"><span class="chip" style="background: #FFE3F1; color: #2B2440">Next.js App Router</span><span class="chip" style="background: #E6DCFF; color: #2B2440">TypeScript</span><span class="chip" style="background: #DDF0FF; color: #2B2440">Tailwind CSS</span><span class="chip" style="background: #FFF1D6; color: #2B2440">Framer Motion</span><span class="chip" style="background: #CFF3DD; color: #2B2440">React Three Fiber + drei</span><span class="chip" style="background: #FFE3F1; color: #2B2440">JSON / MDX content</span></div>
+</div>
+</section>
+
+<!-- 6 DISCLAIMER -->
+<section role="note" style="border-radius: 24px; padding: 24px 28px; background: var(--surface); border: 1.5px dashed rgba(201,42,104,.4); display: flex; gap: 16px; align-items: flex-start">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C92A68" stroke-width="2" stroke-linecap="round" aria-hidden="true" style="flex: none; margin-top: 2px"><circle cx="12" cy="12" r="9"></circle><path d="M12 8v5M12 16.5v.01"></path></svg>
+<p style="margin: 0; font-size: 15px; line-height: 1.7; color: var(--ink-500)"><strong style="color: var(--ink-900)">Disclaimer.</strong> This is an unofficial fan site, not affiliated with SM Entertainment or Hearts2Hearts. All images, music and related rights belong to SM Entertainment and their respective owners.</p>
+</section>
+</main>
+
+<footer style="border-top: 1px solid var(--line); background: var(--surface)">
+<div style="max-width: 1200px; margin: 0 auto; padding: 48px 24px 32px; box-sizing: border-box; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 32px">
+<div style="display: flex; flex-direction: column; gap: 10px"><span style="display: flex; align-items: center; gap: 10px"><svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-10-9.3C.3 8.4 2.2 4 6.2 4c2.3 0 3.9 1.3 5.8 3.4C13.9 5.3 15.5 4 17.8 4c4 0 5.9 4.4 4.2 7.7C19.5 16.4 12 21 12 21z" fill="#FF8FB8"></path></svg><span class="disp" style="font-size: 20px; font-weight: 600">H2H·S2U</span></span><span style="font-size: 14px; line-height: 1.6; color: var(--ink-500); max-width: 32ch">An unofficial, fan-made home for Hearts2Hearts and S2U.</span></div>
+<nav aria-label="Footer" style="display: flex; flex-direction: column"><span style="font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-500); margin-bottom: 6px">Quick links</span><div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 16px"><sc-for list="{{nav}}" as="n" hint-placeholder-count="8"><a class="flink fx" href="{{n.href}}">{{n.label}}</a></sc-for></div></nav>
+<div style="display: flex; flex-direction: column"><span style="font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-500); margin-bottom: 6px">Official socials</span><a class="flink fx" href="https://www.instagram.com/hearts2hearts">Instagram</a><a class="flink fx" href="https://x.com/Hearts2Hearts">X</a><a class="flink fx" href="https://www.youtube.com/@hearts2hearts.official">YouTube</a><a class="flink fx" href="https://www.tiktok.com/@hearts2hearts">TikTok</a></div>
+</div>
+<div style="border-top: 1px solid var(--line); padding: 18px 24px; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 24px; font-size: 13px; color: var(--ink-500); text-align: center"><span>Unofficial fan site · all images and music rights belong to SM Entertainment</span><span style="display: inline-flex; align-items: center; gap: 6px">Made with <svg width="13" height="13" viewBox="0 0 24 24" role="img" aria-label="love"><path d="M12 21s-7.5-4.6-10-9.3C.3 8.4 2.2 4 6.2 4c2.3 0 3.9 1.3 5.8 3.4C13.9 5.3 15.5 4 17.8 4c4 0 5.9 4.4 4.2 7.7C19.5 16.4 12 21 12 21z" fill="#FF8FB8"></path></svg> by fans</span></div>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"dark":{"editor":"boolean","default":false,"section":"Theme"},"reduceMotion":{"editor":"boolean","default":false,"section":"Theme"},"$preview":{"width":1440,"height":2500}}'>
+const NAV = [["home", "Home", "Main.dc.html"], ["members", "Members", "Members.dc.html"], ["music", "Music", "Music.dc.html"], ["blog", "Blog", "Blog.dc.html"], ["game", "Game", "Game.dc.html"], ["schedule", "Schedule", "Schedule.dc.html"], ["city", "Mini City", "City.dc.html"], ["about", "About", "About.dc.html"]];
+const PAGE = "about";
+const STORY = [
+  ["TODO", "Formation", "[How the group was formed · from an official SM source]", "#C9B6FF"],
+  ["Feb 24, 2025", "Debut with The Chase", "The single album came out with the showcase “Chase Our Hearts” at Yes24 Live Hall in Seoul.", "#FF8FB8"],
+  ["May 2025", "SMTOWN LIVE 2025–26", "Joined SM’s family concert tour, starting with Mexico City and Los Angeles.", "#A8D8FF"],
+  ["Jun 18, 2025", "“Style”", "A digital single between eras.", "#A8D8FF"],
+  ["Oct 20, 2025", "First EP, Focus", "Preceded by the pre-release single “Pretty Please” on September 24.", "#C9B6FF"],
+  ["Feb 21, 2026", "Hearts2House 2026 begins", "The first own tour opened with two nights at Olympic Hall in Seoul.", "#FF8FB8"],
+  ["Mar 2026", "Tour goes overseas", "Brooklyn Paramount, The Wiltern in Los Angeles, and Tennis Indoor Senayan in Jakarta.", "#FF8FB8"],
+  ["Jun 22, 2026", "Second EP, Lemon Tang", "Includes the earlier single “Rude!”.", "#FFD25E"],
+  ["Aug 12, 2026", "Japanese single “Iconic Heart”", "A non-album release for Japan.", "#FF8FB8"]
+];
+const I = {
+  cam: "M4 8a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v8a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3zM12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zM16.5 7.5h.01",
+  chat: "M5 6h14a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H10l-4 3v-3H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1z",
+  play: "M3 7a3 3 0 0 1 3-3h12a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3zM10 9v6l5-3z",
+  note: "M9 18V6l11-2v12M9 18a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM20 16a3 3 0 1 1-6 0 3 3 0 0 1 6 0z",
+  head: "M4 15v-3a8 8 0 0 1 16 0v3M4 15a2 2 0 0 1 2-2h1v6H6a2 2 0 0 1-2-2zM20 15a2 2 0 0 0-2-2h-1v6h1a2 2 0 0 0 2-2z",
+  people: "M9 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM3 20a6 6 0 0 1 12 0M17 11a3 3 0 1 0 0-6M21 20a6 6 0 0 0-4-5.7"
+};
+const LINKS = [
+  ["Instagram", "@hearts2hearts", "https://www.instagram.com/hearts2hearts", I.cam, "#FFE3F1"],
+  ["X", "@Hearts2Hearts", "https://x.com/Hearts2Hearts", I.chat, "#E6DCFF"],
+  ["YouTube", "@hearts2hearts.official", "https://www.youtube.com/@hearts2hearts.official", I.play, "#FFE0E6"],
+  ["TikTok", "@hearts2hearts", "https://www.tiktok.com/@hearts2hearts", I.note, "#DDF0FF"],
+  ["Spotify", "Artist link TODO", "https://open.spotify.com/search/Hearts2Hearts", I.head, "#CFF3DD"],
+  ["Weverse", "Community link TODO", "#", I.people, "#FFF1D6"]
+];
+
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { menu: false, dark: null }; }
+  renderVals() {
+    const s = this.state;
+    const dark = s.dark === null ? !!this.props.dark : s.dark;
+    return {
+      rootClass: "h2h" + (dark ? " dark" : "") + (this.props.reduceMotion ? " rm" : ""),
+      nav: NAV.map((n, i) => ({ label: n[1], href: n[2], on: n[0] === PAGE, cls: n[0] === PAGE ? "nl on fx" : "nl fx", cur: n[0] === PAGE ? "page" : "false", delay: (i * 50) + "ms" })),
+      menu: s.menu, openMenu: () => this.setState({ menu: true }), closeMenu: () => this.setState({ menu: false }),
+      toggleDark: () => this.setState({ dark: !dark }),
+      info: [
+        { k: "Debut", v: "Feb 24, 2025", sub: "Single album The Chase", hasSub: true, c: "inherit" },
+        { k: "Agency", v: "SM Entertainment", sub: "", hasSub: false, c: "inherit" },
+        { k: "Members", v: "8", sub: "Jiwoo, Carmen, Yuha, Stella, Juun, A-na, Ian, Ye-on", hasSub: true, c: "inherit" },
+        { k: "Fandom", v: "S2U (하츄)", sub: "", hasSub: false, c: "inherit" },
+        { k: "Official colors", v: "TODO", sub: "Add from an official SM source", hasSub: true, c: "var(--ink-500)" }
+      ],
+      story: STORY.map((t, i) => ({ when: t[0], title: t[1], body: t[2], dot: t[3], line: i === STORY.length - 1 ? "none" : "block" })),
+      links: LINKS.map((l) => ({ name: l[0], handle: l[1], href: l[2], icon: l[3], bg: l[4] }))
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>H2H Admin · Media</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Sans+KR:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:var(--acc-ink)}
+.ad{--bg:#F6F6F9;--surface:#FFFFFF;--ink:#1C1B22;--muted:#5E5C6B;--line:#E5E3EC;--soft:#F1F0F5;--acc:#C92A68;--acc-soft:#FBE6EE;--acc-ink:#9E1D50;--on-acc:#FFFFFF;--ok:#1F7A55;--ok-soft:#E3F5EC;--warn:#8A5A00;--warn-soft:#FFF3D6;--bad:#B42318;--bad-soft:#FDE8E7;font-family:'IBM Plex Sans','IBM Plex Sans KR',system-ui,sans-serif;font-size:14px;color:var(--ink);background:var(--bg)}
+.ad.illit{--acc:#2F5BE0;--acc-soft:#E4EBFF;--acc-ink:#1E40AF}
+.ad.dark{--bg:#121117;--surface:#1B1A22;--ink:#EDECF3;--muted:#A9A6B8;--line:#2D2B38;--soft:#24232D;--acc:#FF8FB8;--acc-soft:rgba(255,143,184,.14);--acc-ink:#FF8FB8;--on-acc:#1C1B22;--ok:#5FD3A0;--ok-soft:rgba(95,211,160,.14);--warn:#F2C14E;--warn-soft:rgba(242,193,78,.14);--bad:#FF8A80;--bad-soft:rgba(255,138,128,.14)}
+.ad.dark.illit{--acc:#8FA9FF;--acc-soft:rgba(143,169,255,.14);--acc-ink:#8FA9FF}
+.mono{font-family:'IBM Plex Mono',ui-monospace,monospace}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 16px;border-radius:8px;font-family:inherit;font-size:14px;font-weight:500;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;text-decoration:none;white-space:nowrap}
+.btn:hover{background:var(--soft);color:var(--ink)}.btn:active{transform:translateY(1px)}
+.btn-p{background:var(--acc);border-color:var(--acc);color:var(--on-acc)}.btn-p:hover{background:var(--acc);color:var(--on-acc);filter:brightness(1.08)}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.ibtn{width:44px;height:44px;flex:none;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;padding:0}
+.ibtn:hover{background:var(--soft)}
+.sl{display:flex;align-items:center;gap:10px;min-height:44px;padding:0 12px;border-radius:8px;color:var(--muted);text-decoration:none;font-weight:500;white-space:nowrap}
+.sl:hover{background:var(--soft);color:var(--ink)}.sl.on{background:var(--acc-soft);color:var(--acc-ink);font-weight:600}
+.seg-wrap{display:flex;padding:3px;border-radius:10px;background:var(--soft);gap:2px}
+.seg{flex:1;min-height:38px;padding:0 12px;border:0;border-radius:8px;background:none;color:var(--muted);font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap}
+.seg.on{background:var(--surface);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.1)}
+.inp{width:100%;box-sizing:border-box;min-height:44px;padding:0 12px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font-family:inherit;font-size:14px}
+.inp:focus{outline:2px solid var(--acc);outline-offset:-1px}
+.inp.req{border-color:var(--warn)}
+.lbl{font-size:13px;font-weight:600}
+.badge{display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 8px;border-radius:6px;font-size:12px;font-weight:600;white-space:nowrap}
+.b-ok{background:var(--ok-soft);color:var(--ok)}.b-warn{background:var(--warn-soft);color:var(--warn)}.b-bad{background:var(--bad-soft);color:var(--bad)}.b-neu{background:var(--soft);color:var(--muted)}.b-acc{background:var(--acc-soft);color:var(--acc-ink)}
+.btn:focus-visible,.ibtn:focus-visible,.sl:focus-visible,.seg:focus-visible,.fx:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.navlist{display:flex;flex-direction:column;gap:2px}
+@media (max-width:900px){.navlist{flex-direction:row;overflow-x:auto}.side-foot,.top-search{display:none!important}}
+.tbl{width:100%;border-collapse:collapse}
+.tbl th{text-align:left;font-size:12px;font-weight:600;color:var(--muted);padding:0 14px;height:40px;border-bottom:1px solid var(--line);white-space:nowrap}
+.tbl td{padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:middle}
+.toast{animation:toast 3s ease both}
+@keyframes toast{0%{opacity:0;transform:translate(-50%,-8px)}10%,85%{opacity:1;transform:translate(-50%,0)}100%{opacity:0;transform:translate(-50%,-8px)}}
+@media (prefers-reduced-motion:reduce){.ad *{animation:none!important;transition:none!important}}
+.btn-d{color:var(--bad);border-color:var(--bad)}.btn-d:hover{background:var(--bad-soft);color:var(--bad)}
+textarea.inp{min-height:88px;padding:10px 12px;resize:vertical;line-height:1.45}
+.fld{display:flex;flex-direction:column;gap:6px}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(180px,100%),1fr));gap:12px}
+.g3{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(150px,100%),1fr));gap:12px}
+.hint{font-size:12px;color:var(--muted);line-height:1.45}
+.row{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:44px}
+.fx{position:absolute;inset:0;width:100%;opacity:0;cursor:pointer}
+.upl:focus-within{outline:2px solid var(--acc);outline-offset:2px}
+.tile{display:flex;flex-direction:column;gap:8px;padding:10px;text-align:left;font-family:inherit;font-size:14px;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:12px;cursor:pointer}
+.tile:hover{border-color:var(--muted)}.tile.on{border-color:var(--acc);box-shadow:0 0 0 3px var(--acc-soft)}
+.tile:focus-visible,.chip:focus-visible,.sw:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.thumb{display:flex;align-items:center;justify-content:center;width:100%;border-radius:8px;overflow:hidden;color:var(--muted);font-size:12px;font-weight:600;background:repeating-linear-gradient(135deg,var(--soft) 0 10px,var(--surface) 10px 20px)}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.r-sq{aspect-ratio:1}.r-wide{aspect-ratio:16/9}.r-tall{aspect-ratio:3/4}
+.chip{display:inline-flex;align-items:center;min-height:40px;padding:0 12px;border-radius:999px;background:var(--soft);color:var(--ink);font-size:13px;font-weight:500;text-decoration:none}
+.chip:hover{background:var(--acc-soft);color:var(--acc-ink)}
+.sec{padding:20px;display:flex;flex-wrap:wrap;gap:20px}
+.sec-h{flex:1 1 200px}.sec-h h2{margin:0;font-size:16px;font-weight:600}.sec-h p{margin:6px 0 0;color:var(--muted);font-size:13px;line-height:1.5}
+.sec-b{flex:3 1 420px;min-width:0;display:flex;flex-direction:column;gap:14px}
+.check{display:flex;align-items:center;gap:10px;min-height:40px;cursor:pointer}.check input{width:18px;height:18px;accent-color:var(--acc)}
+.sw{width:56px;height:44px;flex:none;border:0;background:none;padding:0;cursor:pointer;display:inline-flex;align-items:center;border-radius:999px}
+.sw .track{position:relative;width:52px;height:30px;border-radius:999px;background:var(--line);transition:background .15s}
+.sw .knob{position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.25);transition:left .15s}
+.sw[aria-checked="true"] .track{background:var(--acc)}.sw[aria-checked="true"] .knob{left:25px}
+.inp[disabled]{opacity:.5}
+</style>
+</helmet>
+<div class="{{rootClass}}" style="min-height: 100vh; display: flex; flex-wrap: wrap; align-items: stretch">
+<aside aria-label="Admin" style="flex: 1 1 240px; max-width: 100%; background: var(--surface); border-right: 1px solid var(--line); padding: 16px 12px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; align-items: center; gap: 10px; padding: 4px 8px"><span style="width: 36px; height: 36px; border-radius: 10px; background: var(--acc); color: var(--on-acc); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px">FH</span><span style="display: flex; flex-direction: column"><strong style="font-size: 15px">Fan Hub</strong><span style="font-size: 12px; color: var(--muted)">Admin · CMS</span></span></div>
+<div style="padding: 8px 12px; border-radius: 8px; background: var(--acc-soft); color: var(--acc-ink); font-size: 13px; font-weight: 600">{{groupName}} site</div>
+<nav class="navlist" aria-label="Admin sections"><sc-for list="{{nav}}" as="n" hint-placeholder-count="7"><a class="{{n.cls}}" href="{{n.href}}" aria-current="{{n.cur}}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{n.icon}}"></path></svg>{{n.label}}<sc-if value="{{n.hasCount}}" hint-placeholder-val="{{ false }}"><span class="badge b-acc" style="margin-left: auto">{{n.count}}</span></sc-if></a></sc-for></nav>
+<div class="side-foot" style="margin-top: auto; border-top: 1px solid var(--line); padding-top: 12px"><a class="sl" href="{{siteHref}}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"></path></svg>View live site</a></div>
+</aside>
+<div style="flex: 999 1 640px; min-width: 0; display: flex; flex-direction: column">
+<header style="min-height: 64px; display: flex; align-items: center; gap: 12px; padding: 0 24px; border-bottom: 1px solid var(--line); background: var(--surface)">
+<nav aria-label="Breadcrumb" style="flex: 1; min-width: 0; font-size: 13px; color: var(--muted)">Admin / {{groupName}} / <span style="color: var(--ink); font-weight: 600">Media</span></nav>
+<label class="top-search" style="position: relative; display: flex; align-items: center; width: 280px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" style="position: absolute; left: 12px; color: var(--muted)"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg><span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Search content</span><input class="inp" type="search" placeholder="Search content" style="padding-left: 36px"></label>
+<button class="ibtn" onClick="{{toggleDark}}" aria-label="Toggle dark mode"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"></path></svg></button>
+<span role="img" aria-label="Signed in as admin" style="width: 36px; height: 36px; border-radius: 50%; background: var(--soft); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: var(--muted)">AD</span>
+</header>
+
+<main style="padding: 24px; display: flex; flex-direction: column; gap: 20px; box-sizing: border-box">
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px">
+<div><h1 style="margin: 0; font-size: 24px; font-weight: 600">Media library</h1><p style="margin: 4px 0 0; color: var(--muted)">Files are hosted on the fan site itself. Don’t hotlink images from official sites or socials.</p></div>
+<label class="btn btn-p upl" style="position: relative; overflow: hidden">Upload files<input class="fx" type="file" accept="image/*" multiple onChange="{{upload}}"></label>
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px">
+<div role="group" aria-label="File type" class="seg-wrap"><sc-for list="{{types}}" as="t" hint-placeholder-count="4"><button class="{{t.cls}}" onClick="{{t.pick}}" aria-pressed="{{t.on}}">{{t.label}}</button></sc-for></div>
+<span class="badge b-warn">{{attn}} need attention</span>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start">
+<section aria-label="Files" style="flex: 999 1 520px; min-width: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 14px; align-items: start">
+<sc-for list="{{tiles}}" as="a" hint-placeholder-count="9">
+<button class="{{a.cls}}" onClick="{{a.pick}}" aria-pressed="{{a.on}}">
+<span class="{{a.thumbCls}}"><sc-if value="{{a.hasUrl}}" hint-placeholder-val="{{ false }}"><img src="{{a.url}}" alt=""></sc-if><sc-if value="{{a.noUrl}}" hint-placeholder-val="{{ true }}"><span style="display: flex; flex-direction: column; align-items: center; gap: 6px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zM4 16l5-5 4 4 3-3 4 4"></path></svg>{{a.thumbLabel}}</span></sc-if></span>
+<span class="mono" style="font-size: 12px; overflow-wrap: anywhere">{{a.file}}</span>
+<span style="display: flex; flex-wrap: wrap; gap: 6px; align-items: center"><span class="{{a.badge}}">{{a.status}}</span><span style="font-size: 12px; color: var(--muted)">{{a.kind}}</span></span>
+</button>
+</sc-for>
+<sc-if value="{{noTiles}}" hint-placeholder-val="{{ false }}"><p style="grid-column: 1 / -1; margin: 0; padding: 28px; text-align: center; color: var(--muted)">No files of this type yet.</p></sc-if>
+</section>
+
+<sc-if value="{{hasSel}}" hint-placeholder-val="{{ true }}">
+<section class="card" aria-labelledby="mh" style="flex: 1 1 360px; min-width: 0; padding: 20px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 8px"><h2 id="mh" class="mono" style="margin: 0; font-size: 15px; font-weight: 500; overflow-wrap: anywhere">{{sel.file}}</h2><button class="ibtn" onClick="{{closeSel}}" aria-label="Close details"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
+<span class="{{sel.thumbCls}}"><sc-if value="{{sel.hasUrl}}" hint-placeholder-val="{{ false }}"><img src="{{sel.url}}" alt="{{draft.alt}}"></sc-if><sc-if value="{{sel.noUrl}}" hint-placeholder-val="{{ true }}"><span>{{sel.thumbLabel}}</span></sc-if></span>
+<div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center"><span class="{{sel.badge}}">{{sel.status}}</span><span style="font-size: 13px; color: var(--muted)">{{sel.dims}} · {{sel.size}}</span><label class="btn upl" style="position: relative; overflow: hidden; margin-left: auto; min-height: 36px; font-size: 13px">{{sel.fileBtn}}<input class="fx" type="file" accept="image/*" onChange="{{replaceFile}}"></label></div>
+<label class="fld"><span class="lbl">Alt text *</span><textarea class="{{altCls}}" value="{{draft.alt}}" onChange="{{setD.alt}}" placeholder="What’s in the image, in one sentence"></textarea><span class="hint">Name a member only if the source says who it is. Don’t guess.</span></label>
+<div class="g2">
+<label class="fld"><span class="lbl">Type</span><select class="inp" value="{{draft.kind}}" onChange="{{setD.kind}}"><option>Photos</option><option>Covers</option><option>Graphics</option></select></label>
+<label class="fld"><span class="lbl">License</span><select class="inp" value="{{draft.license}}" onChange="{{setD.license}}"><option value="own">Own work</option><option value="licensed">Licensed (proof on file)</option><option value="press">Press kit (permission on file)</option><option value="todo">Unknown · TODO</option></select></label>
+</div>
+<label class="fld"><span class="lbl">Credit</span><input class="inp" value="{{draft.credit}}" onChange="{{setD.credit}}" placeholder="Photographer, designer or Fan Hub"></label>
+<label class="fld"><span class="lbl">Source URL</span><input class="inp" type="url" value="{{draft.src}}" onChange="{{setD.src}}" placeholder="Where this file came from"></label>
+<sc-if value="{{licTodo}}" hint-placeholder-val="{{ false }}"><div class="badge b-bad" style="height: auto; padding: 8px 10px; line-height: 1.4; white-space: normal">Hidden on the live site until the license is set.</div></sc-if>
+<div class="fld"><span class="lbl">Used in</span><sc-if value="{{hasUsed}}" hint-placeholder-val="{{ true }}"><div style="display: flex; flex-wrap: wrap; gap: 6px"><sc-for list="{{used}}" as="u" hint-placeholder-count="2"><a class="chip" href="{{u.href}}">{{u.label}}</a></sc-for></div></sc-if><sc-if value="{{noUsed}}" hint-placeholder-val="{{ false }}"><span class="hint">Not used on any page yet.</span></sc-if></div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px; border-top: 1px solid var(--line); padding-top: 14px"><button class="btn btn-p" onClick="{{save}}" disabled="{{cantSave}}">Save</button><button class="btn" onClick="{{discard}}" disabled="{{notDirty}}">Discard</button><button class="btn btn-d" onClick="{{remove}}" disabled="{{hasUsed}}" style="margin-left: auto">Delete file</button></div>
+<sc-if value="{{hasUsed}}" hint-placeholder-val="{{ true }}"><span class="hint">To delete, take it off the pages above first.</span></sc-if>
+</section>
+</sc-if>
+<sc-if value="{{noSel}}" hint-placeholder-val="{{ false }}"><section class="card" style="flex: 1 1 360px; min-width: 0; padding: 28px; text-align: center; color: var(--muted)">Select a file to edit its alt text, credit and license.</section></sc-if>
+</div>
+</main>
+</div>
+<sc-if value="{{toast}}" hint-placeholder-val="{{ false }}"><div class="toast" role="status" style="position: fixed; top: 20px; left: 50%; z-index: 90; padding: 12px 16px; border-radius: 10px; background: var(--ink); color: var(--bg); font-size: 14px; font-weight: 500; box-shadow: 0 8px 24px rgba(0,0,0,.2)">{{toastMsg}}</div></sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"dark":{"editor":"boolean","default":false,"section":"Theme"},"$preview":{"width":1440,"height":1150}}'>
+const NAV = [
+  ["dash", "Dashboard", "AdminDashboard.dc.html", "M4 4h6v9H4zM14 4h6v5h-6zM14 13h6v7h-6zM4 17h6v3H4z"],
+  ["members", "Members", "AdminMembers.dc.html", "M9 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM3 20a6 6 0 0 1 12 0M17 11a3 3 0 1 0 0-6M21 20a6 6 0 0 0-4-5.7"],
+  ["releases", "Releases", "AdminReleases.dc.html", "M9 18V6l11-2v12M9 18a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM20 16a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"],
+  ["blog", "AI Blog", "AdminBlog.dc.html", "M12 3l1.9 5.8L20 10l-6.1 1.2L12 17l-1.9-5.8L4 10l6.1-1.2z"],
+  ["schedule", "Schedule", "AdminSchedule.dc.html", "M4 7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zM4 10h16M9 3v4M15 3v4"],
+  ["media", "Media", "AdminMedia.dc.html", "M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zM4 16l5-5 4 4 3-3 4 4"],
+  ["settings", "Settings", "AdminSettings.dc.html", "M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"]
+];
+const PAGE = "media";
+const A = (id, file, kind, ratio, has, alt, credit, license, used, dims, size) => ({ id: id, file: file, kind: kind, ratio: ratio, has: has, alt: alt, credit: credit, src: "", license: license, used: used, dims: dims, size: size, url: null });
+const DATA = {
+  h2h: { name: "Hearts2Hearts", site: "Main.dc.html", assets: [
+    A("h1", "hero-banner.webp", "Graphics", "wide", true, "Pastel holographic gradient with floating hearts", "Fan Hub", "own", [["Home · hero", "Main.dc.html"]], "2880×1200", "184 KB"),
+    A("h2", "og-share.png", "Graphics", "wide", true, "", "Fan Hub", "own", [["Share card", "Main.dc.html"]], "1200×630", "88 KB"),
+    A("h3", "cover-the-chase.webp", "Covers", "sq", false, "", "", "todo", [["Music", "Music.dc.html"]], "—", "—"),
+    A("h4", "cover-focus.webp", "Covers", "sq", false, "", "", "todo", [["Music", "Music.dc.html"]], "—", "—"),
+    A("h5", "member-jiwoo.webp", "Photos", "tall", false, "", "", "todo", [["Members", "Members.dc.html"], ["Member detail", "MemberDetail.dc.html"]], "—", "—"),
+    A("h6", "member-carmen.webp", "Photos", "tall", false, "", "", "todo", [["Members", "Members.dc.html"], ["Member detail", "MemberDetail.dc.html"]], "—", "—"),
+    A("h7", "blog-cover-style.webp", "Graphics", "wide", true, "", "Fan Hub", "own", [["Blog", "Blog.dc.html"]], "1600×900", "96 KB"),
+    A("h8", "city-tiles.svg", "Graphics", "sq", true, "Isometric pastel city tiles", "Fan Hub", "own", [["Mini City", "City.dc.html"]], "vector", "22 KB"),
+    A("h9", "game-pieces.svg", "Graphics", "sq", true, "Heart and star game pieces", "Fan Hub", "own", [["Game", "Game.dc.html"]], "vector", "9 KB")
+  ] },
+  illit: { name: "ILLIT", site: "ILLIT.dc.html", assets: [
+    A("i1", "hero-sticker-sheet.webp", "Graphics", "wide", true, "Sticker sheet of stars, hearts and doodles on a dotted background", "Fan Hub", "own", [["Home · hero", "ILLIT.dc.html"]], "2880×1200", "201 KB"),
+    A("i2", "og-share.png", "Graphics", "wide", true, "", "Fan Hub", "own", [["Share card", "ILLIT.dc.html"]], "1200×630", "91 KB"),
+    A("i3", "cover-super-real-me.webp", "Covers", "sq", false, "", "", "todo", [["Music", "IllitMusic.dc.html"]], "—", "—"),
+    A("i4", "cover-bomb.webp", "Covers", "sq", false, "", "", "todo", [["Music", "IllitMusic.dc.html"]], "—", "—"),
+    A("i5", "member-yunah.webp", "Photos", "tall", false, "", "", "todo", [["Members", "IllitMembers.dc.html"], ["Member detail", "IllitMemberDetail.dc.html"]], "—", "—"),
+    A("i6", "member-minju.webp", "Photos", "tall", false, "", "", "todo", [["Members", "IllitMembers.dc.html"], ["Member detail", "IllitMemberDetail.dc.html"]], "—", "—"),
+    A("i7", "blog-cover-bomb.webp", "Graphics", "wide", true, "", "Fan Hub", "own", [["Blog", "IllitBlog.dc.html"]], "1600×900", "102 KB"),
+    A("i8", "city-tiles.svg", "Graphics", "sq", true, "Isometric sticker-style city tiles", "Fan Hub", "own", [["Mini City", "IllitCity.dc.html"]], "vector", "24 KB"),
+    A("i9", "game-pieces.svg", "Graphics", "sq", true, "Sticker star and heart game pieces", "Fan Hub", "own", [["Game", "IllitGame.dc.html"]], "vector", "11 KB")
+  ] }
+};
+const FIELDS = ["alt", "credit", "src", "license", "kind"];
+const kb = (f) => Math.max(1, Math.round(f.size / 1024)) + " KB";
+
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { group: null, dark: null, type: "all", sel: null, draft: null, edits: {}, added: {}, removed: {}, toast: null }; this.urls = []; }
+  componentWillUnmount() { clearTimeout(this.tt); this.urls.forEach((u) => URL.revokeObjectURL(u)); }
+  flash(msg) { this.setState({ toast: msg }); clearTimeout(this.tt); this.tt = setTimeout(() => this.setState({ toast: null }), 3000); }
+  obj(f) { const u = URL.createObjectURL(f); this.urls.push(u); return u; }
+  renderVals() {
+    const s = this.state, gid = "h2h", g = DATA[gid] || DATA.h2h;
+    const dark = s.dark === null ? !!this.props.dark : s.dark;
+    const all = (s.added[gid] || []).concat(g.assets).filter((a) => !s.removed[a.id]).map((a) => (s.edits[a.id] ? { ...a, ...s.edits[a.id] } : a));
+    const status = (a) => (!a.has ? ["Empty slot", "badge b-neu"] : !a.alt.trim() ? ["Alt text missing", "badge b-warn"] : a.license === "todo" ? ["License TODO", "badge b-bad"] : ["Ready", "badge b-ok"]);
+    const view = (a) => { const st = status(a); return { ...a, status: st[0], badge: st[1], hasUrl: !!a.url, noUrl: !a.url, thumbCls: "thumb r-" + a.ratio, thumbLabel: a.has ? a.dims : "Empty slot", fileBtn: a.has ? "Replace file" : "Upload file" }; };
+    const pick = (a) => this.setState({ sel: a.id, draft: { alt: a.alt, credit: a.credit, src: a.src, license: a.license, kind: a.kind } });
+    const list = all.filter((a) => s.type === "all" || a.kind === s.type);
+    const sel = all.find((a) => a.id === s.sel) || null, d = s.draft || {};
+    const dirty = !!sel && FIELDS.some((k) => d[k] !== sel[k]);
+    const setD = (k) => (e) => this.setState({ draft: { ...this.state.draft, [k]: e.target.value } });
+    const used = sel ? sel.used.map((u) => ({ label: u[0], href: u[1] })) : [];
+    return {
+      rootClass: "ad" + (gid === "illit" ? " illit" : "") + (dark ? " dark" : ""),
+      toggleDark: () => this.setState({ dark: !dark }),
+      groups: [["h2h", "Hearts2Hearts"], ["illit", "ILLIT"]].map((x) => ({ label: x[1], on: gid === x[0] ? "true" : "false", cls: gid === x[0] ? "seg on" : "seg", pick: () => this.setState({ group: x[0], sel: null, draft: null }) })),
+      nav: NAV.map((n) => ({ label: n[1], href: n[2], icon: n[3], cls: n[0] === PAGE ? "sl on" : "sl", cur: n[0] === PAGE ? "page" : "false", hasCount: n[0] === "blog", count: 2 })),
+      groupName: g.name, siteHref: g.site,
+      types: [["all", "All"], ["Photos", "Photos"], ["Covers", "Covers"], ["Graphics", "Graphics"]].map((t) => ({ label: t[1], on: s.type === t[0] ? "true" : "false", cls: s.type === t[0] ? "seg on" : "seg", pick: () => this.setState({ type: t[0] }) })),
+      attn: all.filter((a) => status(a)[0] !== "Ready").length,
+      tiles: list.map((a) => ({ ...view(a), cls: a.id === s.sel ? "tile on" : "tile", on: a.id === s.sel ? "true" : "false", pick: () => pick(a) })),
+      noTiles: list.length === 0,
+      upload: (e) => {
+        const files = Array.from(e.target.files || []); e.target.value = "";
+        if (!files.length) return;
+        const items = files.map((f, i) => ({ ...A(gid + "u" + Date.now() + i, f.name, "Graphics", "sq", true, "", "", "todo", [], "—", kb(f)), url: this.obj(f) }));
+        this.setState({ added: { ...s.added, [gid]: items.concat(s.added[gid] || []) }, type: "all" });
+        pick(items[0]);
+        this.flash(files.length + (files.length > 1 ? " files" : " file") + " uploaded. Add alt text and a license.");
+      },
+      hasSel: !!sel, noSel: !sel,
+      sel: sel ? view(sel) : view(g.assets[0]),
+      draft: { alt: d.alt || "", credit: d.credit || "", src: d.src || "", license: d.license || "todo", kind: d.kind || "Graphics" },
+      setD: { alt: setD("alt"), credit: setD("credit"), src: setD("src"), license: setD("license"), kind: setD("kind") },
+      altCls: "inp" + ((d.alt || "").trim() ? "" : " req"),
+      licTodo: !!sel && d.license === "todo",
+      used: used, hasUsed: used.length > 0, noUsed: used.length === 0,
+      cantSave: !dirty || !(d.alt || "").trim(), notDirty: !dirty,
+      closeSel: () => this.setState({ sel: null, draft: null }),
+      replaceFile: (e) => {
+        const f = (e.target.files || [])[0]; e.target.value = "";
+        if (!f || !sel) return;
+        this.setState({ edits: { ...s.edits, [sel.id]: { ...(s.edits[sel.id] || {}), has: true, url: this.obj(f), size: kb(f), dims: "—" } } });
+        this.flash("File replaced. Check the alt text still fits.");
+      },
+      save: () => {
+        if (!sel || !dirty || !(d.alt || "").trim()) return;
+        const patch = {}; FIELDS.forEach((k) => { patch[k] = d[k]; });
+        this.setState({ edits: { ...s.edits, [sel.id]: { ...(s.edits[sel.id] || {}), ...patch } } });
+        this.flash("Saved " + sel.file);
+      },
+      discard: () => sel && pick(sel),
+      remove: () => {
+        if (!sel || sel.used.length) return;
+        this.setState({ removed: { ...s.removed, [sel.id]: true }, sel: null, draft: null });
+        this.flash("Deleted " + sel.file);
+      },
+      toast: !!s.toast, toastMsg: s.toast || ""
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+/* /city styles (from design/project/City.dc.html). Prefixed ct- to avoid collisions. */
+.ct-root { position: relative; height: calc(100svh - 64px); min-height: 560px; overflow: hidden; touch-action: none; transition: background 700ms ease; }
+
+.ct-leg { display: flex; align-items: center; gap: 10px; width: 100%; min-height: 44px; padding: 0 12px; border: 0; border-radius: 12px; background: none; cursor: pointer; font: 500 14px var(--font-plex-kr), sans-serif; color: #2b2440; text-align: left; }
+.ct-leg:hover, .ct-leg.on { background: rgba(43, 36, 64, 0.07); }
+.ct-leg.on { font-weight: 600; }
+.ct-leg:focus-visible { outline: 2px solid #c92a68; outline-offset: 2px; }
+
+.ct-legend { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); width: 230px; color: #2b2440; }
+.ct-info { position: absolute; left: 20px; bottom: 76px; width: 320px; max-width: calc(100% - 40px); box-sizing: border-box; color: #2b2440; box-shadow: 0 16px 40px rgba(43, 36, 64, 0.18); }
+.ct-hint { color: #2b2440; }
+
+.ct-bubble { display: block; background: #2b2440; color: #fff; padding: 8px 14px; border-radius: 999px; font: 600 14px var(--font-plex-kr), sans-serif; white-space: nowrap; box-shadow: 0 8px 20px rgba(43, 36, 64, 0.25); animation: ct-pop 260ms var(--spring) both; }
+
+.ct-loader { position: absolute; inset: 0; z-index: 100; background: var(--cream-50); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; transition: opacity 400ms ease; pointer-events: none; }
+.ct-wave { animation: ct-wave 2.2s ease-in-out infinite; }
+
+@media (max-width: 760px) {
+  .ct-legend { top: auto; bottom: 76px; right: 12px; left: 12px; width: auto; transform: none; }
+  .ct-legend .ct-items { flex-direction: row !important; overflow-x: auto; gap: 4px; }
+  .ct-legend .ct-items .ct-leg { flex: none; width: auto; white-space: nowrap; }
+  .ct-legend .ct-lt { display: none; }
+  .ct-info { bottom: 140px; }
+  .ct-hint { bottom: 12px; }
+}
+
+@keyframes ct-pop { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+@keyframes ct-wave { 0%, 100% { transform: translate(0, 4px); } 50% { transform: translate(-24px, 0); } }

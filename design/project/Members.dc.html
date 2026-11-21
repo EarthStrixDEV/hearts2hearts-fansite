@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Hearts2Hearts fan site · Members</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&amp;family=IBM+Plex+Sans+KR:wght@400;500;600&amp;family=Caveat:wght@600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#C92A68}a:hover{color:#9E1D50}
+.h2h{--pink-500:#FF8FB8;--pink-700:#C92A68;--cream-50:#FFF8F3;--ink-900:#2B2440;--ink-500:#6E6787;--surface:#FFFFFF;--glass:rgba(255,255,255,.6);--glass-b:rgba(255,255,255,.7);--line:rgba(43,36,64,.08);--holo:linear-gradient(135deg,#FFB6D5,#C9B6FF,#A8D8FF,#FFE3F1);--holo-deep:linear-gradient(135deg,#D63A77,#8A5CE6,#3D84D4);--shadow:0 8px 24px rgba(255,143,184,.25);--glow:0 0 32px rgba(201,182,255,.5);--spring:cubic-bezier(.34,1.56,.64,1);font-family:'IBM Plex Sans KR',system-ui,sans-serif;color:var(--ink-900);background:var(--cream-50)}
+.h2h.dark{--cream-50:#1B1630;--ink-900:#F6F0FF;--ink-500:#B9B0D6;--surface:#262040;--glass:rgba(38,32,64,.62);--glass-b:rgba(255,255,255,.14);--line:rgba(255,255,255,.1);--pink-700:#FF9CC3}
+.disp{font-family:'Fredoka',ui-rounded,system-ui,sans-serif}
+.sig{font-family:'Caveat',cursive}
+.holo-text{background:var(--holo-deep);-webkit-background-clip:text;background-clip:text;color:transparent}
+.glass{background:var(--glass);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--glass-b)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 20px;border-radius:999px;font:600 15px/1 'Fredoka',ui-rounded,sans-serif;border:0;cursor:pointer;text-decoration:none;transition:transform 150ms var(--spring),box-shadow 150ms ease}
+.btn:hover{transform:translateY(-2px)}.btn:active{transform:scale(.96)}
+.btn-p{background:var(--holo-deep);color:#fff;box-shadow:var(--shadow)}.btn-p:hover{color:#fff;box-shadow:var(--shadow),var(--glow)}
+.btn-s{background:var(--glass);color:var(--pink-700);border:1.5px solid var(--pink-500)}.btn-s:hover{color:var(--pink-700)}
+.ibtn{width:44px;height:44px;flex:none;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;background:var(--glass);border:1px solid var(--glass-b);color:var(--ink-900);cursor:pointer;padding:0;transition:transform 150ms var(--spring)}
+.ibtn:hover{transform:scale(1.1)}.ibtn:active{transform:scale(.96)}
+.btn:focus-visible,.ibtn:focus-visible,.fx:focus-visible,.seg:focus-visible,.nl:focus-visible,.mc:focus-visible,select:focus-visible{outline:2px solid var(--pink-700);outline-offset:2px}
+.nl{position:relative;display:inline-flex;align-items:center;min-height:44px;padding:0 11px;color:var(--ink-500);text-decoration:none;font-weight:500;font-size:15px;border-radius:999px;white-space:nowrap}
+.nl:hover{color:var(--ink-900)}.nl.on{color:var(--ink-900)}
+.nav-links{display:flex}.nav-burger{display:none}
+@media (max-width:1000px){.nav-links{display:none}.nav-burger{display:inline-flex}}
+.sheet-link{animation:dropin 420ms var(--spring) both}
+.chip{display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 10px;border-radius:999px;font-size:12px;font-weight:500;white-space:nowrap}
+.seg{display:inline-flex;align-items:center;min-height:40px;padding:0 16px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink-900);font:500 14px/1 'IBM Plex Sans KR',sans-serif;cursor:pointer;transition:transform 150ms var(--spring)}
+.seg:hover{transform:translateY(-1px)}
+.seg.on{background:#2B2440;color:#fff;border-color:#2B2440}
+.h2h.dark .seg.on{background:#FFB6D5;color:#2B2440;border-color:#FFB6D5}
+.flink{color:var(--ink-500);text-decoration:none;font-size:14px;min-height:32px;display:inline-flex;align-items:center}.flink:hover{color:var(--ink-900)}
+.floaty{animation:floaty 6s ease-in-out infinite}
+.mgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px}
+@media (max-width:1024px){.mgrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}}
+@media (max-width:560px){.mgrid{gap:10px}.mc .nm{font-size:20px!important}.mc .fact{display:none}}
+.mc{position:relative;display:block;width:100%;border-radius:24px;overflow:hidden;aspect-ratio:3/4;text-decoration:none;color:#fff;transition:transform 250ms var(--spring),box-shadow 250ms ease;box-shadow:0 10px 24px rgba(43,36,64,.1)}
+.mc:hover{transform:translateY(-6px);box-shadow:var(--shadow);color:#fff}
+.mc .ph{transition:transform 500ms ease}.mc:hover .ph{transform:scale(1.05)}
+.mc .fact{transform:translateY(100%);opacity:0;transition:transform 300ms var(--spring),opacity 200ms ease}
+.mc:hover .fact,.mc:focus-visible .fact{transform:none;opacity:1}
+.mc .meta{transition:transform 300ms var(--spring)}
+.mc:hover .meta,.mc:focus-visible .meta{transform:translateY(-58px)}
+.pcard{border:0;padding:0;background:none;cursor:pointer;perspective:1000px;display:block;width:100%;font:inherit;color:inherit;text-align:left}
+.sel-wrap select{appearance:none;-webkit-appearance:none;min-height:40px;padding:0 40px 0 16px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink-900);font:500 14px/1 'IBM Plex Sans KR',sans-serif;cursor:pointer}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+@keyframes dropin{from{opacity:0;transform:translateY(-16px)}to{opacity:1;transform:none}}
+.h2h.rm *{animation:none!important;transition:none!important}
+@media (prefers-reduced-motion:reduce){.h2h *{animation:none!important;transition:none!important}}
+</style>
+</helmet>
+<div class="{{rootClass}}" style="min-height: 100vh">
+<header class="glass" style="position: sticky; top: 0; z-index: 50; height: 64px; border-width: 0 0 1px 0; display: flex; align-items: center">
+<div style="width: 100%; max-width: 1240px; margin: 0 auto; padding: 0 24px; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; gap: 12px">
+<a href="Main.dc.html" class="fx" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink-900); min-height: 44px; border-radius: 12px"><svg width="30" height="30" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-10-9.3C.3 8.4 2.2 4 6.2 4c2.3 0 3.9 1.3 5.8 3.4C13.9 5.3 15.5 4 17.8 4c4 0 5.9 4.4 4.2 7.7C19.5 16.4 12 21 12 21z" fill="#FF8FB8"></path></svg><span class="disp" style="font-size: 20px; font-weight: 600">H2H<span style="color: var(--pink-700)">·</span>S2U</span></a>
+<nav class="nav-links" aria-label="Main" style="align-items: center"><sc-for list="{{nav}}" as="n" hint-placeholder-count="8"><a class="{{n.cls}}" href="{{n.href}}" aria-current="{{n.cur}}">{{n.label}}<sc-if value="{{n.on}}" hint-placeholder-val="{{ false }}"><svg width="8" height="8" viewBox="0 0 24 24" aria-hidden="true" style="position: absolute; left: 50%; bottom: 3px; margin-left: -4px"><path d="M12 21s-7.5-4.6-10-9.3C.3 8.4 2.2 4 6.2 4c2.3 0 3.9 1.3 5.8 3.4C13.9 5.3 15.5 4 17.8 4c4 0 5.9 4.4 4.2 7.7C19.5 16.4 12 21 12 21z" fill="#FF8FB8"></path></svg></sc-if></a></sc-for></nav>
+<div style="display: flex; gap: 8px"><button class="ibtn" onClick="{{toggleDark}}" aria-label="Toggle dark mode"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"></path></svg></button><button class="ibtn nav-burger" onClick="{{openMenu}}" aria-label="Open menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"></path></svg></button></div>
+</div>
+</header>
+<sc-if value="{{menu}}" hint-placeholder-val="{{ false }}">
+<div style="position: fixed; inset: 0; z-index: 80; display: flex; flex-direction: column; padding: 16px 24px 32px; gap: 4px; background: var(--cream-50)">
+<div style="display: flex; justify-content: flex-end"><button class="ibtn" onClick="{{closeMenu}}" aria-label="Close menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
+<sc-for list="{{nav}}" as="n" hint-placeholder-count="8"><a class="disp sheet-link fx" href="{{n.href}}" style="font-size: 34px; font-weight: 600; color: var(--ink-900); text-decoration: none; padding: 6px 0; animation-delay: {{n.delay}}">{{n.label}}</a></sc-for>
+</div>
+</sc-if>
+
+<!-- PAGE HEADER -->
+<section style="position: relative; overflow: hidden; padding: 64px 24px 40px">
+<div aria-hidden="true" style="position: absolute; inset: 0">
+<svg class="floaty" width="34" height="34" viewBox="0 0 24 24" style="position: absolute; left: 8%; top: 30%"><path d="M12 21s-7.5-4.6-10-9.3C.3 8.4 2.2 4 6.2 4c2.3 0 3.9 1.3 5.8 3.4C13.9 5.3 15.5 4 17.8 4c4 0 5.9 4.4 4.2 7.7C19.5 16.4 12 21 12 21z" fill="#FFB6D5"></path></svg>
+<svg class="floaty" width="22" height="22" viewBox="0 0 24 24" style="position: absolute; right: 12%; top: 22%; animation-delay: -2s"><path d="M12 21s-7.5-4.6-10-9.3C.3 8.4 2.2 4 6.2 4c2.3 0 3.9 1.3 5.8 3.4C13.9 5.3 15.5 4 17.8 4c4 0 5.9 4.4 4.2 7.7C19.5 16.4 12 21 12 21z" fill="#C9B6FF"></path></svg>
+<svg class="floaty" width="26" height="26" viewBox="0 0 24 24" style="position: absolute; right: 30%; bottom: 10%; animation-delay: -4s"><path d="M12 21s-7.5-4.6-10-9.3C.3 8.4 2.2 4 6.2 4c2.3 0 3.9 1.3 5.8 3.4C13.9 5.3 15.5 4 17.8 4c4 0 5.9 4.4 4.2 7.7C19.5 16.4 12 21 12 21z" fill="#A8D8FF"></path></svg>
+<div style="position: absolute; width: 520px; height: 520px; right: -140px; top: -260px; border-radius: 50%; background: radial-gradient(circle, rgba(201,182,255,.55), rgba(201,182,255,0) 70%)"></div>
+</div>
+<div style="position: relative; max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; gap: 10px">
+<h1 class="disp holo-text" style="margin: 0; font-size: clamp(44px, 6vw, 72px); font-weight: 700; letter-spacing: -0.02em; line-height: 1.05">Meet Hearts2Hearts</h1>
+<p style="margin: 0; font-size: 17px; color: var(--ink-500); max-width: 56ch; line-height: 1.6">Eight members, eight stories. Hover for a fun fact, open a card for the full profile.</p>
+</div>
+</section>
+
+<main style="max-width: 1200px; margin: 0 auto; padding: 8px 24px 80px; box-sizing: border-box">
+<div class="glass" style="border-radius: 20px; padding: 12px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 28px; position: sticky; top: 76px; z-index: 20">
+<div role="group" aria-label="Filter by position" style="display: flex; flex-wrap: wrap; gap: 8px">
+<sc-for list="{{filters}}" as="f" hint-placeholder-count="5"><button class="{{f.cls}}" onClick="{{f.pick}}" aria-pressed="{{f.on}}">{{f.label}}</button></sc-for>
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
+<label for="sort" style="font-size: 14px; color: var(--ink-500)">Sort by</label>
+<span class="sel-wrap" style="position: relative; display: inline-flex">
+<select id="sort" value="{{sort}}" onChange="{{pickSort}}"><option value="age">Age (oldest first)</option><option value="name">Name (A–Z)</option><option value="debut">Debut order</option></select>
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true" style="position: absolute; right: 16px; top: 50%; margin-top: -7px; pointer-events: none"><path d="M6 9l6 6 6-6"></path></svg>
+</span>
+<div role="group" aria-label="View" style="display: flex; gap: 4px; padding: 4px; border-radius: 999px; background: var(--line)">
+<sc-for list="{{views}}" as="v" hint-placeholder-count="2"><button class="{{v.cls}}" onClick="{{v.pick}}" aria-pressed="{{v.on}}" style="min-height: 36px">{{v.label}}</button></sc-for>
+</div>
+</div>
+</div>
+
+<sc-if value="{{gridView}}" hint-placeholder-val="{{ true }}">
+<div class="mgrid">
+<sc-for list="{{members}}" as="m" hint-placeholder-count="8">
+<a class="mc" href="MemberDetail.dc.html" aria-label="{{m.name}} profile" style="background: {{m.color}}">
+<span class="ph" style="position: absolute; inset: 0; display: block; background: {{m.grad}}"></span>
+<span style="position: absolute; left: 0; right: 0; top: 0; height: 4px; background: {{m.color}}; display: block; filter: saturate(1.6) brightness(.9)"></span>
+<span class="chip" style="position: absolute; top: 14px; left: 14px; background: rgba(255,255,255,.85); color: #2B2440">TODO · photo</span>
+<span style="position: absolute; left: 0; right: 0; bottom: 0; height: 60%; display: block; background: linear-gradient(0deg, rgba(43,36,64,.78), rgba(43,36,64,0))"></span>
+<span class="meta" style="position: absolute; left: 16px; right: 16px; bottom: 16px; display: flex; flex-direction: column; gap: 6px">
+<span style="display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap"><span class="disp nm" style="font-size: 28px; font-weight: 600">{{m.name}}</span><span style="font-size: 14px; opacity: .9">{{m.ko}}</span></span>
+<span class="chip" style="align-self: flex-start; background: {{m.color}}; color: #2B2440">{{m.posShort}}</span>
+</span>
+<span class="fact" style="position: absolute; left: 0; right: 0; bottom: 0; padding: 14px 16px; display: block; background: rgba(255,255,255,.92); color: #2B2440; font-size: 13px; line-height: 1.5">{{m.fact}}</span>
+</a>
+</sc-for>
+</div>
+</sc-if>
+
+<sc-if value="{{cardView}}" hint-placeholder-val="{{ false }}">
+<div class="mgrid">
+<sc-for list="{{members}}" as="m" hint-placeholder-count="8">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<button class="pcard fx" onClick="{{m.flip}}" aria-label="{{m.flipLabel}}" style="border-radius: 24px">
+<span style="display: block; position: relative; aspect-ratio: 3 / 4; transform-style: preserve-3d; transition: transform 650ms cubic-bezier(.34,1.56,.64,1); transform: {{m.flipT}}">
+<span style="position: absolute; inset: 0; border-radius: 24px; border: 5px solid #fff; box-sizing: border-box; overflow: hidden; backface-visibility: hidden; -webkit-backface-visibility: hidden; background: {{m.grad}}; box-shadow: 0 14px 28px rgba(43,36,64,.14); display: block">
+<span style="position: absolute; inset: 0; background: linear-gradient(115deg, transparent 25%, rgba(255,182,213,.8) 40%, rgba(201,182,255,.8) 50%, rgba(168,216,255,.8) 60%, transparent 75%); mix-blend-mode: color-dodge; opacity: .35; display: block"></span>
+<span class="disp" style="position: absolute; left: 14px; bottom: 12px; color: #fff; font-size: 24px; font-weight: 600; text-shadow: 0 1px 8px rgba(43,36,64,.45)">{{m.name}}</span>
+</span>
+<span style="position: absolute; inset: 0; border-radius: 24px; border: 5px solid #fff; box-sizing: border-box; overflow: hidden; backface-visibility: hidden; -webkit-backface-visibility: hidden; transform: rotateY(180deg); background: {{m.color}}; padding: 18px; display: flex; flex-direction: column; justify-content: space-between; color: #2B2440">
+<span class="sig" style="font-size: 46px; transform: rotate(-6deg); display: block">{{m.name}}</span>
+<span style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; line-height: 1.45"><span>Born {{m.born}}</span><span>{{m.nat}}</span><span>{{m.fact}}</span></span>
+</span>
+</span>
+</button>
+<a class="btn btn-s" href="MemberDetail.dc.html" style="min-height: 40px; font-size: 14px">View {{m.name}}</a>
+</div>
+</sc-for>
+</div>
+</sc-if>
+
+<sc-if value="{{noMembers}}" hint-placeholder-val="{{ false }}">
+<div style="padding: 64px 24px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 12px; color: var(--ink-500); border-radius: 24px; border: 1.5px dashed var(--line)">
+<svg width="72" height="72" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-10-9.3C.3 8.4 2.2 4 6.2 4c2.3 0 3.9 1.3 5.8 3.4C13.9 5.3 15.5 4 17.8 4c4 0 5.9 4.4 4.2 7.7C19.5 16.4 12 21 12 21z" fill="#FFE3F1"></path><circle cx="9" cy="11" r="1" fill="#2B2440"></circle><circle cx="15" cy="11" r="1" fill="#2B2440"></circle><path d="M10 14.5c1.2.8 2.8.8 4 0" stroke="#2B2440" stroke-width="1" fill="none" stroke-linecap="round"></path></svg>
+<span>{{emptyMsg}}</span>
+</div>
+</sc-if>
+<p style="margin: 28px 0 0; font-size: 13px; color: var(--ink-500)">Card colors are fan-picked for this site, not official. In the app, each card morphs into the profile hero (shared-element transition).</p>
+</main>
+
+<footer style="border-top: 1px solid var(--line); background: var(--surface)">
+<div style="max-width: 1200px; margin: 0 auto; padding: 48px 24px 32px; box-sizing: border-box; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 32px">
+<div style="display: flex; flex-direction: column; gap: 10px"><span style="display: flex; align-items: center; gap: 10px"><svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-10-9.3C.3 8.4 2.2 4 6.2 4c2.3 0 3.9 1.3 5.8 3.4C13.9 5.3 15.5 4 17.8 4c4 0 5.9 4.4 4.2 7.7C19.5 16.4 12 21 12 21z" fill="#FF8FB8"></path></svg><span class="disp" style="font-size: 20px; font-weight: 600">H2H·S2U</span></span><span style="font-size: 14px; line-height: 1.6; color: var(--ink-500); max-width: 32ch">An unofficial, fan-made home for Hearts2Hearts and S2U.</span></div>
+<nav aria-label="Footer" style="display: flex; flex-direction: column"><span style="font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-500); margin-bottom: 6px">Quick links</span><div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 16px"><sc-for list="{{nav}}" as="n" hint-placeholder-count="8"><a class="flink fx" href="{{n.href}}">{{n.label}}</a></sc-for></div></nav>
+<div style="display: flex; flex-direction: column"><span style="font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-500); margin-bottom: 6px">Official socials</span><a class="flink fx" href="https://www.instagram.com/hearts2hearts">Instagram</a><a class="flink fx" href="https://x.com/Hearts2Hearts">X</a><a class="flink fx" href="https://www.youtube.com/@hearts2hearts.official">YouTube</a><a class="flink fx" href="https://www.tiktok.com/@hearts2hearts">TikTok</a></div>
+</div>
+<div style="border-top: 1px solid var(--line); padding: 18px 24px; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 24px; font-size: 13px; color: var(--ink-500); text-align: center"><span>Unofficial fan site · all images and music rights belong to SM Entertainment</span><span style="display: inline-flex; align-items: center; gap: 6px">Made with <svg width="13" height="13" viewBox="0 0 24 24" role="img" aria-label="love"><path d="M12 21s-7.5-4.6-10-9.3C.3 8.4 2.2 4 6.2 4c2.3 0 3.9 1.3 5.8 3.4C13.9 5.3 15.5 4 17.8 4c4 0 5.9 4.4 4.2 7.7C19.5 16.4 12 21 12 21z" fill="#FF8FB8"></path></svg> by fans</span></div>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"dark":{"editor":"boolean","default":false,"section":"Theme"},"reduceMotion":{"editor":"boolean","default":false,"section":"Theme"},"$preview":{"width":1440,"height":1800}}'>
+const NAV = [["home", "Home", "Main.dc.html"], ["members", "Members", "Members.dc.html"], ["music", "Music", "Music.dc.html"], ["blog", "Blog", "Blog.dc.html"], ["game", "Game", "Game.dc.html"], ["schedule", "Schedule", "Schedule.dc.html"], ["city", "Mini City", "City.dc.html"], ["about", "About", "About.dc.html"]];
+const PAGE = "members";
+const MEMBERS = [
+  { id: "jiwoo", name: "Jiwoo", ko: "지우", pos: "Leader · Dancer · Rapper", tags: ["dance", "rap"], born: "2006-09-07", nat: "South Korean", color: "#FFB3CF", fact: "Cast at a convenience store while topping up her bus card with friends." },
+  { id: "carmen", name: "Carmen", ko: "카르멘", pos: "Vocalist", tags: ["vocal"], born: "2006-03-28", nat: "Indonesian", color: "#FFCBA4", fact: "Born in Bali; joined through SM’s Jakarta global audition." },
+  { id: "yuha", name: "Yuha", ko: "유하", pos: "Vocalist · Dancer", tags: ["vocal", "dance"], born: "2007-04-12", nat: "South Korean", color: "#A9E3CD", fact: "Won first place in a national piano competition in 4th grade." },
+  { id: "stella", name: "Stella", ko: "스텔라", pos: "Vocalist", tags: ["vocal"], born: "2007-06-18", nat: "South Korean · Canadian", color: "#A8D8FF", fact: "Spent part of her childhood in Vancouver, Canada." },
+  { id: "juun", name: "Juun", ko: "주은", pos: "Main Dancer · Rapper", tags: ["dance", "rap"], born: "2008-12-03", nat: "South Korean", color: "#CDBEFF", fact: "A busking video of her dancing to Red Velvet’s “Red Flavor” drew attention." },
+  { id: "ana", name: "A-na", ko: "에이나", pos: "Vocalist · Rapper", tags: ["vocal", "rap"], born: "2008-12-20", nat: "South Korean", color: "#FFE08A", fact: "Sang the national anthem for her vocal test." },
+  { id: "ian", name: "Ian", ko: "이안", pos: "Dancer · Vocalist", tags: ["dance", "vocal"], born: "2009-10-09", nat: "South Korean", color: "#F9B8DD", fact: "Started out as a kid model and was scouted on Instagram." },
+  { id: "yeon", name: "Ye-on", ko: "예온", pos: "Vocalist", tags: ["vocal"], born: "2010-04-19", nat: "South Korean", color: "#BCC6FF", fact: "Trained in classical singing and musical theater from a young age." }
+];
+const MON = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+const FILTERS = [["all", "All"], ["vocal", "Vocal"], ["dance", "Dance"], ["rap", "Rap"], ["visual", "Visual"]];
+function fmt(iso) { const p = iso.split("-"); return MON[Number(p[1]) - 1] + " " + Number(p[2]) + ", " + p[0]; }
+
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { filter: "all", sort: "debut", view: "grid", flipped: {}, menu: false, dark: null }; }
+  renderVals() {
+    const s = this.state;
+    const dark = s.dark === null ? !!this.props.dark : s.dark;
+    let list = MEMBERS.filter((m) => s.filter === "all" || m.tags.indexOf(s.filter) >= 0);
+    if (s.sort === "age") list = list.slice().sort((a, b) => a.born.localeCompare(b.born));
+    if (s.sort === "name") list = list.slice().sort((a, b) => a.name.localeCompare(b.name));
+    const members = list.map((m) => {
+      const f = !!s.flipped[m.id];
+      return { ...m, born: fmt(m.born), posShort: m.pos, grad: "linear-gradient(165deg," + m.color + ", #FFF8F3 130%)",
+        flipT: f ? "rotateY(180deg)" : "rotateY(0deg)", flipLabel: m.name + " photocard, " + (f ? "back side" : "front side") + ". Click to flip",
+        flip: () => this.setState({ flipped: { ...this.state.flipped, [m.id]: !this.state.flipped[m.id] } }) };
+    });
+    return {
+      rootClass: "h2h" + (dark ? " dark" : "") + (this.props.reduceMotion ? " rm" : ""),
+      nav: NAV.map((n, i) => ({ label: n[1], href: n[2], on: n[0] === PAGE, cls: n[0] === PAGE ? "nl on fx" : "nl fx", cur: n[0] === PAGE ? "page" : "false", delay: (i * 50) + "ms" })),
+      menu: s.menu, openMenu: () => this.setState({ menu: true }), closeMenu: () => this.setState({ menu: false }),
+      toggleDark: () => this.setState({ dark: !dark }),
+      filters: FILTERS.map((f) => ({ label: f[1], on: s.filter === f[0] ? "true" : "false", cls: s.filter === f[0] ? "seg on" : "seg", pick: () => this.setState({ filter: f[0] }) })),
+      sort: s.sort, pickSort: (e) => this.setState({ sort: e.target.value }),
+      views: [["grid", "Grid"], ["card", "Photocard"]].map((v) => ({ label: v[1], on: s.view === v[0] ? "true" : "false", cls: s.view === v[0] ? "seg on" : "seg", pick: () => this.setState({ view: v[0] }) })),
+      members: members,
+      gridView: s.view === "grid" && members.length > 0, cardView: s.view === "card" && members.length > 0, noMembers: members.length === 0,
+      emptyMsg: s.filter === "visual" ? "Visual positions aren’t in members.json yet. Add them from an official source." : "No one matches that filter yet."
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,533 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Hearts2Hearts fan site · Home</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&amp;family=IBM+Plex+Sans+KR:wght@400;500;600&amp;family=Caveat:wght@600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#C92A68}a:hover{color:#9E1D50}
+.h2h{--pink-500:#FF8FB8;--pink-700:#C92A68;--lilac-400:#C9B6FF;--sky-300:#A8D8FF;--cream-50:#FFF8F3;--ink-900:#2B2440;--ink-500:#6E6787;--surface:#FFFFFF;--glass:rgba(255,255,255,.6);--glass-b:rgba(255,255,255,.7);--line:rgba(43,36,64,.08);--holo:linear-gradient(135deg,#FFB6D5,#C9B6FF,#A8D8FF,#FFE3F1);--holo-deep:linear-gradient(135deg,#D63A77,#8A5CE6,#3D84D4);--shadow:0 8px 24px rgba(255,143,184,.25);--glow:0 0 32px rgba(201,182,255,.5);--spring:cubic-bezier(.34,1.56,.64,1);font-family:'IBM Plex Sans KR',system-ui,sans-serif;color:var(--ink-900);background:var(--cream-50);transition:background 400ms ease,color 400ms ease}
+.h2h.dark{--cream-50:#1B1630;--ink-900:#F6F0FF;--ink-500:#B9B0D6;--surface:#262040;--glass:rgba(38,32,64,.62);--glass-b:rgba(255,255,255,.14);--line:rgba(255,255,255,.1);--pink-700:#FF9CC3}
+.grain{background-image:radial-gradient(rgba(43,36,64,.05) 1px,transparent 1px);background-size:4px 4px}
+.disp{font-family:'Fredoka',ui-rounded,system-ui,sans-serif}
+.sig{font-family:'Caveat',cursive}
+.holo-text{background:var(--holo-deep);-webkit-background-clip:text;background-clip:text;color:transparent}
+.glass{background:var(--glass);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--glass-b)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 24px;border-radius:999px;font:600 16px/1 'Fredoka',ui-rounded,sans-serif;border:0;cursor:pointer;text-decoration:none;transition:transform 150ms var(--spring),box-shadow 150ms ease}
+.btn:hover{transform:translateY(-2px)}.btn:active{transform:scale(.96)}
+.btn-p{background:var(--holo-deep);color:#fff;box-shadow:var(--shadow)}.btn-p:hover{color:#fff;box-shadow:var(--shadow),var(--glow)}
+.btn-s{background:var(--glass);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);color:var(--pink-700);border:1.5px solid var(--pink-500)}.btn-s:hover{color:var(--pink-700)}
+.ibtn{width:44px;height:44px;flex:none;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;background:var(--glass);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--glass-b);color:var(--ink-900);cursor:pointer;padding:0;transition:transform 150ms var(--spring)}
+.ibtn:hover{transform:scale(1.1)}.ibtn:active{transform:scale(.96)}
+.btn:focus-visible,.ibtn:focus-visible,.fx:focus-visible,.nl:focus-visible{outline:2px solid var(--pink-700);outline-offset:2px}
+.nl{position:relative;display:inline-flex;align-items:center;min-height:44px;padding:0 11px;color:var(--ink-500);text-decoration:none;font-weight:500;font-size:15px;border-radius:999px;white-space:nowrap}
+.nl:hover{color:var(--ink-900)}.nl.on{color:var(--ink-900)}
+.nav-links{display:flex}.nav-burger{display:none}
+@media (max-width:1100px){.nav-links{display:none}.nav-burger{display:inline-flex}.np-pill{display:none!important}}
+.sheet-link{animation:dropin 420ms var(--spring) both}
+.chip{display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 10px;border-radius:999px;font-size:12px;font-weight:500;white-space:nowrap}
+.flink{color:var(--ink-500);text-decoration:none;font-size:14px;min-height:32px;display:inline-flex;align-items:center}.flink:hover{color:var(--ink-900)}
+.floaty{animation:floaty 6s ease-in-out infinite}
+.twinkle{animation:twinkle 2.8s ease-in-out infinite}
+.bob{animation:bob 2.4s ease-in-out infinite}
+.kb{animation:kb 7s ease-out both}
+.spin{animation:spin 9s linear infinite;animation-play-state:paused}.spin.on{animation-play-state:running}
+.eq span{display:block;width:3px;border-radius:2px;background:var(--pink-700);animation:eq 900ms ease-in-out infinite}
+.marq{display:inline-flex;gap:32px;white-space:nowrap;animation:marquee 9s linear infinite}
+.slide{transition:opacity 700ms ease}
+.dot{height:8px;width:8px;border-radius:999px;background:rgba(43,36,64,.25);transition:width 300ms var(--spring),background 300ms}
+.dot.on{width:28px;background:var(--pink-700)}
+.dot-hit{display:inline-flex;align-items:center;justify-content:center;min-width:28px;height:44px;border:0;background:none;padding:0;cursor:pointer}
+.car-arrow{opacity:0;transition:opacity 200ms ease,transform 150ms var(--spring)}
+.car:hover .car-arrow,.car:focus-within .car-arrow{opacity:1}
+.pc-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px}
+@media (max-width:860px){.pc-row{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:12px;gap:16px}.pc-row>*{flex:0 0 220px;scroll-snap-align:start}}
+@media (hover:none){.car-arrow{opacity:1}.autotilt{animation:autotilt 7s ease-in-out infinite}}
+.pc{border:0;padding:0;background:none;cursor:pointer;perspective:1000px;display:block;width:100%;text-align:left;font:inherit;color:inherit}
+.row{display:grid;grid-template-columns:32px 44px minmax(0,1fr) auto;align-items:center;gap:12px;width:100%;min-height:56px;padding:0 12px;border:0;border-radius:12px;background:none;cursor:pointer;font:inherit;color:var(--ink-900);text-align:left}
+.row:hover{background:var(--line)}
+.row .pi{display:none}.row:hover .pi{display:inline-flex}.row:hover .nm{display:none}
+.row.on{color:var(--pink-700);font-weight:600}
+.card-l{transition:transform 250ms var(--spring),box-shadow 250ms ease}
+.card-l:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.card-l:hover .zoom{transform:scale(1.05)}
+.zoom{transition:transform 500ms ease}
+.clamp2{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.clamp3{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.cloud{animation:drift 38s linear infinite}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-18px)}}
+@keyframes twinkle{0%,100%{opacity:.25;transform:scale(.6)}50%{opacity:1;transform:scale(1)}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes eq{0%,100%{height:4px}50%{height:14px}}
+@keyframes kb{from{transform:scale(1)}to{transform:scale(1.08)}}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes dropin{from{opacity:0;transform:translateY(-16px)}to{opacity:1;transform:none}}
+@keyframes autotilt{0%,100%{transform:rotateY(-6deg) rotateX(3deg)}50%{transform:rotateY(6deg) rotateX(-3deg)}}
+@keyframes drift{from{transform:translateX(-160px)}to{transform:translateX(1100px)}}
+.h2h.rm *{animation:none!important;transition:none!important}
+@media (prefers-reduced-motion:reduce){.h2h *{animation:none!important;transition:none!important}}
+</style>
+</helmet>
+<div class="{{rootClass}}" style="min-height: 100vh; position: relative; overflow-x: clip">
+
+<!-- NAVBAR -->
+<header class="glass" style="position: sticky; top: 0; z-index: 50; height: 64px; border-width: 0 0 1px 0; display: flex; align-items: center">
+<div style="width: 100%; max-width: 1240px; margin: 0 auto; padding: 0 24px; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; gap: 12px">
+<a href="Main.dc.html" class="fx" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink-900); border-radius: 12px; min-height: 44px">
+<svg width="30" height="30" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-10-9.3C.3 8.4 2.2 4 6.2 4c2.3 0 3.9 1.3 5.8 3.4C13.9 5.3 15.5 4 17.8 4c4 0 5.9 4.4 4.2 7.7C19.5 16.4 12 21 12 21z" fill="#FF8FB8"></path><path d="M15.5 8.5c1 .2 1.8 1 2 2" stroke="#fff" stroke-width="1.6" fill="none" stroke-linecap="round"></path></svg>
+<span class="disp" style="font-size: 20px; font-weight: 600">H2H<span style="color: var(--pink-700)">·</span>S2U</span>
+</a>
+<nav class="nav-links" aria-label="Main" style="align-items: center; gap: 0">
+<sc-for list="{{nav}}" as="n" hint-placeholder-count="8">
+<a class="{{n.cls}}" href="{{n.href}}" aria-current="{{n.cur}}">{{n.label}}<sc-if value="{{n.on}}" hint-placeholder-val="{{ false }}"><svg width="8" height="8" viewBox="0 0 24 24" aria-hidden="true" style="position: absolute; left: 50%; bottom: 3px; margin-left: -4px"><path d="M12 21s-7.5-4.6-10-9.3C.3 8.4 2.2 4 6.2 4c2.3 0 3.9 1.3 5.8 3.4C13.9 5.3 15.5 4 17.8 4c4 0 5.9 4.4 4.2 7.7C19.5 16.4 12 21 12 21z" fill="#FF8FB8"></path></svg></sc-if></a>
+</sc-for>
+</nav>
+<div style="display: flex; align-items: center; gap: 8px">
+<div class="glass np-pill" style="width: 280px; height: 56px; box-sizing: border-box; border-radius: 999px; display: flex; align-items: center; gap: 10px; padding: 0 6px; box-shadow: var(--shadow)">
+<span class="{{vinylClass}}" style="width: 44px; height: 44px; flex: none; border-radius: 50%; background: {{current.grad}}; box-shadow: inset 0 0 0 10px rgba(43,36,64,.18); position: relative; display: block"><span style="position: absolute; left: 50%; top: 50%; width: 8px; height: 8px; margin: -4px 0 0 -4px; border-radius: 50%; background: var(--cream-50)"></span></span>
+<span style="flex: 1; min-width: 0; overflow: hidden; display: block">
+<span style="display: block; font-size: 11px; color: var(--ink-500); font-weight: 500">Now playing</span>
+<span style="display: block; overflow: hidden; font-size: 14px; font-weight: 600"><span class="marq"><span>{{current.title}} · Hearts2Hearts</span><span aria-hidden="true">{{current.title}} · Hearts2Hearts</span></span></span>
+</span>
+<button class="ibtn" onClick="{{togglePlay}}" aria-label="{{playLabel}}" style="background: var(--holo-deep); color: #fff; border: 0">
+<sc-if value="{{playing}}" hint-placeholder-val="{{ false }}"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1.5" fill="currentColor"></rect><rect x="14" y="5" width="4" height="14" rx="1.5" fill="currentColor"></rect></svg></sc-if>
+<sc-if value="{{paused}}" hint-placeholder-val="{{ true }}"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z" fill="currentColor"></path></svg></sc-if>
+</button>
+</div>
+<button class="ibtn" onClick="{{toggleDark}}" aria-label="Toggle dark mode"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"></path></svg></button>
+<button class="ibtn nav-burger" onClick="{{openMenu}}" aria-label="Open menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"></path></svg></button>
+</div>
+</div>
+</header>
+<sc-if value="{{menu}}" hint-placeholder-val="{{ false }}">
+<div style="position: fixed; inset: 0; z-index: 80; display: flex; flex-direction: column; padding: 16px 24px 32px; gap: 4px; background: var(--cream-50)">
+<div style="display: flex; justify-content: flex-end"><button class="ibtn" onClick="{{closeMenu}}" aria-label="Close menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
+<sc-for list="{{nav}}" as="n" hint-placeholder-count="8"><a class="disp sheet-link fx" href="{{n.href}}" style="font-size: 34px; font-weight: 600; color: var(--ink-900); text-decoration: none; padding: 6px 0; animation-delay: {{n.delay}}">{{n.label}}</a></sc-for>
+</div>
+</sc-if>
+
+<!-- 1 HERO -->
+<section id="top" style="position: relative; min-height: 820px; display: flex; align-items: center; overflow: hidden">
+<div aria-hidden="true" style="position: absolute; inset: 0; transform: translateY({{par1}}px)">
+<div style="position: absolute; width: 620px; height: 620px; left: -160px; top: -120px; border-radius: 50%; background: radial-gradient(circle, rgba(255,182,213,.75), rgba(255,182,213,0) 70%)"></div>
+<div style="position: absolute; width: 560px; height: 560px; right: -120px; top: 40px; border-radius: 50%; background: radial-gradient(circle, rgba(201,182,255,.7), rgba(201,182,255,0) 70%)"></div>
+<div style="position: absolute; width: 520px; height: 520px; left: 36%; bottom: -260px; border-radius: 50%; background: radial-gradient(circle, rgba(168,216,255,.7), rgba(168,216,255,0) 70%)"></div>
+</div>
+<div class="grain" aria-hidden="true" style="position: absolute; inset: 0; opacity: .6"></div>
+<div aria-hidden="true" style="position: absolute; inset: 0; transform: translateY({{par2}}px)">
+<sc-for list="{{floaters}}" as="f" hint-placeholder-count="10">
+<span style="position: absolute; left: {{f.x}}%; top: {{f.y}}%; display: block; opacity: {{f.o}}">
+<sc-if value="{{f.heart}}" hint-placeholder-val="{{ true }}"><svg class="floaty" width="{{f.s}}" height="{{f.s}}" viewBox="0 0 24 24" style="animation-delay: {{f.d}}; display: block"><path d="M12 21s-7.5-4.6-10-9.3C.3 8.4 2.2 4 6.2 4c2.3 0 3.9 1.3 5.8 3.4C13.9 5.3 15.5 4 17.8 4c4 0 5.9 4.4 4.2 7.7C19.5 16.4 12 21 12 21z" fill="{{f.c}}"></path></svg></sc-if>
+<sc-if value="{{f.star}}" hint-placeholder-val="{{ false }}"><svg class="twinkle" width="{{f.s}}" height="{{f.s}}" viewBox="0 0 24 24" style="animation-delay: {{f.d}}; display: block"><path d="M12 2l1.8 8.2L22 12l-8.2 1.8L12 22l-1.8-8.2L2 12l8.2-1.8z" fill="{{f.c}}"></path></svg></sc-if>
+</span>
+</sc-for>
+</div>
+<div style="position: relative; width: 100%; max-width: 1200px; margin: 0 auto; padding: 64px 24px 120px; box-sizing: border-box; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); gap: 48px; align-items: center">
+<div style="display: flex; flex-direction: column; gap: 24px">
+<span class="chip glass" style="align-self: flex-start; color: var(--pink-700); height: 32px; padding: 0 14px; font-size: 13px"><svg width="12" height="12" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l1.8 8.2L22 12l-8.2 1.8L12 22l-1.8-8.2L2 12l8.2-1.8z" fill="currentColor"></path></svg>Unofficial fan site for S2U</span>
+<h1 class="disp" style="margin: 0; font-size: clamp(56px, 8vw, 112px); line-height: .92; font-weight: 700; letter-spacing: -0.03em">Hearts<span class="holo-text">2</span>Hearts</h1>
+<p style="margin: 0; font-size: 20px; color: var(--ink-500); font-weight: 500">하츠투하츠 · eight hearts, one beat</p>
+<p style="margin: 0; font-size: 17px; line-height: 1.7; max-width: 46ch; color: var(--ink-500)">Every era, every member, every stage, collected in one soft little corner of the internet.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 12px; padding-top: 8px">
+<a class="btn btn-p" href="#music" onClick="{{startPlay}}"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-10-9.3C.3 8.4 2.2 4 6.2 4c2.3 0 3.9 1.3 5.8 3.4C13.9 5.3 15.5 4 17.8 4c4 0 5.9 4.4 4.2 7.7C19.5 16.4 12 21 12 21z" fill="currentColor"></path></svg>Listen Now</a>
+<a class="btn btn-s" href="Members.dc.html">Meet the Members</a>
+</div>
+</div>
+<div aria-hidden="true" style="position: relative; height: 520px; transform: translateY({{par3}}px)">
+<div class="floaty" style="position: absolute; left: 6%; top: 60px; width: 230px; aspect-ratio: 3 / 4; border-radius: 24px; transform: rotate(-9deg); background: linear-gradient(160deg,#FFE3F1,#FFB6D5); box-shadow: 0 24px 48px rgba(201,42,104,.18); border: 6px solid #fff; animation-delay: -1s"></div>
+<div class="floaty" style="position: absolute; right: 6%; top: 20px; width: 230px; aspect-ratio: 3 / 4; border-radius: 24px; transform: rotate(8deg); background: linear-gradient(160deg,#DDF0FF,#A8D8FF); box-shadow: 0 24px 48px rgba(61,132,212,.18); border: 6px solid #fff; animation-delay: -3s"></div>
+<div class="floaty" style="position: absolute; left: 50%; top: 120px; margin-left: -135px; width: 270px; aspect-ratio: 3 / 4; border-radius: 24px; background: linear-gradient(160deg,#F1EAFF,#C9B6FF 60%,#FFD6E7); box-shadow: 0 30px 60px rgba(138,92,230,.25); border: 6px solid #fff; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 20px; box-sizing: border-box"><span class="chip" style="background: rgba(255,255,255,.85); color: #2B2440">TODO · official group photo</span></div>
+</div>
+</div>
+<a href="#release" class="fx bob" aria-label="Scroll to latest release" style="position: absolute; left: 50%; bottom: 28px; margin-left: -22px; width: 44px; height: 44px; border-radius: 999px; display: flex; align-items: center; justify-content: center; color: var(--ink-500)">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
+</a>
+</section>
+
+<!-- 2 LATEST RELEASE -->
+<section id="release" style="max-width: 1200px; margin: 0 auto; padding: 24px 24px 48px; box-sizing: border-box">
+<div class="glass" style="border-radius: 24px; padding: 20px; display: flex; flex-wrap: wrap; align-items: center; gap: 28px; box-shadow: var(--shadow)">
+<div style="width: 168px; height: 168px; flex: none; border-radius: 16px; background: linear-gradient(135deg,#FFE3F1,#FF8FB8); position: relative; box-shadow: 0 16px 32px rgba(201,42,104,.2)"><span class="chip" style="position: absolute; left: 8px; bottom: 8px; background: rgba(255,255,255,.85); color: #2B2440">TODO · cover</span></div>
+<div style="flex: 1 1 280px; display: flex; flex-direction: column; gap: 8px">
+<span style="font-size: 13px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--pink-700)">Latest release</span>
+<span class="disp" style="font-size: 40px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.05">Iconic Heart</span>
+<span style="font-size: 15px; color: var(--ink-500)">Japanese single · August 12, 2026</span>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 10px">
+<a class="btn btn-p" href="https://open.spotify.com/search/Hearts2Hearts"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z" fill="currentColor"></path></svg>Play on Spotify</a>
+<a class="btn btn-s" href="Music.dc.html">Release details</a>
+</div>
+</div>
+</section>
+
+<!-- 3 CAROUSEL (full width) -->
+<section id="eras" style="padding: 48px 0">
+<div style="max-width: 1200px; margin: 0 auto 24px; padding: 0 24px; box-sizing: border-box; display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; flex-wrap: wrap">
+<div>
+<p style="margin: 0 0 6px; font-size: 13px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--pink-700)">Concepts</p>
+<h2 class="disp" style="margin: 0; font-size: 44px; font-weight: 600; letter-spacing: -0.02em">Every era, in order</h2>
+</div>
+<p style="margin: 0; color: var(--ink-500); font-size: 15px">{{slideNum}} / {{slideCount}} · pauses on hover</p>
+</div>
+<div class="car" onMouseEnter="{{pause}}" onMouseLeave="{{resume}}" style="position: relative; overflow: hidden; width: 100%; aspect-ratio: {{carRatio}}; max-height: 760px; background: #EEE6FF">
+<sc-for list="{{slides}}" as="s" hint-placeholder-count="5">
+<div class="slide" aria-hidden="{{s.hidden}}" style="position: absolute; inset: 0; opacity: {{s.op}}; overflow: hidden">
+<div class="{{s.kbClass}}" style="position: absolute; inset: 0; background: {{s.grad}}"></div>
+<div class="grain" style="position: absolute; inset: 0; opacity: .7"></div>
+<div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center"><span class="disp" style="font-size: clamp(64px, 12vw, 180px); font-weight: 700; color: rgba(255,255,255,.55); letter-spacing: -0.03em; text-align: center; line-height: 1">{{s.name}}</span></div>
+<span class="chip" style="position: absolute; top: 24px; right: 24px; background: rgba(255,255,255,.85); color: #2B2440">TODO · official concept photo</span>
+</div>
+</sc-for>
+<div class="glass" style="position: absolute; left: max(24px, calc(50% - 576px)); bottom: 28px; border-radius: 16px; padding: 12px 18px; display: flex; flex-direction: column; gap: 2px">
+<span class="disp" style="font-size: 22px; font-weight: 600">{{activeSlide.name}}</span>
+<span style="font-size: 13px; color: var(--ink-500)">{{activeSlide.kind}} · {{activeSlide.date}}</span>
+</div>
+<button class="ibtn car-arrow" onClick="{{prevSlide}}" aria-label="Previous slide" style="position: absolute; left: 24px; top: 50%; margin-top: -22px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg></button>
+<button class="ibtn car-arrow" onClick="{{nextSlide}}" aria-label="Next slide" style="position: absolute; right: 24px; top: 50%; margin-top: -22px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"></path></svg></button>
+</div>
+<div style="display: flex; justify-content: center; gap: 2px; margin-top: 8px">
+<sc-for list="{{slides}}" as="s" hint-placeholder-count="5"><button class="dot-hit fx" onClick="{{s.go}}" aria-label="Go to {{s.name}}"><span class="{{s.dotClass}}" style="display: block"></span></button></sc-for>
+</div>
+</section>
+
+<!-- 4 TILT CARDS -->
+<section id="cards" style="max-width: 1200px; margin: 0 auto; padding: 48px 24px; box-sizing: border-box">
+<div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 32px">
+<div>
+<p style="margin: 0 0 6px; font-size: 13px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--pink-700)">Photocards</p>
+<h2 class="disp" style="margin: 0; font-size: 44px; font-weight: 600; letter-spacing: -0.02em">Tilt it. Flip it. Collect it.</h2>
+</div>
+<a class="btn btn-s" href="Members.dc.html">All members</a>
+</div>
+<div class="pc-row">
+<sc-for list="{{cards}}" as="c" hint-placeholder-count="8">
+<button class="pc fx" onMouseMove="{{c.move}}" onMouseLeave="{{c.leave}}" onClick="{{c.flip}}" aria-label="{{c.aria}}" style="border-radius: 24px">
+<span class="autotilt" style="display: block; transform-style: preserve-3d">
+<span style="display: block; position: relative; aspect-ratio: 3 / 4; transform-style: preserve-3d; transform: {{c.transform}}; transition: {{c.transition}}">
+<span style="position: absolute; inset: 0; border-radius: 24px; overflow: hidden; backface-visibility: hidden; -webkit-backface-visibility: hidden; background: {{c.grad}}; box-shadow: 0 16px 32px rgba(43,36,64,.14); border: 5px solid #fff; display: block; box-sizing: border-box">
+<span style="position: absolute; inset: 0; display: block; background: linear-gradient(115deg, transparent 20%, rgba(255,182,213,.9) 36%, rgba(201,182,255,.9) 46%, rgba(168,216,255,.9) 56%, rgba(255,227,241,.9) 64%, transparent 78%); background-size: 260% 260%; background-position: {{c.hx}}% {{c.hy}}%; mix-blend-mode: color-dodge; opacity: {{c.ho}}"></span>
+<span aria-hidden="true" style="position: absolute; left: {{c.hx}}%; top: {{c.hy}}%; width: 160px; height: 160px; margin: -80px 0 0 -80px; display: block; border-radius: 50%; background: radial-gradient(circle, rgba(255,255,255,.55), rgba(255,255,255,0) 65%); opacity: {{c.ho}}"></span>
+<svg class="twinkle" aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" style="position: absolute; right: 22%; top: 30%"><path d="M12 2l1.8 8.2L22 12l-8.2 1.8L12 22l-1.8-8.2L2 12l8.2-1.8z" fill="#fff"></path></svg>
+<span class="chip" style="position: absolute; top: 12px; right: 12px; background: {{c.rarBg}}; color: {{c.rarFg}}">{{c.rarity}}</span>
+<span class="chip" style="position: absolute; top: 12px; left: 12px; background: rgba(255,255,255,.85); color: #2B2440">TODO · photo</span>
+<span style="position: absolute; left: 0; right: 0; bottom: 0; padding: 40px 16px 14px; display: flex; align-items: flex-end; justify-content: space-between; background: linear-gradient(0deg, rgba(43,36,64,.62), rgba(43,36,64,0))"><span class="disp" style="font-size: 26px; font-weight: 600; color: #fff">{{c.name}}</span><span style="font-size: 14px; color: rgba(255,255,255,.92)">{{c.ko}}</span></span>
+</span>
+<span style="position: absolute; inset: 0; border-radius: 24px; overflow: hidden; backface-visibility: hidden; -webkit-backface-visibility: hidden; transform: rotateY(180deg); background: {{c.color}}; border: 5px solid #fff; box-sizing: border-box; padding: 22px 20px; display: flex; flex-direction: column; justify-content: space-between; color: #2B2440; box-shadow: 0 16px 32px rgba(43,36,64,.14)">
+<span class="sig" style="font-size: 52px; line-height: 1; display: block; transform: rotate(-6deg)">{{c.name}}</span>
+<span style="display: flex; flex-direction: column; gap: 10px; font-size: 14px; line-height: 1.45">
+<sc-for list="{{c.quick}}" as="q" hint-placeholder-count="3"><span style="display: flex; gap: 8px"><svg width="12" height="12" viewBox="0 0 24 24" aria-hidden="true" style="flex: none; margin-top: 4px"><path d="M12 21s-7.5-4.6-10-9.3C.3 8.4 2.2 4 6.2 4c2.3 0 3.9 1.3 5.8 3.4C13.9 5.3 15.5 4 17.8 4c4 0 5.9 4.4 4.2 7.7C19.5 16.4 12 21 12 21z" fill="#2B2440"></path></svg><span>{{q}}</span></span></sc-for>
+</span>
+<span style="font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; opacity: .75">Hearts2Hearts · {{c.posShort}}</span>
+</span>
+</span>
+</span>
+</button>
+</sc-for>
+</div>
+<p style="margin: 20px 0 0; font-size: 13px; color: var(--ink-500)">Card colors are fan-picked for this site, not official member colors. Swipe sideways on a phone.</p>
+</section>
+
+<!-- 5 MUSIC PREVIEW -->
+<section id="music" style="max-width: 1200px; margin: 0 auto; padding: 48px 24px; box-sizing: border-box">
+<div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 28px">
+<div>
+<p style="margin: 0 0 6px; font-size: 13px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--pink-700)">Music</p>
+<h2 class="disp" style="margin: 0; font-size: 44px; font-weight: 600; letter-spacing: -0.02em">Top 5 right now</h2>
+</div>
+<a class="btn btn-s" href="Music.dc.html">See all music<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: stretch">
+<div style="flex: 1 1 320px; max-width: 420px; border-radius: 24px; overflow: hidden; position: relative; color: #fff; background: #2B2440; min-height: 300px">
+<div aria-hidden="true" style="position: absolute; inset: -60px; background: {{current.grad}}; filter: blur(40px) saturate(1.2); opacity: .9"></div>
+<div aria-hidden="true" style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(43,36,64,.1), rgba(43,36,64,.75))"></div>
+<div style="position: relative; height: 100%; box-sizing: border-box; padding: 24px; display: flex; flex-direction: column; justify-content: space-between; gap: 20px">
+<div style="display: flex; align-items: center; gap: 18px">
+<div class="{{vinylClass}}" style="width: 120px; height: 120px; flex: none; border-radius: 50%; background: {{current.grad}}; box-shadow: 0 16px 32px rgba(0,0,0,.25), inset 0 0 0 4px rgba(255,255,255,.4); position: relative"><div style="position: absolute; left: 50%; top: 50%; width: 16px; height: 16px; margin: -8px 0 0 -8px; border-radius: 50%; background: #2B2440; box-shadow: 0 0 0 5px rgba(255,255,255,.7)"></div></div>
+<div style="display: flex; flex-direction: column; gap: 2px; min-width: 0"><span class="disp" style="font-size: 26px; font-weight: 600">{{current.title}}</span><span style="font-size: 14px; opacity: .85">{{current.album}}</span></div>
+</div>
+<div style="display: flex; align-items: center; justify-content: space-between">
+<button class="ibtn" onClick="{{prevTrack}}" aria-label="Previous track" style="background: transparent; border: 0; color: #fff"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6.5v11a1 1 0 0 1-1.55.83L8.5 13v4a1 1 0 0 1-2 0V7a1 1 0 0 1 2 0v4l7.95-5.33A1 1 0 0 1 18 6.5z" fill="currentColor"></path></svg></button>
+<button class="ibtn" onClick="{{togglePlay}}" aria-label="{{playLabel}}" style="width: 64px; height: 64px; background: #fff; color: #2B2440; border: 0; box-shadow: var(--glow)">
+<sc-if value="{{playing}}" hint-placeholder-val="{{ false }}"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1.5" fill="currentColor"></rect><rect x="14" y="5" width="4" height="14" rx="1.5" fill="currentColor"></rect></svg></sc-if>
+<sc-if value="{{paused}}" hint-placeholder-val="{{ true }}"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z" fill="currentColor"></path></svg></sc-if>
+</button>
+<button class="ibtn" onClick="{{nextTrack}}" aria-label="Next track" style="background: transparent; border: 0; color: #fff"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6.5v11a1 1 0 0 0 1.55.83L15.5 13v4a1 1 0 0 0 2 0V7a1 1 0 0 0-2 0v4L7.55 5.67A1 1 0 0 0 6 6.5z" fill="currentColor"></path></svg></button>
+</div>
+<p style="margin: 0; font-size: 11px; opacity: .8; text-align: center">Playback via the official Spotify embed</p>
+</div>
+</div>
+<div class="glass" style="flex: 999 1 480px; min-width: 0; border-radius: 24px; padding: 12px">
+<sc-for list="{{top5}}" as="t" hint-placeholder-count="5">
+<button class="{{t.cls}}" onClick="{{t.pick}}" aria-label="Play {{t.title}}">
+<span style="display: inline-flex; align-items: center; justify-content: center; color: var(--ink-500); font-variant-numeric: tabular-nums; font-size: 14px">
+<sc-if value="{{t.active}}" hint-placeholder-val="{{ false }}"><span class="eq" aria-hidden="true" style="display: inline-flex; align-items: flex-end; gap: 2px; height: 14px"><span></span><span style="animation-delay: -.3s"></span><span style="animation-delay: -.6s"></span></span></sc-if>
+<sc-if value="{{t.idle}}" hint-placeholder-val="{{ true }}"><span class="nm">{{t.n}}</span><span class="pi"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z" fill="currentColor"></path></svg></span></sc-if>
+</span>
+<span style="width: 44px; height: 44px; border-radius: 8px; background: {{t.grad}}; display: block"></span>
+<span style="display: flex; flex-direction: column; gap: 2px; min-width: 0"><span style="font-size: 15px">{{t.title}}</span><span style="font-size: 13px; color: var(--ink-500); font-weight: 400">{{t.album}}</span></span>
+<span style="font-size: 13px; color: var(--ink-500); font-variant-numeric: tabular-nums; font-weight: 400">–:––</span>
+</button>
+</sc-for>
+<p style="margin: 8px 12px 4px; font-size: 12px; color: var(--ink-500)">Ranking comes from Spotify’s top-tracks data at build time; this order is a placeholder.</p>
+</div>
+</div>
+</section>
+
+<!-- 6 NEXT EVENT BANNER -->
+<section style="max-width: 1200px; margin: 0 auto; padding: 32px 24px; box-sizing: border-box">
+<div style="position: relative; border-radius: 24px; overflow: hidden; background: var(--holo); padding: 36px 40px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px; color: #2B2440">
+<div class="grain" aria-hidden="true" style="position: absolute; inset: 0; opacity: .8"></div>
+<div style="position: relative; display: flex; flex-direction: column; gap: 6px; min-width: 240px">
+<span class="chip" style="align-self: flex-start; background: #2B2440; color: #fff">Next event</span>
+<span class="disp" style="font-size: 32px; font-weight: 600">[NEXT OFFICIAL EVENT]</span>
+<span style="font-size: 15px">[CITY] · [VENUE]</span>
+</div>
+<div style="position: relative; display: grid; grid-template-columns: repeat(4, minmax(64px, 88px)); gap: 10px">
+<sc-for list="{{cd}}" as="u" hint-placeholder-count="4">
+<div style="display: flex; flex-direction: column; align-items: center; gap: 6px"><span class="disp" style="width: 100%; padding: 14px 0; border-radius: 16px; background: rgba(255,255,255,.9); text-align: center; font-size: 34px; font-weight: 600; font-variant-numeric: tabular-nums; box-shadow: 0 10px 20px rgba(43,36,64,.12)">{{u.v}}</span><span style="font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em">{{u.l}}</span></div>
+</sc-for>
+</div>
+<a class="btn btn-p" href="Schedule.dc.html" style="position: relative">Full schedule</a>
+</div>
+</section>
+
+<!-- 7 BLOG -->
+<section id="blog" style="max-width: 1200px; margin: 0 auto; padding: 48px 24px; box-sizing: border-box">
+<div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 28px">
+<div>
+<p style="margin: 0 0 6px; font-size: 13px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--pink-700)">AI daily blog</p>
+<h2 class="disp" style="margin: 0; font-size: 44px; font-weight: 600; letter-spacing: -0.02em">Fresh fan notes</h2>
+</div>
+<a class="btn btn-s" href="Blog.dc.html">All posts</a>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: 24px">
+<sc-for list="{{posts}}" as="p" hint-placeholder-count="3">
+<a class="card-l fx glass" href="Blog.dc.html" style="border-radius: 24px; overflow: hidden; text-decoration: none; color: var(--ink-900); display: flex; flex-direction: column">
+<span style="display: block; position: relative; aspect-ratio: 16 / 9; overflow: hidden"><span class="zoom" style="position: absolute; inset: 0; display: block; background: {{p.grad}}"></span><span class="chip" style="position: absolute; top: 12px; right: 12px; background: #2B2440; color: #fff"><svg width="11" height="11" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l1.8 8.2L22 12l-8.2 1.8L12 22l-1.8-8.2L2 12l8.2-1.8z" fill="#FFB6D5"></path></svg>AI</span></span>
+<span style="display: flex; flex-direction: column; gap: 10px; padding: 18px 20px 20px">
+<span style="display: flex; gap: 6px; flex-wrap: wrap"><sc-for list="{{p.tags}}" as="tg" hint-placeholder-count="2"><span class="chip" style="background: {{tg.bg}}; color: #2B2440">{{tg.t}}</span></sc-for></span>
+<span class="disp clamp2" style="font-size: 21px; font-weight: 600; line-height: 1.25">{{p.title}}</span>
+<span class="clamp3" style="font-size: 14px; line-height: 1.6; color: var(--ink-500)">{{p.excerpt}}</span>
+<span style="font-size: 12px; color: var(--ink-500)">{{p.date}} · {{p.read}} min read · written by AI, fan content</span>
+</span>
+</a>
+</sc-for>
+</div>
+</section>
+
+<!-- 8 CITY TEASER -->
+<section id="city" style="max-width: 1200px; margin: 0 auto; padding: 48px 24px 72px; box-sizing: border-box">
+<div style="position: relative; border-radius: 24px; overflow: hidden; background: linear-gradient(180deg,#DDF0FF,#FFF1F7 75%); box-shadow: var(--shadow)">
+<div style="position: relative; width: 100%; aspect-ratio: 1000 / 560">
+<svg viewBox="0 20 1000 560" width="100%" height="100%" aria-hidden="true" style="position: absolute; inset: 0; display: block">
+<g class="cloud" style="animation-delay: -6s"><ellipse cx="80" cy="90" rx="60" ry="20" fill="#fff"></ellipse><ellipse cx="110" cy="76" rx="36" ry="22" fill="#fff"></ellipse></g>
+<g class="cloud" style="animation-delay: -22s"><ellipse cx="60" cy="150" rx="46" ry="15" fill="#fff"></ellipse></g>
+<path d="{{city.slabL}}" fill="#BFE3CC"></path><path d="{{city.slabR}}" fill="#D3EEDC"></path><path d="{{city.ground}}" fill="#E3F5E9"></path>
+<path d="{{city.road1}}" fill="rgba(255,255,255,.9)"></path><path d="{{city.road2}}" fill="rgba(255,255,255,.9)"></path>
+<sc-for list="{{city.blocks}}" as="b" hint-placeholder-count="8"><g><path d="{{b.left}}" fill="{{b.cl}}"></path><path d="{{b.right}}" fill="{{b.cr}}"></path><path d="{{b.top}}" fill="{{b.ct}}"></path><path d="{{b.door}}" fill="#fff"></path></g></sc-for>
+</svg>
+</div>
+<div class="glass" style="position: absolute; left: 24px; bottom: 24px; right: 24px; max-width: 460px; border-radius: 20px; padding: 22px 24px; display: flex; flex-direction: column; gap: 12px; background: rgba(255,255,255,.82); color: #2B2440">
+<span class="disp" style="font-size: 30px; font-weight: 600; line-height: 1.1">Heart Town, a 3D mini city</span>
+<span style="font-size: 15px; line-height: 1.6; color: #5F5878">Every building is a door: the music store, the concert hall, the school, the café and the member houses.</span>
+<a class="btn btn-p" href="City.dc.html" style="align-self: flex-start">Enter the City</a>
+</div>
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer style="border-top: 1px solid var(--line); background: var(--surface)">
+<div style="max-width: 1200px; margin: 0 auto; padding: 48px 24px 32px; box-sizing: border-box; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 32px">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<span style="display: flex; align-items: center; gap: 10px"><svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-10-9.3C.3 8.4 2.2 4 6.2 4c2.3 0 3.9 1.3 5.8 3.4C13.9 5.3 15.5 4 17.8 4c4 0 5.9 4.4 4.2 7.7C19.5 16.4 12 21 12 21z" fill="#FF8FB8"></path></svg><span class="disp" style="font-size: 20px; font-weight: 600">H2H·S2U</span></span>
+<span style="font-size: 14px; line-height: 1.6; color: var(--ink-500); max-width: 32ch">An unofficial, fan-made home for Hearts2Hearts and S2U.</span>
+</div>
+<nav aria-label="Footer" style="display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-500); margin-bottom: 6px">Quick links</span>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 16px"><sc-for list="{{nav}}" as="n" hint-placeholder-count="8"><a class="flink fx" href="{{n.href}}">{{n.label}}</a></sc-for></div>
+</nav>
+<div style="display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-500); margin-bottom: 6px">Official socials</span>
+<a class="flink fx" href="https://www.instagram.com/hearts2hearts">Instagram</a>
+<a class="flink fx" href="https://x.com/Hearts2Hearts">X</a>
+<a class="flink fx" href="https://www.youtube.com/@hearts2hearts.official">YouTube</a>
+<a class="flink fx" href="https://www.tiktok.com/@hearts2hearts">TikTok</a>
+</div>
+</div>
+<div style="border-top: 1px solid var(--line); padding: 18px 24px; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 24px; font-size: 13px; color: var(--ink-500); text-align: center">
+<span>Unofficial fan site · all images and music rights belong to SM Entertainment</span>
+<span style="display: inline-flex; align-items: center; gap: 6px">Made with <svg width="13" height="13" viewBox="0 0 24 24" role="img" aria-label="love"><path d="M12 21s-7.5-4.6-10-9.3C.3 8.4 2.2 4 6.2 4c2.3 0 3.9 1.3 5.8 3.4C13.9 5.3 15.5 4 17.8 4c4 0 5.9 4.4 4.2 7.7C19.5 16.4 12 21 12 21z" fill="#FF8FB8"></path></svg> by fans</span>
+</div>
+</footer>
+
+<sc-if value="{{showTop}}" hint-placeholder-val="{{ false }}">
+<button class="ibtn" onClick="{{toTop}}" aria-label="Back to top" style="position: fixed; right: 24px; bottom: 24px; width: 56px; height: 56px; background: var(--holo-deep); color: #fff; border: 0; box-shadow: var(--shadow); z-index: 40"><svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-10-9.3C.3 8.4 2.2 4 6.2 4c2.3 0 3.9 1.3 5.8 3.4C13.9 5.3 15.5 4 17.8 4c4 0 5.9 4.4 4.2 7.7C19.5 16.4 12 21 12 21z" fill="currentColor"></path><path d="M12 15V9m-3 3l3-3 3 3" stroke="#8A5CE6" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"dark":{"editor":"boolean","default":false,"section":"Theme"},"reduceMotion":{"editor":"boolean","default":false,"section":"Theme"},"nextEventAt":{"editor":"text","default":"2026-12-20T18:00:00+09:00","section":"Schedule"},"$preview":{"width":1440,"height":5700}}'>
+const NAV = [["home", "Home", "Main.dc.html"], ["members", "Members", "Members.dc.html"], ["music", "Music", "Music.dc.html"], ["blog", "Blog", "Blog.dc.html"], ["game", "Game", "Game.dc.html"], ["schedule", "Schedule", "Schedule.dc.html"], ["city", "Mini City", "City.dc.html"], ["about", "About", "About.dc.html"]];
+const PAGE = "home";
+const MEMBERS = [
+  { id: "jiwoo", name: "Jiwoo", ko: "지우", pos: "Leader · Dancer · Rapper", born: "Sep 7, 2006", nat: "South Korean", color: "#FFB3CF", fact: "Cast at a convenience store while topping up her bus card.", rarity: "holo" },
+  { id: "carmen", name: "Carmen", ko: "카르멘", pos: "Vocalist", born: "Mar 28, 2006", nat: "Indonesian", color: "#FFCBA4", fact: "Born in Bali; joined via SM’s Jakarta global audition.", rarity: "rare" },
+  { id: "yuha", name: "Yuha", ko: "유하", pos: "Vocalist · Dancer", born: "Apr 12, 2007", nat: "South Korean", color: "#A9E3CD", fact: "Won first place in a national piano competition in 4th grade.", rarity: "common" },
+  { id: "stella", name: "Stella", ko: "스텔라", pos: "Vocalist", born: "Jun 18, 2007", nat: "South Korean · Canadian", color: "#A8D8FF", fact: "Spent part of her childhood in Vancouver, Canada.", rarity: "rare" },
+  { id: "juun", name: "Juun", ko: "주은", pos: "Main Dancer · Rapper", born: "Dec 3, 2008", nat: "South Korean", color: "#CDBEFF", fact: "Auditioned with Red Velvet’s “Psycho.”", rarity: "common" },
+  { id: "ana", name: "A-na", ko: "에이나", pos: "Vocalist · Rapper", born: "Dec 20, 2008", nat: "South Korean", color: "#FFE08A", fact: "Sang the national anthem for her vocal test.", rarity: "rare" },
+  { id: "ian", name: "Ian", ko: "이안", pos: "Dancer · Vocalist", born: "Oct 9, 2009", nat: "South Korean", color: "#F9B8DD", fact: "Started out as a kid model and was scouted on Instagram.", rarity: "common" },
+  { id: "yeon", name: "Ye-on", ko: "예온", pos: "Vocalist", born: "Apr 19, 2010", nat: "South Korean", color: "#BCC6FF", fact: "Trained in classical singing and musical theater.", rarity: "holo" }
+];
+const ERAS = [
+  { name: "The Chase", kind: "Single album", date: "Feb 24, 2025", grad: "linear-gradient(135deg,#FFD6E7,#FFB6D5 45%,#E9D9FF)" },
+  { name: "Style", kind: "Digital single", date: "Jun 18, 2025", grad: "linear-gradient(135deg,#DDF0FF,#A8D8FF 50%,#FFE3F1)" },
+  { name: "Focus", kind: "1st mini album", date: "Oct 20, 2025", grad: "linear-gradient(135deg,#E9E1FF,#C9B6FF 50%,#BFE2FF)" },
+  { name: "Rude!", kind: "Digital single", date: "Feb 20, 2026", grad: "linear-gradient(135deg,#FFE0EC,#FF9EC3 50%,#FFD8B8)" },
+  { name: "Lemon Tang", kind: "2nd mini album", date: "Jun 22, 2026", grad: "linear-gradient(135deg,#FFF6C9,#FFE08A 45%,#CFF3DD)" },
+  { name: "Iconic Heart", kind: "Japanese single", date: "Aug 12, 2026", grad: "linear-gradient(135deg,#FFE3F1,#FF8FB8 60%,#C9B6FF)" }
+];
+const TOP5 = [
+  { title: "Lemon Tang", album: "Lemon Tang · 2026", grad: "linear-gradient(135deg,#FFF6C9,#FFE08A 50%,#CFF3DD)" },
+  { title: "Focus", album: "Focus · 2025", grad: "linear-gradient(135deg,#E9E1FF,#C9B6FF 55%,#BFE2FF)" },
+  { title: "The Chase", album: "The Chase · 2025", grad: "linear-gradient(135deg,#FFD6E7,#FFB6D5 50%,#E9D9FF)" },
+  { title: "Style", album: "Style · 2025", grad: "linear-gradient(135deg,#DDF0FF,#A8D8FF)" },
+  { title: "Rude!", album: "Lemon Tang · 2026", grad: "linear-gradient(135deg,#FFE0EC,#FF9EC3 50%,#FFD8B8)" }
+];
+const POSTS = [
+  { title: "Era recap: from The Chase to Lemon Tang", excerpt: "A single album, two mini albums and a run of digital and Japanese singles in about eighteen months. The whole timeline in one place, release by release.", date: "Oct 18, 2026", read: 5, grad: "linear-gradient(135deg,#FFF6C9,#FFB6D5 60%,#C9B6FF)", tags: [{ t: "Era Recap", bg: "#FFE3F1" }] },
+  { title: "Eight audition songs, eight starting points", excerpt: "From Red Velvet’s “Peek-A-Boo” to Taeyeon’s “UR”: the songs the members auditioned with, gathered from published profiles.", date: "Oct 17, 2026", read: 4, grad: "linear-gradient(135deg,#DDF0FF,#C9B6FF)", tags: [{ t: "Trivia", bg: "#DDF0FF" }] },
+  { title: "Hearts2House 2026: a look back at the tour stops", excerpt: "Seoul, Brooklyn, Los Angeles and Jakarta. The group’s first tour ran from February to March 2026; here are the venues and dates.", date: "Oct 16, 2026", read: 3, grad: "linear-gradient(135deg,#FFD6E7,#A8D8FF)", tags: [{ t: "Fun", bg: "#FFF1D6" }] }
+];
+const RAR = { holo: ["Holo", "#2B2440", "#FFFFFF"], rare: ["Rare", "#FFFFFF", "#8A3FC9"], common: ["Common", "rgba(255,255,255,.85)", "#2B2440"] };
+
+function buildCity() {
+  const U = 40, CX = 500, CY = 150;
+  const P = function (x, y, z) { return [CX + (x - y) * U * 0.866, CY + (x + y) * U * 0.5 - z * U]; };
+  const poly = function (pts) { return "M" + pts.map(function (p) { return p[0].toFixed(1) + " " + p[1].toFixed(1); }).join(" L") + " Z"; };
+  const box = function (b) {
+    const x = b.x, y = b.y, w = b.w, d = b.d, h = b.h;
+    return {
+      top: poly([P(x, y, h), P(x + w, y, h), P(x + w, y + d, h), P(x, y + d, h)]),
+      left: poly([P(x, y + d, 0), P(x + w, y + d, 0), P(x + w, y + d, h), P(x, y + d, h)]),
+      right: poly([P(x + w, y, 0), P(x + w, y + d, 0), P(x + w, y + d, h), P(x + w, y, h)]),
+      door: poly([P(x + w * 0.4, y + d, 0), P(x + w * 0.6, y + d, 0), P(x + w * 0.6, y + d, Math.min(0.7, h * 0.4)), P(x + w * 0.4, y + d, Math.min(0.7, h * 0.4))]),
+      ct: b.c[0], cl: b.c[2], cr: b.c[1], depth: x + w / 2 + y + d / 2
+    };
+  };
+  const pink = ["#FFD0E2", "#FFB6D3", "#FF9EC3"], lilac = ["#E4DAFF", "#CFC0FF", "#B9A3F5"], sky = ["#D6ECFF", "#B3D9FA", "#8FC4F2"], peach = ["#FFE6D2", "#FFD0AE", "#F5B98F"], house = ["#FFF0E6", "#EED7CB"];
+  const BL = [
+    { x: 1, y: 1, w: 2, d: 2, h: 2.2, c: pink }, { x: 5.6, y: 0.8, w: 3.2, d: 2.2, h: 3, c: lilac },
+    { x: 1, y: 5, w: 2, d: 2.4, h: 2.6, c: sky }, { x: 6.4, y: 6.2, w: 2, d: 2, h: 1.6, c: peach },
+    { x: 4.2, y: 4.3, w: 0.9, d: 0.9, h: 1.1, c: ["#FFD0E2"].concat(house) }, { x: 5.4, y: 4.3, w: 0.9, d: 0.9, h: 1.3, c: ["#D6ECFF"].concat(house) },
+    { x: 4.2, y: 5.5, w: 0.9, d: 0.9, h: 1.0, c: ["#E4DAFF"].concat(house) }, { x: 5.4, y: 5.5, w: 0.9, d: 0.9, h: 1.2, c: ["#FFF1B8"].concat(house) }
+  ].map(box).sort(function (a, b) { return a.depth - b.depth; });
+  return {
+    ground: poly([P(0, 0, 0), P(10, 0, 0), P(10, 10, 0), P(0, 10, 0)]),
+    slabL: poly([P(0, 10, 0), P(10, 10, 0), P(10, 10, -0.4), P(0, 10, -0.4)]),
+    slabR: poly([P(10, 0, 0), P(10, 10, 0), P(10, 10, -0.4), P(10, 0, -0.4)]),
+    road1: poly([P(0, 3.3, 0), P(10, 3.3, 0), P(10, 3.8, 0), P(0, 3.8, 0)]),
+    road2: poly([P(3.3, 0, 0), P(3.8, 0, 0), P(3.8, 10, 0), P(3.3, 10, 0)]),
+    blocks: BL
+  };
+}
+const CITY = buildCity();
+
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { slide: 0, paused: false, tilt: {}, flipped: {}, playing: false, track: 0, menu: false, sy: 0, dark: null, mobile: false };
+    this.lock = {};
+  }
+  componentDidMount() {
+    this.timer = setInterval(() => { if (!this.state.paused && !this.rm()) this.setState({ slide: (this.state.slide + 1) % ERAS.length }); }, 4500);
+    this.tick = setInterval(() => this.forceUpdate(), 1000);
+    this.onScroll = () => this.setState({ sy: window.scrollY || 0 });
+    window.addEventListener("scroll", this.onScroll, { passive: true });
+    this.onResize = () => this.setState({ mobile: window.innerWidth < 640 });
+    window.addEventListener("resize", this.onResize);
+    this.onResize();
+  }
+  componentWillUnmount() {
+    clearInterval(this.timer); clearInterval(this.tick);
+    window.removeEventListener("scroll", this.onScroll); window.removeEventListener("resize", this.onResize);
+  }
+  rm() {
+    if (this.props.reduceMotion) return true;
+    try { return window.matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) { return false; }
+  }
+  renderVals() {
+    const s = this.state, rm = this.rm();
+    const dark = s.dark === null ? !!this.props.dark : s.dark;
+    const go = (i) => this.setState({ slide: (i + ERAS.length) % ERAS.length });
+    const slides = ERAS.map((e, i) => ({ ...e, op: i === s.slide ? 1 : 0, hidden: i === s.slide ? "false" : "true", kbClass: i === s.slide ? "kb" : "", dotClass: i === s.slide ? "dot on" : "dot", go: () => go(i) }));
+    const cards = MEMBERS.map((m) => {
+      const t = rm ? null : s.tilt[m.id];
+      const f = !!s.flipped[m.id];
+      const rx = t ? (0.5 - t.py) * 30 : 0, ry = t ? (t.px - 0.5) * 30 : 0;
+      const r = RAR[m.rarity];
+      return {
+        ...m, grad: "linear-gradient(160deg," + m.color + ", #FFF8F3 120%)", posShort: m.pos.split(" · ")[0],
+        quick: ["Born " + m.born, m.nat, m.fact],
+        aria: "Photocard of " + m.name + (f ? ", back side. Click to flip" : ". Click to flip for quick facts"),
+        transform: "rotateX(" + rx.toFixed(2) + "deg) rotateY(" + (ry + (f ? 180 : 0)).toFixed(2) + "deg)",
+        transition: t ? "transform 120ms ease-out" : "transform 650ms cubic-bezier(.34,1.56,.64,1)",
+        hx: (t ? t.px * 100 : 50).toFixed(1), hy: (t ? t.py * 100 : 30).toFixed(1),
+        ho: (t ? 0.35 + Math.hypot(t.px - 0.5, t.py - 0.5) * 1.1 : (m.rarity === "holo" ? 0.45 : 0.2)).toFixed(2),
+        rarity: r[0], rarBg: r[1], rarFg: r[2],
+        move: (e) => {
+          if (rm || (this.lock[m.id] && Date.now() < this.lock[m.id])) return;
+          const b = e.currentTarget.getBoundingClientRect();
+          const px = Math.max(0, Math.min(1, (e.clientX - b.left) / b.width)), py = Math.max(0, Math.min(1, (e.clientY - b.top) / b.height));
+          this.setState({ tilt: { ...this.state.tilt, [m.id]: { px: px, py: py } } });
+        },
+        leave: () => this.setState({ tilt: { ...this.state.tilt, [m.id]: null } }),
+        flip: () => { this.lock[m.id] = Date.now() + 700; this.setState({ flipped: { ...this.state.flipped, [m.id]: !this.state.flipped[m.id] }, tilt: { ...this.state.tilt, [m.id]: null } }); }
+      };
+    });
+    const top5 = TOP5.map((t, i) => ({ ...t, n: i + 1, active: i === s.track, idle: i !== s.track, cls: i === s.track ? "row on fx" : "row fx", pick: () => this.setState({ track: i, playing: true }) }));
+    const target = Date.parse(this.props.nextEventAt || "");
+    let diff = Math.max(0, (isNaN(target) ? 0 : target) - Date.now()) / 1000;
+    const dd = Math.floor(diff / 86400); diff -= dd * 86400;
+    const hh = Math.floor(diff / 3600); diff -= hh * 3600;
+    const mm = Math.floor(diff / 60); const ss = Math.floor(diff - mm * 60);
+    const pad = (n) => String(n).padStart(2, "0");
+    const sy = rm ? 0 : Math.min(s.sy, 800);
+    const floaters = [
+      { x: 8, y: 22, s: 28, c: "#FF8FB8", heart: true, star: false, d: "0s", o: .8 }, { x: 18, y: 70, s: 18, c: "#C9B6FF", heart: true, star: false, d: "-2s", o: .9 },
+      { x: 44, y: 14, s: 16, c: "#FFFFFF", heart: false, star: true, d: "-1s", o: 1 }, { x: 52, y: 82, s: 22, c: "#A8D8FF", heart: true, star: false, d: "-3s", o: .8 },
+      { x: 64, y: 8, s: 20, c: "#FFB6D5", heart: true, star: false, d: "-4s", o: .7 }, { x: 88, y: 30, s: 14, c: "#FFFFFF", heart: false, star: true, d: "-2.2s", o: 1 },
+      { x: 92, y: 74, s: 26, c: "#FF8FB8", heart: true, star: false, d: "-1.4s", o: .7 }, { x: 30, y: 40, s: 12, c: "#FFFFFF", heart: false, star: true, d: "-.6s", o: 1 },
+      { x: 74, y: 56, s: 14, c: "#FFFFFF", heart: false, star: true, d: "-1.8s", o: 1 }, { x: 4, y: 88, s: 16, c: "#C9B6FF", heart: false, star: true, d: "-2.6s", o: 1 }
+    ];
+    return {
+      rootClass: "h2h" + (dark ? " dark" : "") + (rm ? " rm" : ""),
+      nav: NAV.map((n, i) => ({ label: n[1], href: n[2], on: n[0] === PAGE, cls: n[0] === PAGE ? "nl on fx" : "nl fx", cur: n[0] === PAGE ? "page" : "false", delay: (i * 50) + "ms" })),
+      menu: s.menu, openMenu: () => this.setState({ menu: true }), closeMenu: () => this.setState({ menu: false }),
+      toggleDark: () => this.setState({ dark: !dark }),
+      par1: (sy * 0.15).toFixed(1), par2: (sy * 0.35).toFixed(1), par3: (sy * -0.08).toFixed(1), floaters: floaters,
+      slides: slides, activeSlide: slides[s.slide], slideNum: s.slide + 1, slideCount: ERAS.length,
+      carRatio: s.mobile ? "4 / 5" : "16 / 9",
+      prevSlide: () => go(s.slide - 1), nextSlide: () => go(s.slide + 1),
+      pause: () => this.setState({ paused: true }), resume: () => this.setState({ paused: false }),
+      cards: cards,
+      playing: s.playing, paused: !s.playing, playLabel: s.playing ? "Pause" : "Play",
+      togglePlay: () => this.setState({ playing: !s.playing }), startPlay: () => this.setState({ playing: true }),
+      vinylClass: "spin" + (s.playing ? " on" : ""),
+      current: TOP5[s.track], top5: top5,
+      prevTrack: () => this.setState({ track: (s.track + 4) % 5 }), nextTrack: () => this.setState({ track: (s.track + 1) % 5 }),
+      cd: [{ v: pad(dd), l: "Days" }, { v: pad(hh), l: "Hours" }, { v: pad(mm), l: "Min" }, { v: pad(ss), l: "Sec" }],
+      posts: POSTS, city: CITY,
+      showTop: s.sy > 600, toTop: () => window.scrollTo({ top: 0, behavior: rm ? "auto" : "smooth" })
+    };
+  }
+}
+</script>
+</body>
+</html>

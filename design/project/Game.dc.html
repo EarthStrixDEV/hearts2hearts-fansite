@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Hearts2Hearts fan site · Game hub</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&amp;family=IBM+Plex+Sans+KR:wght@400;500;600&amp;family=Caveat:wght@600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#C92A68}a:hover{color:#9E1D50}
+.h2h{--pink-500:#FF8FB8;--pink-700:#C92A68;--cream-50:#FFF8F3;--ink-900:#2B2440;--ink-500:#6E6787;--surface:#FFFFFF;--glass:rgba(255,255,255,.6);--glass-b:rgba(255,255,255,.7);--line:rgba(43,36,64,.08);--holo:linear-gradient(135deg,#FFB6D5,#C9B6FF,#A8D8FF,#FFE3F1);--holo-deep:linear-gradient(135deg,#D63A77,#8A5CE6,#3D84D4);--shadow:0 8px 24px rgba(255,143,184,.25);--glow:0 0 32px rgba(201,182,255,.5);--spring:cubic-bezier(.34,1.56,.64,1);font-family:'IBM Plex Sans KR',system-ui,sans-serif;color:var(--ink-900);background:var(--cream-50)}
+.h2h.dark{--cream-50:#1B1630;--ink-900:#F6F0FF;--ink-500:#B9B0D6;--surface:#262040;--glass:rgba(38,32,64,.62);--glass-b:rgba(255,255,255,.14);--line:rgba(255,255,255,.1);--pink-700:#FF9CC3}
+.disp{font-family:'Fredoka',ui-rounded,system-ui,sans-serif}
+.sig{font-family:'Caveat',cursive}
+.holo-text{background:var(--holo-deep);-webkit-background-clip:text;background-clip:text;color:transparent}
+.glass{background:var(--glass);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--glass-b)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 24px;border-radius:999px;font:600 16px/1 'Fredoka',ui-rounded,sans-serif;border:0;cursor:pointer;text-decoration:none;transition:transform 150ms var(--spring),box-shadow 150ms ease}
+.btn:hover{transform:translateY(-2px)}.btn:active{transform:scale(.96)}
+.btn-p{background:var(--holo-deep);color:#fff;box-shadow:var(--shadow)}.btn-p:hover{color:#fff;box-shadow:var(--shadow),var(--glow)}
+.btn-s{background:var(--glass);color:var(--pink-700);border:1.5px solid var(--pink-500)}.btn-s:hover{color:var(--pink-700)}
+.btn[disabled]{opacity:.4;cursor:not-allowed;transform:none;box-shadow:none}
+.ibtn{width:44px;height:44px;flex:none;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;background:var(--glass);border:1px solid var(--glass-b);color:var(--ink-900);cursor:pointer;padding:0;transition:transform 150ms var(--spring)}
+.ibtn:hover{transform:scale(1.1)}.ibtn:active{transform:scale(.96)}
+.btn:focus-visible,.ibtn:focus-visible,.fx:focus-visible,.nl:focus-visible,.ans:focus-visible,.mcard:focus-visible{outline:2px solid var(--pink-700);outline-offset:2px}
+.nl{position:relative;display:inline-flex;align-items:center;min-height:44px;padding:0 11px;color:var(--ink-500);text-decoration:none;font-weight:500;font-size:15px;border-radius:999px;white-space:nowrap}
+.nl:hover{color:var(--ink-900)}.nl.on{color:var(--ink-900)}
+.nav-links{display:flex}.nav-burger{display:none}
+@media (max-width:1000px){.nav-links{display:none}.nav-burger{display:inline-flex}}
+.sheet-link{animation:dropin 420ms var(--spring) both}
+.chip{display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 10px;border-radius:999px;font-size:12px;font-weight:500;white-space:nowrap}
+.flink{color:var(--ink-500);text-decoration:none;font-size:14px;min-height:32px;display:inline-flex;align-items:center}.flink:hover{color:var(--ink-900)}
+.floaty{animation:floaty 6s ease-in-out infinite}
+.gcard{transition:transform 250ms var(--spring),box-shadow 250ms ease}
+.gcard:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+.ans{min-height:64px;width:100%;border-radius:999px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink-900);font:600 18px/1 'Fredoka',ui-rounded,sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:transform 150ms var(--spring),opacity 200ms}
+.ans:hover{transform:translateY(-2px);border-color:var(--pink-500)}.ans:active{transform:scale(.96)}
+.ans.ok{background:#BFF0DA;border-color:#2E9B6E;color:#0F4D33;animation:okpop 450ms var(--spring)}
+.ans.bad{background:#FFE0E6;border-color:#C92A68;color:#7A1236;animation:shake 400ms ease}
+.ans.dim{opacity:.45}
+.mcard{border:0;padding:0;background:none;cursor:pointer;perspective:800px;aspect-ratio:3/4;width:100%}
+.conf{position:absolute;left:50%;top:50%;animation:burst 900ms cubic-bezier(.2,.8,.3,1) both}
+.toast{animation:toast 3s ease both}
+.rise{animation:rise 500ms var(--spring) both}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+@keyframes dropin{from{opacity:0;transform:translateY(-16px)}to{opacity:1;transform:none}}
+@keyframes okpop{0%{transform:scale(.96)}50%{transform:scale(1.05)}100%{transform:scale(1)}}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-8px)}40%{transform:translateX(7px)}60%{transform:translateX(-5px)}80%{transform:translateX(3px)}}
+@keyframes burst{from{transform:translate(-50%,-50%) scale(.3);opacity:1}to{transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) scale(1) rotate(var(--rot));opacity:0}}
+@keyframes toast{0%{opacity:0;transform:translate(-50%,-12px)}10%,85%{opacity:1;transform:translate(-50%,0)}100%{opacity:0;transform:translate(-50%,-12px)}}
+@keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.h2h.rm *{animation:none!important;transition:none!important}
+@media (prefers-reduced-motion:reduce){.h2h *{animation:none!important;transition:none!important}}
+</style>
+</helmet>
+<div class="{{rootClass}}" style="min-height: 100vh; position: relative">
+<header class="glass" style="position: sticky; top: 0; z-index: 50; height: 64px; border-width: 0 0 1px 0; display: flex; align-items: center">
+<div style="width: 100%; max-width: 1240px; margin: 0 auto; padding: 0 24px; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; gap: 12px">
+<a href="Main.dc.html" class="fx" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink-900); min-height: 44px; border-radius: 12px"><svg width="30" height="30" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-10-9.3C.3 8.4 2.2 4 6.2 4c2.3 0 3.9 1.3 5.8 3.4C13.9 5.3 15.5 4 17.8 4c4 0 5.9 4.4 4.2 7.7C19.5 16.4 12 21 12 21z" fill="#FF8FB8"></path></svg><span class="disp" style="font-size: 20px; font-weight: 600">H2H<span style="color: var(--pink-700)">·</span>S2U</span></a>
+<nav class="nav-links" aria-label="Main" style="align-items: center"><sc-for list="{{nav}}" as="n" hint-placeholder-count="8"><a class="{{n.cls}}" href="{{n.href}}" aria-current="{{n.cur}}">{{n.label}}<sc-if value="{{n.on}}" hint-placeholder-val="{{ false }}"><svg width="8" height="8" viewBox="0 0 24 24" aria-hidden="true" style="position: absolute; left: 50%; bottom: 3px; margin-left: -4px"><path d="M12 21s-7.5-4.6-10-9.3C.3 8.4 2.2 4 6.2 4c2.3 0 3.9 1.3 5.8 3.4C13.9 5.3 15.5 4 17.8 4c4 0 5.9 4.4 4.2 7.7C19.5 16.4 12 21 12 21z" fill="#FF8FB8"></path></svg></sc-if></a></sc-for></nav>
+<div style="display: flex; gap: 8px"><button class="ibtn" onClick="{{toggleDark}}" aria-label="Toggle dark mode"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"></path></svg></button><button class="ibtn nav-burger" onClick="{{openMenu}}" aria-label="Open menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"></path></svg></button></div>
+</div>
+</header>
+<sc-if value="{{menu}}" hint-placeholder-val="{{ false }}">
+<div style="position: fixed; inset: 0; z-index: 80; display: flex; flex-direction: column; padding: 16px 24px 32px; gap: 4px; background: var(--cream-50)">
+<div style="display: flex; justify-content: flex-end"><button class="ibtn" onClick="{{closeMenu}}" aria-label="Close menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
+<sc-for list="{{nav}}" as="n" hint-placeholder-count="8"><a class="disp sheet-link fx" href="{{n.href}}" style="font-size: 34px; font-weight: 600; color: var(--ink-900); text-decoration: none; padding: 6px 0; animation-delay: {{n.delay}}">{{n.label}}</a></sc-for>
+</div>
+</sc-if>
+<sc-if value="{{toast}}" hint-placeholder-val="{{ false }}">
+<div class="glass toast" role="status" style="position: fixed; top: 80px; left: 50%; z-index: 70; display: flex; align-items: center; gap: 8px; padding: 12px 18px; border-radius: 999px; box-shadow: var(--shadow); font-size: 14px; font-weight: 500; background: rgba(255,255,255,.9); color: #2B2440"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-10-9.3C.3 8.4 2.2 4 6.2 4c2.3 0 3.9 1.3 5.8 3.4C13.9 5.3 15.5 4 17.8 4c4 0 5.9 4.4 4.2 7.7C19.5 16.4 12 21 12 21z" fill="#FF8FB8"></path></svg>Share image ready · 1080×1350</div>
+</sc-if>
+
+<section style="position: relative; overflow: hidden; padding: 64px 24px 32px">
+<div aria-hidden="true" style="position: absolute; inset: 0">
+<svg class="floaty" width="30" height="30" viewBox="0 0 24 24" style="position: absolute; left: 9%; top: 34%"><path d="M12 21s-7.5-4.6-10-9.3C.3 8.4 2.2 4 6.2 4c2.3 0 3.9 1.3 5.8 3.4C13.9 5.3 15.5 4 17.8 4c4 0 5.9 4.4 4.2 7.7C19.5 16.4 12 21 12 21z" fill="#FFB6D5"></path></svg>
+<svg class="floaty" width="22" height="22" viewBox="0 0 24 24" style="position: absolute; right: 12%; top: 24%; animation-delay: -2s"><path d="M12 21s-7.5-4.6-10-9.3C.3 8.4 2.2 4 6.2 4c2.3 0 3.9 1.3 5.8 3.4C13.9 5.3 15.5 4 17.8 4c4 0 5.9 4.4 4.2 7.7C19.5 16.4 12 21 12 21z" fill="#C9B6FF"></path></svg>
+</div>
+<div style="position: relative; max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; gap: 10px">
+<sc-if value="{{inGame}}" hint-placeholder-val="{{ false }}"><nav aria-label="Breadcrumb" style="font-size: 14px; color: var(--ink-500)"><a href="Game.dc.html" class="fx" onClick="{{quit}}" style="color: var(--ink-500); text-decoration: none">Game</a> / <span style="color: var(--ink-900); font-weight: 600">{{gameName}}</span></nav></sc-if>
+<h1 class="disp holo-text" style="margin: 0; font-size: clamp(40px, 5.5vw, 68px); font-weight: 700; letter-spacing: -0.02em; line-height: 1.05">How well do you know H2H?</h1>
+<p style="margin: 0; font-size: 17px; color: var(--ink-500)">Pick a game. Every question is built from verified facts only.</p>
+</div>
+</section>
+
+<div style="max-width: 1200px; margin: 0 auto; padding: 8px 24px 80px; box-sizing: border-box; display: flex; flex-wrap: wrap; gap: 32px; align-items: flex-start">
+<main style="flex: 999 1 640px; min-width: 0; display: flex; flex-direction: column; align-items: center; gap: 24px">
+
+<!-- HUB -->
+<sc-if value="{{isHub}}" hint-placeholder-val="{{ true }}">
+<div style="width: 100%; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 20px">
+<sc-for list="{{games}}" as="g" hint-placeholder-count="3">
+<div class="gcard glass" style="border-radius: 24px; overflow: hidden; display: flex; flex-direction: column">
+<div style="height: 180px; background: {{g.bg}}; position: relative; overflow: hidden" aria-hidden="true">
+<sc-if value="{{g.isQuiz}}" hint-placeholder-val="{{ true }}"><span class="disp" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); font-size: 110px; font-weight: 700; color: rgba(255,255,255,.85); line-height: 1">?</span><svg width="34" height="34" viewBox="0 0 24 24" style="position: absolute; right: 24%; top: 22%"><path d="M12 21s-7.5-4.6-10-9.3C.3 8.4 2.2 4 6.2 4c2.3 0 3.9 1.3 5.8 3.4C13.9 5.3 15.5 4 17.8 4c4 0 5.9 4.4 4.2 7.7C19.5 16.4 12 21 12 21z" fill="#fff"></path></svg></sc-if>
+<sc-if value="{{g.isMemory}}" hint-placeholder-val="{{ false }}"><span style="position: absolute; left: 50%; top: 50%; width: 64px; height: 86px; margin: -43px 0 0 -80px; border-radius: 10px; background: #fff; transform: rotate(-10deg); box-shadow: 0 8px 18px rgba(43,36,64,.15); display: block"></span><span style="position: absolute; left: 50%; top: 50%; width: 64px; height: 86px; margin: -43px 0 0 6px; border-radius: 10px; background: #FFB3CF; border: 4px solid #fff; box-sizing: border-box; transform: rotate(8deg); box-shadow: 0 8px 18px rgba(43,36,64,.15); display: block"></span></sc-if>
+<sc-if value="{{g.isSong}}" hint-placeholder-val="{{ false }}"><span style="position: absolute; left: 50%; top: 50%; display: flex; gap: 6px; align-items: flex-end; transform: translate(-50%,-50%); height: 70px"><span style="width: 12px; height: 40px; border-radius: 6px; background: #fff; display: block"></span><span style="width: 12px; height: 70px; border-radius: 6px; background: #fff; display: block"></span><span style="width: 12px; height: 28px; border-radius: 6px; background: #fff; display: block"></span><span style="width: 12px; height: 56px; border-radius: 6px; background: #fff; display: block"></span><span style="width: 12px; height: 36px; border-radius: 6px; background: #fff; display: block"></span></span></sc-if>
+</div>
+<div style="padding: 20px; display: flex; flex-direction: column; gap: 10px; flex: 1">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 8px"><span class="disp" style="font-size: 22px; font-weight: 600">{{g.name}}</span><span class="chip" style="background: {{g.diffBg}}; color: #2B2440">{{g.diff}}</span></div>
+<span style="font-size: 14px; line-height: 1.55; color: var(--ink-500)">{{g.desc}}</span>
+<span style="font-size: 13px; color: var(--ink-500)">Best: <strong style="color: var(--ink-900)">{{g.best}}</strong></span>
+<button class="btn btn-p" onClick="{{g.start}}" disabled="{{g.locked}}" style="margin-top: auto">{{g.cta}}</button>
+</div>
+</div>
+</sc-for>
+</div>
+</sc-if>
+
+<!-- QUIZ -->
+<sc-if value="{{isQuiz}}" hint-placeholder-val="{{ false }}">
+<div class="glass" style="width: 100%; max-width: 720px; border-radius: 24px; padding: 24px 28px 28px; box-sizing: border-box; display: flex; flex-direction: column; gap: 22px; position: relative; overflow: hidden">
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 12px">
+<span style="display: inline-flex; align-items: center; gap: 8px; font-weight: 600"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-10-9.3C.3 8.4 2.2 4 6.2 4c2.3 0 3.9 1.3 5.8 3.4C13.9 5.3 15.5 4 17.8 4c4 0 5.9 4.4 4.2 7.7C19.5 16.4 12 21 12 21z" fill="#FF8FB8"></path></svg><span class="disp" style="font-size: 20px">{{score}}</span><span style="font-size: 13px; color: var(--ink-500); font-weight: 500">score</span></span>
+<span role="timer" aria-label="{{time}} seconds left" style="position: relative; width: 52px; height: 52px; display: inline-flex; align-items: center; justify-content: center">
+<svg width="52" height="52" viewBox="0 0 52 52" aria-hidden="true" style="position: absolute; inset: 0; transform: rotate(-90deg)"><circle cx="26" cy="26" r="22" fill="none" stroke="rgba(43,36,64,.1)" stroke-width="5"></circle><circle cx="26" cy="26" r="22" fill="none" stroke="{{ringColor}}" stroke-width="5" stroke-linecap="round" stroke-dasharray="138.2" stroke-dashoffset="{{ringOff}}" style="transition: stroke-dashoffset 1s linear"></circle></svg>
+<span class="disp" style="font-size: 18px; font-weight: 600; font-variant-numeric: tabular-nums">{{time}}</span>
+</span>
+<button class="btn" onClick="{{quit}}" style="min-height: 40px; padding: 0 14px; background: var(--line); color: var(--ink-900); font-size: 14px">Quit</button>
+</div>
+<div style="display: flex; align-items: center; gap: 12px"><span style="font-size: 13px; color: var(--ink-500); white-space: nowrap">Question {{qNum}} of {{qTotal}}</span><div style="flex: 1; height: 6px; border-radius: 999px; background: var(--line); overflow: hidden"><div style="height: 100%; width: {{progressPct}}%; background: var(--holo-deep); border-radius: 999px; transition: width 400ms ease"></div></div></div>
+<h2 class="disp" style="margin: 4px 0; font-size: 30px; font-weight: 600; line-height: 1.25; text-align: center; text-wrap: balance">{{q.text}}</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr)); gap: 12px">
+<sc-for list="{{opts}}" as="o" hint-placeholder-count="4"><button class="{{o.cls}}" onClick="{{o.pick}}" disabled="{{o.locked}}"><span style="width: 14px; height: 14px; border-radius: 50%; background: {{o.color}}; display: block; flex: none"></span>{{o.name}}</button></sc-for>
+</div>
+<sc-if value="{{answered}}" hint-placeholder-val="{{ false }}">
+<div class="rise" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; padding: 16px 20px; border-radius: 16px; background: var(--surface)"><span style="font-size: 15px; line-height: 1.5"><strong>{{verdict}}</strong> {{q.note}}</span><button class="btn btn-p" onClick="{{nextQ}}">{{nextLabel}}</button></div>
+</sc-if>
+<sc-if value="{{confetti}}" hint-placeholder-val="{{ false }}">
+<div aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none"><sc-for list="{{bits}}" as="b" hint-placeholder-count="14"><svg class="conf" width="{{b.s}}" height="{{b.s}}" viewBox="0 0 24 24" style="--dx: {{b.dx}}px; --dy: {{b.dy}}px; --rot: {{b.r}}deg; animation-delay: {{b.d}}"><path d="M12 21s-7.5-4.6-10-9.3C.3 8.4 2.2 4 6.2 4c2.3 0 3.9 1.3 5.8 3.4C13.9 5.3 15.5 4 17.8 4c4 0 5.9 4.4 4.2 7.7C19.5 16.4 12 21 12 21z" fill="{{b.c}}"></path></svg></sc-for></div>
+</sc-if>
+</div>
+</sc-if>
+
+<!-- MEMORY -->
+<sc-if value="{{isMemory}}" hint-placeholder-val="{{ false }}">
+<div class="glass" style="width: 100%; max-width: 720px; border-radius: 24px; padding: 24px 28px 28px; box-sizing: border-box; display: flex; flex-direction: column; gap: 20px">
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 12px">
+<span style="display: inline-flex; align-items: center; gap: 8px; font-weight: 600"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-10-9.3C.3 8.4 2.2 4 6.2 4c2.3 0 3.9 1.3 5.8 3.4C13.9 5.3 15.5 4 17.8 4c4 0 5.9 4.4 4.2 7.7C19.5 16.4 12 21 12 21z" fill="#FF8FB8"></path></svg><span class="disp" style="font-size: 20px">{{pairs}} / 8</span><span style="font-size: 13px; color: var(--ink-500); font-weight: 500">pairs · {{moves}} moves</span></span>
+<span class="disp" role="timer" style="font-size: 18px; font-weight: 600; font-variant-numeric: tabular-nums">{{mTime}}</span>
+<button class="btn" onClick="{{quit}}" style="min-height: 40px; padding: 0 14px; background: var(--line); color: var(--ink-900); font-size: 14px">Quit</button>
+</div>
+<div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px">
+<sc-for list="{{deck}}" as="c" hint-placeholder-count="16">
+<button class="mcard" onClick="{{c.pick}}" aria-label="{{c.label}}" disabled="{{c.done}}">
+<span style="display: block; position: relative; width: 100%; height: 100%; transform-style: preserve-3d; transition: transform 450ms cubic-bezier(.34,1.56,.64,1); transform: {{c.t}}">
+<span style="position: absolute; inset: 0; border-radius: 14px; backface-visibility: hidden; -webkit-backface-visibility: hidden; background: var(--holo); display: flex; align-items: center; justify-content: center; border: 3px solid #fff; box-sizing: border-box"><svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-10-9.3C.3 8.4 2.2 4 6.2 4c2.3 0 3.9 1.3 5.8 3.4C13.9 5.3 15.5 4 17.8 4c4 0 5.9 4.4 4.2 7.7C19.5 16.4 12 21 12 21z" fill="#fff"></path></svg></span>
+<span style="position: absolute; inset: 0; border-radius: 14px; backface-visibility: hidden; -webkit-backface-visibility: hidden; transform: rotateY(180deg); background: {{c.color}}; border: 3px solid #fff; box-sizing: border-box; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 10px; opacity: {{c.op}}"><span class="sig" style="font-size: 24px; color: #2B2440">{{c.name}}</span></span>
+</span>
+</button>
+</sc-for>
+</div>
+</div>
+</sc-if>
+
+<!-- RESULT -->
+<sc-if value="{{isResult}}" hint-placeholder-val="{{ false }}">
+<div style="width: 100%; display: flex; flex-wrap: wrap; gap: 28px; justify-content: center; align-items: center">
+<div class="glass rise" style="flex: 1 1 340px; max-width: 460px; border-radius: 24px; padding: 36px 28px; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center">
+<span class="disp" style="font-size: 34px; font-weight: 700; line-height: 1.15; text-wrap: balance">{{rank}}</span>
+<span class="disp" style="font-size: 72px; font-weight: 700; line-height: 1; font-variant-numeric: tabular-nums">{{shown}}<span style="font-size: 30px; color: var(--ink-500)">/{{max}}</span></span>
+<span style="font-size: 15px; color: var(--ink-500)">{{resultLine}}</span>
+<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 8px">
+<button class="btn btn-s" onClick="{{again}}">Play again</button>
+<button class="btn btn-p" onClick="{{share}}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 8l5-5 5 5M5 14v5a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-5"></path></svg>Share</button>
+</div>
+</div>
+<figure class="rise" style="margin: 0; display: flex; flex-direction: column; gap: 10px; align-items: center; animation-delay: 200ms">
+<div style="width: 220px; aspect-ratio: 3 / 4; border-radius: 20px; border: 6px solid #fff; box-sizing: border-box; background: {{reward.grad}}; box-shadow: 0 24px 48px rgba(43,36,64,.2), var(--glow); position: relative; overflow: hidden">
+<span style="position: absolute; inset: 0; background: linear-gradient(115deg, transparent 25%, rgba(255,182,213,.85) 40%, rgba(201,182,255,.85) 50%, rgba(168,216,255,.85) 60%, transparent 75%); mix-blend-mode: color-dodge; opacity: {{reward.foil}}"></span>
+<span class="chip" style="position: absolute; top: 10px; right: 10px; background: #2B2440; color: #fff">{{reward.rarity}}</span>
+<span class="sig" style="position: absolute; left: 14px; bottom: 10px; font-size: 38px; color: #2B2440">{{reward.name}}</span>
+</div>
+<figcaption style="font-size: 13px; color: var(--ink-500)">New photocard collected · {{reward.rarity}}</figcaption>
+</figure>
+</div>
+</sc-if>
+</main>
+
+<!-- LEADERBOARD -->
+<aside class="glass" aria-label="Leaderboard" style="flex: 1 1 280px; max-width: 360px; border-radius: 24px; padding: 20px; box-sizing: border-box; display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; justify-content: space-between; align-items: center"><span class="disp" style="font-size: 20px; font-weight: 600">Leaderboard</span><span class="chip" style="background: var(--line); color: var(--ink-500)">This device</span></div>
+<sc-if value="{{hasBoard}}" hint-placeholder-val="{{ false }}">
+<ol style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px">
+<sc-for list="{{board}}" as="b" hint-placeholder-count="5">
+<li style="display: grid; grid-template-columns: 28px minmax(0, 1fr) auto; gap: 10px; align-items: center; min-height: 40px; padding: 0 10px; border-radius: 10px; background: {{b.bg}}"><span class="disp" style="font-weight: 600; color: var(--ink-500)">{{b.rank}}</span><span style="font-size: 14px">{{b.game}} · {{b.date}}</span><span class="disp" style="font-weight: 600">{{b.score}}</span></li>
+</sc-for>
+</ol>
+</sc-if>
+<sc-if value="{{noBoard}}" hint-placeholder-val="{{ true }}"><div style="padding: 20px; border-radius: 16px; border: 1.5px dashed var(--line); text-align: center; font-size: 14px; color: var(--ink-500)">No scores yet. Play a round to get on the board.</div></sc-if>
+<span style="font-size: 12px; color: var(--ink-500)">Top 10 saved in your browser. A shared online board can come later.</span>
+</aside>
+</div>
+
+<footer style="border-top: 1px solid var(--line); background: var(--surface)">
+<div style="max-width: 1200px; margin: 0 auto; padding: 48px 24px 32px; box-sizing: border-box; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 32px">
+<div style="display: flex; flex-direction: column; gap: 10px"><span style="display: flex; align-items: center; gap: 10px"><svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-10-9.3C.3 8.4 2.2 4 6.2 4c2.3 0 3.9 1.3 5.8 3.4C13.9 5.3 15.5 4 17.8 4c4 0 5.9 4.4 4.2 7.7C19.5 16.4 12 21 12 21z" fill="#FF8FB8"></path></svg><span class="disp" style="font-size: 20px; font-weight: 600">H2H·S2U</span></span><span style="font-size: 14px; line-height: 1.6; color: var(--ink-500); max-width: 32ch">An unofficial, fan-made home for Hearts2Hearts and S2U.</span></div>
+<nav aria-label="Footer" style="display: flex; flex-direction: column"><span style="font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-500); margin-bottom: 6px">Quick links</span><div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 16px"><sc-for list="{{nav}}" as="n" hint-placeholder-count="8"><a class="flink fx" href="{{n.href}}">{{n.label}}</a></sc-for></div></nav>
+<div style="display: flex; flex-direction: column"><span style="font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-500); margin-bottom: 6px">Official socials</span><a class="flink fx" href="https://www.instagram.com/hearts2hearts">Instagram</a><a class="flink fx" href="https://x.com/Hearts2Hearts">X</a><a class="flink fx" href="https://www.youtube.com/@hearts2hearts.official">YouTube</a><a class="flink fx" href="https://www.tiktok.com/@hearts2hearts">TikTok</a></div>
+</div>
+<div style="border-top: 1px solid var(--line); padding: 18px 24px; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 24px; font-size: 13px; color: var(--ink-500); text-align: center"><span>Unofficial fan site · all images and music rights belong to SM Entertainment</span><span style="display: inline-flex; align-items: center; gap: 6px">Made with <svg width="13" height="13" viewBox="0 0 24 24" role="img" aria-label="love"><path d="M12 21s-7.5-4.6-10-9.3C.3 8.4 2.2 4 6.2 4c2.3 0 3.9 1.3 5.8 3.4C13.9 5.3 15.5 4 17.8 4c4 0 5.9 4.4 4.2 7.7C19.5 16.4 12 21 12 21z" fill="#FF8FB8"></path></svg> by fans</span></div>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"dark":{"editor":"boolean","default":false,"section":"Theme"},"reduceMotion":{"editor":"boolean","default":false,"section":"Theme"},"seconds":{"editor":"int","default":15,"min":5,"max":30,"section":"Game"},"$preview":{"width":1440,"height":1600}}'>
+const NAV = [["home", "Home", "Main.dc.html"], ["members", "Members", "Members.dc.html"], ["music", "Music", "Music.dc.html"], ["blog", "Blog", "Blog.dc.html"], ["game", "Game", "Game.dc.html"], ["schedule", "Schedule", "Schedule.dc.html"], ["city", "Mini City", "City.dc.html"], ["about", "About", "About.dc.html"]];
+const PAGE = "game";
+const COLORS = { Jiwoo: "#FFB3CF", Carmen: "#FFCBA4", Yuha: "#A9E3CD", Stella: "#A8D8FF", Juun: "#CDBEFF", "A-na": "#FFE08A", Ian: "#F9B8DD", "Ye-on": "#BCC6FF" };
+const NAMES = Object.keys(COLORS);
+const QUESTIONS = [
+  { text: "Who was born in Bali?", options: ["Stella", "Carmen", "Yuha", "Ian"], answer: "Carmen", note: "Carmen joined through SM’s Jakarta global audition." },
+  { text: "Who spent part of her childhood in Vancouver, Canada?", options: ["Stella", "Jiwoo", "A-na", "Ye-on"], answer: "Stella", note: "Stella later trained in Busan." },
+  { text: "Who won first place in a national piano competition in 4th grade?", options: ["Juun", "Ian", "Yuha", "Carmen"], answer: "Yuha", note: "SM scouted Yuha three times." },
+  { text: "Who is the leader of Hearts2Hearts?", options: ["A-na", "Jiwoo", "Juun", "Stella"], answer: "Jiwoo", note: "Jiwoo also studied ballet for years." },
+  { text: "Who auditioned with Taeyeon’s “UR”?", options: ["Ye-on", "Yuha", "Ian", "A-na"], answer: "Ye-on", note: "She passed the final audition five days later." }
+];
+const KEY = "h2h-board-v1";
+function readBoard() { try { const v = JSON.parse(window.localStorage.getItem(KEY) || "[]"); return Array.isArray(v) ? v : []; } catch (e) { return []; } }
+function writeBoard(b) { try { window.localStorage.setItem(KEY, JSON.stringify(b)); } catch (e) {} }
+function shuffle(a) { const b = a.slice(); for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); const t = b[i]; b[i] = b[j]; b[j] = t; } return b; }
+
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { screen: "hub", game: null, qi: 0, picked: null, score: 0, time: 15, shown: 0, max: 5, toast: false, menu: false, dark: null, board: [],
+      deck: [], open: [], done: [], moves: 0, mSecs: 0, reward: null };
+  }
+  componentDidMount() {
+    this.setState({ board: readBoard() });
+    this.t = setInterval(() => {
+      const s = this.state;
+      if (s.screen === "quiz" && s.picked === null) { if (s.time <= 1) this.setState({ time: 0, picked: "__timeout" }); else this.setState({ time: s.time - 1 }); }
+      if (s.screen === "memory") this.setState({ mSecs: s.mSecs + 1 });
+      if (s.screen === "result" && s.shown < s.score) this.setState({ shown: s.shown + 1 });
+    }, 1000);
+  }
+  componentWillUnmount() { clearInterval(this.t); clearTimeout(this.tt); clearTimeout(this.ft); }
+  secs() { return Math.max(5, Math.min(30, Number(this.props.seconds) || 15)); }
+  finish(game, score, max) {
+    const pct = score / max;
+    const name = NAMES[Math.floor(Math.random() * NAMES.length)];
+    const rarity = pct >= 0.8 ? "Holo" : pct >= 0.5 ? "Rare" : "Common";
+    const d = new Date();
+    const entry = { game: game, score: score + "/" + max, pct: pct, date: (d.getMonth() + 1) + "/" + d.getDate() };
+    const board = this.state.board.concat([entry]).sort((a, b) => b.pct - a.pct).slice(0, 10);
+    writeBoard(board);
+    this.setState({ screen: "result", score: score, max: max, shown: 0, board: board, reward: { name: name, rarity: rarity, grad: "linear-gradient(160deg," + COLORS[name] + ", #FFF8F3 120%)", foil: rarity === "Holo" ? ".7" : rarity === "Rare" ? ".35" : ".1" } });
+  }
+  startQuiz() { this.setState({ screen: "quiz", game: "Quiz", qi: 0, picked: null, score: 0, time: this.secs() }); }
+  startMemory() {
+    const deck = shuffle(NAMES.concat(NAMES)).map((n, i) => ({ id: i, name: n }));
+    this.setState({ screen: "memory", game: "Memory Match", deck: deck, open: [], done: [], moves: 0, mSecs: 0 });
+  }
+  renderVals() {
+    const s = this.state, total = QUESTIONS.length, q = QUESTIONS[s.qi];
+    const dark = s.dark === null ? !!this.props.dark : s.dark;
+    const answered = s.picked !== null, right = answered && s.picked === q.answer;
+    const bestOf = (g) => { const b = s.board.filter((x) => x.game === g); return b.length ? b[0].score : "no score yet"; };
+    const games = [
+      { name: "Quiz", isQuiz: true, isMemory: false, isSong: false, bg: "linear-gradient(135deg,#FFB6D5,#C9B6FF)", diff: "Easy", diffBg: "#BFF0DA", desc: "Five questions from verified profile facts, beat the timer.", best: bestOf("Quiz"), cta: "Play quiz", locked: false, start: () => this.startQuiz() },
+      { name: "Memory Match", isQuiz: false, isMemory: true, isSong: false, bg: "linear-gradient(135deg,#A8D8FF,#C9B6FF)", diff: "Medium", diffBg: "#FFF1B8", desc: "Flip the photocards and find all eight member pairs.", best: bestOf("Memory Match"), cta: "Play memory", locked: false, start: () => this.startMemory() },
+      { name: "Guess the Song", isQuiz: false, isMemory: false, isSong: true, bg: "linear-gradient(135deg,#FFE08A,#FF9EC3)", diff: "Hard", diffBg: "#FFE0E6", desc: "Name the track from a three-second Spotify preview.", best: "—", cta: "Needs Spotify previews", locked: true, start: () => {} }
+    ];
+    const opts = q.options.map((n) => {
+      let cls = "ans";
+      if (answered) { if (n === q.answer) cls += " ok"; else if (n === s.picked) cls += " bad"; else cls += " dim"; }
+      return { name: n, color: COLORS[n], cls: cls, locked: answered, pick: () => { if (this.state.picked !== null) return; this.setState({ picked: n, score: this.state.score + (n === q.answer ? 1 : 0) }); } };
+    });
+    const bits = [];
+    for (let i = 0; i < 14; i++) { const a = (i / 14) * Math.PI * 2; bits.push({ dx: Math.round(Math.cos(a) * (160 + (i % 3) * 50)), dy: Math.round(Math.sin(a) * (110 + (i % 4) * 30)), r: (i * 47) % 360, s: 14 + (i % 3) * 6, d: (i % 4) * 40 + "ms", c: ["#FF8FB8", "#C9B6FF", "#A8D8FF", "#FFD25E"][i % 4] }); }
+    const sec = this.secs();
+    const deck = s.deck.map((c) => {
+      const isOpen = s.open.indexOf(c.id) >= 0, isDone = s.done.indexOf(c.name) >= 0;
+      return { ...c, color: COLORS[c.name], t: isOpen || isDone ? "rotateY(180deg)" : "rotateY(0deg)", op: isDone ? ".65" : "1", done: isDone, label: isOpen || isDone ? c.name + " card" : "Hidden card",
+        pick: () => {
+          const st = this.state;
+          if (st.open.length >= 2 || st.open.indexOf(c.id) >= 0 || st.done.indexOf(c.name) >= 0) return;
+          const open = st.open.concat([c.id]);
+          if (open.length < 2) { this.setState({ open: open }); return; }
+          const a = st.deck.find((x) => x.id === open[0]);
+          const match = a.name === c.name;
+          this.setState({ open: open, moves: st.moves + 1 });
+          this.ft = setTimeout(() => {
+            const done = match ? this.state.done.concat([c.name]) : this.state.done;
+            this.setState({ open: [], done: done });
+            if (done.length === 8) { const sc = Math.max(1, 8 - Math.max(0, this.state.moves - 8) / 2); this.finish("Memory Match", Math.round(sc), 8); }
+          }, match ? 350 : 800);
+        } };
+    });
+    const pct = s.max ? s.score / s.max : 0;
+    const board = s.board.map((b, i) => ({ ...b, rank: i + 1, bg: i === 0 ? "rgba(255,143,184,.18)" : "transparent" }));
+    return {
+      rootClass: "h2h" + (dark ? " dark" : "") + (this.props.reduceMotion ? " rm" : ""),
+      nav: NAV.map((n, i) => ({ label: n[1], href: n[2], on: n[0] === PAGE, cls: n[0] === PAGE ? "nl on fx" : "nl fx", cur: n[0] === PAGE ? "page" : "false", delay: (i * 50) + "ms" })),
+      menu: s.menu, openMenu: () => this.setState({ menu: true }), closeMenu: () => this.setState({ menu: false }),
+      toggleDark: () => this.setState({ dark: !dark }),
+      isHub: s.screen === "hub", isQuiz: s.screen === "quiz", isMemory: s.screen === "memory", isResult: s.screen === "result",
+      inGame: s.screen !== "hub", gameName: s.game || "",
+      quit: (e) => { if (e && e.preventDefault) e.preventDefault(); this.setState({ screen: "hub" }); },
+      games: games,
+      q: q, qNum: s.qi + 1, qTotal: total, score: s.score, time: s.time,
+      ringOff: (138.2 * (1 - s.time / sec)).toFixed(1), ringColor: s.time <= 5 ? "#C92A68" : "#8A5CE6",
+      progressPct: Math.round(((s.qi + (answered ? 1 : 0)) / total) * 100),
+      opts: opts, answered: answered, confetti: right && !this.props.reduceMotion, bits: bits,
+      verdict: right ? "Correct!" : s.picked === "__timeout" ? "Time’s up, it was " + q.answer + "." : "It was " + q.answer + ".",
+      nextLabel: s.qi + 1 < total ? "Next question" : "See result",
+      nextQ: () => { if (s.qi + 1 < total) this.setState({ qi: s.qi + 1, picked: null, time: sec }); else this.finish("Quiz", s.score, total); },
+      deck: deck, pairs: s.done.length, moves: s.moves, mTime: Math.floor(s.mSecs / 60) + ":" + String(s.mSecs % 60).padStart(2, "0"),
+      rank: pct >= 0.8 ? "You’re a certified S2U!" : pct >= 0.5 ? "Rising S2U in training" : "Welcome, new S2U",
+      shown: s.shown, max: s.max, resultLine: s.game === "Quiz" ? "Built only from verified profile facts" : "Fewer moves, higher score",
+      reward: s.reward || { name: "", rarity: "", grad: "", foil: "0" },
+      again: () => (s.game === "Quiz" ? this.startQuiz() : this.startMemory()),
+      share: () => { this.setState({ toast: true }); clearTimeout(this.tt); this.tt = setTimeout(() => this.setState({ toast: false }), 3000); },
+      toast: s.toast,
+      board: board, hasBoard: board.length > 0, noBoard: board.length === 0
+    };
+  }
+}
+</script>
+</body>
+</html>

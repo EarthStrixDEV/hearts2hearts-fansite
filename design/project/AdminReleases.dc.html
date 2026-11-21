@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>H2H Admin · Releases</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Sans+KR:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:var(--acc-ink)}
+.ad{--bg:#F6F6F9;--surface:#FFFFFF;--ink:#1C1B22;--muted:#5E5C6B;--line:#E5E3EC;--soft:#F1F0F5;--acc:#C92A68;--acc-soft:#FBE6EE;--acc-ink:#9E1D50;--on-acc:#FFFFFF;--ok:#1F7A55;--ok-soft:#E3F5EC;--warn:#8A5A00;--warn-soft:#FFF3D6;--bad:#B42318;--bad-soft:#FDE8E7;font-family:'IBM Plex Sans','IBM Plex Sans KR',system-ui,sans-serif;font-size:14px;color:var(--ink);background:var(--bg)}
+.ad.illit{--acc:#2F5BE0;--acc-soft:#E4EBFF;--acc-ink:#1E40AF}
+.ad.dark{--bg:#121117;--surface:#1B1A22;--ink:#EDECF3;--muted:#A9A6B8;--line:#2D2B38;--soft:#24232D;--acc:#FF8FB8;--acc-soft:rgba(255,143,184,.14);--acc-ink:#FF8FB8;--on-acc:#1C1B22;--ok:#5FD3A0;--ok-soft:rgba(95,211,160,.14);--warn:#F2C14E;--warn-soft:rgba(242,193,78,.14);--bad:#FF8A80;--bad-soft:rgba(255,138,128,.14)}
+.ad.dark.illit{--acc:#8FA9FF;--acc-soft:rgba(143,169,255,.14);--acc-ink:#8FA9FF}
+.mono{font-family:'IBM Plex Mono',ui-monospace,monospace}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 16px;border-radius:8px;font-family:inherit;font-size:14px;font-weight:500;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;text-decoration:none;white-space:nowrap}
+.btn:hover{background:var(--soft);color:var(--ink)}.btn:active{transform:translateY(1px)}
+.btn-p{background:var(--acc);border-color:var(--acc);color:var(--on-acc)}.btn-p:hover{background:var(--acc);color:var(--on-acc);filter:brightness(1.08)}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.ibtn{width:44px;height:44px;flex:none;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;padding:0}
+.ibtn:hover{background:var(--soft)}.ibtn[disabled]{opacity:.35;cursor:not-allowed}
+.sl{display:flex;align-items:center;gap:10px;min-height:44px;padding:0 12px;border-radius:8px;color:var(--muted);text-decoration:none;font-weight:500;white-space:nowrap}
+.sl:hover{background:var(--soft);color:var(--ink)}.sl.on{background:var(--acc-soft);color:var(--acc-ink);font-weight:600}
+.seg-wrap{display:flex;padding:3px;border-radius:10px;background:var(--soft);gap:2px}
+.seg{flex:1;min-height:38px;padding:0 12px;border:0;border-radius:8px;background:none;color:var(--muted);font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap}
+.seg.on{background:var(--surface);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.1)}
+.inp{width:100%;box-sizing:border-box;min-height:44px;padding:0 12px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font-family:inherit;font-size:14px}
+.inp:focus{outline:2px solid var(--acc);outline-offset:-1px}
+.lbl{font-size:13px;font-weight:600}
+.badge{display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 8px;border-radius:6px;font-size:12px;font-weight:600;white-space:nowrap}
+.b-ok{background:var(--ok-soft);color:var(--ok)}.b-warn{background:var(--warn-soft);color:var(--warn)}.b-neu{background:var(--soft);color:var(--muted)}.b-acc{background:var(--acc-soft);color:var(--acc-ink)}
+.btn:focus-visible,.ibtn:focus-visible,.sl:focus-visible,.seg:focus-visible,.fx:focus-visible,.rowbtn:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.navlist{display:flex;flex-direction:column;gap:2px}
+@media (max-width:900px){.navlist{flex-direction:row;overflow-x:auto}.side-foot,.top-search{display:none!important}}
+.tbl{width:100%;border-collapse:collapse}
+.tbl th{text-align:left;font-size:12px;font-weight:600;color:var(--muted);padding:0 14px;height:40px;border-bottom:1px solid var(--line);white-space:nowrap}
+.tbl td{padding:0 14px;height:60px;border-bottom:1px solid var(--line)}
+.tbl tr.sel td{background:var(--acc-soft)}
+.rowbtn{display:flex;align-items:center;gap:12px;border:0;background:none;padding:0;min-height:44px;cursor:pointer;font-family:inherit;font-size:14px;font-weight:600;color:var(--ink);text-align:left}
+.trk{display:grid;grid-template-columns:28px minmax(0,1fr) 84px auto;gap:8px;align-items:center}
+.toast{animation:toast 3s ease both}
+@keyframes toast{0%{opacity:0;transform:translate(-50%,-8px)}10%,85%{opacity:1;transform:translate(-50%,0)}100%{opacity:0;transform:translate(-50%,-8px)}}
+@media (prefers-reduced-motion:reduce){.ad *{animation:none!important;transition:none!important}}
+</style>
+</helmet>
+<div class="{{rootClass}}" style="min-height: 100vh; display: flex; flex-wrap: wrap; align-items: stretch">
+<aside aria-label="Admin" style="flex: 1 1 240px; max-width: 100%; background: var(--surface); border-right: 1px solid var(--line); padding: 16px 12px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; align-items: center; gap: 10px; padding: 4px 8px"><span style="width: 36px; height: 36px; border-radius: 10px; background: var(--acc); color: var(--on-acc); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px">FH</span><span style="display: flex; flex-direction: column"><strong style="font-size: 15px">Fan Hub</strong><span style="font-size: 12px; color: var(--muted)">Admin · CMS</span></span></div>
+<div style="padding: 8px 12px; border-radius: 8px; background: var(--acc-soft); color: var(--acc-ink); font-size: 13px; font-weight: 600">{{groupName}} site</div>
+<nav class="navlist" aria-label="Admin sections"><sc-for list="{{nav}}" as="n" hint-placeholder-count="7"><a class="{{n.cls}}" href="{{n.href}}" aria-current="{{n.cur}}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{n.icon}}"></path></svg>{{n.label}}<sc-if value="{{n.hasCount}}" hint-placeholder-val="{{ false }}"><span class="badge b-acc" style="margin-left: auto">{{n.count}}</span></sc-if></a></sc-for></nav>
+<div class="side-foot" style="margin-top: auto; border-top: 1px solid var(--line); padding-top: 12px"><a class="sl" href="{{siteHref}}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"></path></svg>View live site</a></div>
+</aside>
+<div style="flex: 999 1 640px; min-width: 0; display: flex; flex-direction: column">
+<header style="min-height: 64px; display: flex; align-items: center; gap: 12px; padding: 0 24px; border-bottom: 1px solid var(--line); background: var(--surface)">
+<nav aria-label="Breadcrumb" style="flex: 1; min-width: 0; font-size: 13px; color: var(--muted)">Admin / {{groupName}} / <span style="color: var(--ink); font-weight: 600">Releases</span></nav>
+<label class="top-search" style="position: relative; display: flex; align-items: center; width: 280px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" style="position: absolute; left: 12px; color: var(--muted)"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg><span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Search content</span><input class="inp" type="search" placeholder="Search content" style="padding-left: 36px"></label>
+<button class="ibtn" onClick="{{toggleDark}}" aria-label="Toggle dark mode"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"></path></svg></button>
+<span role="img" aria-label="Signed in as admin" style="width: 36px; height: 36px; border-radius: 50%; background: var(--soft); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: var(--muted)">AD</span>
+</header>
+
+<main style="padding: 24px; display: flex; flex-direction: column; gap: 20px; box-sizing: border-box">
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px">
+<div><h1 style="margin: 0; font-size: 24px; font-weight: 600">Releases</h1><p style="margin: 4px 0 0; color: var(--muted)">Edits discography.json. Track durations stay empty until checked against an official source.</p></div>
+<button class="btn btn-p" onClick="{{addRelease}}">New release</button>
+</div>
+<div role="group" aria-label="Type" class="seg-wrap" style="align-self: flex-start"><sc-for list="{{types}}" as="t" hint-placeholder-count="4"><button class="{{t.cls}}" onClick="{{t.pick}}" aria-pressed="{{t.on}}">{{t.label}}</button></sc-for></div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start">
+<section class="card" aria-label="Release list" style="flex: 999 1 520px; min-width: 0; overflow-x: auto">
+<table class="tbl">
+<thead><tr><th scope="col">Release</th><th scope="col">Type</th><th scope="col">Date</th><th scope="col">Tracks</th><th scope="col">Status</th></tr></thead>
+<tbody>
+<sc-for list="{{rows}}" as="r" hint-placeholder-count="9">
+<tr class="{{r.cls}}">
+<td><button class="rowbtn" onClick="{{r.pick}}" aria-label="Edit {{r.title}}"><span style="width: 40px; height: 40px; border-radius: 8px; background: {{r.grad}}; display: block; flex: none"></span>{{r.title}}</button></td>
+<td style="color: var(--muted); white-space: nowrap">{{r.type}}</td>
+<td class="mono" style="font-size: 13px; white-space: nowrap">{{r.dateLabel}}</td>
+<td><span class="{{r.trackBadge}}">{{r.trackLabel}}</span></td>
+<td><span class="{{r.statusBadge}}">{{r.status}}</span></td>
+</tr>
+</sc-for>
+</tbody>
+</table>
+</section>
+
+<section class="card" aria-labelledby="ed" style="flex: 1 1 400px; min-width: 0; padding: 20px; display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; gap: 14px; align-items: center">
+<label style="width: 88px; height: 88px; border-radius: 10px; background: {{cur.grad}}; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 6px; box-sizing: border-box; cursor: pointer; flex: none"><input type="file" accept="image/*" style="position: absolute; width: 1px; height: 1px; opacity: 0"><span style="font-size: 11px; font-weight: 600; background: rgba(255,255,255,.9); color: #1C1B22; padding: 2px 6px; border-radius: 4px">Upload cover</span></label>
+<div style="flex: 1; min-width: 0"><h2 id="ed" style="margin: 0; font-size: 18px; font-weight: 600">{{curTitle}}</h2><span style="font-size: 13px; color: var(--muted)">Cover: official artwork only, with credit</span></div>
+<sc-if value="{{dirty}}" hint-placeholder-val="{{ false }}"><span class="badge b-warn">Unsaved</span></sc-if>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(170px, 100%), 1fr)); gap: 12px">
+<label style="display: flex; flex-direction: column; gap: 6px; grid-column: 1 / -1"><span class="lbl">Title</span><input class="inp" value="{{cur.title}}" onChange="{{setTitle}}"></label>
+<label style="display: flex; flex-direction: column; gap: 6px"><span class="lbl">Type</span><select class="inp" value="{{cur.type}}" onChange="{{setType}}"><sc-for list="{{typeOptions}}" as="o" hint-placeholder-count="6"><option value="{{o}}">{{o}}</option></sc-for></select></label>
+<label style="display: flex; flex-direction: column; gap: 6px"><span class="lbl">Release date</span><input class="inp" type="date" value="{{cur.date}}" onChange="{{setDate}}"></label>
+<label style="display: flex; flex-direction: column; gap: 6px"><span class="lbl">Lead single</span><input class="inp" value="{{cur.lead}}" onChange="{{setLead}}"></label>
+<label style="display: flex; flex-direction: column; gap: 6px"><span class="lbl">Status</span><select class="inp" value="{{cur.status}}" onChange="{{setStatus}}"><option value="Published">Published</option><option value="Draft">Draft</option></select></label>
+<label style="display: flex; flex-direction: column; gap: 6px; grid-column: 1 / -1"><span class="lbl">Spotify album URL</span><input class="inp" type="url" value="{{cur.spotify}}" placeholder="https://open.spotify.com/album/…" onChange="{{setSpotify}}"></label>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; justify-content: space-between; align-items: center"><span class="lbl">Tracklist</span><span class="{{completeBadge}}">{{completeLabel}}</span></div>
+<sc-for list="{{tracks}}" as="t" hint-placeholder-count="3">
+<div class="trk">
+<span class="mono" style="color: var(--muted); text-align: center">{{t.n}}</span>
+<input class="inp" value="{{t.title}}" onChange="{{t.setTitle}}" aria-label="Track {{t.n}} title">
+<input class="inp mono" value="{{t.dur}}" placeholder="–:––" onChange="{{t.setDur}}" aria-label="Track {{t.n}} duration">
+<span style="display: flex; gap: 4px"><button class="ibtn" onClick="{{t.up}}" disabled="{{t.first}}" aria-label="Move track {{t.n}} up"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 15l6-6 6 6"></path></svg></button><button class="ibtn" onClick="{{t.remove}}" aria-label="Remove track {{t.n}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></span>
+</div>
+</sc-for>
+<div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap"><button class="btn" onClick="{{addTrack}}">Add track</button><label style="display: flex; align-items: center; gap: 8px; min-height: 44px; font-size: 13px; cursor: pointer"><input type="checkbox" checked="{{cur.complete}}" onChange="{{toggleComplete}}" style="width: 18px; height: 18px; accent-color: var(--acc)">Tracklist is complete and checked</label></div>
+</div>
+<div style="display: flex; gap: 8px; flex-wrap: wrap; border-top: 1px solid var(--line); padding-top: 16px">
+<button class="btn btn-p" onClick="{{save}}" disabled="{{clean}}">Save changes</button>
+<button class="btn" onClick="{{discard}}" disabled="{{clean}}">Discard</button>
+<a class="btn" href="{{musicHref}}" style="margin-left: auto">Preview on site</a>
+</div>
+</section>
+</div>
+</main>
+</div>
+<sc-if value="{{toast}}" hint-placeholder-val="{{ false }}"><div class="toast" role="status" style="position: fixed; top: 20px; left: 50%; z-index: 90; padding: 12px 16px; border-radius: 10px; background: var(--ink); color: var(--bg); font-size: 14px; font-weight: 500; box-shadow: 0 8px 24px rgba(0,0,0,.2)">{{toastMsg}}</div></sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"dark":{"editor":"boolean","default":false,"section":"Theme"},"$preview":{"width":1440,"height":1250}}'>
+const NAV = [
+  ["dash", "Dashboard", "AdminDashboard.dc.html", "M4 4h6v9H4zM14 4h6v5h-6zM14 13h6v7h-6zM4 17h6v3H4z"],
+  ["members", "Members", "AdminMembers.dc.html", "M9 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM3 20a6 6 0 0 1 12 0M17 11a3 3 0 1 0 0-6M21 20a6 6 0 0 0-4-5.7"],
+  ["releases", "Releases", "AdminReleases.dc.html", "M9 18V6l11-2v12M9 18a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM20 16a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"],
+  ["blog", "AI Blog", "AdminBlog.dc.html", "M12 3l1.9 5.8L20 10l-6.1 1.2L12 17l-1.9-5.8L4 10l6.1-1.2z"],
+  ["schedule", "Schedule", "AdminSchedule.dc.html", "M4 7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zM4 10h16M9 3v4M15 3v4"],
+  ["media", "Media", "AdminMedia.dc.html", "M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zM4 16l5-5 4 4 3-3 4 4"],
+  ["settings", "Settings", "AdminSettings.dc.html", "M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"]
+];
+const PAGE = "releases";
+const TYPES = ["Mini album", "Single album", "Digital single", "Japanese single", "Collab / OST", "Promotional single"];
+const DATA = {
+  h2h: { name: "Hearts2Hearts", site: "Main.dc.html", music: "Music.dc.html", rel: [
+    ["Iconic Heart", "Japanese single", "2026-08-12", "Iconic Heart", ["Iconic Heart"], "linear-gradient(135deg,#FFE3F1,#FF8FB8)"],
+    ["Lemon Tang", "Mini album", "2026-06-22", "Lemon Tang", ["Lemon Tang", "Rude!"], "linear-gradient(135deg,#FFF6C9,#FFE08A 50%,#CFF3DD)"],
+    ["Rude! (Japanese ver.)", "Japanese single", "2026-03-27", "Rude!", ["Rude! (Japanese ver.)"], "linear-gradient(135deg,#FFE0EC,#DDF0FF)"],
+    ["Rude!", "Digital single", "2026-02-20", "Rude!", ["Rude!"], "linear-gradient(135deg,#FFE0EC,#FF9EC3)"],
+    ["Moonride", "Promotional single", "", "Moonride", ["Moonride"], "linear-gradient(135deg,#2B2440,#A8D8FF)"],
+    ["Focus", "Mini album", "2025-10-20", "Focus", ["Focus", "Pretty Please"], "linear-gradient(135deg,#E9E1FF,#C9B6FF 55%,#BFE2FF)"],
+    ["Pretty Please", "Digital single", "2025-09-24", "Pretty Please", ["Pretty Please"], "linear-gradient(135deg,#FFE3F1,#F9B8DD)"],
+    ["Style", "Digital single", "2025-06-18", "Style", ["Style"], "linear-gradient(135deg,#DDF0FF,#A8D8FF)"],
+    ["The Chase", "Single album", "2025-02-24", "The Chase", ["The Chase", "Butterflies"], "linear-gradient(135deg,#FFD6E7,#FFB6D5 50%,#E9D9FF)"]
+  ], complete: { "The Chase": true, "Style": true, "Pretty Please": true, "Rude!": true } },
+  illit: { name: "ILLIT", site: "ILLIT.dc.html", music: "IllitMusic.dc.html", rel: [
+    ["I Got Your Back", "Japanese single", "2026-07-26", "I Got Your Back", ["I Got Your Back"], "linear-gradient(135deg,#4D7CFF,#8BE8D4)"],
+    ["Iconic by Mistake", "Collab / OST", "2026-06-12", "Iconic by Mistake", ["Iconic by Mistake"], "linear-gradient(135deg,#1E1B3A,#FF4F9A)"],
+    ["Mamihlapinatapai", "Mini album", "2026-04-30", "It’s Me", ["It’s Me"], "linear-gradient(135deg,#8BE8D4,#4D7CFF)"],
+    ["Sunday Morning", "Japanese single", "2026-01-13", "Sunday Morning", ["Sunday Morning"], "linear-gradient(135deg,#FFF6C9,#A8EBD9)"],
+    ["Not Cute Anymore", "Single album", "2025-11-24", "Not Cute Anymore", ["Not Cute Anymore"], "linear-gradient(135deg,#1E1B3A,#4D7CFF)"],
+    ["Secret Quest", "Collab / OST", "2025-11-04", "Secret Quest", ["Secret Quest"], "linear-gradient(135deg,#FFE66D,#4D7CFF)"],
+    ["Toki Yo Tomare", "Japanese single", "2025-09-01", "Toki Yo Tomare", ["Toki Yo Tomare"], "linear-gradient(135deg,#E0C4FF,#FFB3D1)"],
+    ["bomb", "Mini album", "2025-06-16", "Do the Dance", ["Do the Dance"], "linear-gradient(135deg,#FFE66D,#FF8CC0)"],
+    ["Almond Chocolate", "Japanese single", "2025-02-14", "Almond Chocolate", ["Almond Chocolate"], "linear-gradient(135deg,#FFD9A8,#B07A55)"],
+    ["Baby It’s Both", "Collab / OST", "2024-11-22", "Baby It’s Both", ["Baby It’s Both"], "linear-gradient(135deg,#FF8CC0,#E0C4FF)"],
+    ["I’ll Like You", "Mini album", "2024-10-21", "Cherish (My Love)", ["Cherish (My Love)"], "linear-gradient(135deg,#FFB3D1,#B8C8FF)"],
+    ["Super Real Me", "Mini album", "2024-03-25", "Magnetic", ["Magnetic"], "linear-gradient(135deg,#FF8CC0,#4D7CFF)"]
+  ], complete: {} }
+};
+const FILTERS = [["all", "All"], ["album", "Albums"], ["single", "Singles"], ["other", "Collabs & promo"]];
+const MON = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+const kindOf = (t) => (t === "Mini album" || t === "Single album" ? "album" : t === "Digital single" || t === "Japanese single" ? "single" : "other");
+
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { group: null, dark: null, filter: "all", sel: 0, saved: {}, extra: {}, draft: null, toast: null }; }
+  componentWillUnmount() { clearTimeout(this.tt); }
+  flash(msg) { this.setState({ toast: msg }); clearTimeout(this.tt); this.tt = setTimeout(() => this.setState({ toast: null }), 3000); }
+  renderVals() {
+    const s = this.state, gid = "h2h", g = DATA[gid] || DATA.h2h;
+    const dark = s.dark === null ? !!this.props.dark : s.dark;
+    const base = (s.extra[gid] || []).concat(g.rel.map((r, i) => ({ key: gid + i, title: r[0], type: r[1], date: r[2], lead: r[3], tracks: r[4].map((t) => ({ title: t, dur: "" })), grad: r[5], status: "Published", spotify: "", complete: !!g.complete[r[0]] }))).map((r) => s.saved[r.key] || r);
+    const all = base;
+    const shown = all.filter((r) => s.filter === "all" || kindOf(r.type) === s.filter);
+    const selItem = all.find((r) => r.key === s.sel) || shown[0] || all[0];
+    const cur = s.draft && s.draft.key === selItem.key ? s.draft : selItem;
+    const dirty = JSON.stringify(cur) !== JSON.stringify(selItem);
+    const upd = (patch) => this.setState({ draft: { ...cur, ...patch } });
+    const field = (k) => (e) => upd({ [k]: e.target.value });
+    const fmt = (iso) => { if (!iso) return "Date TODO"; const p = iso.split("-"); return MON[Number(p[1]) - 1] + " " + Number(p[2]) + ", " + p[0]; };
+    return {
+      rootClass: "ad" + (gid === "illit" ? " illit" : "") + (dark ? " dark" : ""),
+      toggleDark: () => this.setState({ dark: !dark }),
+      groups: [["h2h", "Hearts2Hearts"], ["illit", "ILLIT"]].map((x) => ({ label: x[1], on: gid === x[0] ? "true" : "false", cls: gid === x[0] ? "seg on" : "seg", pick: () => this.setState({ group: x[0], sel: 0, draft: null }) })),
+      nav: NAV.map((n) => ({ label: n[1], href: n[2], icon: n[3], cls: n[0] === PAGE ? "sl on" : "sl", cur: n[0] === PAGE ? "page" : "false", hasCount: n[0] === "blog", count: 2 })),
+      groupName: g.name, siteHref: g.site, musicHref: g.music,
+      types: FILTERS.map((f) => ({ label: f[1], on: s.filter === f[0] ? "true" : "false", cls: s.filter === f[0] ? "seg on" : "seg", pick: () => this.setState({ filter: f[0] }) })),
+      rows: shown.map((r) => ({ ...r, cls: r.key === selItem.key ? "sel" : "", dateLabel: fmt(r.date), trackLabel: r.tracks.length + (r.complete ? " · complete" : " · partial"), trackBadge: r.complete ? "badge b-ok" : "badge b-warn", statusBadge: r.status === "Published" ? "badge b-neu" : "badge b-acc", pick: () => this.setState({ sel: r.key, draft: null }) })),
+      cur: cur, curTitle: cur.title || "Untitled release", typeOptions: TYPES,
+      setTitle: field("title"), setType: field("type"), setDate: field("date"), setLead: field("lead"), setStatus: field("status"), setSpotify: field("spotify"),
+      tracks: cur.tracks.map((t, i) => ({ ...t, n: i + 1, first: i === 0,
+        setTitle: (e) => upd({ tracks: cur.tracks.map((x, j) => (j === i ? { ...x, title: e.target.value } : x)) }),
+        setDur: (e) => upd({ tracks: cur.tracks.map((x, j) => (j === i ? { ...x, dur: e.target.value } : x)) }),
+        up: () => { if (i === 0) return; const a = cur.tracks.slice(); const tmp = a[i - 1]; a[i - 1] = a[i]; a[i] = tmp; upd({ tracks: a }); },
+        remove: () => upd({ tracks: cur.tracks.filter((x, j) => j !== i) }) })),
+      addTrack: () => upd({ tracks: cur.tracks.concat([{ title: "", dur: "" }]) }),
+      toggleComplete: () => upd({ complete: !cur.complete }),
+      completeLabel: cur.complete ? "Checked against official source" : "Partial · TODO", completeBadge: cur.complete ? "badge b-ok" : "badge b-warn",
+      dirty: dirty, clean: !dirty,
+      save: () => { this.setState({ saved: { ...s.saved, [cur.key]: cur }, draft: null }); this.flash((cur.title || "Release") + " saved"); },
+      discard: () => this.setState({ draft: null }),
+      addRelease: () => { const key = gid + "new" + Date.now(); const item = { key: key, title: "", type: "Digital single", date: "", lead: "", tracks: [{ title: "", dur: "" }], grad: "linear-gradient(135deg,#E5E3EC,#F6F6F9)", status: "Draft", spotify: "", complete: false }; this.setState({ extra: { ...s.extra, [gid]: [item].concat(s.extra[gid] || []) }, sel: key, draft: null, filter: "all" }); },
+      toast: !!s.toast, toastMsg: s.toast || ""
+    };
+  }
+}
+</script>
+</body>
+</html>

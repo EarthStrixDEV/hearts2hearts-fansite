@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Hearts2Hearts fan site · Schedule</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&amp;family=IBM+Plex+Sans+KR:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#C92A68}a:hover{color:#9E1D50}
+.h2h{--pink-500:#FF8FB8;--pink-700:#C92A68;--cream-50:#FFF8F3;--ink-900:#2B2440;--ink-500:#6E6787;--surface:#FFFFFF;--glass:rgba(255,255,255,.6);--glass-b:rgba(255,255,255,.7);--line:rgba(43,36,64,.08);--holo:linear-gradient(135deg,#FFB6D5,#C9B6FF,#A8D8FF,#FFE3F1);--holo-deep:linear-gradient(135deg,#D63A77,#8A5CE6,#3D84D4);--shadow:0 8px 24px rgba(255,143,184,.25);--glow:0 0 32px rgba(201,182,255,.5);--spring:cubic-bezier(.34,1.56,.64,1);font-family:'IBM Plex Sans KR',system-ui,sans-serif;color:var(--ink-900);background:var(--cream-50)}
+.h2h.dark{--cream-50:#1B1630;--ink-900:#F6F0FF;--ink-500:#B9B0D6;--surface:#262040;--glass:rgba(38,32,64,.62);--glass-b:rgba(255,255,255,.14);--line:rgba(255,255,255,.1);--pink-700:#FF9CC3}
+.disp{font-family:'Fredoka',ui-rounded,system-ui,sans-serif}
+.holo-text{background:var(--holo-deep);-webkit-background-clip:text;background-clip:text;color:transparent}
+.glass{background:var(--glass);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--glass-b)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 18px;border-radius:999px;font:600 15px/1 'Fredoka',ui-rounded,sans-serif;border:0;cursor:pointer;text-decoration:none;transition:transform 150ms var(--spring),box-shadow 150ms ease}
+.btn:hover{transform:translateY(-2px)}.btn:active{transform:scale(.96)}
+.btn-p{background:var(--holo-deep);color:#fff;box-shadow:var(--shadow)}.btn-p:hover{color:#fff;box-shadow:var(--shadow),var(--glow)}
+.btn-s{background:var(--glass);color:var(--pink-700);border:1.5px solid var(--pink-500)}.btn-s:hover{color:var(--pink-700)}
+.btn[disabled]{opacity:.4;pointer-events:none;box-shadow:none}
+.ibtn{width:44px;height:44px;flex:none;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;background:var(--glass);border:1px solid var(--glass-b);color:var(--ink-900);cursor:pointer;padding:0;transition:transform 150ms var(--spring)}
+.ibtn:hover{transform:scale(1.1)}.ibtn:active{transform:scale(.96)}
+.btn:focus-visible,.ibtn:focus-visible,.fx:focus-visible,.nl:focus-visible,.seg:focus-visible,.day:focus-visible,.ev:focus-visible,.pin:focus-visible{outline:2px solid var(--pink-700);outline-offset:2px}
+.nl{position:relative;display:inline-flex;align-items:center;min-height:44px;padding:0 11px;color:var(--ink-500);text-decoration:none;font-weight:500;font-size:15px;border-radius:999px;white-space:nowrap}
+.nl:hover{color:var(--ink-900)}.nl.on{color:var(--ink-900)}
+.nav-links{display:flex}.nav-burger{display:none}
+@media (max-width:1000px){.nav-links{display:none}.nav-burger{display:inline-flex}}
+.sheet-link{animation:dropin 420ms var(--spring) both}
+.chip{display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 10px;border-radius:999px;font-size:12px;font-weight:500;white-space:nowrap}
+.seg{display:inline-flex;align-items:center;min-height:40px;padding:0 16px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink-900);font:500 14px/1 'IBM Plex Sans KR',sans-serif;cursor:pointer}
+.seg.on{background:#2B2440;color:#fff;border-color:#2B2440}
+.h2h.dark .seg.on{background:#FFB6D5;color:#2B2440;border-color:#FFB6D5}
+.flink{color:var(--ink-500);text-decoration:none;font-size:14px;min-height:32px;display:inline-flex;align-items:center}.flink:hover{color:var(--ink-900)}
+.floaty{animation:floaty 6s ease-in-out infinite}
+.ev{display:flex;align-items:stretch;width:100%;border-radius:16px;overflow:hidden;border:1px solid var(--glass-b);background:var(--glass);cursor:pointer;padding:0;font:inherit;color:var(--ink-900);text-align:left;transition:transform 200ms var(--spring),box-shadow 200ms}
+.ev:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+.mhead{position:sticky;top:64px;z-index:5;padding:10px 0;background:var(--cream-50)}
+.day{position:relative;aspect-ratio:1/1;min-height:44px;border:0;border-radius:12px;background:none;color:var(--ink-900);font:500 15px/1 'IBM Plex Sans KR',sans-serif;display:flex;align-items:center;justify-content:center}
+.day.out{color:transparent}
+.day.has{cursor:pointer;background:rgba(255,143,184,.14);font-weight:600}
+.day.has:hover{background:rgba(255,143,184,.28)}
+.day.sel{background:#2B2440;color:#fff}
+.pin{position:absolute;transform:translate(-50%,-100%);border:0;background:none;padding:0;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;min-width:44px;min-height:44px;justify-content:flex-end;transition:transform 200ms var(--spring)}
+.pin:hover{transform:translate(-50%,-100%) scale(1.12)}
+.flipbox span.n{animation:flipA 500ms var(--spring)}.flipbox span.n2{animation:flipB 500ms var(--spring)}
+.drawer{animation:slidein 400ms var(--spring) both}
+@media (max-width:640px){.drawer-wrap{align-items:flex-end!important;justify-content:stretch!important}.drawer{width:100%!important;max-width:none!important;height:auto!important;max-height:88vh;border-radius:24px 24px 0 0!important;animation:sheetup 400ms var(--spring) both}}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+@keyframes dropin{from{opacity:0;transform:translateY(-16px)}to{opacity:1;transform:none}}
+@keyframes flipA{from{transform:rotateX(-90deg)}to{transform:none}}
+@keyframes flipB{from{transform:rotateX(-90deg)}to{transform:none}}
+@keyframes slidein{from{transform:translateX(100%)}to{transform:none}}
+@keyframes sheetup{from{transform:translateY(100%)}to{transform:none}}
+.h2h.rm *{animation:none!important;transition:none!important}
+@media (prefers-reduced-motion:reduce){.h2h *{animation:none!important;transition:none!important}}
+</style>
+</helmet>
+<div class="{{rootClass}}" style="min-height: 100vh">
+<header class="glass" style="position: sticky; top: 0; z-index: 50; height: 64px; border-width: 0 0 1px 0; display: flex; align-items: center">
+<div style="width: 100%; max-width: 1240px; margin: 0 auto; padding: 0 24px; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; gap: 12px">
+<a href="Main.dc.html" class="fx" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink-900); min-height: 44px; border-radius: 12px"><svg width="30" height="30" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-10-9.3C.3 8.4 2.2 4 6.2 4c2.3 0 3.9 1.3 5.8 3.4C13.9 5.3 15.5 4 17.8 4c4 0 5.9 4.4 4.2 7.7C19.5 16.4 12 21 12 21z" fill="#FF8FB8"></path></svg><span class="disp" style="font-size: 20px; font-weight: 600">H2H<span style="color: var(--pink-700)">·</span>S2U</span></a>
+<nav class="nav-links" aria-label="Main" style="align-items: center"><sc-for list="{{nav}}" as="n" hint-placeholder-count="8"><a class="{{n.cls}}" href="{{n.href}}" aria-current="{{n.cur}}">{{n.label}}<sc-if value="{{n.on}}" hint-placeholder-val="{{ false }}"><svg width="8" height="8" viewBox="0 0 24 24" aria-hidden="true" style="position: absolute; left: 50%; bottom: 3px; margin-left: -4px"><path d="M12 21s-7.5-4.6-10-9.3C.3 8.4 2.2 4 6.2 4c2.3 0 3.9 1.3 5.8 3.4C13.9 5.3 15.5 4 17.8 4c4 0 5.9 4.4 4.2 7.7C19.5 16.4 12 21 12 21z" fill="#FF8FB8"></path></svg></sc-if></a></sc-for></nav>
+<div style="display: flex; gap: 8px"><button class="ibtn" onClick="{{toggleDark}}" aria-label="Toggle dark mode"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"></path></svg></button><button class="ibtn nav-burger" onClick="{{openMenu}}" aria-label="Open menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"></path></svg></button></div>
+</div>
+</header>
+<sc-if value="{{menu}}" hint-placeholder-val="{{ false }}">
+<div style="position: fixed; inset: 0; z-index: 80; display: flex; flex-direction: column; padding: 16px 24px 32px; gap: 4px; background: var(--cream-50)">
+<div style="display: flex; justify-content: flex-end"><button class="ibtn" onClick="{{closeMenu}}" aria-label="Close menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
+<sc-for list="{{nav}}" as="n" hint-placeholder-count="8"><a class="disp sheet-link fx" href="{{n.href}}" style="font-size: 34px; font-weight: 600; color: var(--ink-900); text-decoration: none; padding: 6px 0; animation-delay: {{n.delay}}">{{n.label}}</a></sc-for>
+</div>
+</sc-if>
+
+<section style="position: relative; overflow: hidden; padding: 64px 24px 24px">
+<div aria-hidden="true" style="position: absolute; inset: 0">
+<svg class="floaty" width="30" height="30" viewBox="0 0 24 24" style="position: absolute; left: 8%; top: 30%"><path d="M12 21s-7.5-4.6-10-9.3C.3 8.4 2.2 4 6.2 4c2.3 0 3.9 1.3 5.8 3.4C13.9 5.3 15.5 4 17.8 4c4 0 5.9 4.4 4.2 7.7C19.5 16.4 12 21 12 21z" fill="#FFB6D5"></path></svg>
+<svg class="floaty" width="22" height="22" viewBox="0 0 24 24" style="position: absolute; right: 12%; top: 22%; animation-delay: -2s"><path d="M12 21s-7.5-4.6-10-9.3C.3 8.4 2.2 4 6.2 4c2.3 0 3.9 1.3 5.8 3.4C13.9 5.3 15.5 4 17.8 4c4 0 5.9 4.4 4.2 7.7C19.5 16.4 12 21 12 21z" fill="#A8D8FF"></path></svg>
+</div>
+<div style="position: relative; max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; gap: 10px">
+<h1 class="disp holo-text" style="margin: 0; font-size: clamp(44px, 6vw, 72px); font-weight: 700; letter-spacing: -0.02em; line-height: 1.05">Concerts &amp; Events</h1>
+<p style="margin: 0; font-size: 17px; color: var(--ink-500)">Official dates only, from schedule.json. Times show in your own timezone.</p>
+</div>
+</section>
+
+<main style="max-width: 1200px; margin: 0 auto; padding: 8px 24px 80px; box-sizing: border-box; display: flex; flex-direction: column; gap: 28px">
+<!-- COUNTDOWN -->
+<section aria-label="Countdown to next event" style="position: relative; border-radius: 24px; overflow: hidden; background: var(--holo); padding: 32px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px; color: #2B2440">
+<div style="display: flex; flex-direction: column; gap: 6px; min-width: 240px"><span class="chip" style="align-self: flex-start; background: #2B2440; color: #fff">Next up</span><span class="disp" style="font-size: 30px; font-weight: 600">[NEXT OFFICIAL EVENT]</span><span style="font-size: 15px">[CITY] · [VENUE] · {{nextLabel}}</span></div>
+<div style="display: grid; grid-template-columns: repeat(4, minmax(72px, 104px)); gap: 12px">
+<sc-for list="{{cd}}" as="u" hint-placeholder-count="4">
+<div style="display: flex; flex-direction: column; align-items: center; gap: 8px"><div class="flipbox" style="width: 100%; perspective: 400px"><span class="disp {{u.cls}}" style="display: block; padding: 20px 0; border-radius: 16px; background: rgba(255,255,255,.92); text-align: center; font-size: 44px; font-weight: 600; font-variant-numeric: tabular-nums; box-shadow: 0 10px 20px rgba(43,36,64,.12); position: relative">{{u.v}}<span aria-hidden="true" style="position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: rgba(43,36,64,.1)"></span></span></div><span style="font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em">{{u.l}}</span></div>
+</sc-for>
+</div>
+</section>
+
+<!-- CONTROLS -->
+<div style="display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px">
+<div role="group" aria-label="View" style="display: flex; gap: 4px; padding: 4px; border-radius: 999px; background: var(--line)"><sc-for list="{{views}}" as="v" hint-placeholder-count="3"><button class="{{v.cls}}" onClick="{{v.pick}}" aria-pressed="{{v.on}}" style="min-height: 36px">{{v.label}}</button></sc-for></div>
+<div role="group" aria-label="When" style="display: flex; gap: 8px"><sc-for list="{{whens}}" as="w" hint-placeholder-count="3"><button class="{{w.cls}}" onClick="{{w.pick}}" aria-pressed="{{w.on}}">{{w.label}}</button></sc-for></div>
+</div>
+<div role="group" aria-label="Event type" style="display: flex; flex-wrap: wrap; gap: 8px"><sc-for list="{{types}}" as="f" hint-placeholder-count="6"><button class="{{f.cls}}" onClick="{{f.pick}}" aria-pressed="{{f.on}}">{{f.label}}</button></sc-for></div>
+</div>
+
+<!-- LIST -->
+<sc-if value="{{isList}}" hint-placeholder-val="{{ true }}">
+<section aria-label="Event list" style="display: flex; flex-direction: column; gap: 8px">
+<sc-for list="{{groups}}" as="g" hint-placeholder-count="4">
+<div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 12px">
+<h2 class="mhead disp" style="margin: 0; font-size: 22px; font-weight: 600">{{g.label}} <span style="font-size: 14px; color: var(--ink-500); font-weight: 400; font-family: 'IBM Plex Sans KR', sans-serif">· {{g.count}}</span></h2>
+<sc-for list="{{g.items}}" as="e" hint-placeholder-count="2">
+<button class="ev" onClick="{{e.open}}" style="opacity: {{e.op}}" aria-label="{{e.name}}, {{e.city}}, {{e.dateText}}, {{e.status}}. Open details">
+<span style="flex: none; width: 92px; background: {{e.dateBg}}; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 14px 0; color: #2B2440"><span style="font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em">{{e.mon}}</span><span class="disp" style="font-size: 36px; font-weight: 600; line-height: 1">{{e.day}}</span><span style="font-size: 12px">{{e.wd}}</span></span>
+<span style="flex: 1; min-width: 0; padding: 14px 18px; display: flex; flex-direction: column; gap: 4px; justify-content: center"><span style="font-size: 12px; color: var(--ink-500); font-weight: 500">{{e.type}}</span><span style="font-weight: 600; font-size: 17px">{{e.name}}</span><span style="font-size: 14px; color: var(--ink-500)">{{e.city}} · {{e.venue}}</span></span>
+<span style="display: flex; align-items: center; gap: 12px; padding: 0 16px"><span class="chip" style="background: {{e.chipBg}}; color: {{e.chipFg}}">{{e.status}}</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true" style="color: var(--ink-500)"><path d="M9 5l7 7-7 7"></path></svg></span>
+</button>
+</sc-for>
+</div>
+</sc-for>
+</section>
+</sc-if>
+
+<!-- CALENDAR -->
+<sc-if value="{{isCal}}" hint-placeholder-val="{{ false }}">
+<section class="glass" aria-label="Calendar" style="max-width: 560px; border-radius: 24px; padding: 24px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; align-items: center; justify-content: space-between"><button class="ibtn" onClick="{{prevMonth}}" aria-label="Previous month"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg></button><span class="disp" style="font-size: 22px; font-weight: 600">{{monthLabel}}</span><button class="ibtn" onClick="{{nextMonth}}" aria-label="Next month"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M9 5l7 7-7 7"></path></svg></button></div>
+<div style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 4px; font-size: 12px; color: var(--ink-500); text-align: center; font-weight: 600"><span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span></div>
+<div style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 4px">
+<sc-for list="{{cells}}" as="c" hint-placeholder-count="35"><button class="{{c.cls}}" onClick="{{c.pick}}" aria-label="{{c.aria}}" tabindex="{{c.tab}}">{{c.n}}<sc-if value="{{c.has}}" hint-placeholder-val="{{ false }}"><svg width="8" height="8" viewBox="0 0 24 24" aria-hidden="true" style="position: absolute; left: 50%; bottom: 5px; margin-left: -4px"><path d="M12 21s-7.5-4.6-10-9.3C.3 8.4 2.2 4 6.2 4c2.3 0 3.9 1.3 5.8 3.4C13.9 5.3 15.5 4 17.8 4c4 0 5.9 4.4 4.2 7.7C19.5 16.4 12 21 12 21z" fill="{{c.dot}}"></path></svg></sc-if></button></sc-for>
+</div>
+<span style="font-size: 13px; color: var(--ink-500)">Days with a heart have an event. Click one to open it.</span>
+</section>
+</sc-if>
+
+<!-- MAP -->
+<sc-if value="{{isMap}}" hint-placeholder-val="{{ false }}">
+<section aria-label="Map" style="display: flex; flex-direction: column; gap: 10px">
+<div style="position: relative; width: 100%; aspect-ratio: 2 / 1; border-radius: 24px; overflow: hidden; background-color: #E6F3FF; background-image: repeating-linear-gradient(0deg, rgba(43,36,64,.06) 0 1px, transparent 1px 8.33%), repeating-linear-gradient(90deg, rgba(43,36,64,.06) 0 1px, transparent 1px 8.33%); box-shadow: var(--shadow)">
+<div aria-hidden="true" style="position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: rgba(43,36,64,.18)"></div>
+<span class="chip" style="position: absolute; left: 16px; top: 16px; background: rgba(255,255,255,.88); color: #2B2440">Map tiles render in the app (Leaflet / Mapbox) · pins are to scale</span>
+<sc-for list="{{pins}}" as="p" hint-placeholder-count="9">
+<button class="pin" onClick="{{p.open}}" aria-label="{{p.city}}, {{p.count}} event(s)" style="left: {{p.x}}%; top: {{p.y}}%">
+<span style="font-size: 12px; font-weight: 600; background: rgba(255,255,255,.92); color: #2B2440; padding: 3px 8px; border-radius: 999px; white-space: nowrap; box-shadow: 0 4px 10px rgba(43,36,64,.12)">{{p.city}} · {{p.count}}</span>
+<svg width="26" height="30" viewBox="0 0 24 28" aria-hidden="true"><path d="M12 27s-9-8.2-9-15a9 9 0 0 1 18 0c0 6.8-9 15-9 15z" fill="{{p.fill}}"></path><path d="M12 15.5s-3.4-2.1-4.5-4.2C6.7 9.8 7.6 8 9.4 8c1 0 1.8.6 2.6 1.5.9-.9 1.6-1.5 2.6-1.5 1.8 0 2.7 1.8 1.9 3.3-1.1 2.1-4.5 4.2-4.5 4.2z" fill="#fff"></path></svg>
+</button>
+</sc-for>
+</div>
+</section>
+</sc-if>
+<sc-if value="{{isEmpty}}" hint-placeholder-val="{{ false }}"><div style="padding: 48px 24px; border-radius: 24px; border: 1.5px dashed var(--line); text-align: center; color: var(--ink-500)">Nothing announced here yet. Check back after the next official notice.</div></sc-if>
+</main>
+
+<!-- DETAIL DRAWER -->
+<sc-if value="{{hasSel}}" hint-placeholder-val="{{ false }}">
+<div class="drawer-wrap" onClick="{{close}}" style="position: fixed; inset: 0; z-index: 90; background: rgba(43,36,64,.4); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); display: flex; justify-content: flex-end">
+<div class="drawer" role="dialog" aria-modal="true" aria-label="{{sel.name}} details" onClick="{{stop}}" onKeyDown="{{onKey}}" style="width: 440px; max-width: 100%; height: 100%; overflow-y: auto; background: var(--cream-50); box-shadow: -20px 0 60px rgba(43,36,64,.25); display: flex; flex-direction: column">
+<div style="aspect-ratio: 4 / 3; background: {{sel.poster}}; position: relative; flex: none"><span class="chip" style="position: absolute; left: 16px; bottom: 16px; background: rgba(255,255,255,.88); color: #2B2440">TODO · official poster</span><button class="ibtn" onClick="{{close}}" aria-label="Close details" style="position: absolute; right: 16px; top: 16px; background: rgba(255,255,255,.88); color: #2B2440"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
+<div style="padding: 24px; display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; gap: 8px; flex-wrap: wrap"><span class="chip" style="background: {{sel.chipBg}}; color: {{sel.chipFg}}">{{sel.status}}</span><span class="chip" style="background: var(--line); color: var(--ink-900)">{{sel.type}}</span></div>
+<span class="disp" style="font-size: 30px; font-weight: 600; line-height: 1.15">{{sel.name}}</span>
+<dl style="margin: 0; display: flex; flex-direction: column; gap: 10px; font-size: 15px">
+<div style="display: flex; gap: 12px"><dt style="width: 72px; color: var(--ink-500); flex: none">Date</dt><dd style="margin: 0; font-weight: 600">{{sel.dateText}}</dd></div>
+<div style="display: flex; gap: 12px"><dt style="width: 72px; color: var(--ink-500); flex: none">Time</dt><dd style="margin: 0">TBA · will show in {{tz}}</dd></div>
+<div style="display: flex; gap: 12px"><dt style="width: 72px; color: var(--ink-500); flex: none">Venue</dt><dd style="margin: 0">{{sel.venue}}, {{sel.city}}</dd></div>
+</dl>
+<div style="aspect-ratio: 16 / 9; border-radius: 16px; background-color: #E6F3FF; background-image: repeating-linear-gradient(0deg, rgba(43,36,64,.06) 0 1px, transparent 1px 12%), repeating-linear-gradient(90deg, rgba(43,36,64,.06) 0 1px, transparent 1px 12%); display: flex; align-items: center; justify-content: center; position: relative"><svg width="30" height="34" viewBox="0 0 24 28" aria-hidden="true"><path d="M12 27s-9-8.2-9-15a9 9 0 0 1 18 0c0 6.8-9 15-9 15z" fill="#C92A68"></path></svg><span class="chip" style="position: absolute; left: 10px; bottom: 10px; background: rgba(255,255,255,.88); color: #2B2440">Venue map embed</span></div>
+<div style="display: flex; gap: 10px; flex-wrap: wrap">
+<a class="btn btn-p" href="#" aria-disabled="{{sel.noTix}}" style="flex: 1">Tickets</a>
+<button class="btn btn-s" disabled="{{sel.noCal}}" style="flex: 1"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="3"></rect><path d="M4 10h16M9 3v4M15 3v4M12 13v4M10 15h4"></path></svg>Add to Calendar</button>
+</div>
+<span style="font-size: 12px; color: var(--ink-500)">Ticket link and .ics file come from the official notice. Past events keep both disabled.</span>
+</div>
+</div>
+</div>
+</sc-if>
+
+<footer style="border-top: 1px solid var(--line); background: var(--surface)">
+<div style="max-width: 1200px; margin: 0 auto; padding: 48px 24px 32px; box-sizing: border-box; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 32px">
+<div style="display: flex; flex-direction: column; gap: 10px"><span style="display: flex; align-items: center; gap: 10px"><svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-10-9.3C.3 8.4 2.2 4 6.2 4c2.3 0 3.9 1.3 5.8 3.4C13.9 5.3 15.5 4 17.8 4c4 0 5.9 4.4 4.2 7.7C19.5 16.4 12 21 12 21z" fill="#FF8FB8"></path></svg><span class="disp" style="font-size: 20px; font-weight: 600">H2H·S2U</span></span><span style="font-size: 14px; line-height: 1.6; color: var(--ink-500); max-width: 32ch">An unofficial, fan-made home for Hearts2Hearts and S2U.</span></div>
+<nav aria-label="Footer" style="display: flex; flex-direction: column"><span style="font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-500); margin-bottom: 6px">Quick links</span><div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 16px"><sc-for list="{{nav}}" as="n" hint-placeholder-count="8"><a class="flink fx" href="{{n.href}}">{{n.label}}</a></sc-for></div></nav>
+<div style="display: flex; flex-direction: column"><span style="font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-500); margin-bottom: 6px">Official socials</span><a class="flink fx" href="https://www.instagram.com/hearts2hearts">Instagram</a><a class="flink fx" href="https://x.com/Hearts2Hearts">X</a><a class="flink fx" href="https://www.youtube.com/@hearts2hearts.official">YouTube</a><a class="flink fx" href="https://www.tiktok.com/@hearts2hearts">TikTok</a></div>
+</div>
+<div style="border-top: 1px solid var(--line); padding: 18px 24px; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 24px; font-size: 13px; color: var(--ink-500); text-align: center"><span>Unofficial fan site · all images and music rights belong to SM Entertainment</span><span style="display: inline-flex; align-items: center; gap: 6px">Made with <svg width="13" height="13" viewBox="0 0 24 24" role="img" aria-label="love"><path d="M12 21s-7.5-4.6-10-9.3C.3 8.4 2.2 4 6.2 4c2.3 0 3.9 1.3 5.8 3.4C13.9 5.3 15.5 4 17.8 4c4 0 5.9 4.4 4.2 7.7C19.5 16.4 12 21 12 21z" fill="#FF8FB8"></path></svg> by fans</span></div>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"dark":{"editor":"boolean","default":false,"section":"Theme"},"reduceMotion":{"editor":"boolean","default":false,"section":"Theme"},"nextEventAt":{"editor":"text","default":"2026-12-20T18:00:00+09:00","section":"Schedule"},"$preview":{"width":1440,"height":2000}}'>
+const NAV = [["home", "Home", "Main.dc.html"], ["members", "Members", "Members.dc.html"], ["music", "Music", "Music.dc.html"], ["blog", "Blog", "Blog.dc.html"], ["game", "Game", "Game.dc.html"], ["schedule", "Schedule", "Schedule.dc.html"], ["city", "Mini City", "City.dc.html"], ["about", "About", "About.dc.html"]];
+const PAGE = "schedule";
+const GEO = { "Seoul": [126.98, 37.57], "Brooklyn, NY": [-73.95, 40.68], "Los Angeles": [-118.24, 34.05], "Jakarta": [106.85, -6.21], "Bangkok": [100.5, 13.75], "Fukuoka": [130.4, 33.59], "Tokyo": [139.69, 35.69], "London": [-0.13, 51.5], "Mexico City": [-99.13, 19.43] };
+const EVENTS = [
+  { name: "Hearts2House 2026", type: "Concert", city: "Jakarta", venue: "Tennis Indoor Senayan", date: "2026-03-28" },
+  { name: "Hearts2House 2026", type: "Concert", city: "Los Angeles", venue: "The Wiltern", date: "2026-03-22" },
+  { name: "Hearts2House 2026", type: "Concert", city: "Brooklyn, NY", venue: "Brooklyn Paramount", date: "2026-03-19" },
+  { name: "Hearts2House 2026 · Day 2", type: "Concert", city: "Seoul", venue: "Olympic Hall", date: "2026-02-22" },
+  { name: "Hearts2House 2026 · Day 1", type: "Concert", city: "Seoul", venue: "Olympic Hall", date: "2026-02-21" },
+  { name: "SMTOWN LIVE 2025–26", type: "Concert", city: "Bangkok", venue: "[VENUE]", date: "2026-02-14" },
+  { name: "SMTOWN LIVE 2025–26", type: "Concert", city: "Fukuoka", venue: "[VENUE]", date: "2026-01-31" },
+  { name: "Focus showcase", type: "Showcase", city: "Seoul", venue: "Blue Square SOL Travel Hall", date: "2025-10-20" },
+  { name: "SMTOWN LIVE 2025–26", type: "Concert", city: "Tokyo", venue: "[VENUE]", date: "2025-08-09" },
+  { name: "SMTOWN LIVE 2025–26", type: "Concert", city: "London", venue: "[VENUE]", date: "2025-06-28" },
+  { name: "SMTOWN LIVE 2025–26", type: "Concert", city: "Los Angeles", venue: "[VENUE]", date: "2025-05-11" },
+  { name: "SMTOWN LIVE 2025–26", type: "Concert", city: "Mexico City", venue: "[VENUE]", date: "2025-05-09" },
+  { name: "Debut showcase “Chase Our Hearts”", type: "Showcase", city: "Seoul", venue: "Yes24 Live Hall", date: "2025-02-24" }
+];
+const MON = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+const WD = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+const TYPES = ["All", "Concert", "Fan Meeting", "Music Show", "Festival", "Showcase"];
+const pad = (n) => String(n).padStart(2, "0");
+const isoOf = (d) => d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate());
+
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { view: "list", type: "All", when: "all", y: 2026, m: 2, sel: null, menu: false, dark: null }; }
+  componentDidMount() { this.t = setInterval(() => this.forceUpdate(), 1000); }
+  componentWillUnmount() { clearInterval(this.t); }
+  renderVals() {
+    const s = this.state;
+    const dark = s.dark === null ? !!this.props.dark : s.dark;
+    const target = Date.parse(this.props.nextEventAt || "");
+    const tDate = isNaN(target) ? null : new Date(target);
+    const today = isoOf(new Date());
+    let tz = "your timezone"; try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone || tz; } catch (e) {}
+    const all = [{ name: "[NEXT OFFICIAL EVENT]", type: "Concert", city: "[CITY]", venue: "[VENUE]", date: tDate ? isoOf(tDate) : null, placeholder: true }].concat(EVENTS)
+      .map((e, i) => {
+        const d = e.date ? new Date(e.date + "T12:00:00") : null, up = !!e.date && e.date >= today;
+        return { ...e, key: i, up: up, mon: d ? MON[d.getMonth()] : "TBA", day: d ? d.getDate() : "--", wd: d ? WD[d.getDay()] : "", ym: d ? d.getFullYear() + "-" + pad(d.getMonth() + 1) : "tba",
+          dateText: d ? WD[d.getDay()] + ", " + MONTHS[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear() : "TBA",
+          status: up ? "Upcoming" : "Past", chipBg: up ? "#FFE3F1" : "rgba(43,36,64,.08)", chipFg: up ? "#9E1D50" : "#6E6787", dateBg: up ? "#FFB6D5" : "#E6DCFF", op: up ? 1 : 0.75,
+          poster: up ? "linear-gradient(135deg,#FFB6D5,#C9B6FF)" : "linear-gradient(135deg,#E6DCFF,#DDF0FF)", noTix: up && !e.placeholder ? "false" : "true", noCal: !up,
+          open: () => this.setState({ sel: i }) };
+      });
+    const list = all.filter((e) => (s.type === "All" || e.type === s.type) && (s.when === "all" || (s.when === "up" ? e.up : !e.up)));
+    const groups = [];
+    list.forEach((e) => { let g = groups.find((x) => x.ym === e.ym); if (!g) { const p = e.ym.split("-"); g = { ym: e.ym, label: e.ym === "tba" ? "Date TBA" : MONTHS[Number(p[1]) - 1] + " " + p[0], items: [] }; groups.push(g); } g.items.push(e); });
+    groups.forEach((g) => { g.count = g.items.length + (g.items.length === 1 ? " event" : " events"); });
+    let diff = Math.max(0, (tDate ? target : 0) - Date.now()) / 1000;
+    const dd = Math.floor(diff / 86400); diff -= dd * 86400; const hh = Math.floor(diff / 3600); diff -= hh * 3600; const mm = Math.floor(diff / 60); const ss = Math.floor(diff - mm * 60);
+    const cd = [[dd, "Days"], [hh, "Hours"], [mm, "Min"], [ss, "Sec"]].map((u, k) => ({ v: pad(u[0]), l: u[1], cls: k === 3 ? (u[0] % 2 ? "n" : "n2") : "" }));
+    const byDay = {}; list.forEach((e) => { if (e.date) (byDay[e.date] = byDay[e.date] || []).push(e); });
+    const first = new Date(s.y, s.m, 1), days = new Date(s.y, s.m + 1, 0).getDate(), cells = [];
+    for (let i = 0; i < first.getDay(); i++) cells.push({ n: "", cls: "day out", has: false, aria: "", tab: "-1", pick: () => {} });
+    for (let n = 1; n <= days; n++) { const iso = s.y + "-" + pad(s.m + 1) + "-" + pad(n), ev = byDay[iso] || [], has = ev.length > 0; cells.push({ n: n, has: has, cls: "day" + (has ? " has" : ""), dot: "#C92A68", tab: has ? "0" : "-1", aria: MONTHS[s.m] + " " + n + (has ? ", " + ev[0].name : ""), pick: () => { if (has) this.setState({ sel: ev[0].key }); } }); }
+    while (cells.length % 7) cells.push({ n: "", cls: "day out", has: false, aria: "", tab: "-1", pick: () => {} });
+    const shift = (k) => { let m = s.m + k, y = s.y; if (m < 0) { m = 11; y--; } if (m > 11) { m = 0; y++; } this.setState({ m: m, y: y }); };
+    const pins = Object.keys(GEO).map((c) => { const evs = list.filter((e) => e.city === c); const g = GEO[c]; return { city: c, count: evs.length, x: ((g[0] + 180) / 360 * 100).toFixed(2), y: ((90 - g[1]) / 180 * 100).toFixed(2), fill: evs.some((e) => e.up) ? "#C92A68" : "#8A5CE6", open: () => { if (evs.length) this.setState({ sel: evs[0].key }); } }; }).filter((p) => p.count > 0);
+    const sel = s.sel === null ? null : all[s.sel];
+    const tog = (arr, cur, key) => arr.map((v) => ({ label: v[1], on: cur === v[0] ? "true" : "false", cls: cur === v[0] ? "seg on" : "seg", pick: () => this.setState({ [key]: v[0] }) }));
+    return {
+      rootClass: "h2h" + (dark ? " dark" : "") + (this.props.reduceMotion ? " rm" : ""),
+      nav: NAV.map((n, i) => ({ label: n[1], href: n[2], on: n[0] === PAGE, cls: n[0] === PAGE ? "nl on fx" : "nl fx", cur: n[0] === PAGE ? "page" : "false", delay: (i * 50) + "ms" })),
+      menu: s.menu, openMenu: () => this.setState({ menu: true }), closeMenu: () => this.setState({ menu: false }),
+      toggleDark: () => this.setState({ dark: !dark }),
+      nextLabel: tDate ? MONTHS[tDate.getMonth()] + " " + tDate.getDate() + ", " + tDate.getFullYear() + " (placeholder)" : "date TBA",
+      cd: cd,
+      views: tog([["list", "List"], ["cal", "Calendar"], ["map", "Map"]], s.view, "view"),
+      whens: tog([["all", "All dates"], ["up", "Upcoming"], ["past", "Past"]], s.when, "when"),
+      types: TYPES.map((t) => ({ label: t, on: s.type === t ? "true" : "false", cls: s.type === t ? "seg on" : "seg", pick: () => this.setState({ type: t }) })),
+      isList: s.view === "list" && list.length > 0, isCal: s.view === "cal", isMap: s.view === "map" && list.length > 0, isEmpty: list.length === 0 && s.view !== "cal",
+      groups: groups, cells: cells, monthLabel: MONTHS[s.m] + " " + s.y, prevMonth: () => shift(-1), nextMonth: () => shift(1),
+      pins: pins,
+      hasSel: !!sel, sel: sel || { name: "" }, tz: tz,
+      close: () => this.setState({ sel: null }), stop: (e) => e.stopPropagation(),
+      onKey: (e) => { if (e.key === "Escape") this.setState({ sel: null }); }
+    };
+  }
+}
+</script>
+</body>
+</html>

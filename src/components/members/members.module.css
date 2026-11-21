@@ -1,0 +1,23 @@
+/* Ported from design/project/Members.dc.html <style>. */
+.mgrid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; }
+@media (max-width: 1024px) { .mgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; } }
+@media (max-width: 560px) { .mgrid { gap: 10px; } .mc .nm { font-size: 20px !important; } .mc .fact { display: none; } }
+
+.mc { position: relative; display: block; width: 100%; border-radius: 24px; overflow: hidden; aspect-ratio: 3 / 4; text-decoration: none; color: #fff; transition: transform 250ms var(--spring), box-shadow 250ms ease; box-shadow: 0 10px 24px rgba(43, 36, 64, 0.1); }
+.mc:hover { transform: translateY(-6px); box-shadow: var(--shadow); color: #fff; }
+.mc .ph { transition: transform 500ms ease; }
+.mc:hover .ph { transform: scale(1.05); }
+.mc .fact { transform: translateY(100%); opacity: 0; transition: transform 300ms var(--spring), opacity 200ms ease; }
+.mc:hover .fact, .mc:focus-visible .fact { transform: none; opacity: 1; }
+.mc .meta { transition: transform 300ms var(--spring); }
+.mc:hover .meta, .mc:focus-visible .meta { transform: translateY(-58px); }
+
+.pcard { border: 0; padding: 0; background: none; cursor: pointer; perspective: 1000px; display: block; width: 100%; font: inherit; color: inherit; text-align: left; }
+
+.seg { display: inline-flex; align-items: center; min-height: 40px; padding: 0 16px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--ink-900); font: 500 14px/1 var(--font-plex-kr), sans-serif; cursor: pointer; transition: transform 150ms var(--spring); }
+.seg:hover { transform: translateY(-1px); }
+.seg.on { background: #2b2440; color: #fff; border-color: #2b2440; }
+:global(.dark) .seg.on { background: #ffb6d5; color: #2b2440; border-color: #ffb6d5; }
+.seg:focus-visible, .sel select:focus-visible { outline: 2px solid var(--pink-700); outline-offset: 2px; }
+
+.sel select { appearance: none; -webkit-appearance: none; min-height: 40px; padding: 0 40px 0 16px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--ink-900); font: 500 14px/1 var(--font-plex-kr), sans-serif; cursor: pointer; }

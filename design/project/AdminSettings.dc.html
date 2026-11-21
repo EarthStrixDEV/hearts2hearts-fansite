@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>H2H Admin · Settings</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Sans+KR:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:var(--acc-ink)}
+.ad{--bg:#F6F6F9;--surface:#FFFFFF;--ink:#1C1B22;--muted:#5E5C6B;--line:#E5E3EC;--soft:#F1F0F5;--acc:#C92A68;--acc-soft:#FBE6EE;--acc-ink:#9E1D50;--on-acc:#FFFFFF;--ok:#1F7A55;--ok-soft:#E3F5EC;--warn:#8A5A00;--warn-soft:#FFF3D6;--bad:#B42318;--bad-soft:#FDE8E7;font-family:'IBM Plex Sans','IBM Plex Sans KR',system-ui,sans-serif;font-size:14px;color:var(--ink);background:var(--bg)}
+.ad.illit{--acc:#2F5BE0;--acc-soft:#E4EBFF;--acc-ink:#1E40AF}
+.ad.dark{--bg:#121117;--surface:#1B1A22;--ink:#EDECF3;--muted:#A9A6B8;--line:#2D2B38;--soft:#24232D;--acc:#FF8FB8;--acc-soft:rgba(255,143,184,.14);--acc-ink:#FF8FB8;--on-acc:#1C1B22;--ok:#5FD3A0;--ok-soft:rgba(95,211,160,.14);--warn:#F2C14E;--warn-soft:rgba(242,193,78,.14);--bad:#FF8A80;--bad-soft:rgba(255,138,128,.14)}
+.ad.dark.illit{--acc:#8FA9FF;--acc-soft:rgba(143,169,255,.14);--acc-ink:#8FA9FF}
+.mono{font-family:'IBM Plex Mono',ui-monospace,monospace}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 16px;border-radius:8px;font-family:inherit;font-size:14px;font-weight:500;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;text-decoration:none;white-space:nowrap}
+.btn:hover{background:var(--soft);color:var(--ink)}.btn:active{transform:translateY(1px)}
+.btn-p{background:var(--acc);border-color:var(--acc);color:var(--on-acc)}.btn-p:hover{background:var(--acc);color:var(--on-acc);filter:brightness(1.08)}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.ibtn{width:44px;height:44px;flex:none;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;padding:0}
+.ibtn:hover{background:var(--soft)}
+.sl{display:flex;align-items:center;gap:10px;min-height:44px;padding:0 12px;border-radius:8px;color:var(--muted);text-decoration:none;font-weight:500;white-space:nowrap}
+.sl:hover{background:var(--soft);color:var(--ink)}.sl.on{background:var(--acc-soft);color:var(--acc-ink);font-weight:600}
+.seg-wrap{display:flex;padding:3px;border-radius:10px;background:var(--soft);gap:2px}
+.seg{flex:1;min-height:38px;padding:0 12px;border:0;border-radius:8px;background:none;color:var(--muted);font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap}
+.seg.on{background:var(--surface);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.1)}
+.inp{width:100%;box-sizing:border-box;min-height:44px;padding:0 12px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font-family:inherit;font-size:14px}
+.inp:focus{outline:2px solid var(--acc);outline-offset:-1px}
+.inp.req{border-color:var(--warn)}
+.lbl{font-size:13px;font-weight:600}
+.badge{display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 8px;border-radius:6px;font-size:12px;font-weight:600;white-space:nowrap}
+.b-ok{background:var(--ok-soft);color:var(--ok)}.b-warn{background:var(--warn-soft);color:var(--warn)}.b-bad{background:var(--bad-soft);color:var(--bad)}.b-neu{background:var(--soft);color:var(--muted)}.b-acc{background:var(--acc-soft);color:var(--acc-ink)}
+.btn:focus-visible,.ibtn:focus-visible,.sl:focus-visible,.seg:focus-visible,.fx:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.navlist{display:flex;flex-direction:column;gap:2px}
+@media (max-width:900px){.navlist{flex-direction:row;overflow-x:auto}.side-foot,.top-search{display:none!important}}
+.tbl{width:100%;border-collapse:collapse}
+.tbl th{text-align:left;font-size:12px;font-weight:600;color:var(--muted);padding:0 14px;height:40px;border-bottom:1px solid var(--line);white-space:nowrap}
+.tbl td{padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:middle}
+.toast{animation:toast 3s ease both}
+@keyframes toast{0%{opacity:0;transform:translate(-50%,-8px)}10%,85%{opacity:1;transform:translate(-50%,0)}100%{opacity:0;transform:translate(-50%,-8px)}}
+@media (prefers-reduced-motion:reduce){.ad *{animation:none!important;transition:none!important}}
+.btn-d{color:var(--bad);border-color:var(--bad)}.btn-d:hover{background:var(--bad-soft);color:var(--bad)}
+textarea.inp{min-height:88px;padding:10px 12px;resize:vertical;line-height:1.45}
+.fld{display:flex;flex-direction:column;gap:6px}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(180px,100%),1fr));gap:12px}
+.g3{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(150px,100%),1fr));gap:12px}
+.hint{font-size:12px;color:var(--muted);line-height:1.45}
+.row{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:44px}
+.fx{position:absolute;inset:0;width:100%;opacity:0;cursor:pointer}
+.upl:focus-within{outline:2px solid var(--acc);outline-offset:2px}
+.tile{display:flex;flex-direction:column;gap:8px;padding:10px;text-align:left;font-family:inherit;font-size:14px;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:12px;cursor:pointer}
+.tile:hover{border-color:var(--muted)}.tile.on{border-color:var(--acc);box-shadow:0 0 0 3px var(--acc-soft)}
+.tile:focus-visible,.chip:focus-visible,.sw:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.thumb{display:flex;align-items:center;justify-content:center;width:100%;border-radius:8px;overflow:hidden;color:var(--muted);font-size:12px;font-weight:600;background:repeating-linear-gradient(135deg,var(--soft) 0 10px,var(--surface) 10px 20px)}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.r-sq{aspect-ratio:1}.r-wide{aspect-ratio:16/9}.r-tall{aspect-ratio:3/4}
+.chip{display:inline-flex;align-items:center;min-height:40px;padding:0 12px;border-radius:999px;background:var(--soft);color:var(--ink);font-size:13px;font-weight:500;text-decoration:none}
+.chip:hover{background:var(--acc-soft);color:var(--acc-ink)}
+.sec{padding:20px;display:flex;flex-wrap:wrap;gap:20px}
+.sec-h{flex:1 1 200px}.sec-h h2{margin:0;font-size:16px;font-weight:600}.sec-h p{margin:6px 0 0;color:var(--muted);font-size:13px;line-height:1.5}
+.sec-b{flex:3 1 420px;min-width:0;display:flex;flex-direction:column;gap:14px}
+.check{display:flex;align-items:center;gap:10px;min-height:40px;cursor:pointer}.check input{width:18px;height:18px;accent-color:var(--acc)}
+.sw{width:56px;height:44px;flex:none;border:0;background:none;padding:0;cursor:pointer;display:inline-flex;align-items:center;border-radius:999px}
+.sw .track{position:relative;width:52px;height:30px;border-radius:999px;background:var(--line);transition:background .15s}
+.sw .knob{position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.25);transition:left .15s}
+.sw[aria-checked="true"] .track{background:var(--acc)}.sw[aria-checked="true"] .knob{left:25px}
+.inp[disabled]{opacity:.5}
+</style>
+</helmet>
+<div class="{{rootClass}}" style="min-height: 100vh; display: flex; flex-wrap: wrap; align-items: stretch">
+<aside aria-label="Admin" style="flex: 1 1 240px; max-width: 100%; background: var(--surface); border-right: 1px solid var(--line); padding: 16px 12px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; align-items: center; gap: 10px; padding: 4px 8px"><span style="width: 36px; height: 36px; border-radius: 10px; background: var(--acc); color: var(--on-acc); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px">FH</span><span style="display: flex; flex-direction: column"><strong style="font-size: 15px">Fan Hub</strong><span style="font-size: 12px; color: var(--muted)">Admin · CMS</span></span></div>
+<div style="padding: 8px 12px; border-radius: 8px; background: var(--acc-soft); color: var(--acc-ink); font-size: 13px; font-weight: 600">{{groupName}} site</div>
+<nav class="navlist" aria-label="Admin sections"><sc-for list="{{nav}}" as="n" hint-placeholder-count="7"><a class="{{n.cls}}" href="{{n.href}}" aria-current="{{n.cur}}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{n.icon}}"></path></svg>{{n.label}}<sc-if value="{{n.hasCount}}" hint-placeholder-val="{{ false }}"><span class="badge b-acc" style="margin-left: auto">{{n.count}}</span></sc-if></a></sc-for></nav>
+<div class="side-foot" style="margin-top: auto; border-top: 1px solid var(--line); padding-top: 12px"><a class="sl" href="{{siteHref}}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"></path></svg>View live site</a></div>
+</aside>
+<div style="flex: 999 1 640px; min-width: 0; display: flex; flex-direction: column">
+<header style="min-height: 64px; display: flex; align-items: center; gap: 12px; padding: 0 24px; border-bottom: 1px solid var(--line); background: var(--surface)">
+<nav aria-label="Breadcrumb" style="flex: 1; min-width: 0; font-size: 13px; color: var(--muted)">Admin / {{groupName}} / <span style="color: var(--ink); font-weight: 600">Settings</span></nav>
+<label class="top-search" style="position: relative; display: flex; align-items: center; width: 280px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" style="position: absolute; left: 12px; color: var(--muted)"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg><span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Search content</span><input class="inp" type="search" placeholder="Search content" style="padding-left: 36px"></label>
+<button class="ibtn" onClick="{{toggleDark}}" aria-label="Toggle dark mode"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"></path></svg></button>
+<span role="img" aria-label="Signed in as admin" style="width: 36px; height: 36px; border-radius: 50%; background: var(--soft); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: var(--muted)">AD</span>
+</header>
+
+<main style="padding: 24px; display: flex; flex-direction: column; gap: 20px; box-sizing: border-box; width: 100%; max-width: 1120px">
+<div><h1 style="margin: 0; font-size: 24px; font-weight: 600">Settings</h1><p style="margin: 4px 0 0; color: var(--muted)">Site-wide settings for {{groupName}}. Nothing changes on the live site until you save.</p></div>
+
+<section class="card sec" aria-labelledby="s-gen">
+<div class="sec-h"><h2 id="s-gen">General</h2><p>Name, tagline and the disclaimer shown in every footer.</p></div>
+<div class="sec-b">
+<div class="g2">
+<label class="fld"><span class="lbl">Site name</span><input class="inp" value="{{v.siteName}}" onChange="{{set.siteName}}"></label>
+<label class="fld"><span class="lbl">Default language</span><select class="inp" value="{{v.lang}}" onChange="{{set.lang}}"><option>English</option><option>ไทย</option><option>한국어</option></select></label>
+</div>
+<label class="fld"><span class="lbl">Tagline</span><input class="inp" value="{{v.tagline}}" onChange="{{set.tagline}}"></label>
+<label class="fld"><span class="lbl">Disclaimer *</span><textarea class="{{discCls}}" value="{{v.disclaimer}}" onChange="{{set.disclaimer}}"></textarea><span class="hint">Must say the site is unofficial and who owns the rights.</span></label>
+<div class="row" style="border-top: 1px solid var(--line); padding-top: 12px"><span><span class="lbl">Event times</span><br><span class="hint">Shown in each visitor’s own timezone, converted from the venue timezone.</span></span><span class="badge b-neu">Automatic</span></div>
+</div>
+</section>
+
+<section class="card sec" aria-labelledby="s-ai">
+<div class="sec-h"><h2 id="s-ai">AI daily post</h2><p>Writes one draft a day. Drafts wait in <a href="AdminBlog.dc.html">AI Blog</a> for a person to approve.</p></div>
+<div class="sec-b">
+<div class="row"><span id="l-ai" class="lbl">Generate a daily draft</span><button class="sw" role="switch" aria-checked="{{sw.ai.on}}" aria-labelledby="l-ai" onClick="{{sw.ai.tg}}"><span class="track"><span class="knob"></span></span></button></div>
+<div class="g3">
+<label class="fld"><span class="lbl">Run time</span><input class="inp" type="time" value="{{v.aiTime}}" onChange="{{set.aiTime}}" disabled="{{aiOff}}"></label>
+<label class="fld"><span class="lbl">Timezone</span><select class="inp" value="{{v.aiTz}}" onChange="{{set.aiTz}}" disabled="{{aiOff}}"><option>Asia/Bangkok</option><option>Asia/Seoul</option><option>Asia/Tokyo</option><option>UTC</option></select></label>
+<label class="fld"><span class="lbl">Model</span><input class="inp mono" value="{{v.model}}" onChange="{{set.model}}" disabled="{{aiOff}}"></label>
+</div>
+<fieldset style="border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px"><legend class="lbl" style="padding: 0; margin-bottom: 6px">Topics it can pick from</legend>
+<sc-for list="{{topics}}" as="t" hint-placeholder-count="4"><label class="check"><input type="checkbox" checked="{{t.on}}" onChange="{{t.tg}}" disabled="{{aiOff}}">{{t.label}}</label></sc-for>
+</fieldset>
+<div style="border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; background: var(--soft); display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 8px"><span class="lbl">Guardrails</span><span class="badge b-neu"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg>Locked</span></div>
+<sc-for list="{{rails}}" as="r" hint-placeholder-count="4"><div style="display: flex; gap: 10px; align-items: flex-start; font-size: 13px; line-height: 1.45"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 2px; color: var(--ok)"><path d="M5 12l5 5 9-10"></path></svg><span>{{r.t}}</span></div></sc-for>
+<span class="hint">These can’t be switched off from the admin.</span>
+</div>
+</div>
+</section>
+
+<section class="card sec" aria-labelledby="s-users">
+<div class="sec-h"><h2 id="s-users">Users &amp; roles</h2><p><strong>Owner</strong> can do everything. <strong>Editor</strong> edits members, releases, schedule and media. <strong>Reviewer</strong> approves or rejects AI posts only.</p></div>
+<div class="sec-b">
+<div class="card" style="overflow-x: auto"><table class="tbl"><thead><tr><th scope="col">Name</th><th scope="col">Email</th><th scope="col">Role</th><th scope="col">Status</th></tr></thead><tbody>
+<sc-for list="{{users}}" as="u" hint-placeholder-count="2"><tr><td style="font-weight: 600">{{u.name}}</td><td class="mono" style="font-size: 13px">{{u.email}}</td><td>{{u.role}}</td><td><span class="{{u.badge}}">{{u.status}}</span></td></tr></sc-for>
+</tbody></table></div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: flex-end">
+<label class="fld" style="flex: 1 1 220px"><span class="lbl">Invite by email</span><input class="inp" type="email" value="{{inv.email}}" onChange="{{inv.setEmail}}" placeholder="name@example.com"></label>
+<label class="fld" style="flex: 0 1 160px"><span class="lbl">Role</span><select class="inp" value="{{inv.role}}" onChange="{{inv.setRole}}"><option>Editor</option><option>Reviewer</option></select></label>
+<button class="btn" onClick="{{inv.send}}" disabled="{{inv.bad}}">Send invite</button>
+</div>
+</div>
+</section>
+
+<section class="card sec" aria-labelledby="s-int">
+<div class="sec-h"><h2 id="s-int">Integrations</h2><p>Embeds and the content database.</p></div>
+<div class="sec-b">
+<div class="row"><span><span id="l-sp" class="lbl">Spotify embeds</span><br><span class="hint">Embedded players only. No audio is hosted here.</span></span><button class="sw" role="switch" aria-checked="{{sw.spotify.on}}" aria-labelledby="l-sp" onClick="{{sw.spotify.tg}}"><span class="track"><span class="knob"></span></span></button></div>
+<div class="row"><span><span id="l-yt" class="lbl">YouTube embeds</span><br><span class="hint">Official MVs and stages, linked from the release page.</span></span><button class="sw" role="switch" aria-checked="{{sw.youtube.on}}" aria-labelledby="l-yt" onClick="{{sw.youtube.tg}}"><span class="track"><span class="knob"></span></span></button></div>
+<div class="row"><span><span class="lbl">Database</span><br><span class="hint mono">[PROVIDER]</span></span><span style="display: flex; gap: 8px; align-items: center"><span class="badge b-warn">Not connected</span><button class="btn" onClick="{{connectDb}}">Connect</button></span></div>
+<div class="row"><span><span class="lbl">Analytics</span><br><span class="hint">No tracking scripts are loaded.</span></span><span class="badge b-neu">Off</span></div>
+</div>
+</section>
+
+<section class="card sec" aria-labelledby="s-danger" style="border-color: var(--bad)">
+<div class="sec-h"><h2 id="s-danger" style="color: var(--bad)">Danger zone</h2><p>These affect the whole {{groupName}} site.</p></div>
+<div class="sec-b">
+<div class="row"><span><span id="l-mt" class="lbl">Maintenance mode</span><br><span class="hint">Visitors see a “back soon” page.</span></span><button class="sw" role="switch" aria-checked="{{sw.maint.on}}" aria-labelledby="l-mt" onClick="{{sw.maint.tg}}"><span class="track"><span class="knob"></span></span></button></div>
+<div class="row"><span><span class="lbl">Export content</span><br><span class="hint">Members, releases, schedule, posts and media info as JSON.</span></span><button class="btn" onClick="{{exportAll}}">Export</button></div>
+<div style="border-top: 1px solid var(--line); padding-top: 14px; display: flex; flex-direction: column; gap: 8px">
+<label class="fld"><span class="lbl">Delete this site</span><span class="hint">Type <strong>{{groupName}}</strong> to confirm. This can’t be undone.</span><input class="inp" value="{{delText}}" onChange="{{setDel}}" aria-label="Type the site name to confirm"></label>
+<button class="btn btn-d" onClick="{{delSite}}" disabled="{{delLocked}}" style="align-self: flex-start">Delete site</button>
+</div>
+</div>
+</section>
+
+<sc-if value="{{dirty}}" hint-placeholder-val="{{ false }}"><div class="card" role="region" aria-label="Unsaved changes" style="position: sticky; bottom: 16px; padding: 12px 16px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; box-shadow: 0 8px 24px rgba(0,0,0,.12)"><span style="flex: 1; font-weight: 600">Unsaved changes</span><button class="btn" onClick="{{discard}}">Discard</button><button class="btn btn-p" onClick="{{save}}" disabled="{{cantSave}}">Save changes</button></div></sc-if>
+</main>
+</div>
+<sc-if value="{{toast}}" hint-placeholder-val="{{ false }}"><div class="toast" role="status" style="position: fixed; top: 20px; left: 50%; z-index: 90; padding: 12px 16px; border-radius: 10px; background: var(--ink); color: var(--bg); font-size: 14px; font-weight: 500; box-shadow: 0 8px 24px rgba(0,0,0,.2)">{{toastMsg}}</div></sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"dark":{"editor":"boolean","default":false,"section":"Theme"},"$preview":{"width":1440,"height":2150}}'>
+const NAV = [
+  ["dash", "Dashboard", "AdminDashboard.dc.html", "M4 4h6v9H4zM14 4h6v5h-6zM14 13h6v7h-6zM4 17h6v3H4z"],
+  ["members", "Members", "AdminMembers.dc.html", "M9 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM3 20a6 6 0 0 1 12 0M17 11a3 3 0 1 0 0-6M21 20a6 6 0 0 0-4-5.7"],
+  ["releases", "Releases", "AdminReleases.dc.html", "M9 18V6l11-2v12M9 18a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM20 16a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"],
+  ["blog", "AI Blog", "AdminBlog.dc.html", "M12 3l1.9 5.8L20 10l-6.1 1.2L12 17l-1.9-5.8L4 10l6.1-1.2z"],
+  ["schedule", "Schedule", "AdminSchedule.dc.html", "M4 7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zM4 10h16M9 3v4M15 3v4"],
+  ["media", "Media", "AdminMedia.dc.html", "M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zM4 16l5-5 4 4 3-3 4 4"],
+  ["settings", "Settings", "AdminSettings.dc.html", "M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"]
+];
+const PAGE = "settings";
+const DEF = {
+  h2h: { name: "Hearts2Hearts", site: "Main.dc.html", v: { siteName: "Hearts2Hearts Fan Hub", lang: "English", tagline: "An unofficial fan site for Hearts2Hearts and S2U.", disclaimer: "Unofficial fan site. Not affiliated with SM Entertainment. Hearts2Hearts names, images and music belong to SM Entertainment and their respective owners.", aiOn: true, aiTime: "09:00", aiTz: "Asia/Bangkok", model: "[LLM MODEL]", topics: { ann: true, sched: true, disco: true, fan: false }, spotify: true, youtube: true, maint: false } },
+  illit: { name: "ILLIT", site: "ILLIT.dc.html", v: { siteName: "ILLIT Fan Hub", lang: "English", tagline: "An unofficial fan site for ILLIT and GLLIT.", disclaimer: "Unofficial fan site. Not affiliated with BELIFT LAB or HYBE. ILLIT names, images and music belong to BELIFT LAB and their respective owners.", aiOn: true, aiTime: "09:00", aiTz: "Asia/Bangkok", model: "[LLM MODEL]", topics: { ann: true, sched: true, disco: true, fan: false }, spotify: true, youtube: true, maint: false } }
+};
+const TOPICS = [["ann", "Release anniversaries"], ["sched", "Upcoming schedule reminders"], ["disco", "Discography deep-dives (from CMS data)"], ["fan", "Fan event roundups"]];
+const RAILS = ["Every post is labeled “AI-written” on the live site.", "No quotes attributed to members, ever.", "Facts must match CMS data or a cited official source; anything else is flagged.", "A person must approve each post before it goes live."];
+const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { group: null, dark: null, edit: {}, saved: {}, invites: {}, inv: { email: "", role: "Editor" }, delText: "", toast: null }; }
+  componentWillUnmount() { clearTimeout(this.tt); }
+  flash(msg) { this.setState({ toast: msg }); clearTimeout(this.tt); this.tt = setTimeout(() => this.setState({ toast: null }), 3000); }
+  renderVals() {
+    const s = this.state, gid = "h2h", g = DEF[gid] || DEF.h2h;
+    const dark = s.dark === null ? !!this.props.dark : s.dark;
+    const cur = { ...g.v, ...(s.saved[gid] || {}) }, v = { ...cur, ...(s.edit[gid] || {}) };
+    const dirty = JSON.stringify(v) !== JSON.stringify(cur);
+    const put = (k, val) => { const st = this.state; this.setState({ edit: { ...st.edit, [gid]: { ...(st.edit[gid] || {}), [k]: val } } }); };
+    const set = {}; ["siteName", "lang", "tagline", "disclaimer", "aiTime", "aiTz", "model"].forEach((k) => { set[k] = (e) => put(k, e.target.value); });
+    const sw = (k) => ({ on: v[k] ? "true" : "false", tg: () => put(k, !v[k]) });
+    const discBad = !/unofficial/i.test(v.disclaimer);
+    const inv = s.inv, invBad = !EMAIL.test(inv.email.trim());
+    const users = [{ name: "[OWNER NAME]", email: "[OWNER EMAIL]", role: "Owner", status: "Active · you", badge: "badge b-ok" }]
+      .concat((s.invites[gid] || []).map((u) => ({ name: "—", email: u.email, role: u.role, status: "Invited", badge: "badge b-warn" })));
+    return {
+      rootClass: "ad" + (gid === "illit" ? " illit" : "") + (dark ? " dark" : ""),
+      toggleDark: () => this.setState({ dark: !dark }),
+      groups: [["h2h", "Hearts2Hearts"], ["illit", "ILLIT"]].map((x) => ({ label: x[1], on: gid === x[0] ? "true" : "false", cls: gid === x[0] ? "seg on" : "seg", pick: () => this.setState({ group: x[0], delText: "" }) })),
+      nav: NAV.map((n) => ({ label: n[1], href: n[2], icon: n[3], cls: n[0] === PAGE ? "sl on" : "sl", cur: n[0] === PAGE ? "page" : "false", hasCount: n[0] === "blog", count: 2 })),
+      groupName: g.name, siteHref: g.site,
+      v: v, set: set,
+      discCls: "inp" + (discBad ? " req" : ""),
+      sw: { ai: sw("aiOn"), spotify: sw("spotify"), youtube: sw("youtube"), maint: sw("maint") },
+      aiOff: !v.aiOn,
+      topics: TOPICS.map((t) => ({ label: t[1], on: !!v.topics[t[0]], tg: () => put("topics", { ...v.topics, [t[0]]: !v.topics[t[0]] }) })),
+      rails: RAILS.map((t) => ({ t: t })),
+      users: users,
+      inv: { email: inv.email, role: inv.role, bad: invBad,
+        setEmail: (e) => this.setState({ inv: { ...this.state.inv, email: e.target.value } }),
+        setRole: (e) => this.setState({ inv: { ...this.state.inv, role: e.target.value } }),
+        send: () => { if (invBad) return; this.setState({ invites: { ...s.invites, [gid]: (s.invites[gid] || []).concat([{ email: inv.email.trim(), role: inv.role }]) }, inv: { email: "", role: inv.role } }); this.flash("Invite added. Email sending isn’t wired up yet."); } },
+      connectDb: () => this.flash("Connect the database in your deployment settings."),
+      exportAll: () => this.flash("Export queued: content.json"),
+      delText: s.delText, setDel: (e) => this.setState({ delText: e.target.value }),
+      delLocked: s.delText.trim() !== g.name,
+      delSite: () => this.flash("Deleting is turned off in this prototype."),
+      dirty: dirty, cantSave: discBad,
+      discard: () => this.setState({ edit: { ...s.edit, [gid]: {} } }),
+      save: () => { if (discBad) return; this.setState({ saved: { ...s.saved, [gid]: v }, edit: { ...s.edit, [gid]: {} } }); this.flash("Settings saved"); },
+      toast: !!s.toast, toastMsg: s.toast || ""
+    };
+  }
+}
+</script>
+</body>
+</html>

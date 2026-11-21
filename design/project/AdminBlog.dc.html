@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>H2H Admin · AI Blog review</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Sans+KR:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:var(--acc-ink)}
+.ad{--bg:#F6F6F9;--surface:#FFFFFF;--ink:#1C1B22;--muted:#5E5C6B;--line:#E5E3EC;--soft:#F1F0F5;--acc:#C92A68;--acc-soft:#FBE6EE;--acc-ink:#9E1D50;--on-acc:#FFFFFF;--ok:#1F7A55;--ok-soft:#E3F5EC;--warn:#8A5A00;--warn-soft:#FFF3D6;--bad:#B42318;--bad-soft:#FDE8E7;font-family:'IBM Plex Sans','IBM Plex Sans KR',system-ui,sans-serif;font-size:14px;color:var(--ink);background:var(--bg)}
+.ad.illit{--acc:#2F5BE0;--acc-soft:#E4EBFF;--acc-ink:#1E40AF}
+.ad.dark{--bg:#121117;--surface:#1B1A22;--ink:#EDECF3;--muted:#A9A6B8;--line:#2D2B38;--soft:#24232D;--acc:#FF8FB8;--acc-soft:rgba(255,143,184,.14);--acc-ink:#FF8FB8;--on-acc:#1C1B22;--ok:#5FD3A0;--ok-soft:rgba(95,211,160,.14);--warn:#F2C14E;--warn-soft:rgba(242,193,78,.14);--bad:#FF8A80;--bad-soft:rgba(255,138,128,.14)}
+.ad.dark.illit{--acc:#8FA9FF;--acc-soft:rgba(143,169,255,.14);--acc-ink:#8FA9FF}
+.mono{font-family:'IBM Plex Mono',ui-monospace,monospace}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 16px;border-radius:8px;font-family:inherit;font-size:14px;font-weight:500;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;text-decoration:none;white-space:nowrap}
+.btn:hover{background:var(--soft);color:var(--ink)}.btn:active{transform:translateY(1px)}
+.btn-p{background:var(--acc);border-color:var(--acc);color:var(--on-acc)}.btn-p:hover{background:var(--acc);color:var(--on-acc);filter:brightness(1.08)}
+.btn-d{color:var(--bad)}.btn-d:hover{background:var(--bad-soft);color:var(--bad)}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.ibtn{width:44px;height:44px;flex:none;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;padding:0}
+.ibtn:hover{background:var(--soft)}
+.sl{display:flex;align-items:center;gap:10px;min-height:44px;padding:0 12px;border-radius:8px;color:var(--muted);text-decoration:none;font-weight:500;white-space:nowrap}
+.sl:hover{background:var(--soft);color:var(--ink)}.sl.on{background:var(--acc-soft);color:var(--acc-ink);font-weight:600}
+.seg-wrap{display:flex;padding:3px;border-radius:10px;background:var(--soft);gap:2px}
+.seg{flex:1;min-height:38px;padding:0 10px;border:0;border-radius:8px;background:none;color:var(--muted);font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap}
+.seg.on{background:var(--surface);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.1)}
+.inp{width:100%;box-sizing:border-box;min-height:44px;padding:0 12px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font-family:inherit;font-size:14px}
+textarea.inp{padding:10px 12px;min-height:80px;resize:vertical;line-height:1.5}
+.inp:focus{outline:2px solid var(--acc);outline-offset:-1px}
+.badge{display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 8px;border-radius:6px;font-size:12px;font-weight:600;white-space:nowrap}
+.b-ok{background:var(--ok-soft);color:var(--ok)}.b-warn{background:var(--warn-soft);color:var(--warn)}.b-bad{background:var(--bad-soft);color:var(--bad)}.b-neu{background:var(--soft);color:var(--muted)}.b-acc{background:var(--acc-soft);color:var(--acc-ink)}
+.btn:focus-visible,.ibtn:focus-visible,.sl:focus-visible,.seg:focus-visible,.fx:focus-visible,.item:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.navlist{display:flex;flex-direction:column;gap:2px}
+@media (max-width:900px){.navlist{flex-direction:row;overflow-x:auto}.side-foot,.top-search{display:none!important}}
+.item{display:flex;flex-direction:column;gap:6px;width:100%;padding:12px 14px;border:0;border-bottom:1px solid var(--line);background:none;text-align:left;cursor:pointer;font-family:inherit;color:var(--ink)}
+.item:hover{background:var(--soft)}.item.on{background:var(--acc-soft)}
+.flag{background:var(--warn-soft);border-bottom:2px solid var(--warn);padding:1px 2px;border-radius:3px}
+.check{display:flex;align-items:center;gap:10px;font-size:13px;min-height:28px}
+.toast{animation:toast 3s ease both}
+@keyframes toast{0%{opacity:0;transform:translate(-50%,-8px)}10%,85%{opacity:1;transform:translate(-50%,0)}100%{opacity:0;transform:translate(-50%,-8px)}}
+@media (prefers-reduced-motion:reduce){.ad *{animation:none!important;transition:none!important}}
+</style>
+</helmet>
+<div class="{{rootClass}}" style="min-height: 100vh; display: flex; flex-wrap: wrap; align-items: stretch">
+<aside aria-label="Admin" style="flex: 1 1 240px; max-width: 100%; background: var(--surface); border-right: 1px solid var(--line); padding: 16px 12px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; align-items: center; gap: 10px; padding: 4px 8px"><span style="width: 36px; height: 36px; border-radius: 10px; background: var(--acc); color: var(--on-acc); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px">FH</span><span style="display: flex; flex-direction: column"><strong style="font-size: 15px">Fan Hub</strong><span style="font-size: 12px; color: var(--muted)">Admin · CMS</span></span></div>
+<div style="padding: 8px 12px; border-radius: 8px; background: var(--acc-soft); color: var(--acc-ink); font-size: 13px; font-weight: 600">{{groupName}} site</div>
+<nav class="navlist" aria-label="Admin sections"><sc-for list="{{nav}}" as="n" hint-placeholder-count="7"><a class="{{n.cls}}" href="{{n.href}}" aria-current="{{n.cur}}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{n.icon}}"></path></svg>{{n.label}}<sc-if value="{{n.hasCount}}" hint-placeholder-val="{{ false }}"><span class="badge b-acc" style="margin-left: auto">{{n.count}}</span></sc-if></a></sc-for></nav>
+<div class="side-foot" style="margin-top: auto; border-top: 1px solid var(--line); padding-top: 12px"><a class="sl" href="{{siteHref}}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"></path></svg>View live site</a></div>
+</aside>
+<div style="flex: 999 1 640px; min-width: 0; display: flex; flex-direction: column">
+<header style="min-height: 64px; display: flex; align-items: center; gap: 12px; padding: 0 24px; border-bottom: 1px solid var(--line); background: var(--surface)">
+<nav aria-label="Breadcrumb" style="flex: 1; min-width: 0; font-size: 13px; color: var(--muted)">Admin / {{groupName}} / <span style="color: var(--ink); font-weight: 600">AI Blog</span></nav>
+<label class="top-search" style="position: relative; display: flex; align-items: center; width: 280px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" style="position: absolute; left: 12px; color: var(--muted)"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg><span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Search content</span><input class="inp" type="search" placeholder="Search content" style="padding-left: 36px"></label>
+<button class="ibtn" onClick="{{toggleDark}}" aria-label="Toggle dark mode"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"></path></svg></button>
+<span role="img" aria-label="Signed in as admin" style="width: 36px; height: 36px; border-radius: 50%; background: var(--soft); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: var(--muted)">AD</span>
+</header>
+
+<main style="padding: 24px; display: flex; flex-direction: column; gap: 20px; box-sizing: border-box">
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px">
+<div><h1 style="margin: 0; font-size: 24px; font-weight: 600">AI Blog</h1><p style="margin: 4px 0 0; color: var(--muted)">The AI writes a draft each day. Nothing goes live until a person checks every fact.</p></div>
+<a class="btn" href="AdminSettings.dc.html">Generator settings</a>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start">
+<!-- LIST -->
+<section class="card" aria-label="Posts" style="flex: 1 1 280px; max-width: 360px; min-width: 0; overflow: hidden">
+<div style="padding: 10px"><div role="tablist" aria-label="Status" class="seg-wrap"><sc-for list="{{tabs}}" as="t" hint-placeholder-count="4"><button role="tab" class="{{t.cls}}" aria-selected="{{t.on}}" onClick="{{t.pick}}">{{t.label}} {{t.count}}</button></sc-for></div></div>
+<sc-if value="{{hasItems}}" hint-placeholder-val="{{ true }}">
+<sc-for list="{{items}}" as="p" hint-placeholder-count="2">
+<button class="{{p.cls}}" onClick="{{p.pick}}"><span style="font-weight: 600; line-height: 1.35">{{p.title}}</span><span style="display: flex; gap: 6px; flex-wrap: wrap; align-items: center"><span class="badge b-neu">{{p.tag}}</span><span class="{{p.badge}}">{{p.state}}</span></span><span style="font-size: 12px; color: var(--muted)">{{p.when}}</span></button>
+</sc-for>
+</sc-if>
+<sc-if value="{{noItems}}" hint-placeholder-val="{{ false }}"><p style="margin: 0; padding: 24px 16px; color: var(--muted); font-size: 13px; text-align: center">Nothing here yet.</p></sc-if>
+</section>
+
+<!-- PREVIEW -->
+<section class="card" aria-label="Preview" style="flex: 999 1 420px; min-width: 0; overflow: hidden">
+<sc-if value="{{hasSel}}" hint-placeholder-val="{{ true }}">
+<div style="height: 160px; background: {{sel.grad}}; position: relative"><span class="badge" style="position: absolute; top: 14px; right: 14px; background: #1C1B22; color: #fff">Written by AI · fan content, not official</span><span class="badge" style="position: absolute; left: 14px; bottom: 14px; background: rgba(255,255,255,.9); color: #1C1B22">Cover · TODO</span></div>
+<article style="padding: 24px 28px 28px; max-width: 720px; display: flex; flex-direction: column; gap: 14px">
+<span class="badge b-neu" style="align-self: flex-start">{{sel.tag}}</span>
+<h2 style="margin: 0; font-size: 26px; font-weight: 600; line-height: 1.25; letter-spacing: -0.01em">{{sel.title}}</h2>
+<sc-for list="{{paras}}" as="pp" hint-placeholder-count="3">
+<p style="margin: 0; font-size: 16px; line-height: 1.8">{{pp.before}}<sc-if value="{{pp.flagged}}" hint-placeholder-val="{{ false }}"><mark class="flag" style="color: inherit">{{pp.claim}}</mark></sc-if><sc-if value="{{pp.plain}}" hint-placeholder-val="{{ true }}">{{pp.claim}}</sc-if></p>
+</sc-for>
+<p style="margin: 0; font-size: 13px; color: var(--muted)">Sources: {{sel.sources}}</p>
+</article>
+</sc-if>
+</section>
+
+<!-- REVIEW -->
+<section class="card" aria-labelledby="rv" style="flex: 1 1 300px; max-width: 380px; min-width: 0; padding: 18px; display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; justify-content: space-between; align-items: center"><h2 id="rv" style="margin: 0; font-size: 16px; font-weight: 600">Review</h2><span class="{{stateBadge}}">{{stateLabel}}</span></div>
+<div style="display: flex; flex-direction: column; gap: 4px">
+<span style="font-size: 12px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .06em">Guardrails</span>
+<sc-for list="{{checks}}" as="c" hint-placeholder-count="4"><div class="check"><span class="{{c.badge}}" style="width: 24px; justify-content: center; padding: 0">{{c.mark}}</span>{{c.label}}</div></sc-for>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<span style="font-size: 12px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .06em">Fact check</span>
+<sc-for list="{{claims}}" as="c" hint-placeholder-count="3">
+<div style="border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; display: flex; flex-direction: column; gap: 8px">
+<span style="font-size: 13px; line-height: 1.45">{{c.text}}</span>
+<span style="display: flex; justify-content: space-between; align-items: center; gap: 8px"><span class="{{c.badge}}">{{c.status}}</span><span class="mono" style="font-size: 12px; color: var(--muted)">{{c.src}}</span></span>
+<sc-if value="{{c.canFix}}" hint-placeholder-val="{{ false }}"><button class="btn" onClick="{{c.remove}}" style="min-height: 36px; font-size: 13px">Remove this sentence</button></sc-if>
+</div>
+</sc-for>
+</div>
+<sc-if value="{{isDraft}}" hint-placeholder-val="{{ true }}">
+<label style="display: flex; flex-direction: column; gap: 6px"><span style="font-size: 13px; font-weight: 600">Publish at</span><input class="inp" type="datetime-local" value="{{publishAt}}" onChange="{{setPublishAt}}"></label>
+<button class="btn btn-p" onClick="{{approve}}" disabled="{{blocked}}">Approve &amp; schedule</button>
+<sc-if value="{{blockedMsg}}" hint-placeholder-val="{{ false }}"><span style="font-size: 12px; color: var(--warn)">Fix or remove flagged claims before approving.</span></sc-if>
+<div style="display: flex; gap: 8px"><button class="btn" onClick="{{regen}}" style="flex: 1">Regenerate</button><button class="btn btn-d" onClick="{{reject}}" style="flex: 1">Reject</button></div>
+</sc-if>
+<sc-if value="{{notDraft}}" hint-placeholder-val="{{ false }}"><button class="btn" onClick="{{backToDraft}}">Move back to drafts</button></sc-if>
+</section>
+</div>
+</main>
+</div>
+<sc-if value="{{toast}}" hint-placeholder-val="{{ false }}"><div class="toast" role="status" style="position: fixed; top: 20px; left: 50%; z-index: 90; padding: 12px 16px; border-radius: 10px; background: var(--ink); color: var(--bg); font-size: 14px; font-weight: 500; box-shadow: 0 8px 24px rgba(0,0,0,.2)">{{toastMsg}}</div></sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"dark":{"editor":"boolean","default":false,"section":"Theme"},"$preview":{"width":1440,"height":1250}}'>
+const NAV = [
+  ["dash", "Dashboard", "AdminDashboard.dc.html", "M4 4h6v9H4zM14 4h6v5h-6zM14 13h6v7h-6zM4 17h6v3H4z"],
+  ["members", "Members", "AdminMembers.dc.html", "M9 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM3 20a6 6 0 0 1 12 0M17 11a3 3 0 1 0 0-6M21 20a6 6 0 0 0-4-5.7"],
+  ["releases", "Releases", "AdminReleases.dc.html", "M9 18V6l11-2v12M9 18a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM20 16a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"],
+  ["blog", "AI Blog", "AdminBlog.dc.html", "M12 3l1.9 5.8L20 10l-6.1 1.2L12 17l-1.9-5.8L4 10l6.1-1.2z"],
+  ["schedule", "Schedule", "AdminSchedule.dc.html", "M4 7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zM4 10h16M9 3v4M15 3v4"],
+  ["media", "Media", "AdminMedia.dc.html", "M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zM4 16l5-5 4 4 3-3 4 4"],
+  ["settings", "Settings", "AdminSettings.dc.html", "M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"]
+];
+const PAGE = "blog";
+const DATA = {
+  h2h: { name: "Hearts2Hearts", site: "Main.dc.html", posts: [
+    { id: "h1", title: "Listening guide: “Style”, the 2025 digital single", tag: "Song Analysis", state: "draft", when: "AI draft · today 09:00", grad: "linear-gradient(135deg,#DDF0FF,#A8D8FF)", sources: "discography.json",
+      paras: [["", "“Style” arrived on June 18, 2025, as a digital single between the debut single album The Chase and the first mini album Focus.", "ok", "discography.json"], ["Listen for how the verses build into the chorus, and how the members trade lines across the song. ", "The track was performed on several music shows during its promotion period.", "flag", "no source"], ["", "It sits between two bigger releases, which makes it a good entry point before Focus.", "ok", "discography.json"]] },
+    { id: "h2", title: "SMTOWN LIVE 2025–26: every H2H stop", tag: "Fun", state: "draft", when: "AI draft · yesterday 09:00", grad: "linear-gradient(135deg,#FFD6E7,#C9B6FF)", sources: "schedule.json",
+      paras: [["", "Hearts2Hearts joined SMTOWN LIVE 2025–26 in Mexico City, Los Angeles, London, Tokyo, Fukuoka and Bangkok.", "ok", "schedule.json"], ["", "The first of those stops was Mexico City on May 9, 2025.", "ok", "schedule.json"]] },
+    { id: "h3", title: "Era recap: from The Chase to Lemon Tang", tag: "Era Recap", state: "published", when: "Published · Oct 18, 2026", grad: "linear-gradient(135deg,#FFF6C9,#FFB6D5 60%,#C9B6FF)", sources: "discography.json", paras: [["", "A single album, two mini albums and a run of digital and Japanese singles.", "ok", "discography.json"]] },
+    { id: "h4", title: "Eight audition songs, eight starting points", tag: "Trivia", state: "published", when: "Published · Oct 17, 2026", grad: "linear-gradient(135deg,#DDF0FF,#C9B6FF)", sources: "members.json", paras: [["", "The songs the members auditioned with, gathered from published profiles.", "ok", "members.json"]] }
+  ] },
+  illit: { name: "ILLIT", site: "ILLIT.dc.html", posts: [
+    { id: "i1", title: "Listening guide: “Do the Dance”", tag: "Song Analysis", state: "draft", when: "AI draft · today 09:00", grad: "linear-gradient(135deg,#FFE66D,#FF8CC0)", sources: "discography.json",
+      paras: [["", "“Do the Dance” comes from bomb, ILLIT’s third EP, released on June 16, 2025.", "ok", "discography.json"], ["Listen for the way the chorus repeats its hook. ", "It became the group’s most-streamed song of the year.", "flag", "no source"], ["", "The same month, the group held its first Glitter Day shows at Olympic Hall in Seoul.", "ok", "schedule.json"]] },
+    { id: "i2", title: "Glitter Day 2025: the four stops", tag: "Era Recap", state: "draft", when: "AI draft · yesterday 09:00", grad: "linear-gradient(135deg,#B8C8FF,#FF4F9A)", sources: "schedule.json",
+      paras: [["", "Glitter Day visited Seoul, Yokohama and Osaka between June and November 2025.", "ok", "schedule.json"], ["", "The final shows returned to Olympic Hall on November 8 and 9.", "ok", "schedule.json"]] },
+    { id: "i3", title: "Era recap: Super Real Me to Mamihlapinatapai", tag: "Era Recap", state: "published", when: "Published · Oct 18, 2026", grad: "linear-gradient(135deg,#FF8CC0,#4D7CFF)", sources: "discography.json", paras: [["", "Four EPs, a single album and a run of Japanese singles since March 2024.", "ok", "discography.json"]] },
+    { id: "i4", title: "From R U Next? to ILLIT", tag: "Trivia", state: "published", when: "Published · Oct 17, 2026", grad: "linear-gradient(135deg,#FFE66D,#8BE8D4)", sources: "about.json", paras: [["", "The JTBC survival show ran from June 30 to September 1, 2023.", "ok", "about.json"]] }
+  ] }
+};
+const TABS = [["draft", "Drafts"], ["scheduled", "Scheduled"], ["published", "Published"], ["rejected", "Rejected"]];
+const STATE = { draft: ["Needs review", "badge b-warn"], scheduled: ["Scheduled", "badge b-acc"], published: ["Published", "badge b-ok"], rejected: ["Rejected", "badge b-bad"] };
+
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { group: null, dark: null, tab: "draft", sel: null, over: {}, removed: {}, publishAt: "2026-10-25T09:00", toast: null }; }
+  componentWillUnmount() { clearTimeout(this.tt); }
+  flash(msg) { this.setState({ toast: msg }); clearTimeout(this.tt); this.tt = setTimeout(() => this.setState({ toast: null }), 3000); }
+  renderVals() {
+    const s = this.state, gid = "h2h", g = DATA[gid] || DATA.h2h;
+    const dark = s.dark === null ? !!this.props.dark : s.dark;
+    const posts = g.posts.map((p) => ({ ...p, state: s.over[p.id] || p.state }));
+    const items = posts.filter((p) => p.state === s.tab);
+    const sel = posts.find((p) => p.id === s.sel && p.state === s.tab) || items[0] || null;
+    const setState = (st, msg) => { this.setState({ over: { ...s.over, [sel.id]: st }, sel: null }); this.flash(msg); };
+    const paras = sel ? sel.paras.filter((x, i) => !s.removed[sel.id + ":" + i]) : [];
+    const claims = sel ? sel.paras.map((x, i) => ({ x: x, i: i })).filter((o) => !s.removed[sel.id + ":" + o.i]) : [];
+    const flags = claims.filter((o) => o.x[2] === "flag").length;
+    const matched = claims.length - flags;
+    const drafts = posts.filter((p) => p.state === "draft").length;
+    return {
+      rootClass: "ad" + (gid === "illit" ? " illit" : "") + (dark ? " dark" : ""),
+      toggleDark: () => this.setState({ dark: !dark }),
+      groups: [["h2h", "Hearts2Hearts"], ["illit", "ILLIT"]].map((x) => ({ label: x[1], on: gid === x[0] ? "true" : "false", cls: gid === x[0] ? "seg on" : "seg", pick: () => this.setState({ group: x[0], sel: null }) })),
+      nav: NAV.map((n) => ({ label: n[1], href: n[2], icon: n[3], cls: n[0] === PAGE ? "sl on" : "sl", cur: n[0] === PAGE ? "page" : "false", hasCount: n[0] === "blog" && drafts > 0, count: drafts })),
+      groupName: g.name, siteHref: g.site,
+      tabs: TABS.map((t) => ({ label: t[1], count: "· " + posts.filter((p) => p.state === t[0]).length, on: s.tab === t[0] ? "true" : "false", cls: s.tab === t[0] ? "seg on" : "seg", pick: () => this.setState({ tab: t[0], sel: null }) })),
+      items: items.map((p) => ({ ...p, cls: sel && p.id === sel.id ? "item on" : "item", state: STATE[p.state][0], badge: STATE[p.state][1], pick: () => this.setState({ sel: p.id }) })),
+      hasItems: items.length > 0, noItems: items.length === 0, hasSel: !!sel,
+      sel: sel || { title: "", tag: "", grad: "", sources: "" },
+      paras: paras.map((x) => ({ before: x[0], claim: x[1], flagged: x[2] === "flag", plain: x[2] !== "flag" })),
+      stateLabel: sel ? STATE[sel.state][0] : "—", stateBadge: sel ? STATE[sel.state][1] : "badge b-neu",
+      checks: [
+        { label: "“Written by AI” label on post", ok: true },
+        { label: "No quotes attributed to members", ok: true },
+        { label: "Facts matched to site data (" + matched + "/" + claims.length + ")", ok: flags === 0 },
+        { label: "Cover image licensed", ok: false }
+      ].map((c) => ({ ...c, mark: c.ok ? "✓" : "!", badge: c.ok ? "badge b-ok" : "badge b-warn" })),
+      claims: claims.map((o) => ({ text: o.x[1], status: o.x[2] === "flag" ? "Needs a source" : "Matched", badge: o.x[2] === "flag" ? "badge b-warn" : "badge b-ok", src: o.x[3], canFix: o.x[2] === "flag" && sel.state === "draft", remove: () => { this.setState({ removed: { ...s.removed, [sel.id + ":" + o.i]: true } }); this.flash("Sentence removed from draft"); } })),
+      isDraft: !!sel && sel.state === "draft", notDraft: !!sel && sel.state !== "draft",
+      blocked: flags > 0, blockedMsg: flags > 0,
+      publishAt: s.publishAt, setPublishAt: (e) => this.setState({ publishAt: e.target.value }),
+      approve: () => setState("scheduled", "Approved · scheduled for " + s.publishAt.replace("T", " ")),
+      reject: () => setState("rejected", "Draft rejected"),
+      regen: () => this.flash("Asked the AI writer for a new version · arrives as a new draft"),
+      backToDraft: () => setState("draft", "Moved back to drafts"),
+      toast: !!s.toast, toastMsg: s.toast || ""
+    };
+  }
+}
+</script>
+</body>
+</html>

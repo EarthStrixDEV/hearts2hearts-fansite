@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>H2H Admin · Schedule</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Sans+KR:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:var(--acc-ink)}
+.ad{--bg:#F6F6F9;--surface:#FFFFFF;--ink:#1C1B22;--muted:#5E5C6B;--line:#E5E3EC;--soft:#F1F0F5;--acc:#C92A68;--acc-soft:#FBE6EE;--acc-ink:#9E1D50;--on-acc:#FFFFFF;--ok:#1F7A55;--ok-soft:#E3F5EC;--warn:#8A5A00;--warn-soft:#FFF3D6;--bad:#B42318;--bad-soft:#FDE8E7;font-family:'IBM Plex Sans','IBM Plex Sans KR',system-ui,sans-serif;font-size:14px;color:var(--ink);background:var(--bg)}
+.ad.illit{--acc:#2F5BE0;--acc-soft:#E4EBFF;--acc-ink:#1E40AF}
+.ad.dark{--bg:#121117;--surface:#1B1A22;--ink:#EDECF3;--muted:#A9A6B8;--line:#2D2B38;--soft:#24232D;--acc:#FF8FB8;--acc-soft:rgba(255,143,184,.14);--acc-ink:#FF8FB8;--on-acc:#1C1B22;--ok:#5FD3A0;--ok-soft:rgba(95,211,160,.14);--warn:#F2C14E;--warn-soft:rgba(242,193,78,.14);--bad:#FF8A80;--bad-soft:rgba(255,138,128,.14)}
+.ad.dark.illit{--acc:#8FA9FF;--acc-soft:rgba(143,169,255,.14);--acc-ink:#8FA9FF}
+.mono{font-family:'IBM Plex Mono',ui-monospace,monospace}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 16px;border-radius:8px;font-family:inherit;font-size:14px;font-weight:500;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;text-decoration:none;white-space:nowrap}
+.btn:hover{background:var(--soft);color:var(--ink)}.btn:active{transform:translateY(1px)}
+.btn-p{background:var(--acc);border-color:var(--acc);color:var(--on-acc)}.btn-p:hover{background:var(--acc);color:var(--on-acc);filter:brightness(1.08)}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.ibtn{width:44px;height:44px;flex:none;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;padding:0}
+.ibtn:hover{background:var(--soft)}
+.sl{display:flex;align-items:center;gap:10px;min-height:44px;padding:0 12px;border-radius:8px;color:var(--muted);text-decoration:none;font-weight:500;white-space:nowrap}
+.sl:hover{background:var(--soft);color:var(--ink)}.sl.on{background:var(--acc-soft);color:var(--acc-ink);font-weight:600}
+.seg-wrap{display:flex;padding:3px;border-radius:10px;background:var(--soft);gap:2px}
+.seg{flex:1;min-height:38px;padding:0 12px;border:0;border-radius:8px;background:none;color:var(--muted);font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap}
+.seg.on{background:var(--surface);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.1)}
+.inp{width:100%;box-sizing:border-box;min-height:44px;padding:0 12px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font-family:inherit;font-size:14px}
+.inp:focus{outline:2px solid var(--acc);outline-offset:-1px}
+.inp.req{border-color:var(--warn)}
+.lbl{font-size:13px;font-weight:600}
+.badge{display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 8px;border-radius:6px;font-size:12px;font-weight:600;white-space:nowrap}
+.b-ok{background:var(--ok-soft);color:var(--ok)}.b-warn{background:var(--warn-soft);color:var(--warn)}.b-bad{background:var(--bad-soft);color:var(--bad)}.b-neu{background:var(--soft);color:var(--muted)}.b-acc{background:var(--acc-soft);color:var(--acc-ink)}
+.btn:focus-visible,.ibtn:focus-visible,.sl:focus-visible,.seg:focus-visible,.fx:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.navlist{display:flex;flex-direction:column;gap:2px}
+@media (max-width:900px){.navlist{flex-direction:row;overflow-x:auto}.side-foot,.top-search{display:none!important}}
+.tbl{width:100%;border-collapse:collapse}
+.tbl th{text-align:left;font-size:12px;font-weight:600;color:var(--muted);padding:0 14px;height:40px;border-bottom:1px solid var(--line);white-space:nowrap}
+.tbl td{padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:middle}
+.toast{animation:toast 3s ease both}
+@keyframes toast{0%{opacity:0;transform:translate(-50%,-8px)}10%,85%{opacity:1;transform:translate(-50%,0)}100%{opacity:0;transform:translate(-50%,-8px)}}
+@media (prefers-reduced-motion:reduce){.ad *{animation:none!important;transition:none!important}}
+</style>
+</helmet>
+<div class="{{rootClass}}" style="min-height: 100vh; display: flex; flex-wrap: wrap; align-items: stretch">
+<aside aria-label="Admin" style="flex: 1 1 240px; max-width: 100%; background: var(--surface); border-right: 1px solid var(--line); padding: 16px 12px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; align-items: center; gap: 10px; padding: 4px 8px"><span style="width: 36px; height: 36px; border-radius: 10px; background: var(--acc); color: var(--on-acc); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px">FH</span><span style="display: flex; flex-direction: column"><strong style="font-size: 15px">Fan Hub</strong><span style="font-size: 12px; color: var(--muted)">Admin · CMS</span></span></div>
+<div style="padding: 8px 12px; border-radius: 8px; background: var(--acc-soft); color: var(--acc-ink); font-size: 13px; font-weight: 600">{{groupName}} site</div>
+<nav class="navlist" aria-label="Admin sections"><sc-for list="{{nav}}" as="n" hint-placeholder-count="7"><a class="{{n.cls}}" href="{{n.href}}" aria-current="{{n.cur}}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{n.icon}}"></path></svg>{{n.label}}<sc-if value="{{n.hasCount}}" hint-placeholder-val="{{ false }}"><span class="badge b-acc" style="margin-left: auto">{{n.count}}</span></sc-if></a></sc-for></nav>
+<div class="side-foot" style="margin-top: auto; border-top: 1px solid var(--line); padding-top: 12px"><a class="sl" href="{{siteHref}}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"></path></svg>View live site</a></div>
+</aside>
+<div style="flex: 999 1 640px; min-width: 0; display: flex; flex-direction: column">
+<header style="min-height: 64px; display: flex; align-items: center; gap: 12px; padding: 0 24px; border-bottom: 1px solid var(--line); background: var(--surface)">
+<nav aria-label="Breadcrumb" style="flex: 1; min-width: 0; font-size: 13px; color: var(--muted)">Admin / {{groupName}} / <span style="color: var(--ink); font-weight: 600">Schedule</span></nav>
+<label class="top-search" style="position: relative; display: flex; align-items: center; width: 280px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" style="position: absolute; left: 12px; color: var(--muted)"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg><span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Search content</span><input class="inp" type="search" placeholder="Search content" style="padding-left: 36px"></label>
+<button class="ibtn" onClick="{{toggleDark}}" aria-label="Toggle dark mode"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"></path></svg></button>
+<span role="img" aria-label="Signed in as admin" style="width: 36px; height: 36px; border-radius: 50%; background: var(--soft); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: var(--muted)">AD</span>
+</header>
+
+<main style="padding: 24px; display: flex; flex-direction: column; gap: 20px; box-sizing: border-box">
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px">
+<div><h1 style="margin: 0; font-size: 24px; font-weight: 600">Schedule</h1><p style="margin: 4px 0 0; color: var(--muted)">Edits schedule.json. An event can’t be saved without an official source link.</p></div>
+<button class="btn btn-p" onClick="{{newEvent}}">Add event</button>
+</div>
+<div role="group" aria-label="When" class="seg-wrap" style="align-self: flex-start"><sc-for list="{{whens}}" as="w" hint-placeholder-count="3"><button class="{{w.cls}}" onClick="{{w.pick}}" aria-pressed="{{w.on}}">{{w.label}}</button></sc-for></div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start">
+<section class="card" aria-label="Events" style="flex: 999 1 560px; min-width: 0; overflow-x: auto">
+<table class="tbl">
+<thead><tr><th scope="col">Event</th><th scope="col">Dates</th><th scope="col">Type</th><th scope="col">Source</th><th scope="col">Status</th><th scope="col"><span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Actions</span></th></tr></thead>
+<tbody>
+<sc-for list="{{rows}}" as="r" hint-placeholder-count="8">
+<tr>
+<td><span style="display: flex; flex-direction: column"><span style="font-weight: 600">{{r.name}}</span><span style="font-size: 12px; color: var(--muted)">{{r.city}} · {{r.venue}}</span></span></td>
+<td class="mono" style="font-size: 13px; white-space: nowrap">{{r.dateLabel}}</td>
+<td><span class="{{r.typeBadge}}">{{r.type}}</span></td>
+<td><span class="{{r.srcBadge}}">{{r.srcLabel}}</span></td>
+<td><span class="{{r.statusBadge}}">{{r.status}}</span></td>
+<td><button class="btn" onClick="{{r.edit}}" style="min-height: 36px; padding: 0 12px; font-size: 13px">Edit</button></td>
+</tr>
+</sc-for>
+</tbody>
+</table>
+<sc-if value="{{noRows}}" hint-placeholder-val="{{ false }}"><p style="margin: 0; padding: 28px; text-align: center; color: var(--muted)">No upcoming events. Add one from an official notice.</p></sc-if>
+</section>
+
+<sc-if value="{{hasForm}}" hint-placeholder-val="{{ true }}">
+<section class="card" aria-labelledby="fh" style="flex: 1 1 380px; min-width: 0; padding: 20px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; justify-content: space-between; align-items: center"><h2 id="fh" style="margin: 0; font-size: 18px; font-weight: 600">{{formTitle}}</h2><button class="ibtn" onClick="{{closeForm}}" aria-label="Close form"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
+<label style="display: flex; flex-direction: column; gap: 6px"><span class="lbl">Event name *</span><input class="{{cls.name}}" value="{{f.name}}" onChange="{{set.name}}" placeholder="e.g. tour or fan meeting title"></label>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(150px, 100%), 1fr)); gap: 12px">
+<label style="display: flex; flex-direction: column; gap: 6px"><span class="lbl">Type</span><select class="inp" value="{{f.type}}" onChange="{{set.type}}"><option>Concert</option><option>Fan Meeting</option><option>Music Show</option><option>Festival</option><option>Showcase</option></select></label>
+<label style="display: flex; flex-direction: column; gap: 6px"><span class="lbl">City *</span><input class="{{cls.city}}" value="{{f.city}}" onChange="{{set.city}}"></label>
+<label style="display: flex; flex-direction: column; gap: 6px; grid-column: 1 / -1"><span class="lbl">Venue *</span><input class="{{cls.venue}}" value="{{f.venue}}" onChange="{{set.venue}}"></label>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<span class="lbl">Show dates *</span>
+<sc-for list="{{dates}}" as="d" hint-placeholder-count="1"><div style="display: flex; gap: 8px"><input class="{{d.cls}}" type="date" value="{{d.v}}" onChange="{{d.set}}" aria-label="Show date {{d.n}}"><button class="ibtn" onClick="{{d.remove}}" disabled="{{d.only}}" aria-label="Remove date {{d.n}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div></sc-for>
+<button class="btn" onClick="{{addDate}}" style="align-self: flex-start">Add another date</button>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(150px, 100%), 1fr)); gap: 12px">
+<label style="display: flex; flex-direction: column; gap: 6px"><span class="lbl">Start time</span><input class="inp" type="time" value="{{f.time}}" onChange="{{set.time}}"></label>
+<label style="display: flex; flex-direction: column; gap: 6px"><span class="lbl">Venue timezone</span><select class="inp" value="{{f.tz}}" onChange="{{set.tz}}"><option>Asia/Seoul</option><option>Asia/Tokyo</option><option>Asia/Bangkok</option><option>Asia/Jakarta</option><option>Asia/Hong_Kong</option><option>America/New_York</option><option>America/Los_Angeles</option><option>America/Mexico_City</option><option>Europe/London</option></select></label>
+</div>
+<label style="display: flex; flex-direction: column; gap: 6px"><span class="lbl">Ticket link</span><input class="inp" type="url" value="{{f.tix}}" onChange="{{set.tix}}" placeholder="https://…"></label>
+<label style="display: flex; flex-direction: column; gap: 6px"><span class="lbl">Official source link *</span><input class="{{cls.src}}" type="url" value="{{f.src}}" onChange="{{set.src}}" placeholder="Agency notice or official social post"><span style="font-size: 12px; color: var(--muted)">Visitors see times in their own timezone; the site converts from the venue timezone.</span></label>
+<sc-if value="{{hasMissing}}" hint-placeholder-val="{{ true }}"><div class="badge b-warn" style="height: auto; padding: 8px 10px; line-height: 1.4; white-space: normal">Still needed: {{missing}}</div></sc-if>
+<div style="display: flex; gap: 8px; border-top: 1px solid var(--line); padding-top: 14px"><button class="btn btn-p" onClick="{{save}}" disabled="{{hasMissing}}">Save event</button><button class="btn" onClick="{{closeForm}}">Cancel</button></div>
+</section>
+</sc-if>
+</div>
+</main>
+</div>
+<sc-if value="{{toast}}" hint-placeholder-val="{{ false }}"><div class="toast" role="status" style="position: fixed; top: 20px; left: 50%; z-index: 90; padding: 12px 16px; border-radius: 10px; background: var(--ink); color: var(--bg); font-size: 14px; font-weight: 500; box-shadow: 0 8px 24px rgba(0,0,0,.2)">{{toastMsg}}</div></sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"dark":{"editor":"boolean","default":false,"section":"Theme"},"$preview":{"width":1440,"height":1150}}'>
+const NAV = [
+  ["dash", "Dashboard", "AdminDashboard.dc.html", "M4 4h6v9H4zM14 4h6v5h-6zM14 13h6v7h-6zM4 17h6v3H4z"],
+  ["members", "Members", "AdminMembers.dc.html", "M9 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM3 20a6 6 0 0 1 12 0M17 11a3 3 0 1 0 0-6M21 20a6 6 0 0 0-4-5.7"],
+  ["releases", "Releases", "AdminReleases.dc.html", "M9 18V6l11-2v12M9 18a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM20 16a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"],
+  ["blog", "AI Blog", "AdminBlog.dc.html", "M12 3l1.9 5.8L20 10l-6.1 1.2L12 17l-1.9-5.8L4 10l6.1-1.2z"],
+  ["schedule", "Schedule", "AdminSchedule.dc.html", "M4 7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zM4 10h16M9 3v4M15 3v4"],
+  ["media", "Media", "AdminMedia.dc.html", "M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zM4 16l5-5 4 4 3-3 4 4"],
+  ["settings", "Settings", "AdminSettings.dc.html", "M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"]
+];
+const PAGE = "schedule";
+const WIKI = "https://en.wikipedia.org/wiki/";
+const DATA = {
+  h2h: { name: "Hearts2Hearts", site: "Main.dc.html", ev: [
+    ["Hearts2House 2026", "Concert", "Jakarta", "Tennis Indoor Senayan", ["2026-03-28"], "Asia/Jakarta"],
+    ["Hearts2House 2026", "Concert", "Los Angeles", "The Wiltern", ["2026-03-22"], "America/Los_Angeles"],
+    ["Hearts2House 2026", "Concert", "Brooklyn, NY", "Brooklyn Paramount", ["2026-03-19"], "America/New_York"],
+    ["Hearts2House 2026", "Concert", "Seoul", "Olympic Hall", ["2026-02-21", "2026-02-22"], "Asia/Seoul"],
+    ["SMTOWN LIVE 2025–26", "Concert", "Bangkok", "", ["2026-02-14"], "Asia/Bangkok"],
+    ["SMTOWN LIVE 2025–26", "Concert", "Fukuoka", "", ["2026-01-31"], "Asia/Tokyo"],
+    ["Focus showcase", "Showcase", "Seoul", "Blue Square SOL Travel Hall", ["2025-10-20"], "Asia/Seoul"],
+    ["Debut showcase “Chase Our Hearts”", "Showcase", "Seoul", "Yes24 Live Hall", ["2025-02-24"], "Asia/Seoul"]
+  ], wiki: "Hearts2Hearts" },
+  illit: { name: "ILLIT", site: "ILLIT.dc.html", ev: [
+    ["Press Start 2026", "Concert", "Hong Kong", "AsiaWorld-Expo Hall 10", ["2026-08-22"], "Asia/Hong_Kong"],
+    ["Press Start 2026", "Concert", "Tokyo", "Toyota Arena Tokyo", ["2026-07-23", "2026-07-25", "2026-07-26"], "Asia/Tokyo"],
+    ["Press Start 2026", "Concert", "Hyogo", "GLION ARENA KOBE", ["2026-07-18", "2026-07-19"], "Asia/Tokyo"],
+    ["Press Start 2026", "Concert", "Fukuoka", "Fukuoka Sunpalace", ["2026-06-29", "2026-06-30"], "Asia/Tokyo"],
+    ["Press Start 2026", "Concert", "Osaka", "Orix Theater", ["2026-06-20", "2026-06-21"], "Asia/Tokyo"],
+    ["Press Start 2026", "Concert", "Aichi", "Aichi Prefectural Art Theater", ["2026-06-13", "2026-06-14"], "Asia/Tokyo"],
+    ["Press Start 2026", "Concert", "Seoul", "TicketLink Live Arena", ["2026-03-14", "2026-03-15"], "Asia/Seoul"],
+    ["Glitter Day", "Concert", "Seoul", "Olympic Hall", ["2025-06-07", "2025-06-08"], "Asia/Seoul"]
+  ], wiki: "Illit" }
+};
+const MON = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+const pad = (n) => String(n).padStart(2, "0");
+const today = () => { const d = new Date(); return d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate()); };
+const blank = () => ({ key: null, name: "", type: "Concert", city: "", venue: "", dates: [""], time: "", tz: "Asia/Seoul", tix: "", src: "" });
+
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { group: null, dark: null, when: "all", form: null, saved: {}, added: {}, toast: null }; }
+  componentWillUnmount() { clearTimeout(this.tt); }
+  flash(msg) { this.setState({ toast: msg }); clearTimeout(this.tt); this.tt = setTimeout(() => this.setState({ toast: null }), 3000); }
+  renderVals() {
+    const s = this.state, gid = "h2h", g = DATA[gid] || DATA.h2h;
+    const dark = s.dark === null ? !!this.props.dark : s.dark, t = today();
+    const base = g.ev.map((e, i) => ({ key: gid + i, name: e[0], type: e[1], city: e[2], venue: e[3], dates: e[4], time: "", tz: e[5], tix: "", src: WIKI + g.wiki, srcWiki: true }));
+    const all = (s.added[gid] || []).concat(base).map((e) => s.saved[e.key] || e);
+    const isUp = (e) => e.dates.some((d) => d >= t);
+    const rows = all.filter((e) => s.when === "all" || (s.when === "up" ? isUp(e) : !isUp(e)));
+    const fmtD = (iso) => { if (!iso) return "?"; const p = iso.split("-"); return MON[Number(p[1]) - 1] + " " + Number(p[2]); };
+    const f = s.form;
+    const req = f ? { name: !f.name.trim(), city: !f.city.trim(), venue: !f.venue.trim(), date: !f.dates.some((d) => d), src: !/^https?:\/\//.test(f.src.trim()) } : {};
+    const missing = f ? [["name", "event name"], ["city", "city"], ["venue", "venue"], ["date", "a show date"], ["src", "official source link"]].filter((x) => req[x[0]]).map((x) => x[1]) : [];
+    const upd = (patch) => this.setState({ form: { ...s.form, ...patch } });
+    const setter = (k) => (e) => upd({ [k]: e.target.value });
+    const inpCls = (k) => "inp" + (req[k] ? " req" : "");
+    return {
+      rootClass: "ad" + (gid === "illit" ? " illit" : "") + (dark ? " dark" : ""),
+      toggleDark: () => this.setState({ dark: !dark }),
+      groups: [["h2h", "Hearts2Hearts"], ["illit", "ILLIT"]].map((x) => ({ label: x[1], on: gid === x[0] ? "true" : "false", cls: gid === x[0] ? "seg on" : "seg", pick: () => this.setState({ group: x[0], form: null }) })),
+      nav: NAV.map((n) => ({ label: n[1], href: n[2], icon: n[3], cls: n[0] === PAGE ? "sl on" : "sl", cur: n[0] === PAGE ? "page" : "false", hasCount: n[0] === "blog", count: 2 })),
+      groupName: g.name, siteHref: g.site,
+      whens: [["all", "All"], ["up", "Upcoming"], ["past", "Past"]].map((w) => ({ label: w[1], on: s.when === w[0] ? "true" : "false", cls: s.when === w[0] ? "seg on" : "seg", pick: () => this.setState({ when: w[0] }) })),
+      rows: rows.map((e) => { const up = isUp(e), ds = e.dates.filter(Boolean); return { ...e, venue: e.venue || "Venue TODO", dateLabel: ds.length ? (ds.length > 1 ? fmtD(ds[0]) + "–" + fmtD(ds[ds.length - 1]).split(" ").pop() : fmtD(ds[0])) + ", " + ds[0].slice(0, 4) : "TBA",
+        typeBadge: "badge b-neu", srcLabel: e.srcWiki ? "Wikipedia · swap for official" : e.src ? "Official link" : "Missing", srcBadge: e.srcWiki ? "badge b-warn" : e.src ? "badge b-ok" : "badge b-bad",
+        status: up ? "Upcoming" : "Past", statusBadge: up ? "badge b-acc" : "badge b-neu", edit: () => this.setState({ form: { ...e, dates: e.dates.slice() } }) }; }),
+      noRows: rows.length === 0,
+      hasForm: !!f, formTitle: f && f.key ? "Edit event" : "New event", f: f || blank(),
+      cls: { name: inpCls("name"), city: inpCls("city"), venue: inpCls("venue"), src: inpCls("src") },
+      set: { name: setter("name"), type: setter("type"), city: setter("city"), venue: setter("venue"), time: setter("time"), tz: setter("tz"), tix: setter("tix"), src: setter("src") },
+      dates: (f ? f.dates : [""]).map((d, i, arr) => ({ v: d, n: i + 1, only: arr.length === 1, cls: "inp" + (req.date ? " req" : ""), set: (e) => upd({ dates: f.dates.map((x, j) => (j === i ? e.target.value : x)) }), remove: () => upd({ dates: f.dates.filter((x, j) => j !== i) }) })),
+      addDate: () => upd({ dates: f.dates.concat([""]) }),
+      hasMissing: missing.length > 0, missing: missing.join(", "),
+      newEvent: () => this.setState({ form: blank() }), closeForm: () => this.setState({ form: null }),
+      save: () => {
+        if (missing.length) return;
+        const item = { ...f, srcWiki: f.srcWiki && f.src === WIKI + g.wiki };
+        if (f.key) this.setState({ saved: { ...s.saved, [f.key]: item }, form: null });
+        else { const key = gid + "new" + Date.now(); this.setState({ added: { ...s.added, [gid]: [{ ...item, key: key }].concat(s.added[gid] || []) }, form: null }); }
+        this.flash("Event saved to schedule.json");
+      },
+      toast: !!s.toast, toastMsg: s.toast || ""
+    };
+  }
+}
+</script>
+</body>
+</html>

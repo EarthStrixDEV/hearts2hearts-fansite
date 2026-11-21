@@ -1,0 +1,15 @@
+/* Sign-in / sign-up pages. Uses the public design tokens from globals.css. */
+.au-wrap { min-height: 100vh; display: grid; place-items: center; padding: 24px 16px; background: var(--cream-50); position: relative; overflow: hidden; }
+.au-wrap::before { content: ""; position: absolute; inset: -20% -10% auto -10%; height: 70%; background: var(--holo); opacity: 0.35; filter: blur(60px); pointer-events: none; }
+.au-card { position: relative; width: 100%; max-width: 420px; gap: 18px; box-shadow: var(--shadow); border: 1px solid var(--line); }
+.au-brand { display: inline-flex; align-items: center; gap: 8px; text-decoration: none; color: var(--ink-900); font-weight: 600; }
+.au-title { margin: 0; font-size: 28px; line-height: 1.15; color: var(--ink-900); }
+.au-sub { margin: 0; color: var(--ink-500); font-size: 15px; line-height: 1.5; }
+.au-form { display: flex; flex-direction: column; gap: 14px; }
+.au-field { display: flex; flex-direction: column; gap: 6px; }
+.au-inp { width: 100%; min-height: 48px; padding: 0 14px; border-radius: 14px; border: 1.5px solid var(--line); background: var(--surface); color: var(--ink-900); font: inherit; font-size: 16px; box-sizing: border-box; }
+.au-inp:focus-visible { outline: 2px solid var(--pink-700); outline-offset: 2px; border-color: var(--pink-500); }
+.au-err { margin: 0; padding: 10px 14px; border-radius: 12px; background: #ffe3e6; color: #9b1c31; font-size: 14px; line-height: 1.45; }
+.dark .au-err { background: rgba(255, 138, 128, 0.16); color: #ffb4ab; }
+.au-alt { margin: 0; text-align: center; font-size: 14px; color: var(--ink-500); }
+.au-alt a { font-weight: 600; }

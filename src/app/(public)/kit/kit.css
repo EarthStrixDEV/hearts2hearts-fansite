@@ -1,0 +1,20 @@
+/* /kit styles (from design/project/Kit.dc.html). Prefixed kt- to avoid collisions. */
+.kt-state { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; min-width: 0; }
+.kt-title { font-family: var(--font-fredoka), ui-rounded, sans-serif; font-size: 22px; font-weight: 600; margin: 0; }
+
+/* forced interaction states shown side by side */
+.kt-hover { transform: translateY(-2px); }
+.btn-p.kt-hover { box-shadow: var(--shadow), var(--glow); }
+.ibtn.kt-hover { transform: scale(1.1); }
+.kt-press { transform: scale(0.96); }
+.kt-focus { outline: 2px solid var(--pink-700); outline-offset: 2px; }
+
+.kt-ans { min-height: 56px; width: 100%; border-radius: 999px; border: 1.5px solid var(--line); background: #fff; color: #2b2440; font: 600 17px/1 var(--font-fredoka), ui-rounded, sans-serif; display: flex; align-items: center; justify-content: center; }
+.kt-ans.ok { background: #bff0da; border-color: #2e9b6e; color: #0f4d33; }
+.kt-ans.bad { background: #ffe0e6; border-color: #c92a68; color: #7a1236; }
+
+.kt-eq span { display: block; width: 3px; border-radius: 2px; background: #c92a68; animation: kt-eq 900ms ease-in-out infinite; }
+.kt-wave { animation: kt-wave 2.4s ease-in-out infinite; }
+
+@keyframes kt-eq { 0%, 100% { height: 4px; } 50% { height: 14px; } }
+@keyframes kt-wave { 0%, 100% { transform: translate(0, 22px); } 50% { transform: translate(-24px, 0); } }

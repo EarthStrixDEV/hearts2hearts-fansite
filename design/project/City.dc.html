@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Hearts2Hearts fan site · Mini City</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&amp;family=IBM+Plex+Sans+KR:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#C92A68}a:hover{color:#9E1D50}
+.h2h{--pink-500:#FF8FB8;--pink-700:#C92A68;--ink-900:#2B2440;--ink-500:#6E6787;--holo-deep:linear-gradient(135deg,#D63A77,#8A5CE6,#3D84D4);--shadow:0 8px 24px rgba(255,143,184,.25);--spring:cubic-bezier(.34,1.56,.64,1);font-family:'IBM Plex Sans KR',system-ui,sans-serif;color:#2B2440}
+.disp{font-family:'Fredoka',ui-rounded,system-ui,sans-serif}
+.glass{background:rgba(255,255,255,.72);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.8)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 18px;border-radius:999px;font:600 15px/1 'Fredoka',ui-rounded,sans-serif;border:0;cursor:pointer;text-decoration:none;transition:transform 150ms var(--spring)}
+.btn:hover{transform:translateY(-2px)}.btn:active{transform:scale(.96)}
+.btn-p{background:var(--holo-deep);color:#fff;box-shadow:var(--shadow)}.btn-p:hover{color:#fff}
+.ibtn{width:44px;height:44px;flex:none;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;border:0;cursor:pointer;padding:0;color:#2B2440;transition:transform 150ms var(--spring)}
+.ibtn:hover{transform:scale(1.1)}.ibtn:active{transform:scale(.96)}
+.btn:focus-visible,.ibtn:focus-visible,.fx:focus-visible,.hit:focus-visible,.leg:focus-visible{outline:2px solid #C92A68;outline-offset:2px}
+.leg{display:flex;align-items:center;gap:10px;width:100%;min-height:44px;padding:0 12px;border:0;border-radius:12px;background:none;cursor:pointer;font:500 14px 'IBM Plex Sans KR',sans-serif;color:#2B2440;text-align:left}
+.leg:hover,.leg.on{background:rgba(43,36,64,.07)}
+.leg.on{font-weight:600}
+.hit{position:absolute;transform:translate(-50%,-50%);border:0;background:transparent;cursor:pointer;border-radius:16px;padding:0}
+.bld{transition:transform 350ms var(--spring)}
+.bld.up{transform:translateY(-14px)}
+.bubble{animation:pop 260ms var(--spring) both}
+.stage{transition:transform 700ms cubic-bezier(.22,1,.36,1)}
+.stage.drag{transition:none}
+.cloud{animation:drift 40s linear infinite}
+.walk1{animation:walk1 14s ease-in-out infinite alternate}
+.walk2{animation:walk2 17s ease-in-out infinite alternate}
+.bob{animation:bob 2.4s ease-in-out infinite}
+.floaty{animation:floaty 5s ease-in-out infinite}
+.twinkle{animation:twinkle 2.6s ease-in-out infinite}
+.wave{animation:wave 2.2s ease-in-out infinite}
+.legend{position:absolute;right:20px;top:50%;transform:translateY(-50%);width:230px}
+@media (max-width:760px){.legend{top:auto;bottom:76px;right:12px;left:12px;width:auto;transform:none}.legend .items{display:flex!important;overflow-x:auto;gap:4px}.legend .items .leg{flex:none;width:auto}.legend .lt{display:none}.hint{bottom:12px!important}}
+@keyframes pop{from{opacity:0;transform:translate(-50%,-90%) scale(.9)}to{opacity:1;transform:translate(-50%,-100%) scale(1)}}
+@keyframes drift{from{transform:translateX(-160px)}to{transform:translateX(1100px)}}
+@keyframes walk1{from{transform:translate(0px,0px)}to{transform:translate(312px,180px)}}
+@keyframes walk2{from{transform:translate(0px,0px)}to{transform:translate(-312px,180px)}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+@keyframes twinkle{0%,100%{opacity:.25}50%{opacity:1}}
+@keyframes wave{0%,100%{transform:translate(0,0)}50%{transform:translate(-24px,0)}}
+.h2h.rm *{animation:none!important}
+@media (prefers-reduced-motion:reduce){.h2h *{animation:none!important;transition:none!important}}
+</style>
+</helmet>
+<div class="{{rootClass}}" style="position: relative; height: 100vh; min-height: 560px; overflow: hidden; background: {{sky}}; transition: background 700ms ease; touch-action: none">
+
+<sc-if value="{{night}}" hint-placeholder-val="{{ false }}">
+<div aria-hidden="true" style="position: absolute; inset: 0">
+<sc-for list="{{stars}}" as="s" hint-placeholder-count="24"><span class="twinkle" style="position: absolute; left: {{s.x}}%; top: {{s.y}}%; width: {{s.r}}px; height: {{s.r}}px; border-radius: 50%; background: #fff; animation-delay: {{s.d}}"></span></sc-for>
+</div>
+</sc-if>
+
+<!-- STAGE -->
+<div onPointerDown="{{down}}" onPointerMove="{{move}}" onPointerUp="{{up}}" onPointerLeave="{{up}}" style="position: absolute; inset: 0; cursor: {{cursor}}">
+<div class="{{stageClass}}" style="position: absolute; left: 50%; top: 52%; width: min(1300px, 150vh); aspect-ratio: 1000 / 600; transform: translate(calc(-50% + {{px}}%), calc(-50% + {{py}}%)) scale({{zoom}})">
+<svg viewBox="0 0 1000 600" width="100%" height="100%" aria-hidden="true" style="position: absolute; inset: 0; display: block; overflow: visible">
+<g class="cloud" style="animation-delay: -6s"><ellipse cx="80" cy="70" rx="60" ry="20" fill="{{cloudFill}}"></ellipse><ellipse cx="110" cy="56" rx="36" ry="22" fill="{{cloudFill}}"></ellipse></g>
+<g class="cloud" style="animation-delay: -22s"><ellipse cx="60" cy="130" rx="46" ry="15" fill="{{cloudFill}}"></ellipse><ellipse cx="82" cy="120" rx="26" ry="16" fill="{{cloudFill}}"></ellipse></g>
+<path d="{{city.slabL}}" fill="{{slabL}}"></path><path d="{{city.slabR}}" fill="{{slabR}}"></path>
+<path d="{{city.ground}}" fill="{{groundFill}}"></path>
+<path d="{{city.road1}}" fill="{{roadFill}}"></path><path d="{{city.road2}}" fill="{{roadFill}}"></path>
+<sc-for list="{{back}}" as="b" hint-placeholder-count="2"><g class="{{b.cls}}" style="filter: {{bFilter}}"><path d="{{b.left}}" fill="{{b.cl}}"></path><path d="{{b.right}}" fill="{{b.cr}}"></path><path d="{{b.top}}" fill="{{b.ct}}"></path><path d="{{b.door}}" fill="{{doorFill}}"></path><path d="{{b.win}}" fill="{{winFill}}"></path></g></sc-for>
+<g transform="translate({{city.w1x}} {{city.w1y}})"><g class="walk1"><g class="bob"><ellipse cx="0" cy="0" rx="7" ry="3" fill="rgba(43,36,64,.15)"></ellipse><rect x="-6" y="-20" width="12" height="16" rx="6" fill="#FF8FB8"></rect><circle cx="0" cy="-26" r="8" fill="#FFE6D6"></circle><path d="M-8 -28a8 8 0 0 1 16 0z" fill="#5A4A7A"></path></g></g></g>
+<g transform="translate({{city.w2x}} {{city.w2y}})"><g class="walk2"><g class="bob" style="animation-delay: -1s"><ellipse cx="0" cy="0" rx="7" ry="3" fill="rgba(43,36,64,.15)"></ellipse><rect x="-6" y="-20" width="12" height="16" rx="6" fill="#8FC4F2"></rect><circle cx="0" cy="-26" r="8" fill="#FFE6D6"></circle><path d="M-8 -28a8 8 0 0 1 16 0z" fill="#8A5C3C"></path></g></g></g>
+<sc-for list="{{front}}" as="b" hint-placeholder-count="6"><g class="{{b.cls}}" style="filter: {{bFilter}}"><path d="{{b.left}}" fill="{{b.cl}}"></path><path d="{{b.right}}" fill="{{b.cr}}"></path><path d="{{b.top}}" fill="{{b.ct}}"></path><path d="{{b.door}}" fill="{{doorFill}}"></path><path d="{{b.win}}" fill="{{winFill}}"></path></g></sc-for>
+<g class="floaty"><path transform="translate(712 100) scale(1.2)" d="M12 21s-7.5-4.6-10-9.3C.3 8.4 2.2 4 6.2 4c2.3 0 3.9 1.3 5.8 3.4C13.9 5.3 15.5 4 17.8 4c4 0 5.9 4.4 4.2 7.7C19.5 16.4 12 21 12 21z" fill="#FF8FB8"></path></g>
+<g class="floaty" style="animation-delay: -2s"><path transform="translate(230 150) scale(.9)" d="M12 21s-7.5-4.6-10-9.3C.3 8.4 2.2 4 6.2 4c2.3 0 3.9 1.3 5.8 3.4C13.9 5.3 15.5 4 17.8 4c4 0 5.9 4.4 4.2 7.7C19.5 16.4 12 21 12 21z" fill="#C9B6FF"></path></g>
+<g class="floaty" style="animation-delay: -4s"><path transform="translate(560 70) scale(.7)" d="M12 21s-7.5-4.6-10-9.3C.3 8.4 2.2 4 6.2 4c2.3 0 3.9 1.3 5.8 3.4C13.9 5.3 15.5 4 17.8 4c4 0 5.9 4.4 4.2 7.7C19.5 16.4 12 21 12 21z" fill="#A8D8FF"></path></g>
+</svg>
+<sc-for list="{{spots}}" as="t" hint-placeholder-count="5">
+<button class="hit" onClick="{{t.pick}}" onMouseEnter="{{t.enter}}" onMouseLeave="{{t.leave}}" onFocus="{{t.enter}}" onBlur="{{t.leave}}" aria-label="{{t.label}}: open info" style="left: {{t.cx}}%; top: {{t.cy}}%; width: {{t.w}}%; height: {{t.h}}%"></button>
+<sc-if value="{{t.show}}" hint-placeholder-val="{{ false }}"><span class="bubble" role="tooltip" style="position: absolute; left: {{t.lx}}%; top: {{t.ly}}%; transform: translate(-50%,-100%); background: #2B2440; color: #fff; padding: 8px 14px; border-radius: 999px; font-size: 14px; font-weight: 600; white-space: nowrap; pointer-events: none; box-shadow: 0 8px 20px rgba(43,36,64,.25)">{{t.label}}</span></sc-if>
+</sc-for>
+</div>
+</div>
+
+<!-- TOP LEFT -->
+<div style="position: absolute; left: 20px; top: 20px; display: flex; align-items: center; gap: 12px">
+<a class="ibtn glass fx" href="Main.dc.html" aria-label="Back to home"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg></a>
+<div class="glass" style="border-radius: 16px; padding: 8px 16px; display: flex; flex-direction: column"><h1 class="disp" style="margin: 0; font-size: 22px; font-weight: 600; line-height: 1.2">Heart Town</h1><span style="font-size: 12px; color: #5F5878">Hearts2Hearts mini city</span></div>
+</div>
+
+<!-- TOP RIGHT -->
+<div style="position: absolute; right: 20px; top: 20px; display: flex; gap: 8px">
+<button class="ibtn glass" onClick="{{toggleNight}}" aria-pressed="{{nightStr}}" aria-label="Night mode">
+<sc-if value="{{night}}" hint-placeholder-val="{{ false }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M5 19l1.5-1.5M17.5 6.5L19 5"></path></svg></sc-if>
+<sc-if value="{{day}}" hint-placeholder-val="{{ true }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"></path></svg></sc-if>
+</button>
+<button class="ibtn glass" onClick="{{toggleSound}}" aria-pressed="{{soundStr}}" aria-label="Background music">
+<sc-if value="{{sound}}" hint-placeholder-val="{{ false }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4zM16 9a4 4 0 0 1 0 6M18.5 6.5a8 8 0 0 1 0 11"></path></svg></sc-if>
+<sc-if value="{{mute}}" hint-placeholder-val="{{ true }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4zM17 9l4 6M21 9l-4 6"></path></svg></sc-if>
+</button>
+<button class="ibtn glass" onClick="{{reset}}" aria-label="Reset view"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 1 0 3-6.2M4 4v4h4"></path></svg></button>
+</div>
+
+<!-- LEGEND -->
+<nav class="legend glass" aria-label="Buildings" style="border-radius: 20px; padding: 12px">
+<span class="lt" style="display: block; padding: 4px 12px 8px; font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: #5F5878">Fly to</span>
+<div class="items" style="display: flex; flex-direction: column; gap: 2px">
+<sc-for list="{{spots}}" as="t" hint-placeholder-count="5"><button class="{{t.legCls}}" onClick="{{t.pick}}" onMouseEnter="{{t.enter}}" onMouseLeave="{{t.leave}}"><span style="width: 10px; height: 10px; border-radius: 50%; background: {{t.dot}}; display: block; flex: none"></span>{{t.label}}</button></sc-for>
+</div>
+</nav>
+
+<!-- INFO CARD -->
+<sc-if value="{{hasSel}}" hint-placeholder-val="{{ false }}">
+<div class="glass" role="dialog" aria-label="{{sel.label}}" style="position: absolute; left: 20px; bottom: 76px; width: 320px; max-width: calc(100% - 40px); border-radius: 20px; padding: 20px; box-sizing: border-box; display: flex; flex-direction: column; gap: 10px; box-shadow: 0 16px 40px rgba(43,36,64,.18)">
+<div style="display: flex; justify-content: space-between; align-items: center"><span style="display: flex; align-items: center; gap: 8px"><span style="width: 12px; height: 12px; border-radius: 50%; background: {{sel.dot}}; display: block"></span><span class="disp" style="font-size: 22px; font-weight: 600">{{sel.label}}</span></span><button class="ibtn" onClick="{{closeSel}}" aria-label="Close" style="width: 36px; height: 36px; background: rgba(43,36,64,.07)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
+<span style="font-size: 14px; line-height: 1.6; color: #5F5878">{{sel.desc}}</span>
+<a class="btn btn-p" href="{{sel.href}}" style="align-self: flex-start">Go to page<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+</div>
+</sc-if>
+
+<!-- HINT -->
+<div class="hint glass" style="position: absolute; left: 50%; bottom: 20px; transform: translateX(-50%); border-radius: 999px; padding: 10px 18px; font-size: 14px; font-weight: 500; white-space: nowrap; display: flex; align-items: center; gap: 8px">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11V5a2 2 0 0 1 4 0v5M13 10V8a2 2 0 0 1 4 0v4M17 11a2 2 0 0 1 4 0v3a7 7 0 0 1-7 7h-1a7 7 0 0 1-6-3.4L5 15a2 2 0 0 1 3.4-2L9 14"></path></svg>
+Drag to explore · Click a building
+</div>
+
+<!-- LOADING -->
+<sc-if value="{{loading}}" hint-placeholder-val="{{ true }}">
+<div role="status" aria-live="polite" style="position: absolute; inset: 0; z-index: 100; background: #FFF8F3; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; opacity: {{loadOp}}; transition: opacity 400ms ease">
+<svg width="120" height="120" viewBox="0 0 24 24" aria-hidden="true"><defs><clipPath id="hc"><path d="M12 21s-7.5-4.6-10-9.3C.3 8.4 2.2 4 6.2 4c2.3 0 3.9 1.3 5.8 3.4C13.9 5.3 15.5 4 17.8 4c4 0 5.9 4.4 4.2 7.7C19.5 16.4 12 21 12 21z"></path></clipPath></defs><path d="M12 21s-7.5-4.6-10-9.3C.3 8.4 2.2 4 6.2 4c2.3 0 3.9 1.3 5.8 3.4C13.9 5.3 15.5 4 17.8 4c4 0 5.9 4.4 4.2 7.7C19.5 16.4 12 21 12 21z" fill="#FFE3F1"></path><g clip-path="url(#hc)"><g transform="translate(0 {{fillY}})"><g class="wave"><path d="M-2 0 Q 4 -1.6 10 0 T 22 0 T 34 0 T 46 0 V 30 H -2 Z" fill="#FF8FB8"></path></g></g></g></svg>
+<span class="disp" style="font-size: 28px; font-weight: 600; font-variant-numeric: tabular-nums">{{loadPct}}%</span>
+<span style="font-size: 14px; color: #6E6787">Building Heart Town…</span>
+</div>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"reduceMotion":{"editor":"boolean","default":false,"section":"Theme"},"startNight":{"editor":"boolean","default":false,"section":"Scene"},"$preview":{"width":1440,"height":900}}'>
+function buildCity() {
+  const U = 40, CX = 500, CY = 150;
+  const P = function (x, y, z) { return [CX + (x - y) * U * 0.866, CY + (x + y) * U * 0.5 - z * U]; };
+  const poly = function (pts) { return "M" + pts.map(function (p) { return p[0].toFixed(1) + " " + p[1].toFixed(1); }).join(" L") + " Z"; };
+  const box = function (b) {
+    const x = b.x, y = b.y, w = b.w, d = b.d, h = b.h;
+    const wz = Math.max(0.5, h * 0.55), wh = Math.min(0.35, h * 0.2);
+    return {
+      id: b.id,
+      top: poly([P(x, y, h), P(x + w, y, h), P(x + w, y + d, h), P(x, y + d, h)]),
+      left: poly([P(x, y + d, 0), P(x + w, y + d, 0), P(x + w, y + d, h), P(x, y + d, h)]),
+      right: poly([P(x + w, y, 0), P(x + w, y + d, 0), P(x + w, y + d, h), P(x + w, y, h)]),
+      door: poly([P(x + w * 0.4, y + d, 0), P(x + w * 0.6, y + d, 0), P(x + w * 0.6, y + d, Math.min(0.7, h * 0.4)), P(x + w * 0.4, y + d, Math.min(0.7, h * 0.4))]),
+      win: poly([P(x + w, y + d * 0.3, wz), P(x + w, y + d * 0.7, wz), P(x + w, y + d * 0.7, wz + wh), P(x + w, y + d * 0.3, wz + wh)]),
+      ct: b.c[0], cl: b.c[2], cr: b.c[1], depth: x + w / 2 + y + d / 2, behindRoad: y + d <= 3.3,
+      ctr: P(x + w / 2, y + d / 2, h / 2), topc: P(x + w / 2, y + d / 2, h), span: (w + d) * U * 0.866, tall: (w + d) * U * 0.5 + h * U
+    };
+  };
+  const pink = ["#FFD0E2", "#FFB6D3", "#FF9EC3"], lilac = ["#E4DAFF", "#CFC0FF", "#B9A3F5"], sky = ["#D6ECFF", "#B3D9FA", "#8FC4F2"], peach = ["#FFE6D2", "#FFD0AE", "#F5B98F"], house = ["#FFF0E6", "#EED7CB"];
+  const BL = [
+    { id: "music", x: 1, y: 1, w: 2, d: 2, h: 2.2, c: pink }, { id: "hall", x: 5.6, y: 0.8, w: 3.2, d: 2.2, h: 3, c: lilac },
+    { id: "school", x: 1, y: 5, w: 2, d: 2.4, h: 2.6, c: sky }, { id: "cafe", x: 6.4, y: 6.2, w: 2, d: 2, h: 1.6, c: peach },
+    { id: "h1", x: 4.2, y: 4.3, w: 0.9, d: 0.9, h: 1.1, c: ["#FFD0E2"].concat(house) }, { id: "h2", x: 5.4, y: 4.3, w: 0.9, d: 0.9, h: 1.3, c: ["#D6ECFF"].concat(house) },
+    { id: "h3", x: 4.2, y: 5.5, w: 0.9, d: 0.9, h: 1.0, c: ["#E4DAFF"].concat(house) }, { id: "h4", x: 5.4, y: 5.5, w: 0.9, d: 0.9, h: 1.2, c: ["#FFF1B8"].concat(house) }
+  ].map(box).sort(function (a, b) { return a.depth - b.depth; });
+  const w1 = P(0.3, 3.55, 0), w2 = P(3.55, 0.3, 0);
+  return {
+    ground: poly([P(0, 0, 0), P(10, 0, 0), P(10, 10, 0), P(0, 10, 0)]),
+    slabL: poly([P(0, 10, 0), P(10, 10, 0), P(10, 10, -0.4), P(0, 10, -0.4)]),
+    slabR: poly([P(10, 0, 0), P(10, 10, 0), P(10, 10, -0.4), P(10, 0, -0.4)]),
+    road1: poly([P(0, 3.3, 0), P(10, 3.3, 0), P(10, 3.8, 0), P(0, 3.8, 0)]),
+    road2: poly([P(3.3, 0, 0), P(3.8, 0, 0), P(3.8, 10, 0), P(3.3, 10, 0)]),
+    blocks: BL, w1x: w1[0].toFixed(1), w1y: w1[1].toFixed(1), w2x: w2[0].toFixed(1), w2y: w2[1].toFixed(1), P: P
+  };
+}
+const CITY = buildCity();
+const SPOTS = [
+  { id: "music", label: "Music Store", href: "Music.dc.html", dot: "#FF8FB8", grp: ["music"], desc: "The discography, popular tracks, music videos and the player all live here." },
+  { id: "hall", label: "Concert Hall", href: "Schedule.dc.html", dot: "#B9A3F5", grp: ["hall"], desc: "Concerts, fan meetings and music shows, with a countdown to the next one." },
+  { id: "school", label: "School", href: "Game.dc.html", dot: "#8FC4F2", grp: ["school"], desc: "Test what you know: quiz, memory match and more mini games." },
+  { id: "cafe", label: "Café", href: "Blog.dc.html", dot: "#F5B98F", grp: ["cafe"], desc: "Grab a drink and read today’s AI-written fan note." },
+  { id: "houses", label: "Member Houses", href: "Members.dc.html", dot: "#FFD25E", grp: ["h1", "h2", "h3", "h4"], desc: "Eight little houses, one for each member. Visit their profiles." }
+];
+const STARS = [];
+for (let i = 0; i < 24; i++) STARS.push({ x: ((i * 37) % 100), y: ((i * 23) % 45), r: 1 + (i % 3), d: -(i % 5) * 0.4 + "s" });
+
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { night: null, sound: false, hover: null, sel: null, px: 0, py: 0, zoom: 1, drag: null, load: 0 }; }
+  componentDidMount() {
+    this.lt = setInterval(() => { const n = Math.min(100, this.state.load + 7 + Math.round(Math.random() * 6)); this.setState({ load: n }); if (n >= 100) clearInterval(this.lt); }, 110);
+  }
+  componentWillUnmount() { clearInterval(this.lt); }
+  renderVals() {
+    const s = this.state;
+    const night = s.night === null ? !!this.props.startNight : s.night;
+    const spot = (id) => SPOTS.find((x) => x.id === id);
+    const active = s.hover || s.sel;
+    const grp = active ? spot(active).grp : [];
+    const blocks = CITY.blocks.map((b) => ({ ...b, cls: grp.indexOf(b.id) >= 0 ? "bld up" : "bld" }));
+    const fly = (sp) => {
+      const bs = CITY.blocks.filter((b) => sp.grp.indexOf(b.id) >= 0);
+      const cx = bs.reduce((a, b) => a + b.ctr[0], 0) / bs.length, cy = bs.reduce((a, b) => a + b.ctr[1], 0) / bs.length;
+      this.setState({ sel: sp.id, px: (500 - cx) / 10 * 1.4, py: (300 - cy) / 6 * 1.4, zoom: 1.4 });
+    };
+    const spots = SPOTS.map((sp) => {
+      const bs = CITY.blocks.filter((b) => sp.grp.indexOf(b.id) >= 0);
+      const xs = bs.map((b) => b.ctr[0]), ys = bs.map((b) => b.ctr[1]);
+      const cx = (Math.min.apply(null, xs) + Math.max.apply(null, xs)) / 2, cy = (Math.min.apply(null, ys) + Math.max.apply(null, ys)) / 2;
+      const span = Math.max.apply(null, bs.map((b) => b.span)) + (Math.max.apply(null, xs) - Math.min.apply(null, xs));
+      const tall = Math.max.apply(null, bs.map((b) => b.tall)) + (Math.max.apply(null, ys) - Math.min.apply(null, ys));
+      const topY = Math.min.apply(null, bs.map((b) => b.topc[1]));
+      return { ...sp, cx: (cx / 10).toFixed(2), cy: (cy / 6).toFixed(2), w: (span * 0.8 / 10).toFixed(2), h: (tall * 0.8 / 6).toFixed(2), lx: (cx / 10).toFixed(2), ly: ((topY - 26) / 6).toFixed(2),
+        show: s.hover === sp.id, legCls: s.sel === sp.id ? "leg on" : "leg",
+        enter: () => this.setState({ hover: sp.id }), leave: () => this.setState({ hover: null }), pick: () => fly(sp) };
+    });
+    const loading = s.load < 100;
+    return {
+      rootClass: "h2h" + (this.props.reduceMotion ? " rm" : ""),
+      night: night, day: !night, nightStr: night ? "true" : "false",
+      sound: s.sound, mute: !s.sound, soundStr: s.sound ? "true" : "false",
+      toggleNight: () => this.setState({ night: !night }), toggleSound: () => this.setState({ sound: !s.sound }),
+      reset: () => this.setState({ px: 0, py: 0, zoom: 1, sel: null }),
+      sky: night ? "linear-gradient(180deg,#1B1630,#3B3068 60%,#6B5A9E)" : "linear-gradient(180deg,#CFE8FF,#FFF1F7 70%,#FFE3F1)",
+      stars: STARS,
+      cloudFill: night ? "rgba(255,255,255,.16)" : "rgba(255,255,255,.95)",
+      groundFill: night ? "#9FC0AD" : "#E3F5E9", slabL: night ? "#7FA591" : "#BFE3CC", slabR: night ? "#8FB4A0" : "#D3EEDC",
+      roadFill: night ? "rgba(255,255,255,.3)" : "rgba(255,255,255,.92)",
+      doorFill: night ? "#FFE38A" : "#FFFFFF", winFill: night ? "#FFE38A" : "rgba(255,255,255,.75)", bFilter: night ? "brightness(.72) saturate(1.1)" : "none",
+      city: CITY, back: blocks.filter((b) => b.behindRoad), front: blocks.filter((b) => !b.behindRoad),
+      spots: spots,
+      hasSel: !!s.sel, sel: s.sel ? spot(s.sel) : { label: "", desc: "", href: "#", dot: "" }, closeSel: () => this.setState({ sel: null }),
+      px: s.px.toFixed(2), py: s.py.toFixed(2), zoom: s.zoom,
+      stageClass: "stage" + (s.drag ? " drag" : ""), cursor: s.drag ? "grabbing" : "grab",
+      down: (e) => { if (e.target.closest && e.target.closest("button")) return; const r = e.currentTarget.getBoundingClientRect(); this.setState({ drag: { x: e.clientX, y: e.clientY, px: s.px, py: s.py, w: Math.min(1300, r.width), h: Math.min(1300, r.width) * 0.6 } }); },
+      move: (e) => { const d = this.state.drag; if (!d) return; this.setState({ px: d.px + (e.clientX - d.x) / d.w * 100, py: d.py + (e.clientY - d.y) / d.h * 100 }); },
+      up: () => { if (this.state.drag) this.setState({ drag: null }); },
+      loading: loading, loadPct: s.load, loadOp: s.load >= 100 ? 0 : 1, fillY: (21 - (s.load / 100) * 18).toFixed(2)
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Hearts2Hearts fan site · UI kit</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&amp;family=IBM+Plex+Sans+KR:wght@400;500;600&amp;family=Caveat:wght@600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#C92A68}a:hover{color:#9E1D50}
+.h2h{--pink-500:#FF8FB8;--pink-700:#C92A68;--cream-50:#FFF8F3;--ink-900:#2B2440;--ink-500:#6E6787;--surface:#FFFFFF;--glass:rgba(255,255,255,.6);--glass-b:rgba(255,255,255,.7);--line:rgba(43,36,64,.08);--holo:linear-gradient(135deg,#FFB6D5,#C9B6FF,#A8D8FF,#FFE3F1);--holo-deep:linear-gradient(135deg,#D63A77,#8A5CE6,#3D84D4);--shadow:0 8px 24px rgba(255,143,184,.25);--glow:0 0 32px rgba(201,182,255,.5);--spring:cubic-bezier(.34,1.56,.64,1);font-family:'IBM Plex Sans KR',system-ui,sans-serif;color:var(--ink-900);background:var(--cream-50)}
+.disp{font-family:'Fredoka',ui-rounded,system-ui,sans-serif}
+.sig{font-family:'Caveat',cursive}
+.glass{background:var(--glass);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--glass-b)}
+.panel{background:#fff;border-radius:24px;padding:28px;box-sizing:border-box;display:flex;flex-direction:column;gap:20px;box-shadow:0 1px 0 rgba(43,36,64,.04)}
+.ptitle{font-family:'Fredoka',ui-rounded,sans-serif;font-size:22px;font-weight:600;margin:0}
+.lbl{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-500)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 24px;border-radius:999px;font:600 16px/1 'Fredoka',ui-rounded,sans-serif;border:0;cursor:pointer;text-decoration:none;transition:transform 150ms var(--spring),box-shadow 150ms ease}
+.btn-p{background:var(--holo-deep);color:#fff;box-shadow:var(--shadow)}
+.btn-s{background:var(--glass);color:var(--pink-700);border:1.5px solid var(--pink-500)}
+.is-hover{transform:translateY(-2px)}.btn-p.is-hover{box-shadow:var(--shadow),var(--glow)}
+.is-press{transform:scale(.96)}
+.is-focus{outline:2px solid var(--pink-700);outline-offset:2px}
+.btn[disabled]{opacity:.4;box-shadow:none;cursor:not-allowed}
+.ibtn{width:44px;height:44px;flex:none;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;background:var(--glass);border:1px solid rgba(43,36,64,.08);color:var(--ink-900);cursor:pointer;padding:0}
+.ibtn.is-hover{transform:scale(1.1)}
+.chip{display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 10px;border-radius:999px;font-size:12px;font-weight:500;white-space:nowrap}
+.state{display:flex;flex-direction:column;align-items:flex-start;gap:8px}
+.spin-btn{width:16px;height:16px;border-radius:50%;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;animation:spin 800ms linear infinite}
+.shimmer{background:linear-gradient(90deg,#FBEFF5 0%,#FFE3F1 40%,#EFE8FF 60%,#FBEFF5 100%);background-size:200% 100%;animation:shimmer 1.4s linear infinite}
+.wave{animation:wave 2.4s ease-in-out infinite}
+.eq span{display:block;width:3px;border-radius:2px;background:#C92A68;animation:eq 900ms ease-in-out infinite}
+.ans{min-height:56px;width:100%;border-radius:999px;border:1.5px solid var(--line);background:#fff;color:var(--ink-900);font:600 17px/1 'Fredoka',ui-rounded,sans-serif;display:flex;align-items:center;justify-content:center}
+.ans.ok{background:#BFF0DA;border-color:#2E9B6E;color:#0F4D33}
+.ans.bad{background:#FFE0E6;border-color:#C92A68;color:#7A1236}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes shimmer{from{background-position:200% 0}to{background-position:-200% 0}}
+@keyframes wave{0%,100%{transform:translate(0,22px)}50%{transform:translate(-24px,0px)}}
+@keyframes eq{0%,100%{height:4px}50%{height:14px}}
+@media (prefers-reduced-motion:reduce){.h2h *{animation:none!important;transition:none!important}}
+</style>
+</helmet>
+<div class="h2h" style="width: 1600px; min-height: 2600px; box-sizing: border-box; padding: 64px; display: flex; flex-direction: column; gap: 32px">
+<div style="display: flex; align-items: flex-end; justify-content: space-between">
+<div style="display: flex; flex-direction: column; gap: 6px">
+<span class="lbl" style="color: var(--pink-700)">Hearts2Hearts fan site</span>
+<h1 class="disp" style="margin: 0; font-size: 56px; font-weight: 600; letter-spacing: -0.02em">UI kit &amp; states</h1>
+</div>
+<p style="margin: 0; max-width: 520px; font-size: 14px; line-height: 1.6; color: var(--ink-500)">Every interactive component carries Default, Hover, Active, Focus (2px pink ring, 2px offset), Disabled and Loading. Reduced motion turns off tilt, parallax, vinyl spin and confetti.</p>
+</div>
+
+<!-- TOKENS -->
+<section class="panel">
+<h2 class="ptitle">Tokens</h2>
+<div style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 16px">
+<div class="state"><span style="width: 100%; height: 72px; border-radius: 16px; background: #FF8FB8; display: block"></span><span style="font-size: 13px; font-weight: 600">pink-500</span><span style="font-size: 12px; color: var(--ink-500)">#FF8FB8 · fills, icons</span></div>
+<div class="state"><span style="width: 100%; height: 72px; border-radius: 16px; background: #C92A68; display: block"></span><span style="font-size: 13px; font-weight: 600">pink-700</span><span style="font-size: 12px; color: var(--ink-500)">#C92A68 · pink text, focus</span></div>
+<div class="state"><span style="width: 100%; height: 72px; border-radius: 16px; background: #C9B6FF; display: block"></span><span style="font-size: 13px; font-weight: 600">lilac-400</span><span style="font-size: 12px; color: var(--ink-500)">#C9B6FF</span></div>
+<div class="state"><span style="width: 100%; height: 72px; border-radius: 16px; background: #A8D8FF; display: block"></span><span style="font-size: 13px; font-weight: 600">sky-300</span><span style="font-size: 12px; color: var(--ink-500)">#A8D8FF</span></div>
+<div class="state"><span style="width: 100%; height: 72px; border-radius: 16px; background: #FFF8F3; border: 1px solid var(--line); box-sizing: border-box; display: block"></span><span style="font-size: 13px; font-weight: 600">cream-50</span><span style="font-size: 12px; color: var(--ink-500)">#FFF8F3 · ground</span></div>
+<div class="state"><span style="width: 100%; height: 72px; border-radius: 16px; background: #2B2440; display: block"></span><span style="font-size: 13px; font-weight: 600">ink-900 / ink-500</span><span style="font-size: 12px; color: var(--ink-500)">#2B2440 · #6E6787</span></div>
+<div class="state"><span style="width: 100%; height: 72px; border-radius: 16px; background: var(--holo); display: block"></span><span style="font-size: 13px; font-weight: 600">holo / holo-deep</span><span style="font-size: 12px; color: var(--ink-500)">deep variant under white text</span></div>
+</div>
+<div style="display: flex; gap: 48px; flex-wrap: wrap; align-items: flex-end">
+<div class="state"><span class="lbl">Radius</span><div style="display: flex; gap: 12px; align-items: flex-end"><span style="width: 48px; height: 48px; border-radius: 8px; background: #FFE3F1; display: block"></span><span style="width: 48px; height: 48px; border-radius: 16px; background: #FFE3F1; display: block"></span><span style="width: 48px; height: 48px; border-radius: 24px; background: #FFE3F1; display: block"></span><span style="width: 96px; height: 48px; border-radius: 999px; background: #FFE3F1; display: block"></span></div><span style="font-size: 12px; color: var(--ink-500)">8 · 16 · 24 · pill</span></div>
+<div class="state"><span class="lbl">Shadow · glow · glass</span><div style="display: flex; gap: 16px"><span style="width: 96px; height: 56px; border-radius: 16px; background: #fff; box-shadow: var(--shadow); display: block"></span><span style="width: 96px; height: 56px; border-radius: 16px; background: #fff; box-shadow: var(--glow); display: block"></span><span style="width: 96px; height: 56px; border-radius: 16px; background: var(--holo); display: block; position: relative; overflow: hidden"><span class="glass" style="position: absolute; inset: 10px; border-radius: 10px; display: block"></span></span></div></div>
+<div class="state"><span class="lbl">Type</span><div style="display: flex; gap: 24px; align-items: baseline"><span class="disp" style="font-size: 40px; font-weight: 600">Fredoka</span><span style="font-size: 18px">IBM Plex Sans KR · 하츠투하츠</span><span class="sig" style="font-size: 34px">Signature</span></div></div>
+<div class="state"><span class="lbl">Motion</span><span style="font-size: 13px; color: var(--ink-500)">spring 260 / 20 · hover 150ms · page 400ms</span></div>
+</div>
+</section>
+
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px">
+
+<!-- BUTTONS -->
+<section class="panel">
+<h2 class="ptitle">Buttons</h2>
+<div style="display: flex; flex-wrap: wrap; gap: 20px">
+<div class="state"><span class="lbl">Default</span><button class="btn btn-p"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-10-9.3C.3 8.4 2.2 4 6.2 4c2.3 0 3.9 1.3 5.8 3.4C13.9 5.3 15.5 4 17.8 4c4 0 5.9 4.4 4.2 7.7C19.5 16.4 12 21 12 21z" fill="currentColor"></path></svg>Listen Now</button></div>
+<div class="state"><span class="lbl">Hover</span><button class="btn btn-p is-hover"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-10-9.3C.3 8.4 2.2 4 6.2 4c2.3 0 3.9 1.3 5.8 3.4C13.9 5.3 15.5 4 17.8 4c4 0 5.9 4.4 4.2 7.7C19.5 16.4 12 21 12 21z" fill="currentColor"></path></svg>Listen Now</button></div>
+<div class="state"><span class="lbl">Pressed</span><button class="btn btn-p is-press"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-10-9.3C.3 8.4 2.2 4 6.2 4c2.3 0 3.9 1.3 5.8 3.4C13.9 5.3 15.5 4 17.8 4c4 0 5.9 4.4 4.2 7.7C19.5 16.4 12 21 12 21z" fill="currentColor"></path></svg>Listen Now</button></div>
+<div class="state"><span class="lbl">Focus</span><button class="btn btn-p is-focus"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-10-9.3C.3 8.4 2.2 4 6.2 4c2.3 0 3.9 1.3 5.8 3.4C13.9 5.3 15.5 4 17.8 4c4 0 5.9 4.4 4.2 7.7C19.5 16.4 12 21 12 21z" fill="currentColor"></path></svg>Listen Now</button></div>
+<div class="state"><span class="lbl">Disabled</span><button class="btn btn-p" disabled>Listen Now</button></div>
+<div class="state"><span class="lbl">Loading</span><button class="btn btn-p" aria-busy="true"><span class="spin-btn" aria-hidden="true"></span>Loading</button></div>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 20px">
+<div class="state"><span class="lbl">Secondary</span><button class="btn btn-s">Meet the members</button></div>
+<div class="state"><span class="lbl">Hover</span><button class="btn btn-s is-hover">Meet the members</button></div>
+<div class="state"><span class="lbl">Focus</span><button class="btn btn-s is-focus">Meet the members</button></div>
+<div class="state"><span class="lbl">Disabled</span><button class="btn btn-s" disabled>Meet the members</button></div>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-end">
+<div class="state"><span class="lbl">Icon</span><button class="ibtn" aria-label="Next"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M9 5l7 7-7 7"></path></svg></button></div>
+<div class="state"><span class="lbl">Hover 1.1</span><button class="ibtn is-hover" aria-label="Next"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M9 5l7 7-7 7"></path></svg></button></div>
+<div class="state"><span class="lbl">Focus</span><button class="ibtn is-focus" aria-label="Next"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M9 5l7 7-7 7"></path></svg></button></div>
+<div class="state"><span class="lbl">Back to top</span><button class="ibtn" aria-label="Back to top" style="width: 56px; height: 56px; background: var(--holo-deep); color: #fff; border: 0; box-shadow: var(--shadow)"><svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-10-9.3C.3 8.4 2.2 4 6.2 4c2.3 0 3.9 1.3 5.8 3.4C13.9 5.3 15.5 4 17.8 4c4 0 5.9 4.4 4.2 7.7C19.5 16.4 12 21 12 21z" fill="currentColor"></path><path d="M12 15V9m-3 3l3-3 3 3" stroke="#8A5CE6" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></div>
+</div>
+<p style="margin: 0; font-size: 12px; color: var(--ink-500)">Primary uses the deep holo gradient so white text stays readable; the pastel holo is reserved for surfaces. Icon buttons are 44px for touch.</p>
+</section>
+
+<!-- SMALL WIDGETS -->
+<section class="panel">
+<h2 class="ptitle">Small widgets</h2>
+<div style="display: flex; flex-wrap: wrap; gap: 28px; align-items: flex-start">
+<div class="state"><span class="lbl">Toast · 3s</span><div class="glass" style="display: flex; align-items: center; gap: 8px; padding: 12px 18px; border-radius: 999px; box-shadow: var(--shadow); font-size: 14px; font-weight: 500; background: rgba(255,255,255,.85)"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-10-9.3C.3 8.4 2.2 4 6.2 4c2.3 0 3.9 1.3 5.8 3.4C13.9 5.3 15.5 4 17.8 4c4 0 5.9 4.4 4.2 7.7C19.5 16.4 12 21 12 21z" fill="#FF8FB8"></path></svg>Added to your playlist</div></div>
+<div class="state"><span class="lbl">Tooltip</span><div style="display: flex; flex-direction: column; align-items: center"><span style="background: #2B2440; color: #fff; font-size: 12px; padding: 6px 10px; border-radius: 8px">Holo rarity · 1 in 8</span><span style="width: 10px; height: 10px; background: #2B2440; transform: rotate(45deg); margin-top: -5px; display: block"></span></div></div>
+<div class="state"><span class="lbl">Chips</span><div style="display: flex; gap: 6px; flex-wrap: wrap"><span class="chip" style="background: #FFE3F1">Recap</span><span class="chip" style="background: #E6DCFF">Discography</span><span class="chip" style="background: #DDF0FF">Trivia</span><span class="chip" style="background: #FFF1D6">2026</span></div></div>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 32px; align-items: flex-end">
+<div class="state"><span class="lbl">Loader · loading screen</span>
+<svg width="96" height="96" viewBox="0 0 24 24" role="img" aria-label="Loading"><defs><clipPath id="hc"><path d="M12 21s-7.5-4.6-10-9.3C.3 8.4 2.2 4 6.2 4c2.3 0 3.9 1.3 5.8 3.4C13.9 5.3 15.5 4 17.8 4c4 0 5.9 4.4 4.2 7.7C19.5 16.4 12 21 12 21z"></path></clipPath></defs><path d="M12 21s-7.5-4.6-10-9.3C.3 8.4 2.2 4 6.2 4c2.3 0 3.9 1.3 5.8 3.4C13.9 5.3 15.5 4 17.8 4c4 0 5.9 4.4 4.2 7.7C19.5 16.4 12 21 12 21z" fill="#FFE3F1"></path><g clip-path="url(#hc)"><g class="wave"><path d="M-2 10 Q 4 8 10 10 T 22 10 T 34 10 T 46 10 V 30 H -2 Z" fill="#FF8FB8"></path></g></g></svg>
+</div>
+<div class="state"><span class="lbl">Empty state</span>
+<div style="display: flex; align-items: center; gap: 12px; padding: 16px 20px; border-radius: 16px; border: 1.5px dashed var(--line)"><svg width="48" height="48" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-10-9.3C.3 8.4 2.2 4 6.2 4c2.3 0 3.9 1.3 5.8 3.4C13.9 5.3 15.5 4 17.8 4c4 0 5.9 4.4 4.2 7.7C19.5 16.4 12 21 12 21z" fill="#FFE3F1"></path><circle cx="9" cy="11" r="1" fill="#2B2440"></circle><circle cx="15" cy="11" r="1" fill="#2B2440"></circle><path d="M10 15c1.2-.8 2.8-.8 4 0" stroke="#2B2440" stroke-width="1" fill="none" stroke-linecap="round"></path></svg><span style="font-size: 14px; color: var(--ink-500)">Nothing announced here yet.</span></div>
+</div>
+<div class="state"><span class="lbl">Rarity badges</span><div style="display: flex; gap: 6px"><span class="chip" style="background: #F1EEF5; color: #2B2440">Common</span><span class="chip" style="background: #fff; color: #8A3FC9; border: 1px solid #E6DCFF">Rare</span><span class="chip" style="background: #2B2440; color: #fff"><svg width="10" height="10" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l1.8 8.2L22 12l-8.2 1.8L12 22l-1.8-8.2L2 12l8.2-1.8z" fill="#FFB6D5"></path></svg>Holo</span></div></div>
+</div>
+</section>
+
+<!-- MEMBER CARD -->
+<section class="panel">
+<h2 class="ptitle">MemberCard · 3:4</h2>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px">
+<div class="state"><span class="lbl">Default</span>
+<div style="width: 100%; aspect-ratio: 3 / 4; border-radius: 24px; overflow: hidden; position: relative; border-top: 4px solid #A8D8FF; background: linear-gradient(165deg,#A8D8FF,#FFF8F3 130%); box-shadow: 0 10px 24px rgba(43,36,64,.1)">
+<span style="position: absolute; left: 0; right: 0; bottom: 0; height: 60%; background: linear-gradient(0deg, rgba(43,36,64,.78), rgba(43,36,64,0))"></span>
+<div style="position: absolute; left: 16px; bottom: 16px; display: flex; flex-direction: column; gap: 6px; color: #fff"><span class="disp" style="font-size: 26px; font-weight: 600">Stella <span style="font-size: 14px; font-weight: 400">스텔라</span></span><span class="chip" style="align-self: flex-start; background: #A8D8FF; color: #2B2440">Vocalist</span></div>
+</div></div>
+<div class="state"><span class="lbl">Hover · zoom, lift, fact</span>
+<div style="width: 100%; aspect-ratio: 3 / 4; border-radius: 24px; overflow: hidden; position: relative; border-top: 4px solid #A8D8FF; background: linear-gradient(165deg,#A8D8FF,#FFF8F3 130%); box-shadow: var(--shadow); transform: translateY(-6px)">
+<span style="position: absolute; left: 0; right: 0; bottom: 0; height: 60%; background: linear-gradient(0deg, rgba(43,36,64,.78), rgba(43,36,64,0))"></span>
+<div style="position: absolute; left: 16px; bottom: 82px; display: flex; flex-direction: column; gap: 6px; color: #fff"><span class="disp" style="font-size: 26px; font-weight: 600">Stella <span style="font-size: 14px; font-weight: 400">스텔라</span></span><span class="chip" style="align-self: flex-start; background: #A8D8FF; color: #2B2440">Vocalist</span></div>
+<span style="position: absolute; left: 0; right: 0; bottom: 0; padding: 12px 16px; background: rgba(255,255,255,.92); color: #2B2440; font-size: 12px; line-height: 1.5">Spent part of her childhood in Vancouver, Canada.</span>
+</div></div>
+<div class="state"><span class="lbl">Skeleton</span>
+<div class="shimmer" style="width: 100%; aspect-ratio: 3 / 4; border-radius: 24px; position: relative">
+<span style="position: absolute; left: 16px; bottom: 44px; width: 55%; height: 18px; border-radius: 999px; background: rgba(255,255,255,.8)"></span>
+<span style="position: absolute; left: 16px; bottom: 18px; width: 35%; height: 14px; border-radius: 999px; background: rgba(255,255,255,.8)"></span>
+</div></div>
+</div>
+</section>
+
+<!-- TILT CARD -->
+<section class="panel">
+<h2 class="ptitle">TiltCard · photocard</h2>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; perspective: 1000px">
+<div class="state"><span class="lbl">Front · resting</span>
+<div style="width: 100%; aspect-ratio: 3 / 4; border-radius: 24px; border: 5px solid #fff; box-sizing: border-box; overflow: hidden; position: relative; background: linear-gradient(160deg,#FFB3CF,#FFF8F3 120%); box-shadow: 0 16px 32px rgba(43,36,64,.14)">
+<span class="chip" style="position: absolute; top: 10px; right: 10px; background: #2B2440; color: #fff">Holo</span>
+<span class="disp" style="position: absolute; left: 14px; bottom: 12px; color: #fff; font-size: 22px; font-weight: 600; text-shadow: 0 1px 8px rgba(43,36,64,.4)">Jiwoo</span>
+</div></div>
+<div class="state"><span class="lbl">Tilt ±15° · foil follows cursor</span>
+<div style="width: 100%; aspect-ratio: 3 / 4; border-radius: 24px; border: 5px solid #fff; box-sizing: border-box; overflow: hidden; position: relative; background: linear-gradient(160deg,#FFB3CF,#FFF8F3 120%); box-shadow: 0 24px 40px rgba(43,36,64,.2); transform: rotateX(8deg) rotateY(-12deg)">
+<span style="position: absolute; inset: 0; background: linear-gradient(115deg, transparent 20%, rgba(255,182,213,.9) 36%, rgba(201,182,255,.9) 46%, rgba(168,216,255,.9) 56%, transparent 75%); background-size: 260% 260%; background-position: 30% 20%; mix-blend-mode: color-dodge; opacity: .8"></span>
+<span style="position: absolute; left: 25%; top: 25%; width: 140px; height: 140px; margin: -70px 0 0 -70px; border-radius: 50%; background: radial-gradient(circle, rgba(255,255,255,.6), rgba(255,255,255,0) 65%)"></span>
+<span class="chip" style="position: absolute; top: 10px; right: 10px; background: #2B2440; color: #fff">Holo</span>
+<span class="disp" style="position: absolute; left: 14px; bottom: 12px; color: #fff; font-size: 22px; font-weight: 600; text-shadow: 0 1px 8px rgba(43,36,64,.4)">Jiwoo</span>
+</div></div>
+<div class="state"><span class="lbl">Back · flipped 180°</span>
+<div style="width: 100%; aspect-ratio: 3 / 4; border-radius: 24px; border: 5px solid #fff; box-sizing: border-box; overflow: hidden; background: #FFB3CF; padding: 16px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 16px 32px rgba(43,36,64,.14)">
+<span class="sig" style="font-size: 40px; transform: rotate(-6deg); display: block">Jiwoo</span>
+<span style="display: flex; flex-direction: column; gap: 6px; font-size: 12px; line-height: 1.4"><span>Born Sep 7, 2006</span><span>South Korean</span><span>Cast at a convenience store</span></span>
+</div></div>
+</div>
+</section>
+
+<!-- MUSIC -->
+<section class="panel">
+<h2 class="ptitle">Music widget</h2>
+<div style="display: flex; gap: 24px; align-items: flex-start">
+<div style="display: flex; flex-direction: column; gap: 16px; flex: 1">
+<div class="state"><span class="lbl">Compact · 280×56 · paused</span>
+<div class="glass" style="width: 280px; height: 56px; box-sizing: border-box; border-radius: 999px; display: flex; align-items: center; gap: 10px; padding: 0 6px; box-shadow: var(--shadow); background: rgba(255,255,255,.85)">
+<span style="width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg,#FFF6C9,#FFE08A 50%,#CFF3DD); box-shadow: inset 0 0 0 10px rgba(43,36,64,.18); display: block; flex: none"></span>
+<span style="flex: 1; min-width: 0"><span style="display: block; font-size: 11px; color: var(--ink-500)">Now playing</span><span style="display: block; font-size: 14px; font-weight: 600; white-space: nowrap; overflow: hidden">Lemon Tang · Hearts2Hearts</span></span>
+<button class="ibtn" aria-label="Play" style="background: var(--holo-deep); color: #fff; border: 0"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z" fill="currentColor"></path></svg></button>
+</div></div>
+<div class="state" style="width: 100%"><span class="lbl">Tracklist rows · default / hover / active</span>
+<div style="width: 100%; display: flex; flex-direction: column; gap: 2px">
+<div style="display: grid; grid-template-columns: 32px 1fr auto; gap: 12px; align-items: center; min-height: 44px; padding: 0 12px; border-radius: 12px; font-size: 15px"><span style="color: var(--ink-500); text-align: center">1</span><span>Focus</span><span style="color: var(--ink-500); font-size: 13px">–:––</span></div>
+<div style="display: grid; grid-template-columns: 32px 1fr auto; gap: 12px; align-items: center; min-height: 44px; padding: 0 12px; border-radius: 12px; font-size: 15px; background: var(--line)"><span style="display: flex; justify-content: center; color: var(--ink-500)"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z" fill="currentColor"></path></svg></span><span>Pretty Please</span><span style="color: var(--ink-500); font-size: 13px">–:––</span></div>
+<div style="display: grid; grid-template-columns: 32px 1fr auto; gap: 12px; align-items: center; min-height: 44px; padding: 0 12px; border-radius: 12px; font-size: 15px; color: #C92A68; font-weight: 600"><span class="eq" aria-hidden="true" style="display: inline-flex; align-items: flex-end; justify-content: center; gap: 2px; height: 14px"><span></span><span style="animation-delay: -.3s"></span><span style="animation-delay: -.6s"></span></span><span>Lemon Tang</span><span style="color: var(--ink-500); font-size: 13px; font-weight: 400">–:––</span></div>
+</div></div>
+</div>
+<div class="state"><span class="lbl">Expanded · 360×520 (scaled)</span>
+<div style="width: 216px; height: 312px; border-radius: 20px; overflow: hidden; position: relative; background: #2B2440; color: #fff">
+<div style="position: absolute; inset: -40px; background: linear-gradient(135deg,#FFF6C9,#FFE08A 50%,#CFF3DD); filter: blur(30px)"></div>
+<div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(43,36,64,.1), rgba(43,36,64,.72))"></div>
+<div style="position: relative; padding: 16px; display: flex; flex-direction: column; gap: 10px; height: 100%; box-sizing: border-box">
+<span style="width: 140px; height: 140px; border-radius: 50%; margin: 0 auto; display: block; background: linear-gradient(135deg,#FFF6C9,#FFE08A 50%,#CFF3DD); box-shadow: 0 12px 24px rgba(0,0,0,.25)"></span>
+<span class="disp" style="font-size: 18px; font-weight: 600">Lemon Tang</span>
+<span style="height: 4px; border-radius: 999px; background: linear-gradient(90deg,#FF8FB8 40%, rgba(255,255,255,.3) 40%); display: block"></span>
+<span style="display: flex; justify-content: space-between; align-items: center; margin-top: auto; font-size: 11px; opacity: .85"><span>shuffle</span><span>prev</span><span style="width: 40px; height: 40px; border-radius: 50%; background: #fff; display: block"></span><span>next</span><span>repeat</span></span>
+</div>
+</div></div>
+</div>
+</section>
+
+<!-- CAROUSEL & NAV -->
+<section class="panel">
+<h2 class="ptitle">Carousel &amp; navbar</h2>
+<div class="state" style="width: 100%"><span class="lbl">Indicators · active dot stretches · glass arrows · caption strip</span>
+<div style="width: 100%; aspect-ratio: 16 / 7; border-radius: 20px; overflow: hidden; position: relative; background: linear-gradient(135deg,#E9E1FF,#C9B6FF 50%,#BFE2FF)">
+<button class="ibtn glass" aria-label="Previous slide" style="position: absolute; left: 12px; top: 50%; margin-top: -22px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg></button>
+<button class="ibtn glass" aria-label="Next slide" style="position: absolute; right: 12px; top: 50%; margin-top: -22px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M9 5l7 7-7 7"></path></svg></button>
+<div class="glass" style="position: absolute; left: 12px; bottom: 12px; border-radius: 12px; padding: 8px 14px; display: flex; flex-direction: column"><span class="disp" style="font-size: 16px; font-weight: 600">Focus</span><span style="font-size: 12px; color: var(--ink-500)">1st mini album · Oct 20, 2025</span></div>
+</div>
+<div style="display: flex; gap: 8px; justify-content: center; width: 100%"><span style="width: 8px; height: 8px; border-radius: 999px; background: rgba(43,36,64,.25); display: block"></span><span style="width: 8px; height: 8px; border-radius: 999px; background: rgba(43,36,64,.25); display: block"></span><span style="width: 28px; height: 8px; border-radius: 999px; background: #C92A68; display: block"></span><span style="width: 8px; height: 8px; border-radius: 999px; background: rgba(43,36,64,.25); display: block"></span><span style="width: 8px; height: 8px; border-radius: 999px; background: rgba(43,36,64,.25); display: block"></span></div>
+</div>
+<div style="display: flex; gap: 20px; align-items: flex-start">
+<div class="state" style="flex: 1"><span class="lbl">Navbar · 64px · active heart dot</span>
+<div class="glass" style="width: 100%; height: 64px; border-radius: 16px; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; box-sizing: border-box; background: rgba(255,255,255,.8)">
+<span style="display: flex; align-items: center; gap: 8px"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-10-9.3C.3 8.4 2.2 4 6.2 4c2.3 0 3.9 1.3 5.8 3.4C13.9 5.3 15.5 4 17.8 4c4 0 5.9 4.4 4.2 7.7C19.5 16.4 12 21 12 21z" fill="#FF8FB8"></path></svg><span class="disp" style="font-weight: 600">H2H·S2U</span></span>
+<span style="display: flex; gap: 14px; font-size: 13px; color: var(--ink-500)"><span style="color: var(--ink-900); position: relative">Home<svg width="7" height="7" viewBox="0 0 24 24" aria-hidden="true" style="position: absolute; left: 50%; bottom: -9px; margin-left: -3.5px"><path d="M12 21s-7.5-4.6-10-9.3C.3 8.4 2.2 4 6.2 4c2.3 0 3.9 1.3 5.8 3.4C13.9 5.3 15.5 4 17.8 4c4 0 5.9 4.4 4.2 7.7C19.5 16.4 12 21 12 21z" fill="#FF8FB8"></path></svg></span><span>Members</span><span>Music</span><span>Blog</span></span>
+<span class="chip" style="background: #FFE3F1; color: #9E1D50">Now playing</span>
+</div></div>
+<div class="state"><span class="lbl">Mobile sheet</span>
+<div style="width: 150px; height: 220px; border-radius: 20px; background: #FFF8F3; border: 1px solid var(--line); padding: 14px; box-sizing: border-box; display: flex; flex-direction: column; gap: 4px">
+<span style="align-self: flex-end; width: 22px; height: 22px; border-radius: 50%; background: var(--line); display: block"></span>
+<span class="disp" style="font-size: 18px; font-weight: 600">Home</span><span class="disp" style="font-size: 18px; font-weight: 600; opacity: .85">Members</span><span class="disp" style="font-size: 18px; font-weight: 600; opacity: .7">Music</span><span class="disp" style="font-size: 18px; font-weight: 600; opacity: .55">Blog</span><span class="disp" style="font-size: 18px; font-weight: 600; opacity: .4">Game</span>
+</div></div>
+</div>
+</section>
+
+<!-- EVENT & BLOG -->
+<section class="panel">
+<h2 class="ptitle">EventCard &amp; countdown</h2>
+<div style="display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; border-radius: 16px; overflow: hidden; border: 1px solid var(--line)"><div style="width: 80px; background: #FFB6D5; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px 0"><span style="font-size: 11px; font-weight: 600">DEC</span><span class="disp" style="font-size: 30px; font-weight: 600; line-height: 1">20</span><span style="font-size: 11px">Sun</span></div><div style="flex: 1; padding: 12px 16px; display: flex; flex-direction: column; justify-content: center; gap: 2px"><span style="font-weight: 600">[EVENT NAME]</span><span style="font-size: 13px; color: var(--ink-500)">[CITY] · [VENUE]</span></div><div style="display: flex; align-items: center; padding-right: 14px"><span class="chip" style="background: #FFE3F1; color: #9E1D50">Upcoming</span></div></div>
+<div style="display: flex; border-radius: 16px; overflow: hidden; border: 1px solid var(--line)"><div style="width: 80px; background: #E3E0EA; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px 0"><span style="font-size: 11px; font-weight: 600">MAR</span><span class="disp" style="font-size: 30px; font-weight: 600; line-height: 1">22</span><span style="font-size: 11px">Sun</span></div><div style="flex: 1; padding: 12px 16px; display: flex; flex-direction: column; justify-content: center; gap: 2px"><span style="font-weight: 600">[EVENT NAME]</span><span style="font-size: 13px; color: var(--ink-500)">[CITY] · [VENUE]</span></div><div style="display: flex; align-items: center; padding-right: 14px"><span class="chip" style="background: #6E6787; color: #fff">Sold out</span></div></div>
+<div style="display: flex; border-radius: 16px; overflow: hidden; border: 1px solid var(--line); opacity: .65"><div style="width: 80px; background: #E6DCFF; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px 0"><span style="font-size: 11px; font-weight: 600">MAR</span><span class="disp" style="font-size: 30px; font-weight: 600; line-height: 1">28</span><span style="font-size: 11px">Sat</span></div><div style="flex: 1; padding: 12px 16px; display: flex; flex-direction: column; justify-content: center; gap: 2px"><span style="font-weight: 600">Hearts2House 2026</span><span style="font-size: 13px; color: var(--ink-500)">Jakarta · Tennis Indoor Senayan</span></div><div style="display: flex; align-items: center; padding-right: 14px"><span class="chip" style="background: rgba(43,36,64,.08); color: #6E6787">Past</span></div></div>
+</div>
+<div style="display: grid; grid-template-columns: repeat(4, 80px); gap: 10px">
+<div style="display: flex; flex-direction: column; align-items: center; gap: 6px"><span class="disp" style="width: 100%; padding: 14px 0; text-align: center; border-radius: 14px; background: #fff; box-shadow: var(--shadow); font-size: 32px; font-weight: 600">63</span><span class="lbl">Days</span></div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 6px"><span class="disp" style="width: 100%; padding: 14px 0; text-align: center; border-radius: 14px; background: #fff; box-shadow: var(--shadow); font-size: 32px; font-weight: 600">04</span><span class="lbl">Hours</span></div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 6px"><span class="disp" style="width: 100%; padding: 14px 0; text-align: center; border-radius: 14px; background: #fff; box-shadow: var(--shadow); font-size: 32px; font-weight: 600">12</span><span class="lbl">Min</span></div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 6px"><span class="disp" style="width: 100%; padding: 14px 0; text-align: center; border-radius: 14px; background: #fff; box-shadow: var(--shadow); font-size: 32px; font-weight: 600; transform: rotateX(25deg)">37</span><span class="lbl">Sec · flipping</span></div>
+</div>
+</section>
+
+<section class="panel">
+<h2 class="ptitle">Blog card &amp; detail</h2>
+<div style="display: flex; gap: 20px; align-items: flex-start">
+<div style="width: 300px; flex: none; border-radius: 20px; overflow: hidden; border: 1px solid var(--line); background: #fff">
+<div style="aspect-ratio: 16 / 9; background: linear-gradient(135deg,#FFF6C9,#FFB6D5 60%,#C9B6FF); position: relative"><span class="chip" style="position: absolute; top: 10px; right: 10px; background: #2B2440; color: #fff"><svg width="10" height="10" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l1.8 8.2L22 12l-8.2 1.8L12 22l-1.8-8.2L2 12l8.2-1.8z" fill="#FFB6D5"></path></svg>AI</span></div>
+<div style="padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 8px"><span style="display: flex; gap: 6px"><span class="chip" style="background: #FFE3F1">Recap</span></span><span class="disp" style="font-size: 18px; font-weight: 600; line-height: 1.25">Era recap: from The Chase to Lemon Tang</span><span style="font-size: 12px; color: var(--ink-500)">Oct 18, 2026 · 5 min read</span></div>
+</div>
+<div style="flex: 1; display: flex; gap: 16px">
+<div style="flex: 1; display: flex; flex-direction: column; gap: 10px; max-width: 360px">
+<span class="chip" style="align-self: flex-start; background: #2B2440; color: #fff"><svg width="10" height="10" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l1.8 8.2L22 12l-8.2 1.8L12 22l-1.8-8.2L2 12l8.2-1.8z" fill="#FFB6D5"></path></svg>Written by AI · fan content, not official</span>
+<span class="disp" style="font-size: 24px; font-weight: 600; line-height: 1.2">Detail page · 720px column</span>
+<span style="font-size: 14px; line-height: 1.8; color: var(--ink-500)">Body copy runs at line-height 1.8 in a 720px column. Facts only from verified sources; no member quotes, ever.</span>
+</div>
+<div style="width: 140px; flex: none; border-left: 2px solid #FFE3F1; padding-left: 12px; display: flex; flex-direction: column; gap: 8px; font-size: 12px; color: var(--ink-500)"><span class="lbl">On this page</span><span style="color: #C92A68; font-weight: 600">The Chase</span><span>Style</span><span>Focus</span><span>Lemon Tang</span></div>
+</div>
+</div>
+</section>
+
+<!-- GAME & MODAL -->
+<section class="panel">
+<h2 class="ptitle">Mini game answers</h2>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
+<div class="state" style="width: 100%"><span class="lbl">Default</span><span class="ans">Carmen</span></div>
+<div class="state" style="width: 100%"><span class="lbl">Hover</span><span class="ans" style="border-color: #FF8FB8; transform: translateY(-2px)">Carmen</span></div>
+<div class="state" style="width: 100%"><span class="lbl">Correct · mint pop + confetti hearts</span><span class="ans ok">Carmen</span></div>
+<div class="state" style="width: 100%"><span class="lbl">Wrong · gentle shake</span><span class="ans bad">Stella</span></div>
+</div>
+</section>
+
+<section class="panel">
+<h2 class="ptitle">Modal &amp; bottom sheet</h2>
+<div style="display: flex; gap: 24px; align-items: flex-end">
+<div class="state" style="flex: 1"><span class="lbl">Desktop · centered, dim + blur, scale .95 → 1</span>
+<div style="width: 100%; height: 220px; border-radius: 16px; background: rgba(43,36,64,.45); display: flex; align-items: center; justify-content: center">
+<div style="width: 70%; height: 150px; border-radius: 24px; background: #FFF8F3; box-shadow: 0 20px 50px rgba(43,36,64,.35); display: flex; overflow: hidden"><span style="width: 40%; background: linear-gradient(165deg,#A8D8FF,#FFF8F3 130%); display: block"></span><span style="flex: 1; padding: 16px; display: flex; flex-direction: column; gap: 6px"><span class="disp" style="font-size: 20px; font-weight: 600">Stella</span><span style="height: 8px; width: 70%; border-radius: 999px; background: var(--line); display: block"></span><span style="height: 8px; width: 50%; border-radius: 999px; background: var(--line); display: block"></span></span></div>
+</div></div>
+<div class="state"><span class="lbl">Mobile · drag handle, swipe down</span>
+<div style="width: 150px; height: 220px; border-radius: 16px; background: rgba(43,36,64,.45); display: flex; align-items: flex-end; overflow: hidden">
+<div style="width: 100%; height: 150px; border-radius: 20px 20px 0 0; background: #FFF8F3; padding: 10px 14px; box-sizing: border-box; display: flex; flex-direction: column; gap: 8px"><span style="width: 36px; height: 4px; border-radius: 999px; background: rgba(43,36,64,.2); margin: 0 auto; display: block"></span><span class="disp" style="font-size: 18px; font-weight: 600">Stella</span><span style="height: 8px; width: 80%; border-radius: 999px; background: var(--line); display: block"></span></div>
+</div></div>
+</div>
+</section>
+
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1600,"height":2600}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>
