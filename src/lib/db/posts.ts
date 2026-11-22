@@ -1,4 +1,5 @@
 import { unstable_cache } from "next/cache";
+import { resolveMediaUrls } from "./media";
 import { hasDb, query, queryOne } from "@/lib/neon/db";
 import type { Post } from "./types";
 import { G } from "./seed/music";
@@ -15,8 +16,10 @@ export interface PostCardData {
   published_at: string;
   source: Post["source"];
   read_min: number;
-  /** Placeholder cover (no media URL resolution yet). */
+  /** Placeholder cover used when the post has no cover image. */
   grad: string;
+  /** Cover image URL (media library: bucket or hotlinked), or null. */
+  cover?: string | null;
 }
 export interface PostDetail extends PostCardData { body_md: string }
 
@@ -41,12 +44,12 @@ const gradFor = (key: string) => {
 };
 const readMin = (md: string) => Math.max(1, Math.ceil(md.split(/\s+/).filter(Boolean).length / 200));
 
-type PostRow = { slug: string; title: string; excerpt: string | null; body_md: string; source: Post["source"]; published_at: string; tags: PostTagRef[] };
+type PostRow = { slug: string; title: string; excerpt: string | null; body_md: string; source: Post["source"]; published_at: string; cover_id: string | null; tags: PostTagRef[] };
 
 // Public read rule (spec §3), enforced in SQL since there is no RLS: status = published AND published_at <= now().
 // The short revalidate below lets scheduled posts appear. to_json(...)#>>'{}' keeps published_at an ISO string.
 const publishedPosts = (extraWhere = "") => `
-  select p.slug, p.title, p.excerpt, p.body_md, p.source, to_json(p.published_at) #>> '{}' as published_at,
+  select p.slug, p.title, p.excerpt, p.body_md, p.source, p.cover_id, to_json(p.published_at) #>> '{}' as published_at,
          coalesce(json_agg(json_build_object('slug', t.slug, 'name', t.name) order by t.name) filter (where t.id is not null), '[]') as tags
     from posts p
     left join post_tags pt on pt.post_id = p.id
@@ -55,7 +58,7 @@ const publishedPosts = (extraWhere = "") => `
    group by p.id
    order by p.published_at desc`;
 
-const toDetail = (r: PostRow): PostDetail => ({
+const toDetail = (r: PostRow, cover: string | null = null): PostDetail => ({
   slug: r.slug,
   title: r.title,
   excerpt: r.excerpt,
@@ -65,13 +68,17 @@ const toDetail = (r: PostRow): PostDetail => ({
   tags: r.tags,
   read_min: readMin(r.body_md),
   grad: gradFor(r.slug),
+  cover,
 });
 const toCard = ({ body_md: _body, ...card }: PostDetail): PostCardData => card;
 
-// Covers are gradient placeholders; cover_id -> media.path -> signedUrl() from @/lib/neon/storage is not wired yet.
 // Bodies are dropped before caching so the list entry stays small however many posts exist.
 const loadAll = unstable_cache(
-  async (): Promise<PostCardData[]> => (await query<PostRow>(publishedPosts())).map((r) => toCard(toDetail(r))),
+  async (): Promise<PostCardData[]> => {
+    const rows = await query<PostRow>(publishedPosts());
+    const covers = await resolveMediaUrls(rows.map((r) => r.cover_id));
+    return rows.map((r) => toCard(toDetail(r, (r.cover_id && covers.get(r.cover_id)) || null)));
+  },
   ["posts-all"],
   { tags: ["posts"], revalidate: 300 },
 );
@@ -80,7 +87,9 @@ const loadPost = (slug: string) =>
   unstable_cache(
     async (): Promise<PostDetail | null> => {
       const row = await queryOne<PostRow>(publishedPosts("and p.slug = $1"), [slug]);
-      return row ? toDetail(row) : null;
+      if (!row) return null;
+      const covers = await resolveMediaUrls([row.cover_id]);
+      return toDetail(row, (row.cover_id && covers.get(row.cover_id)) || null);
     },
     ["post", slug],
     { tags: ["posts", `post:${slug}`], revalidate: 300 },

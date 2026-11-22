@@ -11,6 +11,7 @@ import {
 import styles from "@/components/members/member-detail.module.css";
 import { Chip } from "@/components/ui/Chip";
 import { HeartIcon } from "@/components/ui/HeartIcon";
+import { Photo } from "@/components/ui/Photo";
 import { FACT, getEras, getMember, getMemberTracks, getMembers } from "@/lib/db/members";
 import { PLACEHOLDER_GRADS } from "@/lib/db/seed/home";
 
@@ -74,6 +75,7 @@ export default async function MemberPage({ params }: Props) {
     return { ...t, grad: eraGrad(era >= 0 ? era : k) };
   });
 
+  const portrait = member.photos?.cover ?? member.photos?.avatar ?? member.photos?.gallery[0] ?? null;
   const vars = { "--accent": color, "--accent-deep": deep, "--accent-soft": accentSoft(color) } as CSSProperties;
 
   return (
@@ -95,8 +97,9 @@ export default async function MemberPage({ params }: Props) {
               className={styles.portrait}
               style={{ flex: "1 1 320px", maxWidth: 440, aspectRatio: "3 / 4", borderRadius: 28, position: "relative", overflow: "hidden", background: memberGrad(color), boxShadow: "0 0 0 4px #fff, 0 0 0 8px var(--accent), 0 0 56px var(--accent)", margin: 8 }}
             >
+              {portrait && <Photo src={portrait} alt={member.stage_name} />}
               <span aria-hidden="true" style={{ position: "absolute", inset: 0, background: "linear-gradient(115deg, transparent 25%, rgba(255,255,255,.55) 45%, transparent 60%)", mixBlendMode: "soft-light" }} />
-              <Chip bg="rgba(255,255,255,.88)" color="#2B2440" style={{ position: "absolute", top: 16, left: 16, height: 28, padding: "0 12px", fontSize: 13 }}>TODO · official portrait</Chip>
+              {!portrait && <Chip bg="rgba(255,255,255,.88)" color="#2B2440" style={{ position: "absolute", top: 16, left: 16, height: 28, padding: "0 12px", fontSize: 13 }}>TODO · official portrait</Chip>}
             </div>
             <div className="flex min-w-0 flex-[999_1_420px] flex-col gap-[18px]">
               <div className="flex flex-wrap items-center gap-3">
@@ -158,9 +161,9 @@ export default async function MemberPage({ params }: Props) {
         <section aria-labelledby="gl">
           <div className="mb-5 flex flex-wrap items-end justify-between gap-3">
             <h2 id="gl" className="disp m-0 text-[32px] font-semibold">Gallery</h2>
-            <span className="text-[13px] text-ink-500">Click to open · arrow keys to browse · photos TODO from official channels</span>
+            <span className="text-[13px] text-ink-500">Click to open · arrow keys to browse{member.photos?.gallery.length ? "" : " · photos TODO from official channels"}</span>
           </div>
-          <MemberGallery color={color} />
+          <MemberGallery color={color} images={member.photos?.gallery ?? []} />
         </section>
 
         {/* 5 FEATURED SONGS */}

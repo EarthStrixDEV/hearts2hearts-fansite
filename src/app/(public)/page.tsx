@@ -1,4 +1,5 @@
 import { CityTeaser } from "@/components/home/CityTeaser";
+import { cardPhoto } from "@/components/members/profile";
 import { EraCarousel } from "@/components/home/EraCarousel";
 import { BlogCards, EventBanner, Hero, LatestRelease, SectionHead } from "@/components/home/HomeSections";
 import { MusicWidget } from "@/components/home/MusicWidget";
@@ -11,9 +12,10 @@ const SECTION = "mx-auto max-w-[1200px] px-6";
 
 export default async function HomePage() {
   const { slides, members, release, top5, posts, nextEvent } = await getHomeData();
+  const heroPhoto = (m?: (typeof members)[number]) => (m ? cardPhoto(m) : null);
   return (
     <>
-      <Hero />
+      <Hero photos={{ left: heroPhoto(members[3]), right: heroPhoto(members[0]), center: slides[0]?.imageUrl }} />
       {release && <LatestRelease release={release} />}
 
       {slides.length > 0 && (

@@ -1,5 +1,6 @@
 import "server-only";
 import type { Media } from "@/lib/db/types";
+import { isRemoteImageUrl } from "@/lib/media-url";
 import { query, queryOne, hasDb } from "@/lib/neon/db";
 import { cleanQ } from "../db";
 import { likeOf, MEDIA_COLS, Where } from "../sql";
@@ -55,7 +56,8 @@ export async function mediaUsage(): Promise<Map<string, MediaUse[]>> {
 export async function mediaOptions(): Promise<{ id: string; label: string }[]> {
   if (!hasDb()) return [];
   const rows = await query<{ id: string; path: string; alt: string | null }>(`select id, path, alt from media where mime_type like 'image/%' order by created_at desc limit 300`);
-  return rows.map((m) => ({ id: m.id, label: m.alt ? `${m.path.split("/").pop()} — ${m.alt}` : (m.path.split("/").pop() ?? m.path) }));
+  const name = (p: string) => (isRemoteImageUrl(p) ? `${p.includes("ytimg") ? "YT Music" : "X"} · ${p.includes("ytimg") ? (p.split("/").slice(-2)[0] ?? p) : (p.split("/").pop() ?? p).split("?")[0]}` : (p.split("/").pop() ?? p));
+  return rows.map((m) => ({ id: m.id, label: m.alt ? `${name(m.path)} — ${m.alt}` : name(m.path) }));
 }
 
 /** media.id → object key, to render thumbnails next to pickers. */

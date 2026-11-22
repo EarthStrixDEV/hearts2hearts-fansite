@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { CoverLayer } from "@/components/ui/CoverLayer";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { AiBadge, BlogCard } from "@/components/blog/BlogCard";
@@ -29,7 +30,8 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
 
   return (
     <article>
-      <div className={s.postHero} style={{ background: post.grad }}>
+      <div className={s.postHero} style={{ overflow: "hidden" }}>
+        <CoverLayer src={post.cover} grad={post.grad} />
         <div aria-hidden="true" style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(255,255,255,0), var(--cream-50))" }} />
       </div>
 

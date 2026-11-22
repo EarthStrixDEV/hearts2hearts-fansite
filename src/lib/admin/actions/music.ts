@@ -38,6 +38,8 @@ export async function saveAlbum(_prev: ActionState, fd: FormData): Promise<Actio
   if (date && !/^\d{4}-\d{2}-\d{2}$/.test(date)) return fail("Release date must be a valid date.");
   const spotify = str(fd, "spotify_url");
   if (spotify && !isUrl(spotify)) return fail("Spotify URL must start with http(s)://");
+  const ytm = str(fd, "ytmusic_url");
+  if (ytm && !ytm.startsWith("https://music.youtube.com/")) return fail("YouTube Music link must start with https://music.youtube.com/");
   const cover = str(fd, "cover_id");
   const tracks = parseTracks(str(fd, "tracks_json") || "[]");
   if (!tracks) return fail("Tracklist could not be read. Reload and try again.");
@@ -51,6 +53,7 @@ export async function saveAlbum(_prev: ActionState, fd: FormData): Promise<Actio
     cover_id: isUuid(cover) ? cover : null,
     description: orNull(fd, "description"),
     spotify_url: spotify || null,
+    ytmusic_url: ytm || null,
     status: statusOf(fd),
     updated_by: g.userId,
   };

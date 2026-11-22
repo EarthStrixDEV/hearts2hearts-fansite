@@ -1,6 +1,7 @@
 "use client";
 
 import type { MusicTrack } from "@/lib/db/music";
+import { coverBg } from "./embed";
 import { PlayIcon } from "./icons";
 import s from "./music.module.css";
 
@@ -43,7 +44,7 @@ export function TrackList({
                     </>
                   )}
                 </span>
-                <span style={{ width: 44, height: 44, borderRadius: 8, background: t.grad, display: "block" }} />
+                <span style={{ width: 44, height: 44, borderRadius: 8, background: coverBg(t.cover, t.grad), display: "block" }} />
                 <span style={{ fontSize: 15, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{t.title}</span>
                 <span className={s.alcol}>{t.album}</span>
                 <span style={{ fontSize: 13, color: "var(--ink-500)", textAlign: "right", fontWeight: 400, fontVariantNumeric: "tabular-nums" }}>–:––</span>

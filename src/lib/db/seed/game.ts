@@ -1,6 +1,8 @@
 // Seed = arrays transcribed from design/project/Game.dc.html (<script>). Payload shapes: docs/game-payload.md
-export interface QuestionPayload { text: string; options: string[]; answer: string; note: string }
-export interface CardPayload { name: string; color_hex: string }
+/** Where a fact comes from: shown next to the fact (https links only). */
+export interface SourceRef { label: string; url: string }
+export interface QuestionPayload { text: string; options: string[]; answer: string; note: string; source?: SourceRef }
+export interface CardPayload { name: string; color_hex: string; fact?: string; source?: SourceRef }
 export interface SeedGameItem<P> { id: string; kind: "question" | "card"; payload: P; is_active: boolean; sort_order: number }
 
 export interface GameCatalogEntry {

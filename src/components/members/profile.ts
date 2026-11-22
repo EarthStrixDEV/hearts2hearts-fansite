@@ -1,5 +1,6 @@
 import type { MemberWithFacts } from "@/lib/db/members";
 import { FACT } from "@/lib/db/seed/members";
+import { xImageSize } from "@/lib/media-url";
 
 // Pure helpers shared by the home, members and member-detail pages. Server-side use: client components only get the serialised results.
 
@@ -74,7 +75,14 @@ export interface MemberCardData {
   slug: string; name: string; ko: string; color: string;
   position: string; firstPosition: string; tags: PositionTag[];
   born: string; bornLabel: string; nationality: string; fact: string; rarity: Rarity;
+  /** Card-sized photo URL (avatar, else cover, else first gallery image), or null → gradient placeholder. */
+  photo: string | null;
 }
+/** Best photo for a small card: X images are asked for the 680px size. */
+export const cardPhoto = (m: MemberWithFacts): string | null => {
+  const u = m.photos?.avatar ?? m.photos?.cover ?? m.photos?.gallery[0] ?? null;
+  return u ? xImageSize(u, "small") : null;
+};
 export function toCardData(m: MemberWithFacts): MemberCardData {
   const rarity = factValue(m, FACT.rarity);
   return {
@@ -83,5 +91,6 @@ export function toCardData(m: MemberWithFacts): MemberCardData {
     born: m.birth_date ?? "", bornLabel: m.birth_date ? fmtDate(m.birth_date) : "",
     nationality: factValue(m, FACT.nationality) ?? "", fact: m.bio ?? "",
     rarity: rarity === "holo" || rarity === "rare" ? rarity : "common",
+    photo: cardPhoto(m),
   };
 }

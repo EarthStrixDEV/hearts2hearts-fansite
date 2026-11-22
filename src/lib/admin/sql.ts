@@ -6,7 +6,7 @@ export const ts = (col: string, as = col.split(".").pop()!) => `to_char(${col} a
 export const dt = (col: string, as = col.split(".").pop()!) => `${col}::text as ${as}`;
 
 export const MEMBER_COLS = `id, slug, stage_name, name_ko, real_name, ${dt("birth_date")}, position, color_hex, bio, avatar_id, cover_id, gallery_ids, sort_order, status, ${ts("created_at")}, ${ts("updated_at")}, updated_by`;
-export const ALBUM_COLS = `id, slug, title, album_type, ${dt("release_date")}, cover_id, description, spotify_url, status, ${ts("created_at")}, ${ts("updated_at")}, updated_by`;
+export const ALBUM_COLS = `id, slug, title, album_type, ${dt("release_date")}, cover_id, description, spotify_url, ytmusic_url, status, ${ts("created_at")}, ${ts("updated_at")}, updated_by`;
 export const TRACK_COLS = `id, album_id, track_no, title, duration_sec, is_title_track, spotify_url, youtube_url`;
 export const POST_COLS = `id, slug, title, excerpt, body_md, cover_id, member_id, source, status, ${ts("published_at")}, ${ts("created_at")}, ${ts("updated_at")}, updated_by`;
 export const EVENT_COLS = `id, title, event_type, ${ts("starts_at")}, ${ts("ends_at")}, venue, city, country, ticket_url, poster_id, is_cancelled, status, ${ts("created_at")}, ${ts("updated_at")}, updated_by`;

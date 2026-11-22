@@ -93,3 +93,17 @@ export function ReadOnlyBanner() {
 export function FormFoot({ children }: { children: ReactNode }) {
   return <div className="a-foot">{children}</div>;
 }
+
+/** Pick several library images (e.g. a member gallery). Hold Ctrl/Cmd to select more than one. */
+export function MediaMultiSelect({ name, values, options, label = "Images", hint }: { name: string; values: string[]; options: { id: string; label: string }[]; label?: string; hint?: ReactNode }) {
+  const known = new Set(options.map((o) => o.id));
+  const extra = values.filter((v) => !known.has(v));
+  return (
+    <Field label={label} hint={hint} className="a-full">
+      <select name={name} multiple size={6} defaultValue={values} className="a-inp">
+        {extra.map((v) => <option key={v} value={v}>(current file)</option>)}
+        {options.map((o) => <option key={o.id} value={o.id}>{o.label}</option>)}
+      </select>
+    </Field>
+  );
+}

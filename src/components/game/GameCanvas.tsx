@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { HeartIcon } from "@/components/ui/HeartIcon";
 import type { GameData } from "@/lib/db/game";
 import { GameHub } from "./GameHub";
@@ -15,6 +15,16 @@ import { GAME_RULES, rarityFor, toPoints, type GameKind } from "./rules";
 type Screen = { name: "hub" } | { name: "quiz" } | { name: "memory" } | { name: "result"; game: GameKind; raw: number; max: number; reward: Reward | null };
 
 const QUESTION_SECONDS = 15;
+
+/** A fresh random set of questions per play, so a bigger question bank never changes the 0–5 scoring. */
+function pickQuestions<T>(bank: T[], n: number): T[] {
+  const a = [...bank];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a.slice(0, n);
+}
 
 export function GameCanvas({ data }: { data: GameData }) {
   const [screen, setScreen] = useState<Screen>({ name: "hub" });
@@ -47,6 +57,9 @@ export function GameCanvas({ data }: { data: GameData }) {
     return () => ctl.abort();
   }, []);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const roundQuestions = useMemo(() => pickQuestions(data.questions, GAME_RULES.quiz.rawMax), [round, data.questions]);
+
   const showToast = (msg: string) => {
     setToast(msg);
     clearTimeout(toastTimer.current);
@@ -64,6 +77,8 @@ export function GameCanvas({ data }: { data: GameData }) {
             rarity,
             grad: `linear-gradient(160deg,${member.color_hex}, #FFF8F3 120%)`,
             foil: rarity === "Holo" ? 0.7 : rarity === "Rare" ? 0.35 : 0.1,
+            fact: member.fact,
+            source: member.source,
           }
         : null; // no card rows (empty DB): no photocard reward
       const d = new Date();
@@ -154,7 +169,7 @@ export function GameCanvas({ data }: { data: GameData }) {
         <div className="flex min-w-0 flex-[999_1_640px] flex-col items-center gap-6">
           {screen.name === "hub" && <GameHub catalog={data.catalog} best={best} onStart={start} />}
           {screen.name === "quiz" && (
-            <QuizView key={round} questions={data.questions} colors={colors} seconds={QUESTION_SECONDS} onQuit={quit} onFinish={(c, t) => finish("quiz", c, t)} />
+            <QuizView key={round} questions={roundQuestions} colors={colors} seconds={QUESTION_SECONDS} onQuit={quit} onFinish={(c, t) => finish("quiz", c, t)} />
           )}
           {screen.name === "memory" && <MemoryView key={round} cards={data.cards} onQuit={quit} onFinish={(raw, pairs) => finish("memory", raw, pairs)} />}
           {screen.name === "result" && (

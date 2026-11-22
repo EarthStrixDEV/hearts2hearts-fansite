@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { PostCardData } from "@/lib/db/posts";
+import { CoverLayer } from "@/components/ui/CoverLayer";
 import { fmtDate, tagBg } from "./format";
 import s from "./blog.module.css";
 
@@ -19,7 +20,7 @@ export function BlogCard({ post }: { post: PostCardData }) {
   return (
     <Link href={`/blog/${post.slug}`} className={`card-l glass fx ${s.card}`}>
       <span style={{ display: "block", position: "relative", aspectRatio: "16 / 9", overflow: "hidden" }}>
-        <span className="zoom" style={{ position: "absolute", inset: 0, display: "block", background: post.grad }} />
+        <span className="zoom" style={{ position: "absolute", inset: 0, display: "block" }}><CoverLayer src={post.cover} grad={post.grad} /></span>
         {post.source === "ai" && <AiBadge size={10} style={{ position: "absolute", top: 10, right: 10 }} />}
       </span>
       <span style={{ display: "flex", flexDirection: "column", gap: 8, padding: "16px 18px 18px" }}>
@@ -37,7 +38,7 @@ export function FeaturedCard({ post }: { post: PostCardData }) {
   return (
     <Link href={`/blog/${post.slug}`} className={`card-l glass fx ${s.card} ${s.featured}`}>
       <span style={{ flex: "1 1 420px", minHeight: 300, position: "relative", overflow: "hidden", display: "block" }}>
-        <span className="zoom" style={{ position: "absolute", inset: 0, display: "block", background: post.grad }} />
+        <span className="zoom" style={{ position: "absolute", inset: 0, display: "block" }}><CoverLayer src={post.cover} grad={post.grad} /></span>
         <span className="chip" style={{ position: "absolute", top: 16, left: 16, background: "#FF8FB8", color: "#2B2440" }}>Today’s post</span>
         {post.source === "ai" && <AiBadge style={{ position: "absolute", top: 16, right: 16 }} />}
       </span>

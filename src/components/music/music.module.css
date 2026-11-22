@@ -67,3 +67,14 @@
 .qrow:hover { background: var(--line); }
 .embed { display: block; width: 100%; height: 80px; border: 0; border-radius: 12px; background: rgba(255, 255, 255, 0.2); }
 .embedNote { display: flex; align-items: center; justify-content: center; min-height: 80px; padding: 0 12px; border-radius: 12px; background: rgba(255, 255, 255, 0.14); font-size: 13px; text-align: center; }
+
+/* MV grid: cards fill the column instead of scrolling sideways */
+.mvGrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 24px 20px; }
+.mvGrid .mv, .mvGrid .mvFrame { flex: none; width: 100%; min-width: 0; }
+
+/* In-page YouTube Music player (the IFrame API replaces the placeholder div with an iframe) */
+.ytFrame { width: 100%; aspect-ratio: 16 / 9; border-radius: 12px; overflow: hidden; background: #000; }
+.ytFrame iframe { display: block; width: 100%; height: 100%; border: 0; }
+.playerLinks { display: flex; flex-wrap: wrap; gap: 8px 14px; justify-content: center; font-size: 13px; }
+.playerLinks a { color: #fff; opacity: 0.9; text-decoration: underline; text-underline-offset: 3px; }
+.playerLinks a:hover { opacity: 1; }

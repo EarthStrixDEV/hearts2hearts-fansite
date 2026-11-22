@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { coverBg } from "@/lib/media-url";
 import type { HomeTrack } from "@/lib/db/home";
+import { YtEmbed } from "@/components/music/YtEmbed";
 import { cn } from "@/lib/utils";
 import styles from "./home.module.css";
 
@@ -17,15 +19,19 @@ const PAUSE = (size: number) => (
   </svg>
 );
 
-/** Home "Top 5" player card + track list. Playback state only; audio goes through the official Spotify embed. */
+/** Home "Top 5" player card + track list. Sound comes from the official YouTube Music player (in-page) once play is pressed. */
 export function MusicWidget({ tracks }: { tracks: HomeTrack[] }) {
   const [track, setTrack] = useState(0);
   const [playing, setPlaying] = useState(false);
+  const [started, setStarted] = useState(false);
   const n = tracks.length;
   const cur = tracks[track];
 
   useEffect(() => {
-    const start = () => setPlaying(true);
+    const start = () => {
+      setStarted(true);
+      setPlaying(true);
+    };
     window.addEventListener(PLAY_EVENT, start);
     return () => window.removeEventListener(PLAY_EVENT, start);
   }, []);
@@ -34,11 +40,11 @@ export function MusicWidget({ tracks }: { tracks: HomeTrack[] }) {
   return (
     <div className="flex flex-wrap items-stretch gap-6">
       <div className="relative min-h-[300px] max-w-[420px] flex-[1_1_320px] overflow-hidden rounded-card text-white" style={{ background: "#2B2440" }}>
-        <div aria-hidden="true" style={{ position: "absolute", inset: -60, background: cur.grad, filter: "blur(40px) saturate(1.2)", opacity: 0.9 }} />
+        <div aria-hidden="true" style={{ position: "absolute", inset: -60, background: coverBg(cur.cover, cur.grad), filter: "blur(40px) saturate(1.2)", opacity: 0.9 }} />
         <div aria-hidden="true" style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(43,36,64,.1), rgba(43,36,64,.75))" }} />
         <div className="relative box-border flex h-full flex-col justify-between gap-5 p-6">
           <div className="flex items-center gap-[18px]">
-            <div className={vinyl} style={{ width: 120, height: 120, flex: "none", borderRadius: "50%", background: cur.grad, boxShadow: "0 16px 32px rgba(0,0,0,.25), inset 0 0 0 4px rgba(255,255,255,.4)", position: "relative" }}>
+            <div className={vinyl} style={{ width: 120, height: 120, flex: "none", borderRadius: "50%", background: coverBg(cur.cover, cur.grad), boxShadow: "0 16px 32px rgba(0,0,0,.25), inset 0 0 0 4px rgba(255,255,255,.4)", position: "relative" }}>
               <div style={{ position: "absolute", left: "50%", top: "50%", width: 16, height: 16, margin: "-8px 0 0 -8px", borderRadius: "50%", background: "#2B2440", boxShadow: "0 0 0 5px rgba(255,255,255,.7)" }} />
             </div>
             <div className="flex min-w-0 flex-col gap-0.5">
@@ -50,20 +56,37 @@ export function MusicWidget({ tracks }: { tracks: HomeTrack[] }) {
             <button type="button" className="ibtn" aria-label="Previous track" style={{ background: "transparent", border: 0, color: "#fff" }} onClick={() => setTrack((track + n - 1) % n)}>
               <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6.5v11a1 1 0 0 1-1.55.83L8.5 13v4a1 1 0 0 1-2 0V7a1 1 0 0 1 2 0v4l7.95-5.33A1 1 0 0 1 18 6.5z" fill="currentColor" /></svg>
             </button>
-            <button type="button" className="ibtn" aria-label={playing ? "Pause" : "Play"} style={{ width: 64, height: 64, background: "#fff", color: "#2B2440", border: 0, boxShadow: "var(--glow)" }} onClick={() => setPlaying(!playing)}>
+            <button type="button" className="ibtn" aria-label={playing ? "Pause" : "Play"} style={{ width: 64, height: 64, background: "#fff", color: "#2B2440", border: 0, boxShadow: "var(--glow)" }} onClick={() => { setStarted(true); setPlaying(!playing); }}>
               {playing ? PAUSE(24) : PLAY(24)}
             </button>
             <button type="button" className="ibtn" aria-label="Next track" style={{ background: "transparent", border: 0, color: "#fff" }} onClick={() => setTrack((track + 1) % n)}>
               <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6.5v11a1 1 0 0 0 1.55.83L15.5 13v4a1 1 0 0 0 2 0V7a1 1 0 0 0-2 0v4L7.55 5.67A1 1 0 0 0 6 6.5z" fill="currentColor" /></svg>
             </button>
           </div>
-          <p className="m-0 text-center text-[11px] opacity-80">Playback via the official Spotify embed</p>
+          {started && cur.ytm && (
+            <YtEmbed
+              playlist={cur.ytm}
+              index={cur.ytmIndex ?? 0}
+              playing={playing}
+              title={cur.title}
+              onPlaying={setPlaying}
+              onIndex={(i) => {
+                const q = tracks.findIndex((t) => t.ytm === cur.ytm && t.ytmIndex === i);
+                if (q >= 0) setTrack(q);
+              }}
+              onEnd={() => setTrack((track + 1) % n)}
+            />
+          )}
+          <p className="m-0 text-center text-[11px] opacity-80">
+            Plays through the official YouTube Music player ·{" "}
+            <a href="https://open.spotify.com/search/Hearts2Hearts" target="_blank" rel="noopener noreferrer" style={{ color: "#fff", textDecoration: "underline" }}>Open in Spotify</a>
+          </p>
         </div>
       </div>
 
       <div className="glass min-w-0 flex-[999_1_480px] rounded-card p-3">
         {tracks.map((t, k) => (
-          <button key={t.title} type="button" className={cn("fx", styles.row, k === track && styles.on)} aria-label={`Play ${t.title}`} onClick={() => { setTrack(k); setPlaying(true); }}>
+          <button key={t.title} type="button" className={cn("fx", styles.row, k === track && styles.on)} aria-label={`Play ${t.title}`} onClick={() => { setTrack(k); setStarted(true); setPlaying(true); }}>
             <span className="inline-flex items-center justify-center text-sm tabular-nums text-ink-500">
               {k === track ? (
                 <span className={styles.eq} aria-hidden="true" style={{ display: "inline-flex", alignItems: "flex-end", gap: 2, height: 14 }}>
@@ -76,7 +99,7 @@ export function MusicWidget({ tracks }: { tracks: HomeTrack[] }) {
                 </>
               )}
             </span>
-            <span style={{ width: 44, height: 44, borderRadius: 8, background: t.grad, display: "block" }} />
+            <span style={{ width: 44, height: 44, borderRadius: 8, background: coverBg(t.cover, t.grad), display: "block" }} />
             <span className="flex min-w-0 flex-col gap-0.5">
               <span className="text-[15px]">{t.title}</span>
               <span className="text-[13px] font-normal text-ink-500">{t.album}</span>
@@ -84,7 +107,7 @@ export function MusicWidget({ tracks }: { tracks: HomeTrack[] }) {
             <span className="text-[13px] font-normal tabular-nums text-ink-500">–:––</span>
           </button>
         ))}
-        <p className="mx-3 mb-1 mt-2 text-xs text-ink-500">Ranking comes from Spotify’s top-tracks data at build time; this order is a placeholder.</p>
+        <p className="mx-3 mb-1 mt-2 text-xs text-ink-500">Order is a placeholder (title tracks first); it is not a chart ranking.</p>
       </div>
     </div>
   );

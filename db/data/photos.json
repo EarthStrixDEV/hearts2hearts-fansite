@@ -1,0 +1,113 @@
+{
+  "_comment": "Official promo images from the Hearts2Hearts YouTube channel (SMTOWN / Hearts2Hearts uploads), read 2026-11-22. `portrait` = the first gallery image. `gallery` = vertical Shorts thumbnails (oar2) the channel tagged with ONLY that member's hashtag, hand-picked: one person, face visible, no text overlay. hero/postCovers = official MV thumbnails (hq720; carousel is cropped so the baked-in SMTOWN watermark stays out of frame). Image URL = https://i.ytimg.com/vi/<id>/<variant>.jpg",
+  "credit": "Official Hearts2Hearts YouTube channel (SM Entertainment)",
+  "members": {
+    "jiwoo": {
+      "portrait": "_9of7zm0Prs",
+      "gallery": [
+        "_9of7zm0Prs",
+        "k6BKWnQYSbQ",
+        "hSxqtG7BUfE",
+        "sz0XOXKx39U"
+      ]
+    },
+    "carmen": {
+      "portrait": "yJpG1qVjLpQ",
+      "gallery": [
+        "yJpG1qVjLpQ",
+        "P_PEqKUd8cQ",
+        "176E6Hb5Y3c",
+        "ggCdLi8EmE4"
+      ]
+    },
+    "yuha": {
+      "portrait": "ZnKKZZjOBUA",
+      "gallery": [
+        "ZnKKZZjOBUA",
+        "4oPOtuUzFLk",
+        "Iwa70-BP4aM",
+        "JFSX5TwJ-aE"
+      ]
+    },
+    "stella": {
+      "portrait": "tQZ07VWN_kA",
+      "gallery": [
+        "tQZ07VWN_kA",
+        "X6SUMKix5pM",
+        "q4GaMC4BMU4",
+        "Rh24VLSWJ9g"
+      ]
+    },
+    "juun": {
+      "portrait": "2fxmRgdzekQ",
+      "gallery": [
+        "2fxmRgdzekQ",
+        "1Kf9iR2csr4",
+        "eT8uiCVM3vQ",
+        "n1Z1O3X-33E"
+      ]
+    },
+    "ana": {
+      "portrait": "QB06cB7WL-E",
+      "gallery": [
+        "QB06cB7WL-E",
+        "CVHsF7nGYx0",
+        "uNrh8qp9vzM",
+        "AUzX-jAfoXs"
+      ]
+    },
+    "ian": {
+      "portrait": "-ahLqJOaGzU",
+      "gallery": [
+        "-ahLqJOaGzU",
+        "AMXIyyyiBv8",
+        "ybmjWyp4KFQ",
+        "rLzxJ1RKKqE"
+      ]
+    },
+    "yeon": {
+      "portrait": "d3lDJZPzuIs",
+      "gallery": [
+        "d3lDJZPzuIs",
+        "LzDQ_6qiewY",
+        "Ulj-DNAyEI4",
+        "xknhwj10pxo"
+      ]
+    }
+  },
+  "hero": [
+    {
+      "headline": "Next Chapter",
+      "subline": "Single · Oct 16, 2026",
+      "video": "lu9GinsuyUQ"
+    },
+    {
+      "headline": "ICONIC HEART",
+      "subline": "Japanese debut single · Aug 12, 2026",
+      "video": "chl0R8C4NJ8"
+    },
+    {
+      "headline": "Lemon Tang",
+      "subline": "2nd mini album · Jun 22, 2026",
+      "video": "1VqxWNwgf5Q"
+    },
+    {
+      "headline": "FOCUS",
+      "subline": "1st mini album · Oct 20, 2025",
+      "video": "Ur7aK4FvK-U"
+    },
+    {
+      "headline": "The Chase",
+      "subline": "Debut single · Feb 24, 2025",
+      "video": "kxUA2wwYiME"
+    }
+  ],
+  "postCovers": {
+    "debut-the-chase": "kxUA2wwYiME",
+    "focus-first-mini-album": "Ur7aK4FvK-U",
+    "rookie-year-awards-2025": "n7kFRxFIPrI",
+    "hearts-2-house-2026": "F7sGJVUrkjQ",
+    "rude-and-lemon-tang-2026": "1VqxWNwgf5Q",
+    "japan-debut-iconic-heart": "chl0R8C4NJ8"
+  }
+}

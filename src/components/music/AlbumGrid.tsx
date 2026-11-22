@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { xImageSize } from "@/lib/media-url";
 import type { MusicRelease, ReleaseTab } from "@/lib/db/music";
 import { PlayIcon } from "./icons";
 import s from "./music.module.css";
@@ -36,7 +37,7 @@ export function AlbumGrid({ releases, onPlay }: { releases: MusicRelease[]; onPl
             <button key={r.slug} className={s.alb} onClick={() => onPlay(r)} aria-label={`Play ${r.title}`}>
               <span className={s.art}>
                 <span className={s.vin} />
-                <span className={s.cov} style={{ background: r.grad }} />
+                <span className={s.cov} style={{ background: r.cover ? `center / cover no-repeat url("${xImageSize(r.cover, "small")}")` : r.grad }} />
                 <span className={s.play} aria-hidden="true"><PlayIcon /></span>
               </span>
               <span style={{ display: "flex", flexDirection: "column", gap: 2 }}>

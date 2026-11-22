@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useSyncExternalStore } from "react";
+import { xImageSize } from "@/lib/media-url";
 import type { MusicBoardData, MusicRelease } from "@/lib/db/music";
 import { AlbumGrid } from "./AlbumGrid";
 import { EraTimeline } from "./EraTimeline";
@@ -26,6 +27,7 @@ export function MusicBoard({ data }: { data: MusicBoardData }) {
   const { releases, tracks, videos, eras } = data;
   const [current, setCurrent] = useState(0);
   const [playing, setPlaying] = useState(false);
+  const [started, setStarted] = useState(false);
   const [shuffle, setShuffle] = useState(false);
   const mobile = useIsMobile();
   const latest = releases[0];
@@ -33,7 +35,17 @@ export function MusicBoard({ data }: { data: MusicBoardData }) {
 
   const play = (i: number) => {
     setCurrent(i);
+    setStarted(true);
     setPlaying(true);
+  };
+  const toggle = () => {
+    setStarted(true);
+    setPlaying(!playing);
+  };
+  // The YouTube player moved to another track of the album on its own: follow it.
+  const sync = (ytmIndex: number) => {
+    const q = tracks.findIndex((t) => t.ytm === track?.ytm && t.ytmIndex === ytmIndex);
+    if (q >= 0) setCurrent(q);
   };
   const playRelease = (r: MusicRelease) => {
     const base = r.title.replace(" (Japanese ver.)", "");
@@ -57,7 +69,7 @@ export function MusicBoard({ data }: { data: MusicBoardData }) {
             <section aria-label="Latest release" className={s.hero}>
               <div className={s.heroCover}>
                 <div className={s.vinylOut} aria-hidden="true" />
-                <div style={{ position: "absolute", inset: 0, borderRadius: 20, background: latest.grad, boxShadow: "0 24px 48px rgba(201,42,104,.25)" }} />
+                <div style={{ position: "absolute", inset: 0, borderRadius: 20, background: latest.cover ? `center / cover no-repeat url("${xImageSize(latest.cover, "medium")}")` : latest.grad, boxShadow: "0 24px 48px rgba(201,42,104,.25)" }} />
               </div>
               <div style={{ flex: "1 1 260px", display: "flex", flexDirection: "column", gap: 10 }}>
                 <span className="chip" style={{ alignSelf: "flex-start", background: "#2B2440", color: "#fff" }}>Latest · {latest.kind}</span>
@@ -67,6 +79,7 @@ export function MusicBoard({ data }: { data: MusicBoardData }) {
                   <a className="btn btn-p" href={latest.spotify_url ?? "https://open.spotify.com/search/Hearts2Hearts"} target="_blank" rel="noopener noreferrer">
                     <PlayIcon />Play on Spotify
                   </a>
+                  {latest.ytmusic_url && <a className="btn btn-s" href={latest.ytmusic_url} target="_blank" rel="noopener noreferrer">Listen on YouTube Music</a>}
                   {tracks.length > 0 && <button className="btn btn-s" onClick={() => playRelease(latest)}>Add to queue</button>}
                 </div>
               </div>
@@ -82,9 +95,13 @@ export function MusicBoard({ data }: { data: MusicBoardData }) {
             track={track}
             upNext={upNext}
             playing={playing}
+            started={started}
             shuffle={shuffle}
             showEmbed={!mobile}
-            onToggle={() => setPlaying(!playing)}
+            onToggle={toggle}
+            onPlaying={setPlaying}
+            onSync={sync}
+            onEnd={() => step(1)}
             onPrev={() => step(-1)}
             onNext={() => step(1)}
             onShuffle={() => setShuffle(!shuffle)}
@@ -92,7 +109,7 @@ export function MusicBoard({ data }: { data: MusicBoardData }) {
           />
         )}
       </div>
-      {track && <MiniDock track={track} playing={playing} showEmbed={mobile} onToggle={() => setPlaying(!playing)} />}
+      {track && <MiniDock track={track} playing={playing} started={started} showEmbed={mobile} onToggle={toggle} onPlaying={setPlaying} onSync={sync} onEnd={() => step(1)} />}
     </>
   );
 }

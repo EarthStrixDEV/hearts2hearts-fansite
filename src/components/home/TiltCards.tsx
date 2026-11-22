@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState, type MouseEvent } from "react";
+import { Photo } from "@/components/ui/Photo";
 import type { MemberCardData, Rarity } from "@/components/members/profile";
 import { cn } from "@/lib/utils";
 import { Star } from "./Star";
@@ -61,11 +62,12 @@ export function TiltCards({ cards }: { cards: MemberCardData[] }) {
             <span className={styles.autotilt} style={{ display: "block", transformStyle: "preserve-3d" }}>
               <span style={{ display: "block", position: "relative", aspectRatio: "3 / 4", transformStyle: "preserve-3d", transform: `rotateX(${rx.toFixed(2)}deg) rotateY(${(ry + (f ? 180 : 0)).toFixed(2)}deg)`, transition: t ? "transform 120ms ease-out" : "transform 650ms cubic-bezier(.34,1.56,.64,1)" }}>
                 <span style={{ ...face, background: `linear-gradient(160deg,${c.color}, #FFF8F3 120%)`, boxShadow: "0 16px 32px rgba(43,36,64,.14)", display: "block" }}>
+                  {c.photo && <Photo src={c.photo} />}
                   <span style={{ position: "absolute", inset: 0, display: "block", background: "linear-gradient(115deg, transparent 20%, rgba(255,182,213,.9) 36%, rgba(201,182,255,.9) 46%, rgba(168,216,255,.9) 56%, rgba(255,227,241,.9) 64%, transparent 78%)", backgroundSize: "260% 260%", backgroundPosition: `${hx}% ${hy}%`, mixBlendMode: "color-dodge", opacity: ho }} />
                   <span aria-hidden="true" style={{ position: "absolute", left: `${hx}%`, top: `${hy}%`, width: 160, height: 160, margin: "-80px 0 0 -80px", display: "block", borderRadius: "50%", background: "radial-gradient(circle, rgba(255,255,255,.55), rgba(255,255,255,0) 65%)", opacity: ho }} />
                   <Star className="twinkle absolute" size={18} fill="#fff" style={{ right: "22%", top: "30%" }} />
                   <span className="chip" style={{ position: "absolute", top: 12, right: 12, background: r.bg, color: r.fg }}>{r.label}</span>
-                  <span className="chip" style={{ position: "absolute", top: 12, left: 12, background: "rgba(255,255,255,.85)", color: "#2B2440" }}>TODO · photo</span>
+                  {!c.photo && <span className="chip" style={{ position: "absolute", top: 12, left: 12, background: "rgba(255,255,255,.85)", color: "#2B2440" }}>TODO · photo</span>}
                   <span style={{ position: "absolute", left: 0, right: 0, bottom: 0, padding: "40px 16px 14px", display: "flex", alignItems: "flex-end", justifyContent: "space-between", background: "linear-gradient(0deg, rgba(43,36,64,.62), rgba(43,36,64,0))" }}>
                     <span className="disp" style={{ fontSize: 26, fontWeight: 600, color: "#fff" }}>{c.name}</span>
                     <span style={{ fontSize: 14, color: "rgba(255,255,255,.92)" }}>{c.ko}</span>

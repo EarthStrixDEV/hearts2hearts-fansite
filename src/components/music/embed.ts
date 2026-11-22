@@ -8,15 +8,23 @@ export function spotifyEmbedUrl(url: string | null | undefined): string | null {
   return m ? `https://open.spotify.com/embed/${m[1]}/${m[2]}` : null;
 }
 
-export function youtubeEmbedUrl(url: string | null | undefined): string | null {
+/** The 11-character video id of a YouTube watch / youtu.be / embed URL, or null. */
+export function youtubeId(url: string | null | undefined): string | null {
   if (!url) return null;
   try {
     const u = new URL(url);
     let id: string | null = null;
     if (u.hostname === "youtu.be") id = u.pathname.slice(1);
     else if (YOUTUBE_HOSTS.has(u.hostname)) id = u.pathname === "/watch" ? u.searchParams.get("v") : u.pathname.startsWith("/embed/") ? u.pathname.slice(7) : null;
-    return id && /^[\w-]{11}$/.test(id) ? `https://www.youtube-nocookie.com/embed/${id}` : null;
+    return id && /^[\w-]{11}$/.test(id) ? id : null;
   } catch {
     return null;
   }
 }
+
+export function youtubeEmbedUrl(url: string | null | undefined): string | null {
+  const id = youtubeId(url);
+  return id ? `https://www.youtube-nocookie.com/embed/${id}` : null;
+}
+
+export { coverBg } from "@/lib/media-url";

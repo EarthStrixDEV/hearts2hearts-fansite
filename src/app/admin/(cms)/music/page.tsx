@@ -94,6 +94,7 @@ export default async function AdminReleases({ searchParams }: { searchParams: SP
                   </Field>
                   <Field label="Release date"><input name="release_date" type="date" defaultValue={a?.release_date ?? ""} className="a-inp" /></Field>
                   <Field label="Spotify album URL" className="a-full"><input name="spotify_url" type="url" defaultValue={a?.spotify_url ?? ""} placeholder="https://open.spotify.com/album/…" className="a-inp" /></Field>
+                  <Field label="YouTube Music album URL" className="a-full" hint="Album page on music.youtube.com (playlist?list=OLAK…). The cover comes from the Media library."><input name="ytmusic_url" type="url" defaultValue={a?.ytmusic_url ?? ""} placeholder="https://music.youtube.com/playlist?list=OLAK…" className="a-inp" /></Field>
                   <MediaSelect name="cover_id" label="Cover" value={a?.cover_id} options={media} />
                   <Field label="Slug" hint="Blank = generated from the title."><input name="slug" defaultValue={a?.slug ?? ""} className="a-inp a-mono" /></Field>
                 </div>

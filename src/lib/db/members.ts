@@ -1,17 +1,19 @@
 import { unstable_cache } from "next/cache";
 import { hasDb, query } from "@/lib/neon/db";
+import { resolveMediaUrls } from "./media";
 import type { Member, MemberFact } from "./types";
 import { FACT, SEED_ERAS, SEED_MEMBERS, SEED_MEMBER_TRACKS, type EraStub, type TrackStub } from "./seed/members";
 
 export { FACT };
-export type MemberWithFacts = Member & { facts: Pick<MemberFact, "label" | "value">[] };
+export interface MemberPhotos { avatar: string | null; cover: string | null; gallery: string[] }
+export type MemberWithFacts = Member & { facts: Pick<MemberFact, "label" | "value">[]; photos?: MemberPhotos };
 
 const REVALIDATE = 3600;
 
 // pg returns date/timestamptz as JS Date; the row types promise strings, so cast in SQL.
 const loadMembers = async (): Promise<MemberWithFacts[]> => {
   if (!hasDb()) return SEED_MEMBERS;
-  return query<MemberWithFacts>(
+  const rows = await query<MemberWithFacts>(
     `select m.id, m.slug, m.stage_name, m.name_ko, m.real_name, m.birth_date::text as birth_date, m.position, m.color_hex, m.bio,
             m.avatar_id, m.cover_id, coalesce(m.gallery_ids, '{}') as gallery_ids, m.sort_order, m.status,
             m.created_at::text as created_at, m.updated_at::text as updated_at, m.updated_by,
@@ -21,6 +23,16 @@ const loadMembers = async (): Promise<MemberWithFacts[]> => {
       where m.status = 'published'
       order by m.sort_order`,
   );
+  // Photos live in the media library (bucket object or X CDN URL); resolve them once for the whole list.
+  const urls = await resolveMediaUrls(rows.flatMap((m) => [m.avatar_id, m.cover_id, ...m.gallery_ids]));
+  return rows.map((m) => ({
+    ...m,
+    photos: {
+      avatar: (m.avatar_id && urls.get(m.avatar_id)) || null,
+      cover: (m.cover_id && urls.get(m.cover_id)) || null,
+      gallery: m.gallery_ids.map((id) => urls.get(id)).filter((u): u is string => !!u),
+    },
+  }));
 };
 
 /** Published members by sort_order. Cache tag `members`. */

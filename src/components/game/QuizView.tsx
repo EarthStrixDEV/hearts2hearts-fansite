@@ -119,6 +119,12 @@ export function QuizView({
         <div className="gm-rise flex flex-wrap items-center justify-between gap-3 rounded-tile bg-surface px-5 py-4" aria-live="polite">
           <span className="text-[15px] leading-normal">
             <strong>{right ? "Correct!" : picked === TIMEOUT ? `Time’s up, it was ${q.answer}.` : `It was ${q.answer}.`}</strong> {q.note}
+            {q.source && q.source.url.startsWith("https://") && (
+              <>
+                {" "}
+                <a href={q.source.url} target="_blank" rel="noopener noreferrer" className="whitespace-nowrap text-[13px]">Source: {q.source.label} ↗</a>
+              </>
+            )}
           </span>
           <button type="button" className="btn btn-p" onClick={next}>
             {qi + 1 < total ? "Next question" : "See result"}

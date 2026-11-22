@@ -26,3 +26,30 @@ node --env-file=.env.local scripts/import-h2h.mjs --publish  # publish everythin
 - Awards (GenerAsia): Seoul Music Awards Rookie of the Year (2025-06-21), Korea Grand Music Awards IS Rising Star, MAMA Awards (Best New Artist Female and others, 2025-11), Melon Music Awards New Artist (2025-12-20), Korea First Brand Awards, Golden Disc Awards Most Popular Artist (2026-01-10).
 - Events: HEARTS 2 HOUSE fan meeting at Olympic Hall, Seoul (2026-02-21/22), North American showcases in New York (2026-03-19) and Los Angeles (2026-03-22), fan meeting in Jakarta (2026-03-28). Start times were not found, so they were not added to `events`.
 - Group facts: fandom S2U, official colour Sky Blue (KProfiles only), social handles (X, Instagram, TikTok, YouTube, Facebook, Weverse).
+
+## Quiz, Memory Match cards and blog posts (`db/data/content.json`)
+
+Imported by `node --env-file=.env.local scripts/import-content.mjs [--publish]` (idempotent; quiz/card rows are keyed by `payload.key`, posts by slug). Each quiz question and card carries a `source` (label + https URL) that the game shows after the answer / on the reward card. Each post ends with a **Sources** list and is stored as `source = 'ai'` (written by AI from those pages, so the blog shows its AI badge).
+
+Pages read for this content (2026-11-22): KProfiles member profile; GenerAsia (group, FOCUS, RUDE!); SBS Star and The Korea Times (debut, FOCUS, Japan chart/Korean version); Soompi (first-week records, Melon winners, North American stops, Moonride); CJ ENM (MAMA 2025); Kyunghyang Sports and Star News (fan meeting, showcases, Lemon Tang); Otakukart; Korea JoongAng Daily and Asia Economy (Japan debut); Bandwagon (Next Chapter).
+
+Known gaps: the 2 PM vs 8 PM debut-day time conflict between outlets is stated as such in the post; the Seoul Music Awards rookie award is from one source (GenerAsia); Memory Match cards' "fact" text is limited to what KProfiles states and is not an official SM profile.
+
+## YouTube: MV videos, YouTube Music albums and release art (`db/data/youtube.json`)
+
+Imported by `node --env-file=.env.local scripts/import-youtube.mjs` (idempotent). Read on 2026-11-22 from the official Hearts2Hearts YouTube channel (`@hearts2hearts.official`) in a real browser, because YouTube serves no data to plain HTTP fetches:
+
+- **YouTube Music albums:** the channel's *Releases* tab lists each release with its `OLAK…` playlist id → `albums.ytmusic_url` (`https://music.youtube.com/playlist?list=OLAK…`), shown as "Listen on YouTube Music" on /music.
+- **In-page playback:** the disc player on /music and the home "Top 5" widget play the track from its album's `OLAK…` playlist through the official YouTube IFrame Player API (`youtube-nocookie.com`), loaded only after the viewer presses play. Spotify links ("Open in Spotify", "Play on Spotify") stay. Tracks YouTube refuses to embed show a note pointing to YouTube Music. Some playlist entries are MV/practice videos because YouTube Music albums include them.
+- **Release art:** YouTube Music has no public API. The album's art-track video thumbnail is the cover; its video id comes from YouTube's public oEmbed endpoint for the music.youtube.com playlist. The image URL (`https://i.ytimg.com/vi/<id>/maxresdefault.jpg`) is stored as a `media` row (hotlinked, like X images) and set as `albums.cover_id`. Not found for: ScreaM Rookies : The Chase (Remixes) (not on the channel's Releases tab).
+- **MVs:** video ids of the official MV uploads (SMTOWN and Hearts2Hearts channels), checked with oEmbed (title contains "MV") → `tracks.youtube_url`. Releases with no MV on YouTube (Candy Box Lover, RUDE! Japanese ver.) have none. The grid on /music shows each distinct video once, newest first, thumbnails from `i.ytimg.com`, and mounts the privacy-enhanced `youtube-nocookie.com` player only after a click.
+
+## Photos for the image frames (`db/data/photos.json`)
+
+Imported by `node --env-file=.env.local scripts/import-photos.mjs` (idempotent). All images are official promo material from the Hearts2Hearts YouTube channel, hotlinked from `i.ytimg.com` (nothing is copied), credited in `media.credit`, and stored as `media` rows so editors can swap them in the CMS.
+
+- **Members** (avatar, cover and a 4-image gallery each): vertical Shorts thumbnails the channel tagged with only that member's hashtag, hand-picked (one person, face visible, no text overlay). Identity relies on the channel's own hashtag; it was not verified independently.
+- **Home hero carousel** (5 era slides) and **blog covers** (6 posts): official MV stills (`hq720`). These carry a baked-in watermark in the lower-left corner, so the carousel is shown in a wider 5:2 frame and blog covers are drawn from the top of the still, which keeps the watermark out of view. Credit stays in `media.credit`.
+- **Album covers / disc art**: see the YouTube section above.
+
+Frames still using a placeholder (no public source found): the About page group logo, event posters on /schedule (no events imported yet), the "Photocard collection" cards on member pages (era cards, not photos), and the "Symbol" and "Intro quote" slots on member pages (these need a sourced quote).

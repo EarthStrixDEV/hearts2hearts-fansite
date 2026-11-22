@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ActionForm } from "@/components/admin/ActionForm";
 import { DeleteForm, SaveBar } from "@/components/admin/SaveBar";
-import { Badge, Field, MediaSelect, PageHead, SearchForm, Seg, StatusBadge } from "@/components/admin/ui";
+import { Badge, Field, MediaMultiSelect, MediaSelect, PageHead, SearchForm, Seg, StatusBadge } from "@/components/admin/ui";
 import { deleteMember, saveMember } from "@/lib/admin/actions/members";
 import { getAdminContext } from "@/lib/admin/auth";
 import { one } from "@/lib/admin/db";
@@ -98,6 +98,7 @@ export default async function AdminMembers({ searchParams }: { searchParams: SP 
                 <div className="a-g2">
                   <MediaSelect name="avatar_id" label="Avatar" value={m?.avatar_id} options={media} />
                   <MediaSelect name="cover_id" label="Cover" value={m?.cover_id} options={media} />
+                  <MediaMultiSelect name="gallery_ids" label="Gallery" values={m?.gallery_ids ?? []} options={media} hint="Shown on the member page. Add images in the Media library first (upload or paste X image links)." />
                   <Field label="Sort order" hint="Lower numbers come first on /members."><input name="sort_order" type="number" defaultValue={m?.sort_order ?? rows.length} className="a-inp" /></Field>
                   <Field label="Slug" hint="Blank = generated from the stage name."><input name="slug" defaultValue={m?.slug ?? ""} className="a-inp a-mono" /></Field>
                 </div>

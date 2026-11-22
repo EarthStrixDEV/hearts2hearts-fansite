@@ -1,14 +1,20 @@
 import { unstable_cache } from "next/cache";
 import { hasDb, query } from "@/lib/neon/db";
-import { hasStorage, signedUrl } from "@/lib/neon/storage";
+import { canResolveMedia, signedUrl } from "@/lib/neon/storage";
+import { resolveMediaUrls } from "./media";
 import { getMembers, type MemberWithFacts } from "./members";
 import { PLACEHOLDER_GRADS, SEED_NEXT_EVENT, SEED_POSTS, SEED_RELEASE, SEED_SLIDES, SEED_TOP5 } from "./seed/home";
 
 export interface HomeSlide { id: string; name: string; subline: string; imageUrl: string | null; grad: string }
-export interface HomeRelease { title: string; typeLabel: string; releaseDate: string | null; spotifyUrl: string | null; grad: string }
-export interface HomeTrack { title: string; album: string; grad: string }
+export interface HomeRelease { title: string; typeLabel: string; releaseDate: string | null; spotifyUrl: string | null; grad: string; coverUrl?: string | null }
+export interface HomeTrack {
+  title: string; album: string; grad: string; cover?: string | null;
+  /** YouTube Music album playlist (OLAK...) and the track's 0-based position in it, for in-page playback. */
+  ytm?: string | null;
+  ytmIndex?: number;
+}
 export interface HomePost {
-  href: string; title: string; excerpt: string; publishedAt: string; readMin: number; isAi: boolean; grad: string; tags: { label: string; bg: string }[];
+  href: string; title: string; excerpt: string; publishedAt: string; readMin: number; isAi: boolean; grad: string; cover?: string | null; tags: { label: string; bg: string }[];
 }
 export interface HomeEvent { title: string; place: string; startsAt: string }
 export interface HomeData {
@@ -24,12 +30,20 @@ type Section = Omit<HomeData, "members">;
 const TAG_BG = ["#FFE3F1", "#DDF0FF", "#FFF1D6"];
 const TYPE_LABEL = { single: "Single", ep: "EP", album: "Album" } as const;
 const grad = (i: number) => PLACEHOLDER_GRADS[i % PLACEHOLDER_GRADS.length];
+const ytmListId = (url: string | null): string | null => {
+  try {
+    const id = url ? new URL(url).searchParams.get("list") : null;
+    return id && id.startsWith("OLAK") ? id : null;
+  } catch {
+    return null;
+  }
+};
 const ISO = `'YYYY-MM-DD"T"HH24:MI:SS"Z"'`;
 // Signed URLs outlive the 1h cache window, so a cached slide never points at an expired link.
 const SIGN_TTL = 24 * 3600;
 
 async function imageUrl(key: string | null): Promise<string | null> {
-  if (!key || !hasStorage()) return null;
+  if (!key || !canResolveMedia(key)) return null;
   try {
     return await signedUrl(key, SIGN_TTL);
   } catch {
@@ -50,21 +64,21 @@ async function loadSections(): Promise<Section> {
           and (h.show_until is null or h.show_until >= now())
         order by h.sort_order`,
     ),
-    query<{ title: string; album_type: keyof typeof TYPE_LABEL; release_date: string | null; spotify_url: string | null }>(
-      `select title, album_type, release_date::text as release_date, spotify_url
+    query<{ title: string; album_type: keyof typeof TYPE_LABEL; release_date: string | null; spotify_url: string | null; cover_id: string | null }>(
+      `select title, album_type, release_date::text as release_date, spotify_url, cover_id
          from albums
         where status = 'published' and release_date <= current_date
         order by release_date desc limit 1`,
     ),
-    query<{ title: string; album: string; year: number | null }>(
-      `select t.title, a.title as album, extract(year from a.release_date)::int as year
+    query<{ title: string; album: string; year: number | null; cover_id: string | null; ytmusic_url: string | null; track_no: number }>(
+      `select t.title, a.title as album, extract(year from a.release_date)::int as year, a.cover_id, a.ytmusic_url, t.track_no
          from tracks t join albums a on a.id = t.album_id
         where a.status = 'published'
         order by t.is_title_track desc, a.release_date desc nulls last, t.track_no
         limit 5`,
     ),
-    query<{ slug: string; title: string; excerpt: string | null; body_md: string; source: "human" | "ai"; published_at: string; tags: string[] }>(
-      `select p.slug, p.title, p.excerpt, p.body_md, p.source,
+    query<{ slug: string; title: string; excerpt: string | null; body_md: string; source: "human" | "ai"; published_at: string; cover_id: string | null; tags: string[] }>(
+      `select p.slug, p.title, p.excerpt, p.body_md, p.source, p.cover_id,
               to_char(p.published_at at time zone 'UTC', ${ISO}) as published_at,
               coalesce((select json_agg(tg.name order by tg.name)
                           from post_tags pt join tags tg on tg.id = pt.tag_id
@@ -81,16 +95,18 @@ async function loadSections(): Promise<Section> {
     ),
   ]);
 
+  const media = await resolveMediaUrls([...tracks.map((t) => t.cover_id), ...posts.map((p) => p.cover_id)]);
   const a = albums[0];
+  const cover = a?.cover_id ? (await resolveMediaUrls([a.cover_id])).get(a.cover_id) ?? null : null;
   const e = events[0];
   return {
     slides: await Promise.all(
       slides.map(async (s, i) => ({ id: s.id, name: s.headline ?? "", subline: s.subline ?? "", imageUrl: await imageUrl(s.path), grad: grad(i) })),
     ),
     release: a
-      ? { title: a.title, typeLabel: TYPE_LABEL[a.album_type], releaseDate: a.release_date, spotifyUrl: a.spotify_url, grad: SEED_RELEASE.grad }
+      ? { title: a.title, typeLabel: TYPE_LABEL[a.album_type], releaseDate: a.release_date, spotifyUrl: a.spotify_url, grad: SEED_RELEASE.grad, coverUrl: cover }
       : null,
-    top5: tracks.map((t, i) => ({ title: t.title, album: t.year ? `${t.album} · ${t.year}` : t.album, grad: grad(i) })),
+    top5: tracks.map((t, i) => ({ title: t.title, album: t.year ? `${t.album} · ${t.year}` : t.album, grad: grad(i), cover: (t.cover_id && media.get(t.cover_id)) || null, ytm: ytmListId(t.ytmusic_url), ytmIndex: t.track_no - 1 })),
     posts: posts.map((p, i) => ({
       href: `/blog/${p.slug}`,
       title: p.title,
@@ -99,6 +115,7 @@ async function loadSections(): Promise<Section> {
       readMin: Math.max(1, Math.ceil(p.body_md.split(/\s+/).length / 200)),
       isAi: p.source === "ai",
       grad: grad(i),
+      cover: (p.cover_id && media.get(p.cover_id)) || null,
       tags: p.tags.slice(0, 2).map((label, k) => ({ label, bg: TAG_BG[k % TAG_BG.length] })),
     })),
     nextEvent: e ? { title: e.title, place: [e.city, e.venue].filter(Boolean).join(" · "), startsAt: e.starts_at } : null,

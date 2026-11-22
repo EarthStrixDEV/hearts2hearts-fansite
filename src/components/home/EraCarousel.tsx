@@ -33,7 +33,7 @@ export function EraCarousel({ slides }: { slides: HomeSlide[] }) {
         <p className="m-0 text-[15px] text-ink-500">{i + 1} / {n} · pauses on hover</p>
       </div>
       <div
-        className={cn(styles.car, "relative w-full overflow-hidden aspect-[4/5] sm:aspect-video max-h-[760px]")}
+        className={cn(styles.car, "relative w-full overflow-hidden aspect-[4/5] sm:aspect-[5/2] max-h-[760px]")}
         style={{ background: "#EEE6FF" }}
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
@@ -42,7 +42,7 @@ export function EraCarousel({ slides }: { slides: HomeSlide[] }) {
       >
         {slides.map((s, k) => (
           <div key={s.id} className={styles.slide} aria-hidden={k !== i} style={{ position: "absolute", inset: 0, opacity: k === i ? 1 : 0, overflow: "hidden" }}>
-            <div className={k === i ? styles.kb : undefined} style={{ position: "absolute", inset: 0, background: s.imageUrl ? `center / cover url(${s.imageUrl})` : s.grad }} />
+            <div className={k === i ? styles.kb : undefined} style={{ position: "absolute", inset: 0, background: s.imageUrl ? `center top / cover url(${s.imageUrl})` : s.grad }} />
             <div className="grain absolute inset-0" style={{ opacity: 0.7 }} />
             <div className="absolute inset-0 flex items-center justify-center">
               <span className="disp text-center font-bold leading-none tracking-[-0.03em]" style={{ fontSize: "clamp(64px, 12vw, 180px)", color: "rgba(255,255,255,.55)" }}>{s.name}</span>

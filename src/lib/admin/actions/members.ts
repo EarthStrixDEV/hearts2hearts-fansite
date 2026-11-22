@@ -41,6 +41,7 @@ export async function saveMember(_prev: ActionState, fd: FormData): Promise<Acti
     bio: orNull(fd, "bio"),
     avatar_id: isUuid(avatar) ? avatar : null,
     cover_id: isUuid(cover) ? cover : null,
+    gallery_ids: fd.getAll("gallery_ids").filter((v): v is string => typeof v === "string" && isUuid(v)),
     sort_order: num(fd, "sort_order", 0),
     status: statusOf(fd),
     updated_by: g.userId,

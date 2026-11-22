@@ -2,11 +2,28 @@
 
 import { useState } from "react";
 import type { MusicVideo } from "@/lib/db/music";
-import { youtubeEmbedUrl } from "./embed";
+import { youtubeEmbedUrl, youtubeId } from "./embed";
 import { PlayIcon } from "./icons";
 import s from "./music.module.css";
 
-/** Thumbnail first; the YouTube iframe is only mounted after a click. */
+/** YouTube thumbnail at 16:9 (hq720), falling back to hqdefault if that size is missing. */
+function MvThumb({ id }: { id: string }) {
+  const [src, setSrc] = useState(`https://i.ytimg.com/vi/${id}/hq720.jpg`);
+  return (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src={src}
+      alt=""
+      loading="lazy"
+      decoding="async"
+      referrerPolicy="no-referrer"
+      onError={() => setSrc(`https://i.ytimg.com/vi/${id}/hqdefault.jpg`)}
+      style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+    />
+  );
+}
+
+/** Responsive grid. Thumbnail first; the privacy-enhanced YouTube iframe is only mounted after a click (and autoplays). */
 export function MvRail({ videos }: { videos: MusicVideo[] }) {
   const [loaded, setLoaded] = useState<number | null>(null);
 
@@ -14,11 +31,13 @@ export function MvRail({ videos }: { videos: MusicVideo[] }) {
     <section aria-labelledby="mvh">
       <div className={s.sectionHead}>
         <h2 id="mvh" className={`disp ${s.h2}`}>Music videos</h2>
-        <span className={s.note}>Thumbnail first; the YouTube embed loads on click</span>
+        <span className={s.note}>Official videos from the Hearts2Hearts YouTube channel · plays here on click</span>
       </div>
-      <div className={s.hscroll}>
+      <div className={s.mvGrid}>
         {videos.map((v, i) => {
-          const embed = loaded === i ? youtubeEmbedUrl(v.youtube_url) : null;
+          const embedBase = loaded === i ? youtubeEmbedUrl(v.youtube_url) : null;
+          const embed = embedBase ? `${embedBase}?autoplay=1&rel=0&playsinline=1` : null;
+          const id = v.id ?? youtubeId(v.youtube_url);
           const caption = (
             <span style={{ display: "flex", flexDirection: "column", gap: 2 }}>
               <span className="disp" style={{ fontSize: 18, fontWeight: 600 }}>{v.title}</span>
@@ -44,6 +63,7 @@ export function MvRail({ videos }: { videos: MusicVideo[] }) {
           return (
             <button key={v.title} className={s.mv} onClick={() => setLoaded(i)} aria-label={`Play ${v.title} music video`}>
               <span className={s.mvThumb} style={{ background: v.grad }}>
+                {id && <MvThumb id={id} />}
                 {loaded === i ? (
                   <span style={{ position: "absolute", inset: 0, background: "#1b1630", color: "#fff", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 14, textAlign: "center", padding: 20 }}>
                     Official music video link coming soon

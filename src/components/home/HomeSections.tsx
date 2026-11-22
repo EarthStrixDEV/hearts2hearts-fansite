@@ -1,4 +1,7 @@
 import Link from "next/link";
+import { CoverLayer } from "@/components/ui/CoverLayer";
+import { Photo } from "@/components/ui/Photo";
+import { coverBg, xImageSize } from "@/lib/media-url";
 import type { CSSProperties, ReactNode } from "react";
 import { fmtDate } from "@/components/members/profile";
 import { Button } from "@/components/ui/Button";
@@ -36,7 +39,8 @@ const blob = (size: number, rgb: string, pos: CSSProperties) => (
   <div style={{ position: "absolute", width: size, height: size, borderRadius: "50%", background: `radial-gradient(circle, rgba(${rgb},.7), rgba(${rgb},0) 70%)`, ...pos }} />
 );
 
-export function Hero() {
+/** `photos`: official promo images for the three floating cards (centre = group), or null to keep the colour placeholders. */
+export function Hero({ photos }: { photos?: { left?: string | null; center?: string | null; right?: string | null } }) {
   return (
     <section id="top" className="relative flex min-h-[820px] items-center overflow-hidden">
       <Parallax factor={0.15} className="absolute inset-0">
@@ -76,10 +80,10 @@ export function Hero() {
         </div>
         <Parallax factor={-0.08} className="relative h-[520px]">
           <div aria-hidden="true" className="absolute inset-0">
-            <div className="floaty absolute" style={{ left: "6%", top: 60, width: 230, aspectRatio: "3 / 4", borderRadius: 24, transform: "rotate(-9deg)", background: "linear-gradient(160deg,#FFE3F1,#FFB6D5)", boxShadow: "0 24px 48px rgba(201,42,104,.18)", border: "6px solid #fff", animationDelay: "-1s" }} />
-            <div className="floaty absolute" style={{ right: "6%", top: 20, width: 230, aspectRatio: "3 / 4", borderRadius: 24, transform: "rotate(8deg)", background: "linear-gradient(160deg,#DDF0FF,#A8D8FF)", boxShadow: "0 24px 48px rgba(61,132,212,.18)", border: "6px solid #fff", animationDelay: "-3s" }} />
-            <div className="floaty absolute box-border flex items-end justify-center pb-5" style={{ left: "50%", top: 120, marginLeft: -135, width: 270, aspectRatio: "3 / 4", borderRadius: 24, background: "linear-gradient(160deg,#F1EAFF,#C9B6FF 60%,#FFD6E7)", boxShadow: "0 30px 60px rgba(138,92,230,.25)", border: "6px solid #fff" }}>
-              <Chip bg="rgba(255,255,255,.85)" color="#2B2440">TODO · official group photo</Chip>
+            <div className="floaty absolute" style={{ left: "6%", top: 60, width: 230, aspectRatio: "3 / 4", borderRadius: 24, transform: "rotate(-9deg)", background: "linear-gradient(160deg,#FFE3F1,#FFB6D5)", boxShadow: "0 24px 48px rgba(201,42,104,.18)", border: "6px solid #fff", animationDelay: "-1s", overflow: "hidden" }}>{photos?.left && <Photo src={photos.left} />}</div>
+            <div className="floaty absolute" style={{ right: "6%", top: 20, width: 230, aspectRatio: "3 / 4", borderRadius: 24, transform: "rotate(8deg)", background: "linear-gradient(160deg,#DDF0FF,#A8D8FF)", boxShadow: "0 24px 48px rgba(61,132,212,.18)", border: "6px solid #fff", animationDelay: "-3s", overflow: "hidden" }}>{photos?.right && <Photo src={photos.right} />}</div>
+            <div className="floaty absolute box-border flex items-end justify-center pb-5" style={{ left: "50%", top: 120, marginLeft: -135, width: 270, aspectRatio: "3 / 4", borderRadius: 24, background: "linear-gradient(160deg,#F1EAFF,#C9B6FF 60%,#FFD6E7)", boxShadow: "0 30px 60px rgba(138,92,230,.25)", border: "6px solid #fff", overflow: "hidden" }}>
+              {photos?.center ? <Photo src={photos.center} style={{ objectPosition: "88% 50%" }} /> : <Chip bg="rgba(255,255,255,.85)" color="#2B2440">TODO · official group photo</Chip>}
             </div>
           </div>
         </Parallax>
@@ -95,8 +99,8 @@ export function LatestRelease({ release }: { release: HomeRelease }) {
   return (
     <section id="release" className={`${SECTION} pb-12 pt-6`}>
       <div className="glass flex flex-wrap items-center gap-7 rounded-card p-5 shadow-pink">
-        <div className="relative h-[168px] w-[168px] flex-none rounded-2xl" style={{ background: release.grad, boxShadow: "0 16px 32px rgba(201,42,104,.2)" }}>
-          <Chip bg="rgba(255,255,255,.85)" color="#2B2440" style={{ position: "absolute", left: 8, bottom: 8 }}>TODO · cover</Chip>
+        <div className="relative h-[168px] w-[168px] flex-none rounded-2xl" style={{ background: release.coverUrl ? `center / cover no-repeat url("${xImageSize(release.coverUrl, "medium")}")` : release.grad, boxShadow: "0 16px 32px rgba(201,42,104,.2)" }}>
+          {!release.coverUrl && <Chip bg="rgba(255,255,255,.85)" color="#2B2440" style={{ position: "absolute", left: 8, bottom: 8 }}>TODO · cover</Chip>}
         </div>
         <div className="flex flex-[1_1_280px] flex-col gap-2">
           <span className="text-[13px] font-semibold uppercase tracking-[0.12em] text-pink-700">Latest release</span>
@@ -140,7 +144,7 @@ export function BlogCards({ posts }: { posts: HomePost[] }) {
       {posts.map((p) => (
         <Link key={p.href + p.title} href={p.href} className="card-l fx glass flex flex-col overflow-hidden rounded-card text-ink-900 no-underline">
           <span className="relative block aspect-video overflow-hidden">
-            <span className="zoom absolute inset-0 block" style={{ background: p.grad }} />
+            <span className="zoom absolute inset-0 block"><CoverLayer src={p.cover} grad={p.grad} /></span>
             {p.isAi && <Chip bg="#2B2440" color="#fff" style={{ position: "absolute", top: 12, right: 12 }}><Star size={11} fill="#FFB6D5" />AI</Chip>}
           </span>
           <span className="flex flex-col gap-2.5 px-5 pb-5 pt-[18px]">

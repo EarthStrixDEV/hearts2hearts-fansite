@@ -1,0 +1,147 @@
+{
+  "_comment": "Read from the official Hearts2Hearts YouTube channel (Releases tab = YouTube Music albums) on 2026-11-22. `art` = the album's art-track video; its thumbnail is the release art (found with YouTube oEmbed on the music.youtube.com playlist). MV ids were checked with oEmbed (title contains 'MV').",
+  "albums": [
+    {
+      "slug": "the-chase",
+      "playlist": "OLAK5uy_kXfg-1lNByB7WUeGu6eUQAcXh9QsQFtSQ",
+      "art": "dTVCk33AQEs"
+    },
+    {
+      "slug": "style",
+      "playlist": "OLAK5uy_mzbEcBBp6iEIhY72dPq4tDdAJgay8kO2g",
+      "art": "D3tUvbqOAAY"
+    },
+    {
+      "slug": "pretty-please",
+      "playlist": "OLAK5uy_kD5oyxt2XHfNp5JtjLuSrkqhvBQIEhOg8",
+      "art": "ZMppsPVqDt4"
+    },
+    {
+      "slug": "focus",
+      "playlist": "OLAK5uy_ngiR4A42ItLgquYIGXrvwJiu1EUzdRv3Y",
+      "art": "eqKhhG4FVoQ"
+    },
+    {
+      "slug": "focus-remixes",
+      "playlist": "OLAK5uy_lJ69YFW4k-ChbspuDAr43Uv8z1iPkGSlI",
+      "art": "Ut-cDAhM3zs"
+    },
+    {
+      "slug": "rude",
+      "playlist": "OLAK5uy_ndsDbi2cJuRsuGgCEkw7Jw298T9msMqVI",
+      "art": "Q4AE3ub4nBM"
+    },
+    {
+      "slug": "rude-japanese-ver",
+      "playlist": "OLAK5uy_kkJ1XuygyEmmqP77DQXIpBDHDXXNCDBzE",
+      "art": "yQgYjGOCAxQ"
+    },
+    {
+      "slug": "iscream-rude-remixes",
+      "playlist": "OLAK5uy_lA3Sk9jJPTCKmKYgwXOTf0ZpwS2J__ZEg",
+      "art": "DLYrHlDTQh0"
+    },
+    {
+      "slug": "lemon-tang",
+      "playlist": "OLAK5uy_n7zRcfuUE4FPPlPpi21fjkjG82KDTSGME",
+      "art": "BEPSc8q6Bd8"
+    },
+    {
+      "slug": "iconic-heart",
+      "playlist": "OLAK5uy_kK2-WeRwxq5frV4V0ZYKM_LYc6evJpbkI",
+      "art": "hl7_dxuytRQ"
+    },
+    {
+      "slug": "iconic-heart-korean-ver",
+      "playlist": "OLAK5uy_lZsZRQESghDe9qsC4MBSFEXn_DmtO3siE",
+      "art": "iUNLe0iD9P8"
+    },
+    {
+      "slug": "moonride",
+      "playlist": "OLAK5uy_nAV-cVFkrewbG8gPk1bKLsYLy95sTNJCU",
+      "art": "hfftbNrp_lw"
+    },
+    {
+      "slug": "candy-box-lover",
+      "playlist": "OLAK5uy_nwGY0ovTCsOr_o1kMXy7S44qKhO7TkQII",
+      "art": "ZwrhdH77o1I"
+    },
+    {
+      "slug": "next-chapter",
+      "playlist": "OLAK5uy_nNjWVr132Uu0KoP0qZEfLYl2erQPsRPBs",
+      "art": "YVN8O_YKBbA"
+    }
+  ],
+  "mvs": [
+    {
+      "album": "the-chase",
+      "track": "The Chase",
+      "video": "kxUA2wwYiME"
+    },
+    {
+      "album": "style",
+      "track": "STYLE",
+      "video": "n7kFRxFIPrI"
+    },
+    {
+      "album": "focus",
+      "track": "STYLE",
+      "video": "n7kFRxFIPrI"
+    },
+    {
+      "album": "pretty-please",
+      "track": "Pretty Please",
+      "video": "ufwB9Uja_wM"
+    },
+    {
+      "album": "focus",
+      "track": "Pretty Please",
+      "video": "ufwB9Uja_wM"
+    },
+    {
+      "album": "focus",
+      "track": "FOCUS",
+      "video": "Ur7aK4FvK-U"
+    },
+    {
+      "album": "rude",
+      "track": "RUDE!",
+      "video": "F7sGJVUrkjQ"
+    },
+    {
+      "album": "lemon-tang",
+      "track": "RUDE!",
+      "video": "F7sGJVUrkjQ"
+    },
+    {
+      "album": "lemon-tang",
+      "track": "Lemon Tang",
+      "video": "1VqxWNwgf5Q"
+    },
+    {
+      "album": "iconic-heart",
+      "track": "ICONIC HEART",
+      "video": "chl0R8C4NJ8"
+    },
+    {
+      "album": "iconic-heart-korean-ver",
+      "track": "ICONIC HEART (Korean ver.)",
+      "video": "DK_dr_n2rM4"
+    },
+    {
+      "album": "moonride",
+      "track": "Moonride",
+      "video": "gNUMxMuxH20"
+    },
+    {
+      "album": "next-chapter",
+      "track": "Next Chapter",
+      "video": "lu9GinsuyUQ"
+    },
+    {
+      "album": "iscream-rude-remixes",
+      "track": "RUDE! (Silly Silky Remix)",
+      "video": "EU8zYwRc9js"
+    }
+  ]
+}

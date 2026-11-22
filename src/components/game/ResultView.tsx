@@ -5,7 +5,7 @@ import { Chip } from "@/components/ui/Chip";
 import { rankTitle, type Rarity } from "./rules";
 import { usePrefersReducedMotion } from "./local-board";
 
-export interface Reward { name: string; rarity: Rarity; grad: string; foil: number }
+export interface Reward { name: string; rarity: Rarity; grad: string; foil: number; fact?: string; source?: { label: string; url: string } }
 export type SaveState =
   | { status: "guest" }
   | { status: "saving" }
@@ -64,6 +64,14 @@ export function ResultView({
           <span className="sig absolute bottom-2.5 left-3.5 text-[38px] text-[#2B2440]">{reward.name}</span>
         </div>
         <figcaption className="text-[13px] text-ink-500">New photocard collected · {reward.rarity}</figcaption>
+        {reward.fact && (
+          <p className="m-0 max-w-[280px] text-center text-[13px] leading-normal text-ink-500">
+            {reward.fact}
+            {reward.source && reward.source.url.startsWith("https://") && (
+              <>{" "}<a href={reward.source.url} target="_blank" rel="noopener noreferrer" className="whitespace-nowrap">Source: {reward.source.label} ↗</a></>
+            )}
+          </p>
+        )}
       </figure>}
     </div>
   );

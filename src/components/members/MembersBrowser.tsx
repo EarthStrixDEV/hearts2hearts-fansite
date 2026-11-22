@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import { Chip } from "@/components/ui/Chip";
 import { HeartIcon } from "@/components/ui/HeartIcon";
+import { Photo } from "@/components/ui/Photo";
 import { cn } from "@/lib/utils";
 import type { MemberCardData, PositionTag } from "./profile";
 import styles from "./members.module.css";
@@ -77,7 +78,7 @@ export function MembersBrowser({ members }: { members: MemberCardData[] }) {
             <Link key={m.slug} href={`/members/${m.slug}`} aria-label={`${m.name} profile`} className={cn("fx", styles.mc)} style={{ background: m.color }}>
               <span className={styles.ph} style={{ position: "absolute", inset: 0, display: "block", background: grad(m.color) }} />
               <span style={{ position: "absolute", left: 0, right: 0, top: 0, height: 4, background: m.color, display: "block", filter: "saturate(1.6) brightness(.9)" }} />
-              <Chip bg="rgba(255,255,255,.85)" color="#2B2440" style={{ position: "absolute", top: 14, left: 14 }}>TODO · photo</Chip>
+              {m.photo ? <Photo src={m.photo} /> : <Chip bg="rgba(255,255,255,.85)" color="#2B2440" style={{ position: "absolute", top: 14, left: 14 }}>TODO · photo</Chip>}
               <span style={{ position: "absolute", left: 0, right: 0, bottom: 0, height: "60%", display: "block", background: "linear-gradient(0deg, rgba(43,36,64,.78), rgba(43,36,64,0))" }} />
               <span className={cn(styles.meta, "absolute inset-x-4 bottom-4 flex flex-col gap-1.5")}>
                 <span className="flex flex-wrap items-baseline gap-2">
@@ -107,6 +108,7 @@ export function MembersBrowser({ members }: { members: MemberCardData[] }) {
                 >
                   <span style={{ display: "block", position: "relative", aspectRatio: "3 / 4", transformStyle: "preserve-3d", transition: "transform 650ms cubic-bezier(.34,1.56,.64,1)", transform: f ? "rotateY(180deg)" : "rotateY(0deg)" }}>
                     <span style={{ position: "absolute", inset: 0, borderRadius: 24, border: "5px solid #fff", boxSizing: "border-box", overflow: "hidden", backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden", background: grad(m.color), boxShadow: "0 14px 28px rgba(43,36,64,.14)", display: "block" }}>
+                      {m.photo && <Photo src={m.photo} />}
                       <span style={{ position: "absolute", inset: 0, background: "linear-gradient(115deg, transparent 25%, rgba(255,182,213,.8) 40%, rgba(201,182,255,.8) 50%, rgba(168,216,255,.8) 60%, transparent 75%)", mixBlendMode: "color-dodge", opacity: 0.35, display: "block" }} />
                       <span className="disp" style={{ position: "absolute", left: 14, bottom: 12, color: "#fff", fontSize: 24, fontWeight: 600, textShadow: "0 1px 8px rgba(43,36,64,.45)" }}>{m.name}</span>
                     </span>

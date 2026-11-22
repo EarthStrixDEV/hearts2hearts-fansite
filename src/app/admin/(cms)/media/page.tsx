@@ -3,7 +3,7 @@ import { ActionForm, SubmitButton } from "@/components/admin/ActionForm";
 import { DeleteForm } from "@/components/admin/SaveBar";
 import { UploadButton } from "@/components/admin/UploadButton";
 import { Badge, Field, PageHead, SearchForm, Seg, type Tone } from "@/components/admin/ui";
-import { deleteMedia, updateMedia } from "@/lib/admin/actions/media";
+import { addXImages, deleteMedia, updateMedia } from "@/lib/admin/actions/media";
 import { getAdminContext } from "@/lib/admin/auth";
 import { one } from "@/lib/admin/db";
 import { fmtDateTime } from "@/lib/admin/form";
@@ -11,13 +11,14 @@ import { signedUrls } from "@/lib/admin/mediaUrl";
 import { getMedia, listMedia, mediaUsage } from "@/lib/admin/queries/media";
 import { href } from "@/lib/admin/url";
 import type { Media } from "@/lib/db/types";
+import { isRemoteImageUrl } from "@/lib/media-url";
 
 export const metadata = { title: "Media" };
 
 type SP = Promise<Record<string, string | string[] | undefined>>;
 const FILTERS = [["all", "All"], ["images", "Images"], ["noalt", "Missing alt"]] as const;
 const isImage = (m: Media) => m.mime_type.startsWith("image/");
-const fileName = (m: Media) => m.path.split("/").pop() ?? m.path;
+const fileName = (m: Media) => (isRemoteImageUrl(m.path) ? `${m.path.includes("ytimg") ? "YT Music · " + (m.path.split("/").slice(-2)[0] ?? m.path) : "X · " + (m.path.split("/").pop() ?? m.path).split("?")[0]}` : m.path.split("/").pop() ?? m.path);
 const state = (m: Media): { label: string; tone: Tone } =>
   isImage(m) && !(m.alt ?? "").trim() ? { label: "Alt text missing", tone: "warn" } : { label: "Ready", tone: "ok" };
 
@@ -35,9 +36,22 @@ export default async function AdminMedia({ searchParams }: { searchParams: SP })
     <>
       <PageHead
         title="Media library"
-        desc="Files are hosted on the fan site itself. Don’t hotlink images from official sites or socials."
+        desc="Upload files to the fan site, or add images that live on X’s image CDN by pasting their links. Images from X stay on X and can disappear if the post is deleted."
         actions={<UploadButton disabled={!ctx.configured} />}
       />
+      <section className="a-card a-pad" aria-labelledby="xh" style={{ display: "flex", flexDirection: "column", gap: 12, marginBottom: 16 }}>
+        <h2 id="xh" style={{ fontSize: 16, fontWeight: 600 }}>Add images from X</h2>
+        <ActionForm action={addXImages} readOnly={!ctx.configured} className="a-stack">
+          <Field label="Image links" hint="One per line. Right-click an image on X → Copy image address (https://pbs.twimg.com/media/…). Only X image links are accepted.">
+            <textarea name="urls" rows={3} required className="a-inp a-mono" placeholder="https://pbs.twimg.com/media/XXXXXXXX?format=jpg&name=large" />
+          </Field>
+          <div className="a-g2">
+            <Field label="Alt text (optional)" hint="Applied to every link above. Name a member only if the source says who it is."><input name="alt" className="a-inp" /></Field>
+            <Field label="Credit" hint="Who owns it, e.g. the post link or “SM Entertainment via X”."><input name="credit" className="a-inp" /></Field>
+          </div>
+          <div className="a-foot"><SubmitButton variant="primary">Add images</SubmitButton></div>
+        </ActionForm>
+      </section>
       <div className="a-cluster" style={{ justifyContent: "space-between" }}>
         <Seg label="File type" items={FILTERS.map(([k, l]) => ({ label: l, on: f === k, href: href("/admin/media", { q, f: k === "all" ? undefined : k }) }))} />
         <SearchForm q={q} hidden={{ f: keep.f }} placeholder="Search files" />

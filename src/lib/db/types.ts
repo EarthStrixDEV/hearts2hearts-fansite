@@ -15,7 +15,7 @@ export interface MemberFact { id: string; member_id: string; label: string; valu
 export type AlbumType = "single" | "ep" | "album";
 export interface Album {
   id: string; slug: string; title: string; album_type: AlbumType; release_date: string | null; cover_id: string | null;
-  description: string | null; spotify_url: string | null; status: ContentStatus; created_at: string; updated_at: string; updated_by: string | null;
+  description: string | null; spotify_url: string | null; ytmusic_url?: string | null; status: ContentStatus; created_at: string; updated_at: string; updated_by: string | null;
 }
 export interface Track {
   id: string; album_id: string; track_no: number; title: string; duration_sec: number | null; is_title_track: boolean;
