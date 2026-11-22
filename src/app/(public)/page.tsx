@@ -7,6 +7,7 @@ import { TiltCards } from "@/components/home/TiltCards";
 import { toCardData } from "@/components/members/profile";
 import { Button } from "@/components/ui/Button";
 import { getHomeData } from "@/lib/db/home";
+import { GROUP_PHOTO } from "@/lib/db/seed/licensed-images";
 
 const SECTION = "mx-auto max-w-[1200px] px-6";
 
@@ -15,7 +16,7 @@ export default async function HomePage() {
   const heroPhoto = (m?: (typeof members)[number]) => (m ? cardPhoto(m) : null);
   return (
     <>
-      <Hero photos={{ left: heroPhoto(members[3]), right: heroPhoto(members[0]), center: slides[0]?.imageUrl }} />
+      <Hero photos={{ left: heroPhoto(members[3]), right: heroPhoto(members[0]), center: slides[0]?.imageUrl }} groupPhoto={GROUP_PHOTO} />
       {release && <LatestRelease release={release} />}
 
       {slides.length > 0 && (

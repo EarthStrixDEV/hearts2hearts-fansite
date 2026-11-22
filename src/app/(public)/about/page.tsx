@@ -4,6 +4,7 @@ import { GroupInfo, OfficialLinks, StoryTimeline } from "@/components/about/Abou
 import { Chip } from "@/components/ui/Chip";
 import { HeartIcon } from "@/components/ui/HeartIcon";
 import { getAboutContent } from "@/lib/db/pages";
+import { GROUP_LOGOTYPE } from "@/lib/db/seed/licensed-images";
 
 export const metadata: Metadata = { title: "About" };
 
@@ -23,9 +24,15 @@ export default async function AboutPage() {
           <nav aria-label="Breadcrumb" className="text-sm text-ink-500">
             <Link href="/" className="fx text-ink-500 no-underline">Home</Link> / <span aria-current="page" className="font-semibold text-ink-900">About</span>
           </nav>
-          <div className="flex h-[120px] w-[220px] items-center justify-center rounded-card" style={{ border: "2px dashed rgba(201,42,104,.35)", background: "rgba(255,255,255,.5)" }}>
-            <Chip bg="#fff" color="#2B2440">TODO · official group logo</Chip>
-          </div>
+          <figure className="m-0 flex flex-col items-center gap-2">
+            <div className="flex h-[120px] w-[220px] items-center justify-center rounded-card px-5" style={{ background: "rgba(255,255,255,.7)" }}>
+              {/* eslint-disable-next-line @next/next/no-img-element -- hotlinked SVG from Wikimedia Commons */}
+              <img src={GROUP_LOGOTYPE.src} alt={GROUP_LOGOTYPE.alt} width={180} height={21} referrerPolicy="no-referrer" style={{ width: "100%", height: "auto" }} />
+            </div>
+            <figcaption className="text-xs text-ink-500">
+              Logo: {GROUP_LOGOTYPE.author} via <a href={GROUP_LOGOTYPE.sourceUrl} target="_blank" rel="noopener noreferrer" className="fx text-ink-500">Wikimedia Commons</a> · {GROUP_LOGOTYPE.license}
+            </figcaption>
+          </figure>
           <h1 className="disp holo-text m-0 font-bold leading-[1.02] tracking-[-0.02em]" style={{ fontSize: "clamp(48px, 7vw, 84px)" }}>{about.title}</h1>
           <p className="m-0 max-w-[48ch] text-xl leading-relaxed text-ink-500">{about.nameStory}</p>
         </div>
