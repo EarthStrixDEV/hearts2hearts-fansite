@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/Button";
 import { Chip } from "@/components/ui/Chip";
 import { HeartIcon } from "@/components/ui/HeartIcon";
 import type { HomeEvent, HomePost, HomeRelease } from "@/lib/db/home";
+import type { LicensedImage } from "@/lib/db/seed/licensed-images";
 import { Countdown } from "./Countdown";
 import { ListenNow } from "./ListenNow";
 import { Parallax } from "./Parallax";
@@ -40,7 +41,9 @@ const blob = (size: number, rgb: string, pos: CSSProperties) => (
 );
 
 /** `photos`: official promo images for the three floating cards (centre = group), or null to keep the colour placeholders. */
-export function Hero({ photos }: { photos?: { left?: string | null; center?: string | null; right?: string | null } }) {
+/** `groupPhoto`: freely licensed group photo for the centre card when `photos.center` is empty; its credit is shown under the cards. */
+export function Hero({ photos, groupPhoto }: { photos?: { left?: string | null; center?: string | null; right?: string | null }; groupPhoto?: LicensedImage | null }) {
+  const group = photos?.center ? null : groupPhoto ?? null;
   return (
     <section id="top" className="relative flex min-h-[820px] items-center overflow-hidden">
       <Parallax factor={0.15} className="absolute inset-0">
@@ -83,9 +86,17 @@ export function Hero({ photos }: { photos?: { left?: string | null; center?: str
             <div className="floaty absolute" style={{ left: "6%", top: 60, width: 230, aspectRatio: "3 / 4", borderRadius: 24, transform: "rotate(-9deg)", background: "linear-gradient(160deg,#FFE3F1,#FFB6D5)", boxShadow: "0 24px 48px rgba(201,42,104,.18)", border: "6px solid #fff", animationDelay: "-1s", overflow: "hidden" }}>{photos?.left && <Photo src={photos.left} />}</div>
             <div className="floaty absolute" style={{ right: "6%", top: 20, width: 230, aspectRatio: "3 / 4", borderRadius: 24, transform: "rotate(8deg)", background: "linear-gradient(160deg,#DDF0FF,#A8D8FF)", boxShadow: "0 24px 48px rgba(61,132,212,.18)", border: "6px solid #fff", animationDelay: "-3s", overflow: "hidden" }}>{photos?.right && <Photo src={photos.right} />}</div>
             <div className="floaty absolute box-border flex items-end justify-center pb-5" style={{ left: "50%", top: 120, marginLeft: -135, width: 270, aspectRatio: "3 / 4", borderRadius: 24, background: "linear-gradient(160deg,#F1EAFF,#C9B6FF 60%,#FFD6E7)", boxShadow: "0 30px 60px rgba(138,92,230,.25)", border: "6px solid #fff", overflow: "hidden" }}>
-              {photos?.center ? <Photo src={photos.center} style={{ objectPosition: "88% 50%" }} /> : <Chip bg="rgba(255,255,255,.85)" color="#2B2440">TODO · official group photo</Chip>}
+              {photos?.center ? <Photo src={photos.center} style={{ objectPosition: "88% 50%" }} />
+                : group ? <Photo src={group.src} alt={group.alt} style={{ objectFit: "contain" }} />
+                : <Chip bg="rgba(255,255,255,.85)" color="#2B2440">TODO · official group photo</Chip>}
             </div>
           </div>
+          {group && (
+            <p className="absolute bottom-0 left-0 right-0 m-0 text-center text-xs text-ink-500">
+              Group photo: {group.author} · <a href={group.licenseUrl} target="_blank" rel="noopener noreferrer license" className="fx text-ink-500">{group.license}</a> · via{" "}
+              <a href={group.sourceUrl} target="_blank" rel="noopener noreferrer" className="fx text-ink-500">Wikimedia Commons</a>
+            </p>
+          )}
         </Parallax>
       </div>
       <a href="#release" className={`fx absolute bottom-7 left-1/2 -ml-[22px] flex h-11 w-11 items-center justify-center rounded-full text-ink-500 ${styles.bob}`} aria-label="Scroll to latest release">
