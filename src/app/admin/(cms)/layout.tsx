@@ -11,7 +11,9 @@ import { hasRole } from "@/lib/admin/roles";
 
 export default async function CmsLayout({ children }: { children: React.ReactNode }) {
   const ctx = await getAdminContext();
-  if (ctx.configured && !hasRole(ctx.role, "editor")) redirect("/admin/denied"); // middleware already does this; defence in depth
+  // The proxy already does this; defence in depth. Unconfigured = read-only preview, which only exists outside production.
+  const denied = ctx.configured ? !hasRole(ctx.role, "editor") : process.env.NODE_ENV === "production";
+  if (denied) redirect("/admin/denied");
   const drafts = await draftPostCount();
   const items = ADMIN_NAV.filter((n) => hasRole(ctx.role, n.role)).map((n) => ({ key: n.key, label: n.label, href: n.href, icon: n.icon, count: n.key === "posts" ? drafts : undefined }));
 

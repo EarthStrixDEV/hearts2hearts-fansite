@@ -1,8 +1,8 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { HeartIcon } from "@/components/ui/HeartIcon";
-import type { GameData } from "@/lib/db/game";
+import type { PublicGameData } from "@/lib/db/game";
 import { GameHub } from "./GameHub";
 import { Leaderboard } from "./Leaderboard";
 import { LoginGate, type FanUser } from "./LoginGate";
@@ -16,17 +16,7 @@ type Screen = { name: "hub" } | { name: "quiz" } | { name: "memory" } | { name: 
 
 const QUESTION_SECONDS = 15;
 
-/** A fresh random set of questions per play, so a bigger question bank never changes the 0–5 scoring. */
-function pickQuestions<T>(bank: T[], n: number): T[] {
-  const a = [...bank];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a.slice(0, n);
-}
-
-export function GameCanvas({ data }: { data: GameData }) {
+export function GameCanvas({ data }: { data: PublicGameData }) {
   const [screen, setScreen] = useState<Screen>({ name: "hub" });
   const [round, setRound] = useState(0); // remounts a view for "Play again"
   const [local, setLocal] = useState<LocalEntry[]>([]);
@@ -57,9 +47,6 @@ export function GameCanvas({ data }: { data: GameData }) {
     return () => ctl.abort();
   }, []);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const roundQuestions = useMemo(() => pickQuestions(data.questions, GAME_RULES.quiz.rawMax), [round, data.questions]);
-
   const showToast = (msg: string) => {
     setToast(msg);
     clearTimeout(toastTimer.current);
@@ -67,7 +54,7 @@ export function GameCanvas({ data }: { data: GameData }) {
   };
 
   const finish = useCallback(
-    async (game: GameKind, raw: number, max: number) => {
+    async (game: GameKind, raw: number, max: number, roundToken?: string | null) => {
       const pct = max ? raw / max : 0;
       const member = data.cards[Math.floor(Math.random() * data.cards.length)];
       const rarity = rarityFor(pct);
@@ -91,7 +78,8 @@ export function GameCanvas({ data }: { data: GameData }) {
         const res = await fetch("/api/game/score", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ game, score: toPoints(game, raw) }),
+          // Quiz: the server grades the round and takes the score from the signed token; memory still reports its own points.
+          body: JSON.stringify(game === "quiz" ? { game, token: roundToken } : { game, score: toPoints(game, raw) }),
         });
         const j = await res.json().catch(() => ({}));
         if (res.ok && j.ok) {
@@ -101,6 +89,7 @@ export function GameCanvas({ data }: { data: GameData }) {
           const msg: Record<string, string> = {
             too_fast: "That round was too quick to count. Score kept on this device.",
             login_required: "Sign in again to post scores (your session expired, or this account can’t post).",
+            invalid_round: "This round couldn’t be verified (you may have signed in mid-game). Score kept on this device.",
           };
           setSave({ status: "error", message: msg[j.error] ?? "Could not post to the online board. Score kept on this device." });
         }
@@ -169,7 +158,7 @@ export function GameCanvas({ data }: { data: GameData }) {
         <div className="flex min-w-0 flex-[999_1_640px] flex-col items-center gap-6">
           {screen.name === "hub" && <GameHub catalog={data.catalog} best={best} onStart={start} />}
           {screen.name === "quiz" && (
-            <QuizView key={round} questions={roundQuestions} colors={colors} seconds={QUESTION_SECONDS} onQuit={quit} onFinish={(c, t) => finish("quiz", c, t)} />
+            <QuizView key={round} colors={colors} seconds={QUESTION_SECONDS} onQuit={quit} onFinish={(c, t, token) => finish("quiz", c, t, token)} />
           )}
           {screen.name === "memory" && <MemoryView key={round} cards={data.cards} onQuit={quit} onFinish={(raw, pairs) => finish("memory", raw, pairs)} />}
           {screen.name === "result" && (

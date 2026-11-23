@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { HeartIcon } from "@/components/ui/HeartIcon";
 import { cn } from "@/lib/utils";
-import type { QuestionPayload } from "@/lib/db/seed/game";
 import { usePrefersReducedMotion } from "./local-board";
+import type { PublicQuestion, QuizAnswer } from "./rules";
 
 const TIMEOUT = "__timeout";
 const RING = 138.2;
@@ -20,56 +20,116 @@ const BITS = Array.from({ length: 14 }, (_, i) => {
   };
 });
 
+/**
+ * The round is server-owned: questions come from /api/game/quiz/start without answers, and every pick is graded by
+ * /api/game/quiz/answer (which also returns the explanation). `onFinish` hands back the final signed round token,
+ * which is the only thing the leaderboard accepts as proof of the score.
+ */
 export function QuizView({
-  questions,
   colors,
   seconds = 15,
   onFinish,
   onQuit,
 }: {
-  questions: QuestionPayload[];
   colors: Record<string, string>;
   seconds?: number;
-  onFinish: (correct: number, total: number) => void;
+  onFinish: (correct: number, total: number, token: string | null) => void;
   onQuit: () => void;
 }) {
+  const [questions, setQuestions] = useState<PublicQuestion[] | null>(null);
+  const [loadError, setLoadError] = useState<string | null>(null);
   const [qi, setQi] = useState(0);
   const [picked, setPicked] = useState<string | null>(null);
+  const [result, setResult] = useState<QuizAnswer | null>(null);
+  const [checkError, setCheckError] = useState(false);
   const [score, setScore] = useState(0);
   const [time, setTime] = useState(seconds);
+  const token = useRef<string | null>(null);
   const reduced = usePrefersReducedMotion();
 
-  const total = questions.length;
-  const q = questions[qi];
+  const loadRound = useCallback(async (signal?: AbortSignal) => {
+    setLoadError(null);
+    try {
+      const res = await fetch("/api/game/quiz/start", { method: "POST", signal });
+      const j = await res.json().catch(() => ({}));
+      if (!res.ok || !j.ok) throw new Error(String(j.error ?? res.status));
+      token.current = j.token;
+      setQuestions(j.questions);
+    } catch (e) {
+      if ((e as Error)?.name !== "AbortError") setLoadError("Could not load the questions. Check your connection and try again.");
+    }
+  }, []);
+
+  useEffect(() => {
+    const ctl = new AbortController();
+    void loadRound(ctl.signal);
+    return () => ctl.abort();
+  }, [loadRound]);
+
+  const total = questions?.length ?? 0;
+  const q = questions?.[qi] ?? null;
   const answered = picked !== null;
-  const right = answered && picked === q.answer;
+  const right = result?.correct === true;
+
+  // Sends the pick (null = timeout) for grading; the response unlocks the explanation and the next token.
+  const submit = useCallback(async (pick: string | null) => {
+    setCheckError(false);
+    try {
+      const res = await fetch("/api/game/quiz/answer", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ token: token.current, pick }),
+      });
+      const j = await res.json().catch(() => ({}));
+      if (!res.ok || !j.ok) throw new Error(String(j.error ?? res.status));
+      token.current = j.token;
+      setResult({ correct: j.correct, answer: j.answer, note: j.note, source: j.source });
+      if (j.correct) setScore((s) => s + 1);
+    } catch {
+      setCheckError(true);
+    }
+  }, []);
 
   // 1s countdown per question; hitting 0 locks the question as a timeout.
   useEffect(() => {
-    if (picked !== null) return;
+    if (!q || picked !== null) return;
     if (time <= 0) {
       setPicked(TIMEOUT);
+      void submit(null);
       return;
     }
     const t = setTimeout(() => setTime((v) => v - 1), 1000);
     return () => clearTimeout(t);
-  }, [time, picked]);
+  }, [q, time, picked, submit]);
 
   const pick = (name: string) => {
     if (picked !== null) return;
     setPicked(name);
-    if (name === q.answer) setScore((s) => s + 1);
+    void submit(name);
   };
   const next = () => {
     if (qi + 1 < total) {
       setQi(qi + 1);
       setPicked(null);
+      setResult(null);
       setTime(seconds);
-    } else onFinish(score, total);
+    } else onFinish(score, total, token.current);
   };
 
   const ringColor = time <= 5 ? "#C92A68" : "#8A5CE6";
   const bits = useMemo(() => BITS, []);
+
+  if (!q) {
+    return (
+      <div className="glass flex w-full max-w-[720px] flex-col items-center gap-4 rounded-card p-8 text-center" aria-live="polite">
+        <span className="text-[15px] text-ink-500">{loadError ?? "Loading questions…"}</span>
+        <div className="flex gap-3">
+          {loadError && <button type="button" className="btn btn-p" onClick={() => void loadRound()}>Try again</button>}
+          <button type="button" className="btn btn-s" onClick={onQuit}>Back</button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="glass relative flex w-full max-w-[720px] flex-col gap-[22px] overflow-hidden rounded-card p-6 sm:px-7 sm:pb-7">
@@ -107,7 +167,7 @@ export function QuizView({
             type="button"
             disabled={answered}
             onClick={() => pick(n)}
-            className={cn("gm-ans", answered && (n === q.answer ? "ok" : n === picked ? "bad" : "dim"))}
+            className={cn("gm-ans", result && (n === result.answer ? "ok" : n === picked ? "bad" : "dim"))}
           >
             <span className="block h-3.5 w-3.5 flex-none rounded-full" style={{ background: colors[n] ?? "#C9B6FF" }} />
             {n}
@@ -115,14 +175,23 @@ export function QuizView({
         ))}
       </div>
 
-      {answered && (
+      {answered && !result && (
+        <div className="gm-rise flex flex-wrap items-center justify-between gap-3 rounded-tile bg-surface px-5 py-4" aria-live="polite">
+          <span className="text-[15px] leading-normal">{checkError ? "Could not check your answer. Check your connection and try again." : "Checking…"}</span>
+          {checkError && (
+            <button type="button" className="btn btn-p" onClick={() => void submit(picked === TIMEOUT ? null : picked)}>Try again</button>
+          )}
+        </div>
+      )}
+
+      {answered && result && (
         <div className="gm-rise flex flex-wrap items-center justify-between gap-3 rounded-tile bg-surface px-5 py-4" aria-live="polite">
           <span className="text-[15px] leading-normal">
-            <strong>{right ? "Correct!" : picked === TIMEOUT ? `Time’s up, it was ${q.answer}.` : `It was ${q.answer}.`}</strong> {q.note}
-            {q.source && q.source.url.startsWith("https://") && (
+            <strong>{right ? "Correct!" : picked === TIMEOUT ? `Time’s up, it was ${result.answer}.` : `It was ${result.answer}.`}</strong> {result.note}
+            {result.source && result.source.url.startsWith("https://") && (
               <>
                 {" "}
-                <a href={q.source.url} target="_blank" rel="noopener noreferrer" className="whitespace-nowrap text-[13px]">Source: {q.source.label} ↗</a>
+                <a href={result.source.url} target="_blank" rel="noopener noreferrer" className="whitespace-nowrap text-[13px]">Source: {result.source.label} ↗</a>
               </>
             )}
           </span>

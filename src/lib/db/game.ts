@@ -14,11 +14,15 @@ import {
 export const GAME_TAG = "game";
 export const MEMORY_PAIRS = 8;
 
+/** A quiz question with its id and answer. Server only: the answer must never reach the browser (see src/lib/game-round.ts). */
+export interface ServerQuestion extends QuestionPayload { id: string }
 export interface GameData {
-  questions: QuestionPayload[];
+  questions: ServerQuestion[];
   cards: CardPayload[];
   catalog: GameCatalogEntry[];
 }
+/** What the game page may send to the browser: no questions, they come per round from /api/game/quiz/start. */
+export type PublicGameData = Pick<GameData, "cards" | "catalog">;
 export interface LeaderboardRow { rank: number; name: string; score: number; played_at: string }
 
 const isQuestion = (p: Record<string, unknown>): boolean =>
@@ -26,7 +30,7 @@ const isQuestion = (p: Record<string, unknown>): boolean =>
 const isCard = (p: Record<string, unknown>): boolean => typeof p.name === "string" && typeof p.color_hex === "string";
 
 /** Locks a game in the hub when its content is missing (empty DB). */
-function withAvailability(questions: QuestionPayload[], cards: CardPayload[]): GameData {
+function withAvailability(questions: ServerQuestion[], cards: CardPayload[]): GameData {
   const catalog = GAME_CATALOG.map((g) => {
     if (g.key === "quiz" && questions.length === 0) return { ...g, locked: true, cta: "No questions yet" };
     if (g.key === "memory" && cards.length !== MEMORY_PAIRS) return { ...g, locked: true, cta: "No cards yet" };
@@ -38,12 +42,12 @@ function withAvailability(questions: QuestionPayload[], cards: CardPayload[]): G
 const loadGameItems = unstable_cache(
   async (): Promise<GameData> => {
     // No database configured: run on the design's seed data. With a database, an empty table means empty states (games locked).
-    if (!hasDb()) return withAvailability(SEED_QUESTIONS.map((i) => i.payload), SEED_CARDS.map((i) => i.payload));
+    if (!hasDb()) return withAvailability(SEED_QUESTIONS.map((i) => ({ ...i.payload, id: i.id })), SEED_CARDS.map((i) => i.payload));
     try {
-      const rows = await query<{ kind: string; payload: Record<string, unknown> }>(
-        "select kind, payload from game_items where is_active order by sort_order, id",
+      const rows = await query<{ id: string; kind: string; payload: Record<string, unknown> }>(
+        "select id::text as id, kind, payload from game_items where is_active order by sort_order, id",
       );
-      const questions = rows.filter((r) => r.kind === "question" && isQuestion(r.payload)).map((r) => r.payload as unknown as QuestionPayload);
+      const questions = rows.filter((r) => r.kind === "question" && isQuestion(r.payload)).map((r) => ({ ...(r.payload as unknown as QuestionPayload), id: r.id }));
       const cards = rows.filter((r) => r.kind === "card" && isCard(r.payload)).map((r) => r.payload as unknown as CardPayload);
       return withAvailability(questions, cards);
     } catch (e) {

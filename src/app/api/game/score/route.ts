@@ -3,6 +3,7 @@ import { revalidateTag } from "next/cache";
 import { hasDb, queryOne } from "@/lib/neon/db";
 import { getCurrentUser } from "@/lib/auth/session";
 import { GAME_TAG, getTopScores } from "@/lib/db/game";
+import { readRound, sameOrigin } from "@/lib/game-round";
 import { CURRENT_SEASON, GAME_RULES, isGameKind, isValidScore } from "@/components/game/rules";
 
 export const runtime = "nodejs";
@@ -17,17 +18,13 @@ export async function GET() {
 }
 
 /**
- * POST { game: "quiz" | "memory", score: number } -> { ok, rank, score, season }
- * 1. same-origin  2. valid body + score on the game's grid and <= per-round cap  3. signed-in fan (getCurrentUser: null if signed out OR banned)
- * 4. throttle + insert in ONE statement (min round time since the fan's last score)  5. rank among fans' best scores
+ * POST { game: "memory", score: number } | { game: "quiz", token } -> { ok, rank, score, season }
+ * 1. same-origin  2. valid body  3. signed-in fan (getCurrentUser: null if signed out OR banned)
+ * 4. quiz: the score is the server-graded result of a finished round token (never a client number); memory: score on the game's grid and <= per-round cap
+ * 5. throttle + insert in ONE statement (min round time since the fan's last score)  6. rank among fans' best scores
  */
 export async function POST(req: NextRequest) {
-  const origin = req.headers.get("origin");
-  if (origin) {
-    let host: string | null = null;
-    try { host = new URL(origin).host; } catch {}
-    if (host !== req.headers.get("host")) return err(403, "bad_origin");
-  }
+  if (!sameOrigin(req)) return err(403, "bad_origin");
 
   let body: unknown;
   try {
@@ -35,13 +32,23 @@ export async function POST(req: NextRequest) {
   } catch {
     return err(400, "invalid_json");
   }
-  const { game, score } = (body ?? {}) as { game?: unknown; score?: unknown };
+  const { game, score: claimed, token } = (body ?? {}) as { game?: unknown; score?: unknown; token?: unknown };
   if (!isGameKind(game)) return err(400, "invalid_game");
-  if (!isValidScore(game, score)) return err(422, "invalid_score");
+  if (game !== "quiz" && !isValidScore(game, claimed)) return err(422, "invalid_score");
   if (!hasDb()) return err(503, "not_configured");
 
   const user = await getCurrentUser();
   if (!user) return err(401, "login_required");
+
+  let score: number;
+  if (game === "quiz") {
+    const round = readRound(token);
+    if (!round || round.u !== user.id || round.i !== round.q.length || round.q.length > GAME_RULES.quiz.rawMax) return err(422, "invalid_round");
+    if (Date.now() - round.t < GAME_RULES.quiz.minRoundMs) return err(429, "too_fast");
+    score = round.c * GAME_RULES.quiz.pointsPerStep;
+  } else {
+    score = claimed as number; // isValidScore above
+  }
 
   // Atomic: insert only if the fan has no score newer than the game's minimum round time.
   const inserted = await queryOne<{ id: string }>(

@@ -12,7 +12,11 @@ export const GAME_RULES: Record<GameKind, { label: string; rawMax: number; point
   memory: { label: "Memory Match", rawMax: 8, pointsPerStep: 125, minRoundMs: 8000 },
 };
 
-export const isGameKind = (v: unknown): v is GameKind => v === "quiz" || v === "memory";
+/** A quiz question as the browser sees it: no answer, no note (both come back from /api/game/quiz/answer). */
+export interface PublicQuestion { id: string; text: string; options: string[] }
+export interface QuizAnswer { correct: boolean; answer: string; note: string; source?: { label: string; url: string } }
+
+export const isGameKind =(v: unknown): v is GameKind => v === "quiz" || v === "memory";
 
 export const toPoints = (game: GameKind, raw: number) =>
   Math.max(0, Math.min(GAME_RULES[game].rawMax, Math.round(raw))) * GAME_RULES[game].pointsPerStep;
