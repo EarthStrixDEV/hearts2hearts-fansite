@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { IconButton } from "@/components/ui/IconButton";
 import { usePrefersReducedMotion } from "@/components/game/local-board";
-import type { CitySpotView } from "@/lib/db/seed/city";
+import type { CityHouse, CitySpotView } from "@/lib/db/seed/city";
 import type { CityView } from "./CityScene";
 
 const CityScene = dynamic(() => import("./CityScene"), { ssr: false });
@@ -14,7 +14,7 @@ const CityScene = dynamic(() => import("./CityScene"), { ssr: false });
 const STARS = Array.from({ length: 24 }, (_, i) => ({ x: (i * 37) % 100, y: (i * 23) % 45, r: 1 + (i % 3), d: -(i % 5) * 0.4 }));
 const HEART = "M12 21s-7.5-4.6-10-9.3C.3 8.4 2.2 4 6.2 4c2.3 0 3.9 1.3 5.8 3.4C13.9 5.3 15.5 4 17.8 4c4 0 5.9 4.4 4.2 7.7C19.5 16.4 12 21 12 21z";
 
-export function CityExperience({ spots }: { spots: CitySpotView[] }) {
+export function CityExperience({ spots, houses }: { spots: CitySpotView[]; houses: CityHouse[] }) {
   const reduced = usePrefersReducedMotion();
   const [isNight, setNight] = useState(false);
   const [hover, setHover] = useState<string | null>(null);
@@ -46,7 +46,7 @@ export function CityExperience({ spots }: { spots: CitySpotView[] }) {
       )}
 
       <div className="absolute inset-0 cursor-grab active:cursor-grabbing" role="img" aria-label="Interactive 3D mini city. Use the Fly to list to visit each building.">
-        <CityScene spots={spots} view={view} hover={hover} isNight={isNight} reduced={reduced} onHover={setHover} onPick={pick} onReady={() => setReady(true)} />
+        <CityScene spots={spots} houses={houses} view={view} hover={hover} isNight={isNight} reduced={reduced} onHover={setHover} onPick={pick} onReady={() => setReady(true)} />
       </div>
 
       {/* top left */}
