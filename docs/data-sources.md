@@ -52,4 +52,12 @@ Imported by `node --env-file=.env.local scripts/import-photos.mjs` (idempotent).
 - **Home hero carousel** (5 era slides) and **blog covers** (6 posts): official MV stills (`hq720`). These carry a baked-in watermark in the lower-left corner, so the carousel is shown in a wider 5:2 frame and blog covers are drawn from the top of the still, which keeps the watermark out of view. Credit stays in `media.credit`.
 - **Album covers / disc art**: see the YouTube section above.
 
-Frames still using a placeholder (no public source found): the About page group logo, event posters on /schedule (no events imported yet), the "Photocard collection" cards on member pages (era cards, not photos), and the "Symbol" and "Intro quote" slots on member pages (these need a sourced quote).
+Frames still using a placeholder (no public source found): the About page group logo, event posters on /schedule (no events imported yet), and the "Symbol" and "Intro quote" slots on member pages (these need a sourced quote).
+
+## Photocard collection (`db/data/photocards.json`, table `member_era_cards`)
+
+Migration `0009_member_era_cards.sql` + `node --env-file=.env.local scripts/import-photocards.mjs` (idempotent; re-running rewrites the rows from the JSON, so a photo swapped in the CMS is overwritten). One official Short thumbnail (`oar2`, hotlinked from `i.ytimg.com`, credited in `media.credit`) per member per release, read 2026-11-24 from the Shorts tab of `@hearts2hearts.official` (1,214 Shorts, 305 tagged with a single member's hashtag).
+
+- **Era match:** a Short counts for a release when it was uploaded from 14 days before that release (comeback teasers) until 14 days before the next published release. Then hand-picked: one person, face visible, no text overlay. Identity relies on the channel's own hashtag, not verified independently.
+- **Remix / language versions** (FOCUS (Remixes), RUDE! (Japanese ver.), ICONIC HEART (Korean ver.)) reuse the photo of their base release (`baseEra` in the JSON). Draft releases have no cards.
+- **Pretty Please for Yuha, Stella, Juun, A-na and Ye-on** borrows their FOCUS photo (`fallbackEra` in the JSON; Pretty Please was the pre-release single of FOCUS). That 26-day window had no clean single-member Short for them (Yuha's only one shows two people, Juun's hides the face). All 96 cards have a photo.

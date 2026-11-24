@@ -66,6 +66,28 @@ export const getMemberTracks = (member: Pick<Member, "id" | "slug">): Promise<Tr
     { tags: [`member:${member.slug}`, "music"], revalidate: REVALIDATE },
   )();
 
+/**
+ * Photocard photos of one member, keyed by album title (= era title from getEras). Eras without a row are left out, so the
+ * card keeps its gradient. Empty without a database. Cache tags `member:{slug}`, `music`.
+ */
+export const getMemberEraPhotos = (member: Pick<Member, "id" | "slug">): Promise<Record<string, string>> =>
+  unstable_cache(
+    async (): Promise<Record<string, string>> => {
+      if (!hasDb()) return {};
+      const rows = await query<{ title: string; media_id: string }>(
+        `select a.title, c.media_id
+           from member_era_cards c
+           join albums a on a.id = c.album_id
+          where c.member_id = $1 and c.media_id is not null and a.status = 'published'`,
+        [member.id],
+      );
+      const urls = await resolveMediaUrls(rows.map((r) => r.media_id));
+      return Object.fromEntries(rows.flatMap((r) => (urls.has(r.media_id) ? [[r.title, urls.get(r.media_id)!]] : [])));
+    },
+    ["member:era-photos", member.slug],
+    { tags: [`member:${member.slug}`, "music"], revalidate: REVALIDATE },
+  )();
+
 /** Release timeline (albums by date) for the member timeline / photocard collection. Seed stub when there is no DB. */
 export const getEras = unstable_cache(
   async (): Promise<EraStub[]> => {

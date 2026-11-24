@@ -12,7 +12,7 @@ import styles from "@/components/members/member-detail.module.css";
 import { Chip } from "@/components/ui/Chip";
 import { HeartIcon } from "@/components/ui/HeartIcon";
 import { Photo } from "@/components/ui/Photo";
-import { FACT, getEras, getMember, getMemberTracks, getMembers } from "@/lib/db/members";
+import { FACT, getEras, getMember, getMemberEraPhotos, getMemberTracks, getMembers } from "@/lib/db/members";
 import { PLACEHOLDER_GRADS } from "@/lib/db/seed/home";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -43,7 +43,7 @@ export default async function MemberPage({ params }: Props) {
   const { slug } = await params;
   const [member, members, eras] = await Promise.all([getMember(slug), getMembers(), getEras()]);
   if (!member) notFound();
-  const tracks = await getMemberTracks(member);
+  const [tracks, eraPhotos] = await Promise.all([getMemberTracks(member), getMemberEraPhotos(member)]);
 
   const i = members.findIndex((m) => m.slug === slug);
   const prev = members[(i + members.length - 1) % members.length];
@@ -206,7 +206,7 @@ export default async function MemberPage({ params }: Props) {
               <h2 id="pc" className="disp m-0 text-[32px] font-semibold">Photocard collection</h2>
               <span className="text-[13px] text-ink-500">One card per era · click to flip</span>
             </div>
-            <EraCards name={member.stage_name} cards={eras.map((e, k) => ({ era: e.title, dateLabel: fmtDate(e.date), grad: eraGrad(k) }))} />
+            <EraCards name={member.stage_name} cards={eras.map((e, k) => ({ era: e.title, dateLabel: fmtDate(e.date), grad: eraGrad(k), photo: eraPhotos[e.title] ?? null }))} />
           </section>
         )}
 

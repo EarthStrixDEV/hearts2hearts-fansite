@@ -1,0 +1,22 @@
+{
+  "_comment": "Photocard collection (member page): one official Short thumbnail per member per era. Source: Hearts2Hearts YouTube channel (@hearts2hearts.official) Shorts tagged with ONLY that member's hashtag, uploaded from 14 days before the release until 14 days before the next one (comeback teasers count), then hand-picked: one person, face visible, no text overlay. Read 2026-11-24. Identity relies on the channel's own hashtag; it was not verified independently. Image URL = https://i.ytimg.com/vi/<id>/oar2.jpg. A missing era = no clean single-member Short in that window, the card keeps its gradient.",
+  "credit": "Official Hearts2Hearts YouTube channel (SM Entertainment)",
+  "baseEra": {
+    "FOCUS (Remixes)": "FOCUS",
+    "RUDE! (Japanese ver.)": "RUDE!",
+    "ICONIC HEART (Korean ver.)": "ICONIC HEART"
+  },
+  "fallbackEra": {
+    "Pretty Please": "FOCUS"
+  },
+  "cards": {
+    "jiwoo": { "The Chase": "QKc4zBSBH7k", "STYLE": "Hcn1oDUj144", "Pretty Please": "ybrY-YN8WQY", "FOCUS": "IfiP7ajPaAw", "RUDE!": "NQih5_BXrkI", "Lemon Tang": "l00FMbzWZk4", "ICONIC HEART": "sz0XOXKx39U", "Moonride": "hSxqtG7BUfE", "Next Chapter": "k6BKWnQYSbQ" },
+    "carmen": { "The Chase": "JB9lPqo48VA", "STYLE": "PE46hh1pAdQ", "Pretty Please": "Nd0M_Q6fFq0", "FOCUS": "f5FU-NkrNn8", "RUDE!": "npV-PwxOdY0", "Lemon Tang": "WNy0Cb2jl1M", "ICONIC HEART": "SX0NYVQh7BE", "Moonride": "ggCdLi8EmE4", "Next Chapter": "yJpG1qVjLpQ" },
+    "yuha": { "The Chase": "ubE9UuO98Wo", "STYLE": "f-MvotBGxHQ", "FOCUS": "RBEGZ0nAJz4", "RUDE!": "0k_N3f5Tp78", "Lemon Tang": "qaIwh8HJvj0", "ICONIC HEART": "XY4xxBPOtTI", "Moonride": "RX6Izm5kOzY", "Next Chapter": "4oPOtuUzFLk" },
+    "stella": { "The Chase": "sFXQrYBaw58", "STYLE": "gh-nGOX0EHs", "FOCUS": "N4u_y8oEZUQ", "RUDE!": "q6fRL9grnrA", "Lemon Tang": "Rh24VLSWJ9g", "ICONIC HEART": "bVKm7dDha5Y", "Moonride": "X6SUMKix5pM", "Next Chapter": "tQZ07VWN_kA" },
+    "juun": { "The Chase": "6jRoMyoMo0M", "STYLE": "mJ85nTNeMuU", "FOCUS": "whRLXGbz24U", "RUDE!": "POIkyNw6y6g", "Lemon Tang": "Va86OjPb2YE", "ICONIC HEART": "n1Z1O3X-33E", "Moonride": "eT8uiCVM3vQ", "Next Chapter": "2fxmRgdzekQ" },
+    "ana": { "The Chase": "tVRMwU95SwY", "STYLE": "rCCq72nJm1k", "FOCUS": "u5UGFlLr2_o", "RUDE!": "qVMFjPdoPnw", "Lemon Tang": "Almf8sJV_IM", "ICONIC HEART": "uNrh8qp9vzM", "Moonride": "CVHsF7nGYx0", "Next Chapter": "QB06cB7WL-E" },
+    "ian": { "The Chase": "xpj6AATTd64", "STYLE": "RwoAMleqFoU", "Pretty Please": "oJoPchCMA-Q", "FOCUS": "VbrKMO3SzpM", "RUDE!": "fGORui-K3K8", "Lemon Tang": "_ryS4ygBOuA", "ICONIC HEART": "lfeU_UxSSuA", "Moonride": "q_X3LvrmSQs", "Next Chapter": "JCxRa5yW-qU" },
+    "yeon": { "The Chase": "xBHCSuubpM4", "STYLE": "564x5kqTb38", "FOCUS": "a9-UsG4PDgc", "RUDE!": "so6iJp_sRPw", "Lemon Tang": "xlmYlhkjuZ4", "ICONIC HEART": "xknhwj10pxo", "Moonride": "8b7h2hhbwlQ", "Next Chapter": "x209MzeMeYs" }
+  }
+}

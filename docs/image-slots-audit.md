@@ -29,7 +29,6 @@ art. These are official YouTube stills hotlinked from `i.ytimg.com` (see `docs/d
 |---|---|
 | Event poster in the schedule drawer (`src/components/schedule/EventDrawer.tsx`) | No events are imported and `events.poster_id` is not rendered. Real posters are © SM, and Commons has none |
 | Album cover, *ScreaM Rookies : The Chase (Remixes)* | No freely licensed cover exists (album art is © SM) |
-| Member page "Photocard collection" (`EraCards.tsx`) | Not a photo slot: the design uses colour cards |
 
 ## Other freely licensed Hearts2Hearts files on Commons (not used yet)
 
