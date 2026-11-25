@@ -54,7 +54,7 @@ export function LiveRoom({ countdown, room, signedIn, fandomName, floodColor, se
   const vars = (flood ? { "--room-flood": floodColor } : undefined) as CSSProperties | undefined;
   const label = done ? "It’s out" : flood ? "Final countdown" : "Counting down";
   const text = done
-    ? "Go stream it. The room stays open while it’s open."
+    ? "Go stream it. The room stays open a little longer."
     : flood
       ? `${fandomName} colors everywhere. Together now.`
       : `Release time ${whenText}`;
