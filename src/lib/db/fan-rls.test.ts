@@ -8,6 +8,7 @@
 import { randomUUID } from "node:crypto";
 import pg from "pg";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import { getOrCreateFanMe, saveFanTheme } from "./fan";
 import { withUser } from "./fan-client";
 
 const OWNER_URL = process.env.FAN_TEST_OWNER_URL;
@@ -199,6 +200,22 @@ describe.skipIf(!enabled)("fan RLS (fan_app)", () => {
     await rejectsWith(setTrade(A, early, "rating_from = 5"), "23514"); // not done yet
     expect(await setTrade(A, early, "state = 'cancelled'")).toEqual([{ state: "cancelled" }]); // sender may cancel while pending
     await rejectsWith(setTrade(B, early, "state = 'accepted'"), "23514");
+  });
+
+  it("fan profile: created on first visit, theme saved, private to its owner", async () => {
+    const first = await getOrCreateFanMe(A);
+    expect(first).toMatchObject({ nickname: `rls-${tag}`, themeMode: "era", biasMemberId: null, eraAlbumId: null });
+    expect(first.joinedAt).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+
+    await saveFanTheme(A, { mode: "bias", biasMemberId: id.member, eraAlbumId: id.album });
+    expect(await getOrCreateFanMe(A)).toMatchObject({ themeMode: "bias", biasMemberId: id.member, eraAlbumId: id.album });
+    // going back to era mode keeps the stored bias and era
+    await saveFanTheme(A, { mode: "era", biasMemberId: null, eraAlbumId: null });
+    expect(await getOrCreateFanMe(A)).toMatchObject({ themeMode: "era", biasMemberId: id.member, eraAlbumId: id.album });
+
+    expect(await n(B, "select 1 from fan_profiles where user_id = $1", [A])).toBe(0);
+    await rejectsWith(withUser(B, (q) => q("insert into fan_profiles (user_id, nickname) values ($1, 'x')", [A])), "42501");
+    await rejectsWith(saveFanTheme(A, { mode: "bias", biasMemberId: randomUUID(), eraAlbumId: null }), "23503"); // unknown member
   });
 
   it("7. a guest sees only published content and no private rows", async () => {
