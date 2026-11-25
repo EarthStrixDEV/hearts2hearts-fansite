@@ -6,9 +6,20 @@ export const DEFAULT_MODEL = "claude-sonnet-5-5";
 const ENDPOINT = "https://api.anthropic.com/v1/messages";
 const TIMEOUT_MS = 45_000;
 
-export async function callLLM(opts: { system: string; user: string; model: string; maxTokens?: number }): Promise<string> {
+/** An image sent with the user turn (vision). `data` is base64 without the data: prefix. */
+export interface LLMImage { mediaType: "image/png" | "image/jpeg" | "image/webp" | "image/gif"; data: string }
+
+export async function callLLM(opts: { system: string; user: string; model: string; maxTokens?: number; images?: LLMImage[] }): Promise<string> {
   const key = process.env.LLM_API_KEY;
   if (!key) throw new Error("LLM_API_KEY is not set");
+
+  // Text-only calls keep the plain string content; images turn it into blocks (images first, then the text).
+  const content = opts.images?.length
+    ? [
+        ...opts.images.map((i) => ({ type: "image", source: { type: "base64", media_type: i.mediaType, data: i.data } })),
+        { type: "text", text: opts.user },
+      ]
+    : opts.user;
 
   const res = await fetch(ENDPOINT, {
     method: "POST",
@@ -21,7 +32,7 @@ export async function callLLM(opts: { system: string; user: string; model: strin
       model: opts.model,
       max_tokens: opts.maxTokens ?? 2000,
       system: opts.system,
-      messages: [{ role: "user", content: opts.user }],
+      messages: [{ role: "user", content }],
     }),
     signal: AbortSignal.timeout(TIMEOUT_MS),
   });
