@@ -1,0 +1,66 @@
+/* /fan/live/[countdownId] (design/LiveRoom artboard). The room is always the dark "venue"; at <= 10 s left the whole room floods
+   with --room-flood (the fandom color, set inline by LiveRoom). Fixed colors on purpose: the room does not follow the site theme. */
+.room { background: #17132a; color: #f6f0ff; --panel: rgba(255, 255, 255, 0.07); --field: rgba(255, 255, 255, 0.9); transition: background 600ms ease, color 600ms ease; box-sizing: border-box; min-height: 70vh; padding: clamp(24px, 4vw, 48px) clamp(16px, 3vw, 24px) 80px; }
+.flood { background: var(--room-flood, #a8d8ff); color: #2b2440; --panel: rgba(255, 255, 255, 0.55); }
+.col { max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; gap: 28px; }
+
+.top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px; }
+.topL { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.back { font-size: 14px; text-decoration: none; color: inherit; opacity: 0.85; min-height: 44px; display: inline-flex; align-items: center; align-self: flex-start; }
+.back:hover { text-decoration: underline; }
+.room a:focus-visible, .room button:focus-visible, .room input:focus-visible { outline: 2px solid #ff9cc3; outline-offset: 2px; }
+.flood a:focus-visible, .flood button:focus-visible, .flood input:focus-visible { outline-color: #c92a68; }
+.dim { opacity: 0.75; }
+.h1 { margin: 0; font-size: clamp(28px, 5vw, 48px); font-weight: 600; letter-spacing: -0.02em; line-height: 1.1; overflow-wrap: anywhere; }
+.online { display: flex; align-items: center; gap: 10px; padding: 12px 18px; border-radius: 999px; background: var(--panel); transition: background 600ms ease; }
+.onlineNum { font-size: 20px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.onlineTxt { font-size: 14px; opacity: 0.8; }
+.liveDot { width: 8px; height: 8px; border-radius: 50%; background: #ff5c8a; display: block; animation: blink 1.2s ease-in-out infinite; }
+@keyframes blink { 50% { opacity: 0.3; } }
+
+.grid { display: flex; flex-wrap: wrap; gap: 24px; align-items: stretch; }
+.stage { flex: 2 1 560px; min-width: 0; border-radius: 32px; background: var(--panel); padding: clamp(32px, 5vw, 56px) clamp(16px, 3vw, 32px); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px; text-align: center; min-height: 520px; box-sizing: border-box; transition: background 600ms ease; }
+.clock { font-weight: 700; line-height: 1; letter-spacing: -0.04em; font-variant-numeric: tabular-nums; white-space: nowrap; max-width: 100%; }
+.clockLg { font-size: clamp(72px, 18vw, 160px); }
+.clockMd { font-size: clamp(44px, 11vw, 104px); }
+.clockSm { font-size: clamp(32px, 7vw, 72px); }
+.pulse { animation: pulse 1s ease-in-out infinite; }
+@keyframes pulse { 50% { transform: scale(1.06); } }
+.phaseText { font-size: 16px; max-width: 460px; line-height: 1.7; opacity: 0.85; margin: 0; }
+.actions { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 0 24px; border-radius: 999px; font: 600 16px/1 var(--font-fredoka), ui-rounded, sans-serif; border: 0; cursor: pointer; text-decoration: none; transition: transform 150ms var(--spring, cubic-bezier(0.34, 1.56, 0.64, 1)); }
+.btn:hover:not(:disabled) { transform: translateY(-2px); }
+.btn:active:not(:disabled) { transform: scale(0.96); }
+.btn:disabled { opacity: 0.55; cursor: not-allowed; }
+.btnP { background: #ff8fb8; color: #2b2440; }
+.btnS { background: var(--panel); color: inherit; border: 1.5px solid currentColor; }
+.note { font-size: 12px; opacity: 0.7; margin: 0; }
+
+.chat { flex: 1 1 300px; min-width: 0; border-radius: 24px; background: var(--panel); padding: 24px; display: flex; flex-direction: column; gap: 12px; box-sizing: border-box; transition: background 600ms ease; }
+.log { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; flex: 1; min-height: 240px; max-height: 460px; overflow-y: auto; overscroll-behavior: contain; }
+.msg { display: flex; gap: 10px; align-items: flex-start; }
+.avatar { width: 32px; height: 32px; border-radius: 50%; flex: none; display: block; }
+.msgBody { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.who { font-size: 12px; opacity: 0.7; overflow-wrap: anywhere; }
+.text { font-size: 14px; line-height: 1.5; overflow-wrap: anywhere; }
+.empty { font-size: 14px; opacity: 0.8; line-height: 1.6; margin: 0; }
+.empty a { color: inherit; text-decoration: underline; }
+.form { margin-top: auto; display: flex; gap: 8px; }
+.input { flex: 1; min-width: 0; min-height: 44px; border-radius: 999px; border: 0; padding: 0 16px; font: inherit; background: var(--field); color: #2b2440; }
+.input:disabled { opacity: 0.6; }
+.send { min-height: 44px; min-width: 44px; padding: 0 18px; }
+.status { font-size: 12px; margin: 0; opacity: 0.85; min-height: 1.2em; }
+.statusErr { color: #ffb3cf; opacity: 1; }
+.flood .statusErr { color: #a3174f; }
+.srOnly { position: absolute; left: -9999px; }
+
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+.card { border-radius: 20px; background: var(--panel); padding: 20px; display: flex; flex-direction: column; gap: 4px; transition: background 600ms ease; }
+.cardT { font-size: 20px; font-weight: 600; }
+.cardD { font-size: 13px; opacity: 0.8; margin: 0; }
+
+@media (max-width: 480px) {
+  .stage { min-height: 0; border-radius: 24px; }
+  .chat { padding: 16px; }
+  .btn { padding: 0 18px; }
+}
