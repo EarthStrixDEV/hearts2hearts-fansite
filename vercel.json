@@ -1,5 +1,8 @@
 {
   "crons": [
-    { "path": "/api/cron/ai-blog", "schedule": "0 2 * * *" }
+    { "path": "/api/cron/ai-blog", "schedule": "0 2 * * *" },
+    { "path": "/api/cron/match-trades", "schedule": "0 1 * * *" },
+    { "path": "/api/cron/unlock-capsules", "schedule": "0 0 * * *" },
+    { "path": "/api/cron/build-wrapped", "schedule": "0 0 1 12 *" }
   ]
 }
