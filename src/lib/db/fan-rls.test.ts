@@ -218,6 +218,14 @@ describe.skipIf(!enabled)("fan RLS (fan_app)", () => {
     await rejectsWith(saveFanTheme(A, { mode: "bias", biasMemberId: randomUUID(), eraAlbumId: null }), "23503"); // unknown member
   });
 
+  it("daily login: opening a fan page logs one login per day and unlocks the login items", async () => {
+    await getOrCreateFanMe(C);
+    await getOrCreateFanMe(C); // same Thai day: still one row
+    expect(await n(C, "select 1 from fan_activity where kind = 'login'")).toBe(1);
+    expect(await n(C, "select 1 from fan_room_items where item_id = $1", [id.itemPub])).toBe(1);
+    expect(await n(B, "select 1 from fan_activity where kind = 'login' and user_id = $1", [C])).toBe(0);
+  });
+
   it("7. a guest sees only published content and no private rows", async () => {
     expect(await n(null, "select 1 from countdowns where id = any($1)", [[id.cdPub, id.cdDraft]])).toBe(1);
     expect(await n(null, "select 1 from photocards where id = any($1)", [[id.pc1, id.pc2, id.pcDraft]])).toBe(2);

@@ -51,12 +51,13 @@ describe.skipIf(!enabled)("fan room data (fan_app)", () => {
     }
   });
 
-  it("shows a published item as locked before any activity, and never shows drafts", async () => {
+  it("opening the room counts as the day's login; other items stay locked; drafts are never shown", async () => {
     const room = await getMyRoom(A);
-    expect(room.items.find((i) => i.id === item.login)).toMatchObject({ unlocked: false, placed: false, placement: null, modelUrl: null });
-    expect(room.items.find((i) => i.id === item.mission)?.rule).toEqual({ kind: "mission", count: 2 });
+    // the page load logs the daily login (getOrCreateFanMe), which unlocks the login item right away
+    expect(room.items.find((i) => i.id === item.login)).toMatchObject({ unlocked: true, placed: false, placement: null, modelUrl: null });
+    expect(room.items.find((i) => i.id === item.mission)).toMatchObject({ unlocked: false, rule: { kind: "mission", count: 2 } });
     expect(room.items.find((i) => i.id === item.draft)).toBeUndefined();
-    expect(room.totals.login ?? 0).toBe(0);
+    expect(room.totals.login).toBe(1);
     expect(room.nickname).toBeTruthy();
   });
 

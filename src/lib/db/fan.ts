@@ -92,7 +92,11 @@ export async function getCountdownById(id: string): Promise<{ id: string; title:
   return rows[0] ? { id: rows[0].id, title: rows[0].title, targetAt: rows[0].target_at } : null;
 }
 
-/** The fan's profile, created on first visit (nickname defaults to the account's display name). */
+/**
+ * The fan's profile, created on first visit (nickname defaults to the account's display name).
+ * Also logs the daily login (app.log_fan_activity is idempotent per Thai day), so every login-required fan page that loads
+ * the profile counts as that day's visit.
+ */
 export async function getOrCreateFanMe(userId: string): Promise<FanMe> {
   return withUser(userId, async (q) => {
     await q(
@@ -105,6 +109,7 @@ export async function getOrCreateFanMe(userId: string): Promise<FanMe> {
       "select nickname, theme_mode, bias_member_id, era_album_id, joined_fandom_at::text as joined_fandom_at from fan_profiles where user_id = $1",
       [userId],
     );
+    await q("select app.log_fan_activity('login')");
     return { nickname: r.nickname, themeMode: r.theme_mode, biasMemberId: r.bias_member_id, eraAlbumId: r.era_album_id, joinedAt: r.joined_fandom_at };
   });
 }

@@ -9,6 +9,7 @@
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "test": "vitest run",
+    "e2e": "playwright test",
     "db:migrate": "node --env-file=.env.local scripts/migrate.mjs",
     "db:seed-fan": "node --env-file=.env.local scripts/seed-fan.mjs"
   },
@@ -32,6 +33,7 @@
     "zod": "^4.6.7"
   },
   "devDependencies": {
+    "@playwright/test": "^1.65.1",
     "@types/node": "^22.10.0",
     "@types/pg": "^8.23.1",
     "@types/react": "^19.0.0",
