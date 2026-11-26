@@ -1,0 +1,42 @@
+/* /fan/room (design/MyRoom artboard). The 3D stage keeps the artboard's fixed light sky in dark mode, like the hub hero. */
+.root { box-sizing: border-box; padding: 48px 24px 80px; background: var(--cream-50); }
+.col { max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; gap: 28px; }
+
+.head { display: flex; flex-direction: column; gap: 8px; }
+.back { align-self: flex-start; display: inline-flex; align-items: center; min-height: 44px; font-size: 14px; text-decoration: none; }
+.h1 { margin: 0; font-size: clamp(32px, 6vw, 48px); font-weight: 600; letter-spacing: -0.02em; overflow-wrap: anywhere; }
+.lede { margin: 0; font-size: 15px; color: var(--ink-500); }
+
+.grid { display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start; }
+.stage { flex: 2 1 600px; min-width: 0; border-radius: 32px; background: linear-gradient(180deg, #eaf4ff, #fff8f3); padding: 32px; box-sizing: border-box; }
+.canvas { position: relative; width: 100%; height: 520px; }
+.loading { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 14px; color: #6e6787; pointer-events: none; }
+
+.side { flex: 1 1 300px; min-width: 0; display: flex; flex-direction: column; gap: 16px; }
+.invHead { display: flex; justify-content: space-between; align-items: center; }
+.placedChip { background: #ffe3f1; color: #9e1d50; }
+.empty { margin: 0; font-size: 14px; line-height: 1.6; color: var(--ink-500); }
+.error { margin: 0; min-height: 0; font-size: 13px; color: var(--pink-700); }
+.error:empty { display: none; }
+
+.row { display: flex; justify-content: space-between; align-items: center; gap: 12px; min-height: 56px; padding: 8px 12px; border-radius: 14px; cursor: pointer; font: inherit; color: var(--ink-900); background: var(--surface); border: 1px solid var(--line); text-align: left; transition: background 200ms ease, transform 150ms var(--spring); }
+.row:hover { transform: translateY(-1px); }
+.row:focus-visible { outline: 2px solid var(--pink-700); outline-offset: 2px; }
+.row:disabled { cursor: progress; opacity: 0.7; }
+.rowOn { background: color-mix(in srgb, var(--pink-500) 14%, var(--surface)); }
+.rowText { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.rowName { font-weight: 600; overflow-wrap: anywhere; }
+.rowFrom { font-size: 12px; color: var(--ink-500); }
+.chipOn { background: #bff0da; color: #0f4d33; }
+.chipOff { background: #f1eef5; color: #6e6787; }
+
+.locked { background: #2b2440; color: #fff; border-radius: 24px; padding: 24px; display: flex; flex-direction: column; gap: 10px; box-sizing: border-box; }
+.lockedList { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.lockedText { font-size: 14px; line-height: 1.6; color: #e8e3f4; }
+.progress { color: #b9b0d6; white-space: nowrap; }
+
+@media (max-width: 520px) {
+  .root { padding: 24px 16px 64px; }
+  .stage { padding: 12px; border-radius: 24px; }
+  .canvas { height: 380px; }
+}
