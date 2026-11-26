@@ -37,8 +37,8 @@ describe("GET /api/cron/unlock-capsules", () => {
   it("reports who just unlocked and leaves presence alone outside 00:00 UTC", async () => {
     const res = await call("Bearer s3cret");
     expect(res.status).toBe(200);
-    expect(await res.json()).toEqual({ windowMinutes: 60, authors: 2, letters: 3, notified: 0, presencePurged: null });
-    expect(authorsToNotify).toHaveBeenCalledWith(60);
+    expect(await res.json()).toEqual({ windowMinutes: 1440, authors: 2, letters: 3, notified: 0, presencePurged: null });
+    expect(authorsToNotify).toHaveBeenCalledWith(1440);
     expect(purgeOldPresence).not.toHaveBeenCalled();
   });
 

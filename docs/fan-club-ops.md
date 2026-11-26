@@ -18,11 +18,11 @@ Neon Auth users live in `neon_auth."user"`; `profiles.id` references it. A branc
 
 | Route | Schedule (UTC) | What it does |
 | --- | --- | --- |
-| `/api/cron/match-trades` | `*/15 * * * *` | records new photocard matches (`trade_match_notices`) |
-| `/api/cron/unlock-capsules` | `0 * * * *` | finds letters opened in the last hour; at 00:00 UTC also purges old `live_presence` |
+| `/api/cron/match-trades` | `0 1 * * *` | records new photocard matches (`trade_match_notices`) |
+| `/api/cron/unlock-capsules` | `0 0 * * *` | finds letters opened in the last day; also purges old `live_presence` |
 | `/api/cron/build-wrapped` | `0 0 1 12 *` | builds every fan's Wrapped snapshot and slide images (rerun with `?year=` to resume) |
 
-All reject calls without `Authorization: Bearer $CRON_SECRET`. Sub-daily crons need a Vercel plan that allows them (Hobby only allows daily), and `build-wrapped` asks for a 300 s function limit.
+All reject calls without `Authorization: Bearer $CRON_SECRET`. The schedules are daily because Vercel Hobby only allows daily crons and refuses to deploy anything faster. On Pro, the intended cadence is `*/15 * * * *` for `match-trades` and hourly for `unlock-capsules`; when you change the latter to `0 * * * *`, also set `WINDOW_MINUTES` in its route to 60 (it must match the schedule). `build-wrapped` asks for a 300 s function limit.
 
 **No notification channel exists in this repo.** Trade matches, unlocked capsules and event reminders are recorded but nothing is sent; the routes report `notified: 0`.
 
